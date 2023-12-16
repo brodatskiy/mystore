@@ -37,11 +37,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $users = User::all();
-
-        return Inertia::render('Admin/Users/Create', [
-            'users' => $users,
-        ]);
+        return Inertia::render('Admin/Users/Create');
     }
 
     /**

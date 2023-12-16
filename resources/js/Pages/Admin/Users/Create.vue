@@ -2,10 +2,10 @@
 import { ref } from "vue";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import { useForm, Head } from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
 
 import PrimaryButton from "@/Components/Admin/PrimaryButton.vue";
 
-defineProps(["users"]);
 const form = useForm({
   name: "",
   email: "",
@@ -27,7 +27,6 @@ const roleItems = ref([
 
 let breadcrumbs = ref([
   { title: "Users", disabled: false, href: "users.index" },
-  { title: "List", disabled: true, href: "users.index" },
 ]);
 </script>
 
@@ -37,6 +36,11 @@ let breadcrumbs = ref([
   <AdminLayout>
     <div>
       <v-breadcrumbs :items="breadcrumbs">
+        <template v-slot:title="{ item }">
+          <Link :href="route(item.href)">
+            {{ item.title }}
+          </Link>
+        </template>
         <template v-slot:divider>
           <v-icon icon="mdi-chevron-right"></v-icon>
         </template>
@@ -44,7 +48,7 @@ let breadcrumbs = ref([
     </div>
     <v-sheet class="pa-4" rounded="xl" elevation="3">
       <div class="w-50 mx-auto">
-        <h2 class="text-center mt-2">Add new user</h2>
+        <h2 class="text-center">Add new user</h2>
         <v-form @submit.prevent="form.post(route('users.store'))">
           <v-text-field
             v-model="form.name"
@@ -88,7 +92,7 @@ let breadcrumbs = ref([
             label="Choose avatar"
           ></v-file-input>
           <div class="d-flex justify-end">
-            <PrimaryButton class="mt-2"> Create </PrimaryButton>
+            <PrimaryButton class="mt-2" type="submit"> Create </PrimaryButton>
           </div>
         </v-form>
       </div>
