@@ -46,7 +46,10 @@ class UserController extends Controller
     public function store(StoreRequest $request): RedirectResponse
     {
         $data = $request->validated();
-        $data['avatar'] = Storage::disk('public')->put('/images', $data['avatar']);
+
+        if (isset($data['avatar'])) {
+            $data['avatar'] = Storage::disk('public')->put('/images', $data['avatar']);
+        }
 
         $password = Str::random(10);
         $data['password'] = Hash::make($password);
