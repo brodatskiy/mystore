@@ -29,7 +29,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('categories.create');
+        return Inertia::render('Admin/Categories/Create');
     }
 
     /**
@@ -40,7 +40,7 @@ class CategoryController extends Controller
         $data = $request->validated();
         Category::firstOrCreate($data);
 
-        return redirect()->route('categories.index');
+        return to_route('categories.index');
     }
 
     /**
@@ -48,7 +48,9 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return view('categories.show', compact('category'));
+        return Inertia::render('Admin/Categories/Show', [
+            'categories' => $category
+        ]);
     }
 
     /**
@@ -56,7 +58,9 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('categories.edit', compact('category'));
+        return Inertia::render('Admin/Categories/Edit', [
+            'categories' => $category
+        ]);
     }
 
     /**
@@ -67,7 +71,9 @@ class CategoryController extends Controller
         $data = $request->validated();
         $category->update($data);
 
-        return view('categories.show', compact('category'));
+        return Inertia::render('Admin/Categories/Show', [
+            'categories' => $category
+        ]);
     }
 
     /**
@@ -77,6 +83,6 @@ class CategoryController extends Controller
     {
         $category->delete();
 
-        return redirect()->route('categories.index');
+        return to_route('categories.index');
     }
 }

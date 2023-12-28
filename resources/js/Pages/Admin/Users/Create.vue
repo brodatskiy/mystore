@@ -1,9 +1,8 @@
 <script setup>
 import { ref } from "vue";
-import AdminLayout from "@/Layouts/AdminLayout.vue";
-import { useForm, Head } from "@inertiajs/vue3";
-import { Link } from "@inertiajs/vue3";
+import { useForm, Head, Link } from "@inertiajs/vue3";
 
+import AdminLayout from "@/Layouts/AdminLayout.vue";
 import PrimaryButton from "@/Components/Admin/PrimaryButton.vue";
 
 const form = useForm({

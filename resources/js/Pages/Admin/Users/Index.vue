@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from "vue";
+import { Head, Link } from "@inertiajs/vue3";
+
 import AdminLayout from "@/Layouts/AdminLayout.vue";
-import { Link } from "@inertiajs/vue3";
-import { Head } from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/Admin/PrimaryButton.vue";
 import DungerButton from "@/Components/Admin/DangerButton.vue";
 

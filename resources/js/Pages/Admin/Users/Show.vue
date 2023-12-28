@@ -1,11 +1,10 @@
 <script setup>
 import { ref } from "vue";
+import { Head, Link } from "@inertiajs/vue3";
+
 import AdminLayout from "@/Layouts/AdminLayout.vue";
-import { Head } from "@inertiajs/vue3";
-import { Link } from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/Admin/PrimaryButton.vue";
 import DungerButton from "@/Components/Admin/DangerButton.vue";
-
 import AvatarPlaceholder from "~/assets/images/avatar-placeholder.png";
 
 const props = defineProps(["user"]);

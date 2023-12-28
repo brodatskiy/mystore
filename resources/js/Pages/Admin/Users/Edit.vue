@@ -1,7 +1,8 @@
 <script setup>
 import { ref } from "vue";
+import { Head, Link, useForm } from "@inertiajs/vue3";
+
 import AdminLayout from "@/Layouts/AdminLayout.vue";
-import { useForm, Head } from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/Admin/PrimaryButton.vue";
 
 let props = defineProps(["user"]);
@@ -25,7 +26,7 @@ const roleItems = ref([
 ]);
 let breadcrumbs = ref([
   { title: "Users", disabled: false, href: "users.index" },
-  { title: props.users.name, disabled: true, href: "users.index" },
+  { title: String(props.user.name), disabled: true, href: "users.index" },
 ]);
 </script>
 
