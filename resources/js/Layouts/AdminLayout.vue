@@ -107,11 +107,10 @@ let navLinks = ref([
 
     <!-- Page Content -->
     <v-main>
-      <v-container fluid class="h-screen">
+      <v-container fluid class="h-100">
         <slot />
       </v-container>
-
-      <v-footer app height="32" class="rounded-t-xl">
+      <v-footer height="32" class="rounded-t-xl">
         <div class="px-4 py-2 text-end w-100">
           {{ new Date().getFullYear() }} — <strong>MyStore</strong>
         </div>
