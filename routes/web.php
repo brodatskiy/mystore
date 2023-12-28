@@ -24,25 +24,10 @@ use Inertia\Inertia;
 |
 */
 
-// Route::get('/', function () {
-//    return Inertia::render('MainView', [
-//        'canLogin' => Route::has('login'),
-//        'canRegister' => Route::has('register')
-//    ]);
-// });
-
 Route::get('/',  [MainController::class, 'index'])->name('/');
-Route::get('dashboard',   function () {
-    return Inertia::render('Dashboard');
-})->name('dashboard');
 Route::get('/cart', function () {
     return Inertia::render('Cart/Index');
 })->name('cart');
-
-
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
