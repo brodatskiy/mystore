@@ -1,5 +1,5 @@
 import "./bootstrap";
-import "../css/main.css";
+import "../styles/main.css";
 
 import { createApp, h } from "vue";
 import { createInertiaApp } from "@inertiajs/vue3";
@@ -15,21 +15,21 @@ import StarRating from "vue-star-rating";
 const appName = import.meta.env.VITE_APP_NAME || "MyStore";
 
 createInertiaApp({
-    title: (title) => `${title} - ${appName}`,
-    resolve: (name) =>
-        resolvePageComponent(
-            `./Pages/${name}.vue`,
-            import.meta.glob("./Pages/**/*.vue")
-        ),
-    setup({ el, App, props, plugin }) {
-        return createApp({ render: () => h(App, props) })
-            .use(plugin)
-            .use(ZiggyVue, Ziggy)
-            .use(registerPlugins)
-            .component("StarRating", StarRating)
-            .mount(el);
-    },
-    progress: {
-        color: "#4B5563",
-    },
+  title: (title) => `${title} - ${appName}`,
+  resolve: (name) =>
+    resolvePageComponent(
+      `./Pages/${name}.vue`,
+      import.meta.glob("./Pages/**/*.vue")
+    ),
+  setup({ el, App, props, plugin }) {
+    return createApp({ render: () => h(App, props) })
+      .use(plugin)
+      .use(ZiggyVue, Ziggy)
+      .use(registerPlugins)
+      .component("StarRating", StarRating)
+      .mount(el);
+  },
+  progress: {
+    color: "#4B5563",
+  },
 });
