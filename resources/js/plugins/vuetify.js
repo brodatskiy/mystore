@@ -14,7 +14,7 @@ const myCustomLightTheme = {
     surfaceAdminDarker: "#cfbeb4",
     primary: "#111111",
     secondary: "#03DAC6",
-    error: "#f2705e",
+    error: "#f04d3e",
     info: "#2196F3",
     success: "#4CAF50",
     warning: "#FB8C00",
