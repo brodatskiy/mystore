@@ -57,10 +57,8 @@ let breadcrumbs = ref([
               </Link>
             </td>
             <td class="text-center px-0">
-              <Link :href="route('users.destroy', user.id)">
-                <DungerButton method="delete" as="button">
-                  Delete
-                </DungerButton>
+              <Link method="delete" :href="route('users.destroy', user.id)">
+                <DungerButton as="button"> Delete </DungerButton>
               </Link>
             </td>
           </tr>
