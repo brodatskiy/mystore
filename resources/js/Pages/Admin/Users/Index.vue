@@ -57,7 +57,11 @@ let breadcrumbs = ref([
               </Link>
             </td>
             <td class="text-center px-0">
-              <Link method="delete" :href="route('users.destroy', user.id)">
+              <Link
+                method="delete"
+                :href="route('users.destroy', user.id)"
+                as="button"
+              >
                 <DungerButton as="button"> Delete </DungerButton>
               </Link>
             </td>
@@ -67,8 +71,8 @@ let breadcrumbs = ref([
       <div class="d-flex align-middle justify-center mt-4">
         <Link :href="route('users.create')">
           <PrimaryButton>
-            <v-icon class="mr-4" icon="mdi-account-plus"></v-icon>
             Add new user
+            <v-icon class="ml-3" icon="mdi-account-plus"></v-icon>
           </PrimaryButton>
         </Link>
       </div>

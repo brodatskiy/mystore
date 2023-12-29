@@ -85,17 +85,17 @@ const breadcrumbs = ref([
         </div>
       </div>
       <div class="px-4">
-        <PrimaryButton :href="route('users.edit', user.id)" as="button">
-          Edit
-        </PrimaryButton>
-        <DungerButton
-          :href="route('users.destroy', user.id)"
-          class="ml-2"
+        <Link :href="route('users.edit', user)">
+          <PrimaryButton> Edit </PrimaryButton>
+        </Link>
+        <Link
           method="delete"
+          :href="route('users.destroy', user.id)"
           as="button"
+          class="ml-2"
         >
-          Delete
-        </DungerButton>
+          <DungerButton as="button"> Delete </DungerButton>
+        </Link>
       </div>
     </v-sheet>
   </AdminLayout>
