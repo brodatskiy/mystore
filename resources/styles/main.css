@@ -6,6 +6,12 @@ a:active {
   color: inherit;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-background-clip: text;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }
