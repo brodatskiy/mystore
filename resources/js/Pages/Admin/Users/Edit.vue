@@ -34,18 +34,17 @@ let breadcrumbs = ref([
   <Head title="Edit user" />
 
   <AdminLayout>
-    <div>
-      <v-breadcrumbs :items="breadcrumbs">
-        <template v-slot:title="{ item }">
-          <Link :href="route(item.href)">
-            {{ item.title }}
-          </Link>
-        </template>
-        <template v-slot:divider>
-          <v-icon icon="mdi-chevron-right"></v-icon>
-        </template>
-      </v-breadcrumbs>
-    </div>
+    <v-breadcrumbs :items="breadcrumbs">
+      <template v-slot:title="{ item }">
+        <Link :href="route(item.href)">
+          {{ item.title }}
+        </Link>
+      </template>
+      <template v-slot:divider>
+        <v-icon icon="mdi-chevron-right"></v-icon>
+      </template>
+    </v-breadcrumbs>
+
     <v-sheet class="pa-4" rounded="xl" elevation="3">
       <div class="w-50 mx-auto">
         <h2 class="text-center mt-2">Edit user</h2>

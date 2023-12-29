@@ -6,7 +6,7 @@ import AdminLayout from "@/Layouts/AdminLayout.vue";
 import PrimaryButton from "@/Components/Admin/PrimaryButton.vue";
 import DungerButton from "@/Components/Admin/DangerButton.vue";
 
-defineProps(["users"]);
+const props = defineProps(["users"]);
 
 let breadcrumbs = ref([
   { title: "Dashboard", disabled: false, href: "dashboard.index" },
@@ -18,18 +18,16 @@ let breadcrumbs = ref([
   <Head title="Users" />
 
   <AdminLayout>
-    <div>
-      <v-breadcrumbs :items="breadcrumbs">
-        <template v-slot:title="{ item }">
-          <Link :href="route(item.href)">
-            {{ item.title }}
-          </Link>
-        </template>
-        <template v-slot:divider>
-          <v-icon icon="mdi-chevron-right"></v-icon>
-        </template>
-      </v-breadcrumbs>
-    </div>
+    <v-breadcrumbs :items="breadcrumbs">
+      <template v-slot:title="{ item }">
+        <Link :href="route(item.href)">
+          {{ item.title }}
+        </Link>
+      </template>
+      <template v-slot:divider>
+        <v-icon icon="mdi-chevron-right"></v-icon>
+      </template>
+    </v-breadcrumbs>
 
     <v-sheet class="pa-4" rounded="xl" elevation="3">
       <v-table fixed-header class="mt-6" color="inherit">
