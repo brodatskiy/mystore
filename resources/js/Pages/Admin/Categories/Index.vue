@@ -30,17 +30,16 @@ let breadcrumbs = ref([
     </v-breadcrumbs>
 
     <v-sheet class="pa-4" rounded="xl" elevation="3">
-      <v-table fixed-header class="mt-6" color="inherit">
+      <v-table fixed-header class="mt-6">
         <thead>
           <tr>
             <th class="text-left">Title</th>
-            <th class="text-center"></th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="category in categories" :key="category.id">
             <td>{{ category.title }}</td>
-            <td class="text-center px-0">
+            <td class="text-right">
               <Link
                 method="delete"
                 :href="route('categories.destroy', category.id)"

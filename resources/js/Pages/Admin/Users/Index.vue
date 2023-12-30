@@ -30,7 +30,7 @@ let breadcrumbs = ref([
     </v-breadcrumbs>
 
     <v-sheet class="pa-4" rounded="xl" elevation="3">
-      <v-table fixed-header class="mt-6" color="inherit">
+      <v-table fixed-header class="mt-6">
         <thead>
           <tr>
             <th class="text-left">Name</th>
@@ -39,8 +39,6 @@ let breadcrumbs = ref([
             <th class="text-left">Gender</th>
             <th class="text-left">Email</th>
             <th class="text-left">Role</th>
-            <th class="text-center"></th>
-            <th class="text-center"></th>
           </tr>
         </thead>
         <tbody>
@@ -51,12 +49,12 @@ let breadcrumbs = ref([
             <td>{{ user.gender }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.role }}</td>
-            <td class="text-center px-0">
+            <td class="text-right">
               <Link :href="route('users.show', user)">
                 <PrimaryButton> Show </PrimaryButton>
               </Link>
             </td>
-            <td class="text-center px-0">
+            <td class="text-right">
               <Link
                 method="delete"
                 :href="route('users.destroy', user.id)"
