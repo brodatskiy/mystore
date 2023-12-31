@@ -93,9 +93,11 @@ class UserController extends Controller
         }
         $user->update($data);
 
-        return Inertia::render('Admin/Users/Show', [
-            'user' => new UserResource($user),
-        ]);
+        // return redirect()->route('users.show', compact('user'));
+        return to_route('users.show', $user);
+        // return Inertia::render('Admin/Users/Show', [
+        //     'user' => new UserResource($user),
+        // ]);
     }
 
     /**

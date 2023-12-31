@@ -61,9 +61,7 @@ class CategoryController extends Controller
         $data = $request->validated();
         $category->update($data);
 
-        return Inertia::render('Admin/Categories/Show', [
-            'categories' => $category
-        ]);
+        return to_route('categories.index');
     }
 
     /**
