@@ -7,6 +7,7 @@ use App\Http\Requests\Tag\StoreRequest;
 use App\Http\Requests\Tag\UpdateRequest;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class TagController extends Controller
 {
@@ -17,7 +18,9 @@ class TagController extends Controller
     {
         $tags = Tag::all();
 
-        return view('tags.index', compact('tags'));
+        return Inertia::render('Admin/Tags/Index', [
+            'tags' => $tags,
+        ]);
     }
 
     /**
@@ -25,7 +28,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('tags.create');
+        return Inertia::render('Admin/Tags/Create');
     }
 
     /**
@@ -37,15 +40,7 @@ class TagController extends Controller
 
         Tag::firstOrCreate($data);
 
-        return redirect()->route('tags.index');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Tag $tag)
-    {
-        return view('tags.show', compact('tag'));
+        return to_route('tags.index');
     }
 
     /**
@@ -53,7 +48,9 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        return view('tags.edit', compact('tag'));
+        return Inertia::render('Admin/Tags/Edit', [
+            'tag' => $tag,
+        ]);
     }
 
     /**
@@ -65,7 +62,7 @@ class TagController extends Controller
 
         $tag->update($data);
 
-        return view('tags.show', compact('tag'));
+        return to_route('tags.index');
     }
 
     /**
@@ -75,6 +72,6 @@ class TagController extends Controller
     {
         $tag->delete();
 
-        return redirect()->route('tags.index');
+        return to_route('tags.index');
     }
 }
