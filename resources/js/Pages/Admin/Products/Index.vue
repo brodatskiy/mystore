@@ -70,7 +70,7 @@ let breadcrumbs = ref([
         <Link :href="route('users.create')">
           <PrimaryButton>
             Add new user
-            <v-icon class="ml-3" icon="mdi-account-plus"></v-icon>
+            <v-icon class="ml-3" icon="mdi-plus"></v-icon>
           </PrimaryButton>
         </Link>
       </div>

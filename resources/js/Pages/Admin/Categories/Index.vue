@@ -53,7 +53,7 @@ let breadcrumbs = ref([
       <div class="d-flex align-middle justify-center mt-4">
         <Link :href="route('categories.create')">
           <PrimaryButton>
-            <v-icon class="mr-4" icon="mdi-account-plus"></v-icon>
+            <v-icon class="mr-4" icon="mdi-plus"></v-icon>
             Add new category
           </PrimaryButton>
         </Link>
