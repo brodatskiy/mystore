@@ -16,8 +16,8 @@ let navLinks = ref([
     icon: "mdi-account-box",
     href: "users.index",
   },
+  { title: "Products", icon: "mdi-tshirt-crew", href: "products.index" },
   { title: "Tags", icon: "mdi-tag-multiple", href: "tags.index" },
-  { title: "Products", icon: "mdi-tshirt-crew", href: "users.index" },
   { title: "Categories", icon: "mdi-list-box", href: "categories.index" },
 ]);
 </script>

@@ -6,16 +6,16 @@ import AdminLayout from "@/Layouts/AdminLayout.vue";
 import PrimaryButton from "@/Components/Admin/PrimaryButton.vue";
 import DungerButton from "@/Components/Admin/DangerButton.vue";
 
-const props = defineProps(["users"]);
+const props = defineProps(["products"]);
 
 let breadcrumbs = ref([
   { title: "Dashboard", disabled: false, href: "dashboard.index" },
-  { title: "Users", disabled: true, href: "users.index" },
+  { title: "Products", disabled: true, href: "products.index" },
 ]);
 </script>
 
 <template>
-  <Head title="Users" />
+  <Head title="Products" />
 
   <AdminLayout>
     <v-breadcrumbs :items="breadcrumbs">
@@ -42,7 +42,7 @@ let breadcrumbs = ref([
           </tr>
         </thead>
         <tbody>
-          <tr v-for="user in users" :key="user.id">
+          <tr v-for="user in products" :key="user.id">
             <td>{{ user.name }}</td>
             <td>{{ user.age }}</td>
             <td>{{ user.address }}</td>
@@ -50,14 +50,14 @@ let breadcrumbs = ref([
             <td>{{ user.email }}</td>
             <td>{{ user.role }}</td>
             <td class="text-right">
-              <Link :href="route('users.show', user)">
+              <Link :href="route('products.show', user)">
                 <PrimaryButton> Show </PrimaryButton>
               </Link>
             </td>
             <td class="text-right">
               <Link
                 method="delete"
-                :href="route('users.destroy', user.id)"
+                :href="route('products.destroy', user.id)"
                 as="button"
               >
                 <DungerButton as="button"> Delete </DungerButton>
@@ -67,7 +67,7 @@ let breadcrumbs = ref([
         </tbody>
       </v-table>
       <div class="d-flex align-middle justify-center mt-4">
-        <Link :href="route('users.create')">
+        <Link :href="route('products.create')">
           <PrimaryButton>
             Add new user
             <v-icon class="ml-3" icon="mdi-plus"></v-icon>

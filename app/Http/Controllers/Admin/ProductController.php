@@ -7,6 +7,7 @@ use App\Http\Requests\Product\UpdateRequest;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Tag;
+use Inertia\Inertia;
 use App\Http\Controllers\BaseController;
 
 class ProductController extends BaseController
@@ -18,7 +19,7 @@ class ProductController extends BaseController
     {
         $products = Product::all();
 
-        return view('products.index', compact('products'));
+        return Inertia::render('products.index', [$products]);
     }
 
     /**
