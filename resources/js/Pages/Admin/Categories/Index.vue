@@ -42,7 +42,7 @@ let breadcrumbs = ref([
             <td class="text-right">
               <Link
                 method="delete"
-                :href="route('categories.destroy', category.id)"
+                :href="route('categories.destroy', category)"
               >
                 <DungerButton as="button"> Delete </DungerButton>
               </Link>
