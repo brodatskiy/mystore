@@ -11,12 +11,12 @@ const form = useForm({
 
 let breadcrumbs = ref([
   { title: "Dashboard", disabled: false, href: "dashboard.index" },
-  { title: "Categories", disabled: true, href: "categories.index" },
+  { title: "Tags", disabled: true, href: "tags.index" },
 ]);
 </script>
 
 <template>
-  <Head title="Categories" />
+  <Head title="Tags" />
 
   <AdminLayout>
     <v-breadcrumbs :items="breadcrumbs">
@@ -33,7 +33,7 @@ let breadcrumbs = ref([
     <v-sheet class="pa-4" rounded="xl" elevation="3">
       <div class="w-50 mx-auto">
         <h2 class="text-center">Add new category</h2>
-        <v-form @submit.prevent="form.post(route('categories.store'))">
+        <v-form @submit.prevent="form.post(route('tags.store'))">
           <v-text-field
             v-model="form.title"
             label="Title"
