@@ -54,7 +54,7 @@ let breadcrumbs = ref([
         <Link :href="route('categories.create')">
           <PrimaryButton>
             <v-icon class="mr-4" icon="mdi-account-plus"></v-icon>
-            Add new user
+            Add new category
           </PrimaryButton>
         </Link>
       </div>

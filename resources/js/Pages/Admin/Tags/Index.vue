@@ -6,16 +6,16 @@ import AdminLayout from "@/Layouts/AdminLayout.vue";
 import PrimaryButton from "@/Components/Admin/PrimaryButton.vue";
 import DungerButton from "@/Components/Admin/DangerButton.vue";
 
-const props = defineProps(["categories"]);
+const props = defineProps(["tags"]);
 
 let breadcrumbs = ref([
   { title: "Dashboard", disabled: false, href: "dashboard.index" },
-  { title: "Categories", disabled: true, href: "categories.index" },
+  { title: "Tags", disabled: true, href: "tags.index" },
 ]);
 </script>
 
 <template>
-  <Head title="Categories" />
+  <Head title="Tags" />
 
   <AdminLayout>
     <v-breadcrumbs :items="breadcrumbs">
@@ -37,13 +37,10 @@ let breadcrumbs = ref([
           </tr>
         </thead>
         <tbody>
-          <tr v-for="category in categories" :key="category.id">
-            <td>{{ category.title }}</td>
+          <tr v-for="tag in tags" :key="tag.id">
+            <td>{{ tag.title }}</td>
             <td class="text-right">
-              <Link
-                method="delete"
-                :href="route('categories.destroy', category.id)"
-              >
+              <Link method="delete" :href="route('tags.destroy', tag)">
                 <DungerButton as="button"> Delete </DungerButton>
               </Link>
             </td>
@@ -51,10 +48,10 @@ let breadcrumbs = ref([
         </tbody>
       </v-table>
       <div class="d-flex align-middle justify-center mt-4">
-        <Link :href="route('categories.create')">
+        <Link :href="route('tags.create')">
           <PrimaryButton>
             <v-icon class="mr-4" icon="mdi-account-plus"></v-icon>
-            Add new user
+            Add new tag
           </PrimaryButton>
         </Link>
       </div>
