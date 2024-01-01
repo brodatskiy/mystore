@@ -69,7 +69,7 @@ let breadcrumbs = ref([
       <div class="d-flex align-middle justify-center mt-4">
         <Link :href="route('products.create')">
           <PrimaryButton>
-            Add new user
+            Add new product
             <v-icon class="ml-3" icon="mdi-plus"></v-icon>
           </PrimaryButton>
         </Link>
