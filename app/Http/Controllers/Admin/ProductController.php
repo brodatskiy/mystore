@@ -19,7 +19,7 @@ class ProductController extends BaseController
     {
         $products = Product::all();
 
-        return Inertia::render('products.index', [
+        return Inertia::render('Admin/Products/Index', [
             'products' => $products
         ]);
     }
@@ -32,7 +32,7 @@ class ProductController extends BaseController
         $tags = Tag::all();
         $categories = Category::all();
 
-        return Inertia::render('products.index', [
+        return Inertia::render('Admin/Products/Create', [
             'tags' => $tags,
             'categories' => $categories
         ]);
@@ -57,7 +57,7 @@ class ProductController extends BaseController
         // ??????????????
         $categories = Category::all();
 
-        return Inertia::render('products.show', [
+        return Inertia::render('Admin/Products/Show', [
             'product' => $product,
             'categories' => $categories
         ]);
@@ -72,7 +72,7 @@ class ProductController extends BaseController
         $categories = Category::all();
         $productTagsIds = $product->tags()->get()->modelKeys();
 
-        return Inertia::render('products.show', [
+        return Inertia::render('Admin/Products/Edit', [
             'product' => $product,
             'categories' => $categories,
             'tags' => $tags,
@@ -98,6 +98,6 @@ class ProductController extends BaseController
     {
         $product->delete();
 
-        return redirect()->route('products.index');
+        return to_route('products.index');
     }
 }
