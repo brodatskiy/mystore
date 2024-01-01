@@ -19,7 +19,9 @@ class ProductController extends BaseController
     {
         $products = Product::all();
 
-        return Inertia::render('products.index', [$products]);
+        return Inertia::render('products.index', [
+            'products' => $products
+        ]);
     }
 
     /**
@@ -29,7 +31,11 @@ class ProductController extends BaseController
     {
         $tags = Tag::all();
         $categories = Category::all();
-        return view('products.create', compact('tags', 'categories'));
+
+        return Inertia::render('products.index', [
+            'tags' => $tags,
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -40,7 +46,7 @@ class ProductController extends BaseController
         $data = $request->validated();
         $this->service->store($data);
 
-        return redirect()->route('products.index');
+        return to_route('product.index');
     }
 
     /**
@@ -48,9 +54,13 @@ class ProductController extends BaseController
      */
     public function show(Product $product)
     {
-        $tags = Tag::all();
+        // ??????????????
+        $categories = Category::all();
 
-        return view('products.show', compact('product', 'tags'));
+        return Inertia::render('products.show', [
+            'product' => $product,
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -62,7 +72,12 @@ class ProductController extends BaseController
         $categories = Category::all();
         $productTagsIds = $product->tags()->get()->modelKeys();
 
-        return view('products.edit', compact('product', 'tags', 'categories', 'productTagsIds'));
+        return Inertia::render('products.show', [
+            'product' => $product,
+            'categories' => $categories,
+            'tags' => $tags,
+            'productTagsIds' => $productTagsIds,
+        ]);
     }
 
     /**
@@ -73,7 +88,7 @@ class ProductController extends BaseController
         $data = $request->validated();
         $product = $this->service->update($data, $product);
 
-        return redirect()->route('products.show', compact('product'));
+        return to_route('products.index', $product);
     }
 
     /**
