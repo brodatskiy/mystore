@@ -22,11 +22,6 @@ const form = useForm({
   tags: [],
 });
 
-// const categoryItems = ref([
-//   { value: 1, title: "Male" },
-//   { value: 2, title: "Female" },
-// ]);
-
 let breadcrumbs = ref([
   { title: "Products", disabled: false, href: "products.index" },
 ]);
