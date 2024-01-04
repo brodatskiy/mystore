@@ -24,7 +24,6 @@
         <!-- Small boxes (Stat box) -->
         <div class="row">
 
-
             <form action="{{ route('products.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
 
