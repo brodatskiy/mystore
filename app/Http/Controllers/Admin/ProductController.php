@@ -46,7 +46,7 @@ class ProductController extends BaseController
         $data = $request->validated();
         $this->service->store($data);
 
-        return to_route('product.index');
+        return to_route('products.index');
     }
 
     /**
