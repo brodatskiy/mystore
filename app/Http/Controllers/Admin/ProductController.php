@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\Tag;
 use Inertia\Inertia;
 use App\Http\Controllers\BaseController;
+use App\Http\Resources\Product\ProductResource;
 
 class ProductController extends BaseController
 {
@@ -18,9 +19,8 @@ class ProductController extends BaseController
     public function index()
     {
         $products = Product::all();
-
         return Inertia::render('Admin/Products/Index', [
-            'products' => $products
+            'products' => ProductResource::collection($products)
         ]);
     }
 
