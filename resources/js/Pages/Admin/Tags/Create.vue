@@ -42,9 +42,9 @@ let breadcrumbs = ref([
             :error-messages="form.errors.title"
           />
 
-          <div class="d-flex justify-end">
-            <PrimaryButton class="mt-2" type="submit"> Create </PrimaryButton>
-          </div>
+          <PrimaryButton class="w-100 mt-3" type="submit">
+            Create
+          </PrimaryButton>
         </v-form>
       </div>
     </v-sheet>
