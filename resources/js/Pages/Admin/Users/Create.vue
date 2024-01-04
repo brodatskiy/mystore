@@ -62,11 +62,19 @@ let breadcrumbs = ref([
             :error="form.errors.email ? true : false"
             :error-messages="form.errors.email"
           />
-          <v-text-field v-model="form.age" label="Age" variant="underlined" />
+          <v-text-field
+            v-model="form.age"
+            label="Age"
+            variant="underlined"
+            :error="form.errors.age ? true : false"
+            :error-messages="form.errors.age"
+          />
           <v-text-field
             v-model="form.address"
             label="Address"
             variant="underlined"
+            :error="form.errors.address ? true : false"
+            :error-messages="form.errors.address"
           />
           <v-select
             v-model="form.gender"
@@ -74,6 +82,8 @@ let breadcrumbs = ref([
             variant="underlined"
             label="Gender"
             :items="genderItems"
+            :error="form.errors.gender ? true : false"
+            :error-messages="form.errors.gender"
           ></v-select>
           <v-select
             v-model="form.role"
@@ -81,6 +91,8 @@ let breadcrumbs = ref([
             variant="underlined"
             label="Role"
             :items="roleItems"
+            :error="form.errors.role ? true : false"
+            :error-messages="form.errors.role"
           ></v-select>
 
           <v-file-input
@@ -88,6 +100,8 @@ let breadcrumbs = ref([
             clearable
             variant="underlined"
             label="Choose avatar"
+            :error="form.errors.avatar ? true : false"
+            :error-messages="form.errors.avatar"
           ></v-file-input>
           <div class="d-flex justify-end">
             <PrimaryButton class="mt-2" type="submit"> Create </PrimaryButton>
