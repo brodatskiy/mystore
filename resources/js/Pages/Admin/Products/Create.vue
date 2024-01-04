@@ -17,7 +17,7 @@ const form = useForm({
   preview_image: "",
   price: "",
   count: "",
-  is_published: "",
+  is_published: true,
   category_id: "",
   tags: [],
 });
@@ -25,8 +25,6 @@ const form = useForm({
 let breadcrumbs = ref([
   { title: "Products", disabled: false, href: "products.index" },
 ]);
-
-console.log(props.tags);
 </script>
 
 <template>
@@ -121,7 +119,10 @@ console.log(props.tags);
             :error-messages="form.errors.preview_image"
           ></v-file-input>
 
-          <v-checkbox label="Is published"></v-checkbox>
+          <v-checkbox
+            v-model="form.is_published"
+            label="Is published"
+          ></v-checkbox>
 
           <div class="d-flex justify-end">
             <PrimaryButton class="mt-2" type="submit"> Create </PrimaryButton>
