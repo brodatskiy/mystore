@@ -5,32 +5,37 @@ import { useForm, Head, Link } from "@inertiajs/vue3";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import PrimaryButton from "@/Components/Admin/PrimaryButton.vue";
 
-const form = useForm({
-  name: "",
-  email: "",
-  age: "",
-  address: "",
-  gender: "",
-  role: 0,
-  avatar: "",
+let props = defineProps({
+  tags: Array,
+  categories: Array,
 });
 
-const genderItems = ref([
-  { value: 1, title: "Male" },
-  { value: 2, title: "Female" },
-]);
-const roleItems = ref([
-  { value: 0, title: "User" },
-  { value: 1, title: "Admin" },
-]);
+const form = useForm({
+  title: "",
+  description: "",
+  content: "",
+  preview_image: "",
+  price: "",
+  count: "",
+  is_published: "",
+  category_id: "",
+  tags: [],
+});
+
+// const categoryItems = ref([
+//   { value: 1, title: "Male" },
+//   { value: 2, title: "Female" },
+// ]);
 
 let breadcrumbs = ref([
-  { title: "Users", disabled: false, href: "users.index" },
+  { title: "Products", disabled: false, href: "products.index" },
 ]);
+
+console.log(props.tags);
 </script>
 
 <template>
-  <Head title="Users" />
+  <Head title="Products" />
 
   <AdminLayout>
     <v-breadcrumbs :items="breadcrumbs">
@@ -46,49 +51,83 @@ let breadcrumbs = ref([
 
     <v-sheet class="pa-4" rounded="xl" elevation="3">
       <div class="w-50 mx-auto">
-        <h2 class="text-center">Add new user</h2>
-        <v-form @submit.prevent="form.post(route('users.store'))">
+        <h2 class="text-center">Add new product</h2>
+        <v-form @submit.prevent="form.post(route('products.store'))">
           <v-text-field
-            v-model="form.name"
-            label="Name"
+            v-model="form.title"
+            label="Title"
             variant="underlined"
-            :error="form.errors.name ? true : false"
-            :error-messages="form.errors.name"
+            :error="form.errors.title ? true : false"
+            :error-messages="form.errors.title"
           />
+
           <v-text-field
-            v-model="form.email"
-            label="Email"
+            v-model="form.description"
+            label="Description"
             variant="underlined"
-            :error="form.errors.email ? true : false"
-            :error-messages="form.errors.email"
+            :error="form.errors.description ? true : false"
+            :error-messages="form.errors.description"
           />
-          <v-text-field v-model="form.age" label="Age" variant="underlined" />
+
           <v-text-field
-            v-model="form.address"
-            label="Address"
+            v-model="form.content"
+            label="Content"
             variant="underlined"
+            :error="form.errors.content ? true : false"
+            :error-messages="form.errors.content"
           />
+
+          <v-text-field
+            v-model="form.price"
+            type="number"
+            label="Price"
+            variant="underlined"
+            :error="form.errors.price ? true : false"
+            :error-messages="form.errors.price"
+          />
+
+          <v-text-field
+            v-model="form.count"
+            type="number"
+            label="Count"
+            variant="underlined"
+            :error="form.errors.count ? true : false"
+            :error-messages="form.errors.count"
+          />
+
           <v-select
-            v-model="form.gender"
-            item-value="value"
+            v-model="form.category_id"
+            item-value="id"
             variant="underlined"
-            label="Gender"
-            :items="genderItems"
+            label="Category"
+            :items="categories"
+            :error="form.errors.category_id ? true : false"
+            :error-messages="form.errors.category_id"
           ></v-select>
+
           <v-select
-            v-model="form.role"
-            item-value="value"
+            v-model="form.tags"
+            item-value="id"
             variant="underlined"
-            label="Role"
-            :items="roleItems"
+            label="Tags"
+            multiple
+            chips
+            :items="tags"
+            :error="form.errors.tags ? true : false"
+            :error-messages="form.errors.tags"
           ></v-select>
 
           <v-file-input
-            @input="form.avatar = $event.target.files[0]"
+            @input="form.preview_image = $event.target.files[0]"
             clearable
             variant="underlined"
-            label="Choose avatar"
+            label="Choose preview image"
+            :error="form.errors.preview_image ? true : false"
+            :error-messages="form.errors.preview_image"
           ></v-file-input>
+
+          <v-checkbox label="Is published"></v-checkbox>
+
           <div class="d-flex justify-end">
             <PrimaryButton class="mt-2" type="submit"> Create </PrimaryButton>
           </div>

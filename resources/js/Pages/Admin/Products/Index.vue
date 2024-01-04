@@ -33,31 +33,35 @@ let breadcrumbs = ref([
       <v-table fixed-header class="mt-6">
         <thead>
           <tr>
-            <th class="text-left">Name</th>
-            <th class="text-left">Age</th>
-            <th class="text-left">Address</th>
-            <th class="text-left">Gender</th>
-            <th class="text-left">Email</th>
-            <th class="text-left">Role</th>
+            <th class="text-left">Image</th>
+            <th class="text-left">Title</th>
+            <th class="text-left">Description</th>
+            <th class="text-left">Content</th>
+            <th class="text-left">Price</th>
+            <th class="text-left">Count</th>
+            <th class="text-left">Published</th>
+            <th class="text-left">Category</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="user in products" :key="user.id">
-            <td>{{ user.name }}</td>
-            <td>{{ user.age }}</td>
-            <td>{{ user.address }}</td>
-            <td>{{ user.gender }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.role }}</td>
+          <tr v-for="product in products" :key="product.id">
+            <td>{{ product.preview_image }}</td>
+            <td>{{ product.title }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.content }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.count }}</td>
+            <td>{{ product.is_published }}</td>
+            <td>{{ product.category }}</td>
             <td class="text-right">
-              <Link :href="route('products.show', user)">
+              <Link :href="route('products.show', product)">
                 <PrimaryButton> Show </PrimaryButton>
               </Link>
             </td>
             <td class="text-right">
               <Link
                 method="delete"
-                :href="route('products.destroy', user.id)"
+                :href="route('products.destroy', product.id)"
                 as="button"
               >
                 <DungerButton as="button"> Delete </DungerButton>
