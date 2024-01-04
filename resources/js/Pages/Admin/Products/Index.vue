@@ -6,7 +6,7 @@ import AdminLayout from "@/Layouts/AdminLayout.vue";
 import PrimaryButton from "@/Components/Admin/PrimaryButton.vue";
 import DungerButton from "@/Components/Admin/DangerButton.vue";
 
-const props = defineProps(["products"]);
+const props = defineProps({ products: Object });
 
 let breadcrumbs = ref([
   { title: "Dashboard", disabled: false, href: "dashboard.index" },
@@ -41,18 +41,33 @@ let breadcrumbs = ref([
             <th class="text-left">Count</th>
             <th class="text-left">Published</th>
             <th class="text-left">Category</th>
+            <th class="text-left">Tags</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="product in products" :key="product.id">
-            <td>{{ product.preview_image }}</td>
+            <td>
+              <v-img
+                :min-width="200"
+                :src="product.image"
+                alt="product image"
+                class="w-full"
+              />
+            </td>
             <td>{{ product.title }}</td>
             <td>{{ product.description }}</td>
             <td>{{ product.content }}</td>
             <td>{{ product.price }}</td>
             <td>{{ product.count }}</td>
-            <td>{{ product.is_published }}</td>
-            <td>{{ product.category }}</td>
+            <td>{{ product.isPublished ? "Yes" : "No" }}</td>
+            <td>{{ product.category.title }}</td>
+            <td>
+              <div v-for="tag in product.tags" :key="tag.id" class="pa-1">
+                <v-chip>
+                  {{ tag.title }}
+                </v-chip>
+              </div>
+            </td>
             <td class="text-right">
               <Link :href="route('products.show', product)">
                 <PrimaryButton> Show </PrimaryButton>
