@@ -54,13 +54,6 @@
           :product="product"
         />
       </div>
-      <div class="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-5 mb-5>">
-        <ProductCard
-          v-for="product in products"
-          :key="product.id"
-          :product="product"
-        />
-      </div>
 
       <!-- <div v-else class="mb-3"><p>Loading...</p></div> -->
     </div>
