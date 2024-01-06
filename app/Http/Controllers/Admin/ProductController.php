@@ -54,11 +54,10 @@ class ProductController extends BaseController
      */
     public function show(Product $product)
     {
-        // ??????????????
         $categories = Category::all();
 
         return Inertia::render('Admin/Products/Show', [
-            'product' => $product,
+            'product' => new ProductResource($product),
             'categories' => $categories
         ]);
     }
@@ -70,13 +69,11 @@ class ProductController extends BaseController
     {
         $tags = Tag::all();
         $categories = Category::all();
-        $productTagsIds = $product->tags()->get()->modelKeys();
 
         return Inertia::render('Admin/Products/Edit', [
-            'product' => $product,
+            'product' => new ProductResource($product),
             'categories' => $categories,
             'tags' => $tags,
-            'productTagsIds' => $productTagsIds,
         ]);
     }
 
