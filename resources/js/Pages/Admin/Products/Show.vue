@@ -7,21 +7,21 @@ import PrimaryButton from "@/Components/Admin/PrimaryButton.vue";
 import DungerButton from "@/Components/Admin/DangerButton.vue";
 import AvatarPlaceholder from "~/assets/images/avatar-placeholder.png";
 
-const props = defineProps(["user"]);
+const props = defineProps(["product"]);
 
 const breadcrumbs = ref([
   { title: "Dashboard", disabled: false, href: "dashboard.index" },
-  { title: "Users", disabled: false, href: "users.index" },
+  { title: "Products", disabled: false, href: "products.index" },
   {
-    title: String(props.user.id),
+    title: String(props.product.id),
     disabled: true,
-    href: "users.index",
+    href: "products.index",
   },
 ]);
 </script>
 
 <template>
-  <Head title="Users" />
+  <Head title="Products" />
 
   <AdminLayout>
     <v-breadcrumbs :items="breadcrumbs">
@@ -39,17 +39,9 @@ const breadcrumbs = ref([
       <div class="d-flex">
         <div>
           <v-img
-            v-if="user.avatar"
             :min-width="200"
-            :src="user.avatar"
-            alt="user avatar"
-            class="w-full"
-          />
-          <v-img
-            v-else
-            :min-width="200"
-            :src="AvatarPlaceholder"
-            alt="user avatar"
+            :src="product.image"
+            alt="product avatar"
             class="w-full"
           />
         </div>
@@ -57,40 +49,56 @@ const breadcrumbs = ref([
           <v-table class="ml-10">
             <tbody>
               <tr>
-                <td>Name</td>
-                <td>{{ user.name }}</td>
+                <td>Title</td>
+                <td>{{ product.title }}</td>
               </tr>
               <tr>
-                <td>Age</td>
-                <td>{{ user.age }}</td>
+                <td>Description</td>
+                <td>{{ product.description }}</td>
               </tr>
               <tr>
-                <td>Address</td>
-                <td>{{ user.address }}</td>
+                <td>Content</td>
+                <td>{{ product.content }}</td>
               </tr>
               <tr>
-                <td>Gender</td>
-                <td>{{ user.gender }}</td>
+                <td>Price</td>
+                <td>{{ product.price }}</td>
               </tr>
               <tr>
-                <td>Email</td>
-                <td>{{ user.email }}</td>
+                <td>Count</td>
+                <td>{{ product.count }}</td>
               </tr>
               <tr>
                 <td>Role</td>
-                <td>{{ user.role }}</td>
+                <td>{{ product.role }}</td>
+              </tr>
+              <tr>
+                <td>Is published</td>
+                <td>{{ product.isPublished }}</td>
+              </tr>
+              <tr>
+                <td>Category</td>
+                <td>{{ product.category.title }}</td>
+              </tr>
+              <tr>
+                <td>Tags</td>
+                <div v-for="tag in product.tags" :key="tag.id" class="pa-1">
+                  <v-chip>
+                    {{ tag.title }}
+                  </v-chip>
+                </div>
               </tr>
             </tbody>
           </v-table>
         </div>
       </div>
       <div class="px-4">
-        <Link :href="route('users.edit', user)">
+        <Link :href="route('products.edit', product)">
           <PrimaryButton> Edit </PrimaryButton>
         </Link>
         <Link
           method="delete"
-          :href="route('users.destroy', user.id)"
+          :href="route('products.destroy', product.id)"
           as="button"
           class="ml-2"
         >
