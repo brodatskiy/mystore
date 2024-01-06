@@ -73,9 +73,6 @@ onMounted(() => {});
           </v-col>
         </v-row>
       </v-container>
-      <div
-        class="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-5 mb-5>"
-      ></div>
 
       <!-- <div v-else class="mb-3"><p>Loading...</p></div> -->
     </div>
