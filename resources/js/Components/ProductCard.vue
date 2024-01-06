@@ -8,16 +8,44 @@ import { Link } from "@inertiajs/vue3";
 defineProps(["product"]);
 </script>
 <template>
-  <v-card width="300">
-    <img
-      :src="product.image"
-      alt="Card Image"
-      class="object-contain h-32 w-100"
-    />
-    <p class="text-lg">
-      {{ product.title }}
-    </p>
-    <p class="text-2xl mb-5">{{ product.price }} $</p>
+  <v-card class="pa-3" hover rounded="xl" max-width="300">
+    <div>
+      <v-img
+        :src="product.image"
+        alt="Card Image"
+        width="250"
+        cover
+        aspect-ratio="1.4"
+      />
+    </div>
+    <v-card-item>
+      <v-card-title> {{ product.title }} </v-card-title>
+      <v-card-subtitle>{{ product.price }} $</v-card-subtitle>
+    </v-card-item>
+    <v-card-actions>
+      <v-spacer></v-spacer>
+
+      <v-btn
+        size="small"
+        color="surface-variant"
+        variant="text"
+        icon="mdi-heart"
+      ></v-btn>
+
+      <v-btn
+        size="small"
+        color="surface-variant"
+        variant="text"
+        icon="mdi-bookmark"
+      ></v-btn>
+
+      <v-btn
+        size="small"
+        color="surface-variant"
+        variant="text"
+        icon="mdi-share-variant"
+      ></v-btn>
+    </v-card-actions>
   </v-card>
 
   <!-- <star-rating
