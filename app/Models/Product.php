@@ -10,6 +10,7 @@ class Product extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $with = ['category', 'tags'];
 
     public function category()
     {
