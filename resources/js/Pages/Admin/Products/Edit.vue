@@ -24,8 +24,6 @@ const form = useForm({
   tags: props.product.tags,
 });
 
-console.log(props.product);
-
 let breadcrumbs = ref([
   { title: "products", disabled: false, href: "products.index" },
   {
