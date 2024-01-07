@@ -68,7 +68,7 @@ onMounted(() => {});
             </div> -->
       <v-container>
         <v-row>
-          <v-col v-for="product in products" :key="n" cols="4">
+          <v-col v-for="product in products" :key="product.id" cols="4">
             <ProductCard :product="product"></ProductCard>
           </v-col>
         </v-row>
