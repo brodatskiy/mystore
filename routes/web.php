@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\TagController;
 
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -27,12 +28,13 @@ Route::get('/',  [MainController::class, 'index'])->name('/');
 Route::get('/cart', function () {
     return Inertia::render('Cart/Index');
 })->name('cart');
+Route::resource('message', MessageController::class)->only('index');
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::resource('products', ProductController::class);
     Route::resource('categories', CategoryController::class)->except(['show']);
-    Route::resource('tags', TagController::class);
+    Route::resource('tags', TagController::class)->except(['show']);
     Route::resource('users', UserController::class);
 });
 
