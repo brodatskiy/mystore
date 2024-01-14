@@ -21,33 +21,6 @@ onMounted(() => {});
   <Head title="Main" />
 
   <MainLayout>
-    <v-carousel hide-delimiters cycle show-arrows="hover">
-      <template v-slot:prev="{ props }">
-        <button class="" @click="props.onClick">
-          <v-icon icon="mdi-chevron-left" size="large" />
-        </button>
-      </template>
-      <template v-slot:next="{ props }">
-        <button class="" @click="props.onClick">
-          <v-icon icon="mdi-chevron-right" size="large" />
-        </button>
-      </template>
-      <v-carousel-item
-        src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-        cover
-      ></v-carousel-item>
-
-      <v-carousel-item
-        src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg"
-        cover
-      ></v-carousel-item>
-
-      <v-carousel-item
-        src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-        cover
-      ></v-carousel-item>
-    </v-carousel>
-
     <div class="p-4 max-w-7xl mx-auto flex flex-col items-center">
       <!-- <div class="menu flex mb-2">
                 <FilterProducts></FilterProducts>
