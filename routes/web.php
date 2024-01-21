@@ -28,7 +28,7 @@ Route::get('/',  [MainController::class, 'index'])->name('/');
 Route::get('/cart', function () {
     return Inertia::render('Cart/Index');
 })->name('cart');
-Route::resource('message', MessageController::class)->only('index');
+Route::resource('chat', MessageController::class);
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');

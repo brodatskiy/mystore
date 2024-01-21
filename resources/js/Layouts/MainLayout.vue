@@ -41,7 +41,10 @@ onMounted(() => {});
         <v-icon icon="mdi-menu" size="large" />
       </div>
       <div class="hidden sm:block">Categories</div>
-      <div class="hidden sm:block ml-2">Chat</div>
+      <Link :href="route('chat.index')">
+        <div class="hidden sm:block ml-2">Chat</div>
+      </Link>
+
       <div class="sm:hidden px-2">
         <Link :href="route('/')">
           <button>
@@ -172,7 +175,7 @@ onMounted(() => {});
 
     <!-- Page Content -->
     <main>
-      <v-container fluid class="px-0 py-0">
+      <v-container fluid class="mt-16">
         <slot />
       </v-container>
     </main>
