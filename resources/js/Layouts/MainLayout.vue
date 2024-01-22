@@ -168,12 +168,7 @@ onMounted(() => {});
         </v-list-item>
       </v-list></v-sheet
     >
-    <!-- <input
-                    v-model.lazy="productStore.searchQuery"
-                    class="rounded-l focus:outline-none h-[30px] px-1 text-black"
-        /> -->
 
-    <!-- Page Content -->
     <main>
       <v-container fluid class="mt-16">
         <slot />
