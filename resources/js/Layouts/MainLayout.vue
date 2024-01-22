@@ -5,14 +5,12 @@ import { Link } from "@inertiajs/vue3";
 
 // import { useCartStore } from "@/Store/useCartStore";
 // import { useProductStore } from "@/Store/useProductStore";
-// import { usePersistCart } from "@/Utils/usePersistCart";
 
 // const productStore = useProductStore();
 // const cartStore = useCartStore();
 
 // productStore.fetchProducts();
 
-// usePersistCart();
 let links = ref([
   {
     to: "cart",
