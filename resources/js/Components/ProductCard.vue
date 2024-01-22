@@ -9,7 +9,7 @@ defineProps(["product"]);
 </script>
 <template>
   <v-hover v-slot="{ isHovering, props }">
-    <v-card class="product" variant="text" v-bind="props">
+    <v-card min-width="239" class="product" variant="text" v-bind="props">
       <div>
         <v-img
           :src="product.image"
@@ -54,8 +54,6 @@ defineProps(["product"]);
 .product__bottom {
   position: relative;
   opacity: 0;
-}
-.text-none {
 }
 
 .vue-star-rating-rating-text {
