@@ -8,10 +8,9 @@ const myCustomLightTheme = {
   colors: {
     background: "#FFFFFF",
     backgroundAdmin: "#FFFFFF",
-    surface: "#F0E0D6",
+    surface: "#111111",
+    surface_light: "#a3a3a3",
     surfaceAdmin: "#F0E0D6",
-    surfaceAdminLighter: "#f5ece6",
-    surfaceAdminDarker: "#cfbeb4",
     primary: "#111111",
     secondary: "#03DAC6",
     error: "#f04d3e",
