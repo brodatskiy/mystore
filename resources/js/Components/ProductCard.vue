@@ -8,46 +8,28 @@ import { Link } from "@inertiajs/vue3";
 defineProps(["product"]);
 </script>
 <template>
-  <v-card class="pa-3" hover rounded="xl" max-width="300">
-    <div>
-      <v-img
-        :src="product.image"
-        alt="Card Image"
-        width="250"
-        cover
-        aspect-ratio="1.4"
-      />
-    </div>
-    <v-card-item>
-      <v-card-title> {{ product.title }} </v-card-title>
-      <v-card-subtitle>{{ product.price }} $</v-card-subtitle>
-    </v-card-item>
-    <v-card-actions>
-      <v-spacer></v-spacer>
-
-      <v-btn
-        size="small"
-        color="surface-variant"
-        variant="text"
-        icon="mdi-heart"
-      ></v-btn>
-
-      <v-btn
-        size="small"
-        color="surface-variant"
-        variant="text"
-        icon="mdi-bookmark"
-      ></v-btn>
-
-      <v-btn
-        size="small"
-        color="surface-variant"
-        variant="text"
-        icon="mdi-share-variant"
-      ></v-btn>
-    </v-card-actions>
-  </v-card>
-
+  <v-hover v-slot="{ isHovering, props }">
+    <v-card class="product" variant="text" v-bind="props">
+      <div>
+        <v-img
+          :src="product.image"
+          alt="Card Image"
+          width="300"
+          cover
+          aspect-ratio="1.4"
+        />
+      </div>
+      <div class="d-flex justify-space-between">
+        <div>{{ product.price }}</div>
+        <div>{{ product.title }}</div>
+        <div>
+          <v-icon icon="mdi-heart-outline" size="small" />
+          <!-- <v-icon icon="mdi-heart" size="small" /> -->
+        </div>
+      </div>
+      <div class="product__bottom">Размеры и цвета</div>
+    </v-card>
+  </v-hover>
   <!-- <star-rating
                 :increment="0.5"
                 :read-only="true"
@@ -65,7 +47,17 @@ defineProps(["product"]);
                 Add to cart
             </ButtonStd> -->
 </template>
-<style>
+<style scoped>
+.product:hover .product__bottom {
+  opacity: 1;
+}
+.product__bottom {
+  position: relative;
+  opacity: 0;
+}
+.text-none {
+}
+
 .vue-star-rating-rating-text {
   margin-top: 5px;
 }
