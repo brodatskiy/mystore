@@ -9,28 +9,33 @@ import { Link } from "@inertiajs/vue3";
 import ProductCard from "@/Components/ProductCard.vue";
 
 const props = defineProps(["products"]);
-let showModal = ref(false);
-
-const display = useDisplay();
-
-console.log(display);
 
 const cols = computed(() => {
-  const { lg, sm } = useDisplay();
-  return lg ? 3 : sm ? 4 : 6;
+  const { name } = useDisplay();
+  switch (name.value) {
+    case "md":
+      return 4;
+    case "lg":
+      return 3;
+    default:
+      return 6;
+  }
+
+  return undefined;
 });
 </script>
 <template>
   <Head title="Main" />
 
   <MainLayout>
-    <div class="p-4 max-w-7xl mx-auto flex flex-col items-center">
-      <v-container>
+    <div>
+      <v-container class="pa-0">
         <v-row>
           <v-col
             v-for="(product, index) in products"
             :key="product.id"
             :cols="cols"
+            class="pa-2"
           >
             <ProductCard :product="product"></ProductCard>
           </v-col>

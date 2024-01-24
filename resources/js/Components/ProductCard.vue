@@ -11,13 +11,7 @@ defineProps(["product"]);
   <v-hover v-slot="{ isHovering, props }">
     <v-card min-width="239" class="product" variant="text" v-bind="props">
       <div>
-        <v-img
-          :src="product.image"
-          alt="Card Image"
-          width="300"
-          cover
-          aspect-ratio="1.4"
-        />
+        <v-img :src="product.image" alt="Card Image" cover aspect-ratio="1.4" />
       </div>
       <div class="d-flex justify-space-between">
         <div>{{ product.price }}</div>
