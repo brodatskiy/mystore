@@ -9,7 +9,7 @@ defineProps(["product"]);
 </script>
 <template>
   <v-hover v-slot="{ isHovering, props }">
-    <v-card min-width="239" class="product" variant="text" v-bind="props">
+    <v-card min-width="200" class="product" variant="text" v-bind="props">
       <div>
         <v-img :src="product.image" alt="Card Image" cover aspect-ratio="1.4" />
       </div>

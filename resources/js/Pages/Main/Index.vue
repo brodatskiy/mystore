@@ -29,13 +29,13 @@ const cols = computed(() => {
 
   <MainLayout>
     <div>
-      <v-container class="pa-0">
+      <v-container class="pa-0 grid-container">
         <v-row>
           <v-col
             v-for="(product, index) in products"
             :key="product.id"
             :cols="cols"
-            class="pa-2"
+            class="px-1"
           >
             <ProductCard :product="product"></ProductCard>
           </v-col>
@@ -45,4 +45,8 @@ const cols = computed(() => {
   </MainLayout>
 </template>
 
-<style scoped></style>
+<style scoped>
+.grid-container {
+  grid-gap: 50px;
+}
+</style>

@@ -39,22 +39,18 @@ onMounted(() => {});
         >
           <v-icon icon="mdi-menu" size="large" />
         </div>
-        <div class="">Categories</div>
-        <Link :href="route('chat.index')">
+
+        <!-- <Link :href="route('chat.index')">
           <div class="ml-2">Chat</div>
-        </Link>
+        </Link> -->
       </template>
 
-      <v-spacer></v-spacer>
-
       <!-- Logo -->
-      <div class="header__logo">
+      <v-app-bar-title class="header__logo">
         <Link :href="route('/')">
           <p>MyStore</p>
         </Link>
-      </div>
-
-      <v-spacer></v-spacer>
+      </v-app-bar-title>
 
       <template v-slot:append>
         <div class="hidden sm:block px-2 text-gray-800 hover:text-red-300">
