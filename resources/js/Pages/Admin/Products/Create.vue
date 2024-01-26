@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { useForm, Head, Link } from "@inertiajs/vue3";
 
 import AdminLayout from "@/Layouts/AdminLayout.vue";
-import PrimaryButton from "@/Components/Admin/PrimaryButton.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 let props = defineProps({
   tags: Array,

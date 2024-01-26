@@ -3,8 +3,8 @@ import { ref } from "vue";
 import { Head, Link } from "@inertiajs/vue3";
 
 import AdminLayout from "@/Layouts/AdminLayout.vue";
-import PrimaryButton from "@/Components/Admin/PrimaryButton.vue";
-import DungerButton from "@/Components/Admin/DangerButton.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import DungerButton from "@/Components/DangerButton.vue";
 import AvatarPlaceholder from "~/assets/images/avatar-placeholder.png";
 
 const props = defineProps(["product"]);
