@@ -79,16 +79,24 @@ onMounted(() => {});
               <v-menu activator="parent" open-on-hover>
                 <v-list>
                   <v-list-item>
-                    <div>
-                      <Link :href="route('logout')" method="post" as="button">
-                        <v-list-item-title> Log out </v-list-item-title>
-                      </Link>
-                    </div>
-                    <div>
-                      <Link :href="route('dashboard.index')" as="button">
-                        <v-list-item-title> Admin </v-list-item-title>
-                      </Link>
-                    </div>
+                    <Link :href="route('chat.index')" as="button">
+                      <v-list-item-title> Chat </v-list-item-title>
+                    </Link>
+                  </v-list-item>
+                  <v-list-item>
+                    <Link :href="route('profile.edit')" as="button">
+                      <v-list-item-title> Profile </v-list-item-title>
+                    </Link>
+                  </v-list-item>
+                  <v-list-item>
+                    <Link :href="route('dashboard.index')" as="button">
+                      <v-list-item-title> Admin </v-list-item-title>
+                    </Link>
+                  </v-list-item>
+                  <v-list-item>
+                    <Link :href="route('logout')" method="post" as="button">
+                      <v-list-item-title> Log out </v-list-item-title>
+                    </Link>
                   </v-list-item>
                 </v-list>
               </v-menu>
@@ -149,17 +157,16 @@ onMounted(() => {});
       </v-list></v-sheet
     >
 
-    <main>
-      <v-container fluid class="mt-16">
+    <v-main>
+      <v-container fluid class="mt-16 h-100">
         <slot />
       </v-container>
-    </main>
-
-    <v-footer color="background">
-      <v-btn class="mx-auto" variant="text" @click="print('footer')">
-        Get data
-      </v-btn>
-    </v-footer>
+      <v-footer height="32" color="background">
+        <v-btn class="mx-auto" variant="text" @click="print('footer')">
+          Get data
+        </v-btn>
+      </v-footer>
+    </v-main>
   </v-app>
 </template>
 

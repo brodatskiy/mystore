@@ -85,6 +85,7 @@ let navLinks = ref([
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
+
     <v-toolbar color="transparent" flat class="px-1">
       <div
         class="px-2 cursor-pointer"
