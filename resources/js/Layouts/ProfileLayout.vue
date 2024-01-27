@@ -61,7 +61,7 @@ let navLinks = ref([
 
     <!-- Page Content -->
     <v-main>
-      <v-container class="mt-2">
+      <v-container class="mt-5">
         <slot />
       </v-container>
     </v-main>

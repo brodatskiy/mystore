@@ -34,8 +34,9 @@ const submit = () => {
 
     <v-form @submit.prevent="submit">
       <v-text-field
-        type="email"
         v-model="form.email"
+        type="email"
+        class="mb-2"
         density="compact"
         variant="underlined"
         label="Email"

@@ -26,6 +26,7 @@ const submit = () => {
     <form @submit.prevent="submit">
       <v-text-field
         type="name"
+        class="mb-2"
         v-model="form.name"
         density="compact"
         variant="underlined"
@@ -37,6 +38,7 @@ const submit = () => {
 
       <v-text-field
         type="email"
+        class="mb-2"
         v-model="form.email"
         density="compact"
         variant="underlined"
@@ -48,6 +50,7 @@ const submit = () => {
 
       <v-text-field
         v-model="form.password"
+        class="mb-2"
         :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
         :type="showPassword ? 'text' : 'password'"
         density="compact"
