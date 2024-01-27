@@ -1,3 +1,6 @@
+<script setup>
+import { Link } from "@inertiajs/vue3";
+</script>
 <template>
   <Link :href="route('/')" class="d-flex align-baseline justify-center mb-3">
     <v-icon icon="mdi-store" size="x-large" class=""></v-icon>
