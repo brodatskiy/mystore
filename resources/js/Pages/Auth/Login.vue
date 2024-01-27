@@ -2,18 +2,12 @@
 import { ref } from "vue";
 import Checkbox from "@/Components/Checkbox.vue";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
-import InputError from "@/Components/InputError.vue";
-import InputLabel from "@/Components/InputLabel.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import TextInput from "@/Components/TextInput.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 
 defineProps({
   canResetPassword: {
     type: Boolean,
-  },
-  status: {
-    type: String,
+    status: String,
   },
 });
 
@@ -44,8 +38,7 @@ const submit = () => {
         type="email"
         v-model="form.email"
         density="compact"
-        variant="outlined"
-        rounded="xl"
+        variant="underlined"
         label="Email"
         prepend-inner-icon="mdi-email-outline"
         :error="form.errors.email ? true : false"
@@ -59,9 +52,8 @@ const submit = () => {
         density="compact"
         placeholder="Enter your password"
         prepend-inner-icon="mdi-lock-outline"
-        variant="outlined"
+        variant="underlined"
         label="Password"
-        rounded="xl"
         :error="form.errors.password ? true : false"
         :error-messages="form.errors.password"
         @click:append-inner="showPassword = !showPassword"
@@ -84,7 +76,6 @@ const submit = () => {
           color="primary"
           size="large"
           variant="flat"
-          rounded="xl"
         >
           Log In
         </v-btn>
