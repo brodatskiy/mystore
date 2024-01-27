@@ -7,18 +7,20 @@ import { Link } from "@inertiajs/vue3";
   <v-app>
     <v-sheet color="background" class="h-100 d-flex align-center">
       <v-card
-        class="d-flex flex-column align-center w-25 px-6 py-4 mx-auto bg-white"
+        class="d-flex flex-column align-center w-25 px-6 py-6 mx-auto"
+        color="surface"
         rounded="xl"
-        max-width="448"
+        width="450"
+        min-width="350"
       >
-        <div class="mb-3">
+        <div class="">
           <Link :href="route('/')" class="d-flex align-baseline">
             <v-icon icon="mdi-store" size="large" class=""></v-icon>
             <h1 class="font-weight-bold">MyStore</h1>
           </Link>
         </div>
 
-        <div class="w-75 mt-2">
+        <div class="w-75 mt-5">
           <slot />
         </div>
       </v-card>
