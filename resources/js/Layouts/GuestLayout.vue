@@ -5,21 +5,15 @@ import { Link } from "@inertiajs/vue3";
 
 <template>
   <v-app>
-    <v-sheet color="background" class="h-100 d-flex align-center">
+    <v-sheet color="background" class="ma-auto">
+      <ApplicationLogo />
+
       <v-card
-        class="d-flex flex-column align-center w-25 px-6 py-6 mx-auto"
+        class="d-flex flex-column align-center pa-5 ma-5"
         color="surface"
         rounded="xl"
-        width="450"
-        min-width="350"
+        min-width="400"
       >
-        <div class="">
-          <Link :href="route('/')" class="d-flex align-baseline">
-            <v-icon icon="mdi-store" size="large" class=""></v-icon>
-            <h1 class="font-weight-bold">MyStore</h1>
-          </Link>
-        </div>
-
         <div class="w-75 mt-5">
           <slot />
         </div>
