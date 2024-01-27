@@ -12,10 +12,6 @@ input:-webkit-autofill:focus {
   -webkit-background-clip: text;
 }
 
-.cursor-pointer {
-  cursor: pointer;
-}
-
 .v-footer {
   margin: 0 14px;
 }
