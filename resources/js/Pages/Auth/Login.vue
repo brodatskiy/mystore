@@ -1,13 +1,11 @@
 <script setup>
 import { ref } from "vue";
-import Checkbox from "@/Components/Checkbox.vue";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 
 defineProps({
   canResetPassword: {
     type: Boolean,
-    status: String,
   },
 });
 
@@ -30,9 +28,6 @@ const submit = () => {
   <GuestLayout>
     <Head title="Log in" />
 
-    <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
-      {{ status }}
-    </div>
     <v-form @submit.prevent="submit">
       <v-text-field
         type="email"
@@ -59,32 +54,29 @@ const submit = () => {
         @click:append-inner="showPassword = !showPassword"
       ></v-text-field>
 
-      <div class="">
-        <label class="flex items-center">
-          <Checkbox name="remember" v-model:checked="form.remember" />
-          <span class="ml-2">Remember me</span>
-        </label>
-      </div>
+      <v-checkbox
+        v-model="form.remember"
+        density="compact"
+        label="Remember me"
+        name="remember"
+      ></v-checkbox>
 
-      <div class="mt-4">
-        <v-btn
-          block
-          type="submit"
-          class="w-full"
-          :class="{ 'opacity-25': form.processing }"
-          :disabled="form.processing"
-          color="primary"
-          size="large"
-          variant="flat"
-        >
-          Log In
-        </v-btn>
-      </div>
-      <div class="mt-2">
-        <Link v-if="canResetPassword" :href="route('password.request')">
-          Forgot your password?
-        </Link>
-      </div>
+      <v-btn
+        block
+        type="submit"
+        class="w-full"
+        :class="{ 'opacity-25': form.processing }"
+        :disabled="form.processing"
+        color="primary"
+        size="large"
+        variant="flat"
+      >
+        Log In
+      </v-btn>
+
+      <Link v-if="canResetPassword" :href="route('password.request')">
+        <p class="text-indigo-darken-2">Forgot your password?</p>
+      </Link>
     </v-form>
   </GuestLayout>
 </template>
