@@ -68,7 +68,6 @@ const submit = () => {
       <v-btn
         block
         type="submit"
-        class="w-full"
         :class="{ 'opacity-25': form.processing }"
         :disabled="form.processing"
         color="primary"

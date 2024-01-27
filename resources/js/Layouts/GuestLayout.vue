@@ -13,6 +13,7 @@ import { Link } from "@inertiajs/vue3";
         color="surface"
         rounded="xl"
         min-width="400"
+        max-width="700"
       >
         <div class="w-75 mt-5">
           <slot />
