@@ -3,9 +3,12 @@ import { ref } from "vue";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 
-defineProps({
+const props = defineProps({
   canResetPassword: {
     type: Boolean,
+  },
+  status: {
+    type: String,
   },
 });
 
@@ -15,6 +18,7 @@ const form = useForm({
   remember: false,
 });
 
+const snackbar = ref(props.status);
 const showPassword = ref(false);
 
 const submit = () => {
@@ -78,6 +82,10 @@ const submit = () => {
         <p class="text-indigo-darken-2">Forgot your password?</p>
       </Link>
     </v-form>
+
+    <v-snackbar v-model="snackbar" rounded="xl">
+      <p class="text-center">{{ status }}</p>
+    </v-snackbar>
   </GuestLayout>
 </template>
 
