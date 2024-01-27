@@ -11,20 +11,6 @@ import { Link } from "@inertiajs/vue3";
 
 // productStore.fetchProducts();
 
-let links = ref([
-  {
-    to: "cart",
-    text: "Dashboard",
-  },
-  {
-    to: "/",
-    text: "Players",
-  },
-  {
-    to: "/",
-    text: "Tournaments",
-  },
-]);
 let sidebarExpand = ref(false);
 
 onMounted(() => {});
@@ -47,9 +33,7 @@ onMounted(() => {});
 
       <!-- Logo -->
       <v-app-bar-title class="header__logo">
-        <Link :href="route('/')">
-          <p>MyStore</p>
-        </Link>
+        <ApplicationLogo />
       </v-app-bar-title>
 
       <template v-slot:append>
@@ -76,11 +60,11 @@ onMounted(() => {});
           <div v-else>
             <button class="px-2">
               <v-icon icon="mdi-account-check" size="large" />
-              <v-menu activator="parent" open-on-hover>
+              <v-menu activator="parent" open-on-hover width="120" offset="10">
                 <v-list>
-                  <v-list-item>
-                    <Link :href="route('chat.index')" as="button">
-                      <v-list-item-title> Chat </v-list-item-title>
+                  <v-list-item v-if="$page.props.auth.user.role === 1">
+                    <Link :href="route('dashboard.index')" as="button">
+                      <v-list-item-title> Admin panel </v-list-item-title>
                     </Link>
                   </v-list-item>
                   <v-list-item>
@@ -89,10 +73,13 @@ onMounted(() => {});
                     </Link>
                   </v-list-item>
                   <v-list-item>
-                    <Link :href="route('dashboard.index')" as="button">
-                      <v-list-item-title> Admin </v-list-item-title>
+                    <Link :href="route('chat.index')" as="button">
+                      <v-list-item-title> Chat </v-list-item-title>
                     </Link>
                   </v-list-item>
+
+                  <v-divider></v-divider>
+
                   <v-list-item>
                     <Link :href="route('logout')" method="post" as="button">
                       <v-list-item-title> Log out </v-list-item-title>
