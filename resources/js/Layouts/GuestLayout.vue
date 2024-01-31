@@ -5,7 +5,7 @@ import { Link } from "@inertiajs/vue3";
 
 <template>
   <v-app>
-    <v-sheet color="background" class="ma-auto">
+    <v-sheet color="background" class="d-flex flex-column align-center ma-auto">
       <ApplicationLogo />
 
       <v-card
