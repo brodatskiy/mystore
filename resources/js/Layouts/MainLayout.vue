@@ -49,18 +49,28 @@ onMounted(() => {});
         <div>
           <!-- Login/Register -->
           <div v-if="!$page.props.auth.user">
-            <div>
-              <Link :href="route('login')">
-                <button class="px-2">
-                  <v-icon icon="mdi-account" size="large" />
-                </button>
-              </Link>
-            </div>
+            <button class="px-2">
+              <v-icon icon="mdi-account" size="large" />
+              <v-menu activator="parent" open-on-hover offset="10">
+                <v-list>
+                  <v-list-item>
+                    <Link :href="route('login')" as="button">
+                      <v-list-item-title> Log in </v-list-item-title>
+                    </Link>
+                  </v-list-item>
+                  <v-list-item>
+                    <Link :href="route('register')" as="button">
+                      <v-list-item-title> Register </v-list-item-title>
+                    </Link>
+                  </v-list-item>
+                </v-list>
+              </v-menu>
+            </button>
           </div>
           <div v-else>
             <button class="px-2">
               <v-icon icon="mdi-account-check" size="large" />
-              <v-menu activator="parent" open-on-hover width="120" offset="10">
+              <v-menu activator="parent" open-on-hover offset="10">
                 <v-list>
                   <v-list-item v-if="$page.props.auth.user.role === 1">
                     <Link :href="route('dashboard.index')" as="button">
@@ -148,10 +158,10 @@ onMounted(() => {});
       <v-container fluid class="mt-5 h-100">
         <slot />
       </v-container>
-      <v-footer height="32" color="background">
-        <v-btn class="mx-auto" variant="text" @click="print('footer')">
-          Get data
-        </v-btn>
+      <v-footer height="32" class="">
+        <div class="px-4 py-2 text-end w-100">
+          {{ new Date().getFullYear() }} — <strong>MyStore</strong>
+        </div>
       </v-footer>
     </v-main>
   </v-app>
