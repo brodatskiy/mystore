@@ -43,6 +43,7 @@ let breadcrumbs = ref([
               <Link
                 method="delete"
                 :href="route('categories.destroy', category)"
+                as="button"
               >
                 <DungerButton as="button"> Delete </DungerButton>
               </Link>
