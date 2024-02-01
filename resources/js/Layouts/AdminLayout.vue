@@ -3,6 +3,7 @@ import { ref } from "vue";
 import { Link } from "@inertiajs/vue3";
 
 import AvatarPlaceholder from "~/assets/images/avatar-placeholder.png";
+import NavMenu from "@/Components/NavMenu.vue";
 
 let sidebarExpand = ref(true);
 let navLinks = ref([
@@ -65,25 +66,7 @@ let navLinks = ref([
       </v-list>
 
       <!-- Links -->
-      <v-list mandatory :lines="false">
-        <v-list-item
-          v-for="(item, i) in navLinks"
-          :key="i"
-          :value="item"
-          color="primary"
-        >
-          <Link :href="route(item.href)">
-            <div class="d-flex">
-              <v-icon :icon="item.icon"></v-icon>
-
-              <v-list-item-title
-                class="ml-3"
-                v-text="item.title"
-              ></v-list-item-title>
-            </div>
-          </Link>
-        </v-list-item>
-      </v-list>
+      <NavMenu :navLinks="navLinks" />
     </v-navigation-drawer>
 
     <v-toolbar color="transparent" flat class="px-1">
