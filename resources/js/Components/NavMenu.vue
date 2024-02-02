@@ -9,13 +9,7 @@ const props = defineProps({
 </script>
 <template>
   <v-list :lines="false">
-    <template
-      v-for="(item, i) in navLinks"
-      :key="i"
-      :value="item"
-      :active="route().current(item.href)"
-      color="primary"
-    >
+    <template v-for="(item, i) in navLinks" :key="i" :value="item">
       <Link :href="route(item.href)">
         <v-list-item
           :active="route().current(item.href)"
