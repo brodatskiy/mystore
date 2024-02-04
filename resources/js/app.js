@@ -10,8 +10,6 @@ import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
 // Plugins
 import { registerPlugins } from "@/plugins";
 
-import StarRating from "vue-star-rating";
-
 const appName = import.meta.env.VITE_APP_NAME || "MyStore";
 
 createInertiaApp({
@@ -26,7 +24,6 @@ createInertiaApp({
       .use(plugin)
       .use(ZiggyVue, Ziggy)
       .use(registerPlugins)
-      .component("StarRating", StarRating)
       .mount(el);
   },
   progress: {
