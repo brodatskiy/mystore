@@ -5,11 +5,11 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Admin\MessageAdminController;
 
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -28,7 +28,8 @@ Route::get('/',  [MainController::class, 'index'])->name('/');
 Route::get('/cart', function () {
     return Inertia::render('Cart/Index');
 })->name('cart');
-Route::resource('chat', MessageController::class);
+
+Route::resource('messages', MessageController::class);
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
@@ -36,6 +37,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::resource('categories', CategoryController::class)->except(['show']);
     Route::resource('tags', TagController::class)->except(['show']);
     Route::resource('users', UserController::class);
+    Route::resource('messages', MessageController::class)->only(['index']);
 });
 
 Route::middleware(['auth'])->group(function () {
