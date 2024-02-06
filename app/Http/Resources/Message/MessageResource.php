@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Message;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -16,7 +16,8 @@ class MessageResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'body' => $this->body,
+            'content' => $this->content,
+            'author' => $this->user_id,
             'time' => $this->created_at->diffForHumans(),
         ];
     }

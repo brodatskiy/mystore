@@ -25,7 +25,7 @@ class MessageAdminController extends Controller
     {
         $messages = Message::all();
 
-        return Inertia::render('Admin/Messages/Index', [
+        return Inertia::render('Admin/Message/Index', [
             'messages' => MessageResource::collection($messages)
         ]);
     }

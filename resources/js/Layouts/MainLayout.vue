@@ -83,7 +83,7 @@ onMounted(() => {});
                     </Link>
                   </v-list-item>
                   <v-list-item>
-                    <Link :href="route('chat.index')" as="button">
+                    <Link :href="route('messages.index')" as="button">
                       <v-list-item-title> Chat </v-list-item-title>
                     </Link>
                   </v-list-item>

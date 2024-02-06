@@ -29,18 +29,17 @@ Route::get('/cart', function () {
     return Inertia::render('Cart/Index');
 })->name('cart');
 
-Route::resource('messages', MessageController::class);
-
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::resource('products', ProductController::class);
     Route::resource('categories', CategoryController::class)->except(['show']);
     Route::resource('tags', TagController::class)->except(['show']);
     Route::resource('users', UserController::class);
-    Route::resource('messages', MessageController::class)->only(['index']);
+    Route::resource('chat', MessageAdminController::class)->only(['index']);
 });
 
 Route::middleware(['auth'])->group(function () {
+    Route::resource('/messages', MessageController::class)->only(['index', 'store']);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

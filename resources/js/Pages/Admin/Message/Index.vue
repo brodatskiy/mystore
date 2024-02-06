@@ -36,7 +36,7 @@ const messageForm = useForm({
 
 let breadcrumbs = ref([
   { title: "Dashboard", disabled: false, href: "dashboard.index" },
-  { title: "Chat", disabled: true, href: "adminChat.index" },
+  { title: "Chat", disabled: true, href: "chat.index" },
 ]);
 
 function sendMessage() {

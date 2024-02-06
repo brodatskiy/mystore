@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->index()->constrained('users')->onDelete('cascade');
             $table->text('content');
             $table->timestamps();
         });
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('chat');
+        Schema::dropIfExists('messages');
     }
 };
