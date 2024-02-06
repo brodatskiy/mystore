@@ -12,7 +12,7 @@ const myCustomLightTheme = {
     surface_light: "#a3a3a3",
     surfaceAdmin: "#F0E0D6",
     primary: "#111111",
-    secondary: "#03DAC6",
+    secondary: "#5b79f0",
     error: "#f04d3e",
     info: "#2196F3",
     success: "#4CAF50",
