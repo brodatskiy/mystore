@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import GuestLayout from "@/Layouts/GuestLayout.vue";
+import AuthLayout from "@/Layouts/AuthLayout.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 
 const form = useForm({
@@ -20,7 +20,7 @@ const submit = () => {
 </script>
 
 <template>
-  <GuestLayout>
+  <AuthLayout>
     <Head title="Register" />
 
     <form @submit.prevent="submit">
@@ -93,5 +93,5 @@ const submit = () => {
         <p class="text-indigo-darken-2">Already registered?</p>
       </Link>
     </form>
-  </GuestLayout>
+  </AuthLayout>
 </template>

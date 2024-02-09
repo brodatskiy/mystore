@@ -12,7 +12,7 @@ const classes = computed(() =>
 </script>
 <template>
   <Link :href="route('/')" :class="classes">
-    <v-icon icon="mdi-store" size="x-large" class=""></v-icon>
-    <p class="font-weight-bold text-h4">MyStore</p>
+    <v-icon icon="mdi-store"></v-icon>
+    <p class="font-weight-bold text-h5">MyStore</p>
   </Link>
 </template>

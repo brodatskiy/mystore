@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from "vue";
-import GuestLayout from "@/Layouts/GuestLayout.vue";
+import AuthLayout from "@/Layouts/AuthLayout.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 
 const props = defineProps({
@@ -22,7 +22,7 @@ const snackbar = ref(verificationLinkSent);
 </script>
 
 <template>
-  <GuestLayout>
+  <AuthLayout>
     <Head title="Email Verification" />
 
     <div class="mb-4">
@@ -54,5 +54,5 @@ const snackbar = ref(verificationLinkSent);
         during registration.
       </p>
     </v-snackbar>
-  </GuestLayout>
+  </AuthLayout>
 </template>

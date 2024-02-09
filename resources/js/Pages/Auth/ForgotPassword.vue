@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import GuestLayout from "@/Layouts/GuestLayout.vue";
+import AuthLayout from "@/Layouts/AuthLayout.vue";
 import { Head, useForm } from "@inertiajs/vue3";
 
 const props = defineProps({
@@ -21,7 +21,7 @@ const submit = () => {
 </script>
 
 <template>
-  <GuestLayout>
+  <AuthLayout>
     <Head title="Forgot Password" />
 
     <div class="mb-4 text-body-1">
@@ -57,5 +57,5 @@ const submit = () => {
     <v-snackbar v-model="snackbar" rounded="xl">
       <p class="text-center">{{ status }}</p>
     </v-snackbar>
-  </GuestLayout>
+  </AuthLayout>
 </template>

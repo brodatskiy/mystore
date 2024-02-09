@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import GuestLayout from "@/Layouts/GuestLayout.vue";
+import AuthLayout from "@/Layouts/AuthLayout.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 
 const props = defineProps({
@@ -29,7 +29,7 @@ const submit = () => {
 </script>
 
 <template>
-  <GuestLayout>
+  <AuthLayout>
     <Head title="Log in" />
 
     <v-form @submit.prevent="submit">
@@ -86,7 +86,7 @@ const submit = () => {
     <v-snackbar v-model="snackbar" rounded="xl">
       <p class="text-center">{{ status }}</p>
     </v-snackbar>
-  </GuestLayout>
+  </AuthLayout>
 </template>
 
 <style scoped></style>

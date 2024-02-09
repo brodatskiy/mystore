@@ -1,5 +1,5 @@
 <script setup>
-import GuestLayout from "@/Layouts/GuestLayout.vue";
+import AuthLayout from "@/Layouts/AuthLayout.vue";
 import { Head, useForm } from "@inertiajs/vue3";
 
 const form = useForm({
@@ -14,7 +14,7 @@ const submit = () => {
 </script>
 
 <template>
-  <GuestLayout>
+  <AuthLayout>
     <Head title="Confirm Password" />
 
     <div class="mb-4">
@@ -49,5 +49,5 @@ const submit = () => {
         Confirm
       </v-btn>
     </v-form>
-  </GuestLayout>
+  </AuthLayout>
 </template>
