@@ -2,10 +2,10 @@
 
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\TagController;
-use App\Http\Controllers\Admin\MessageAdminController;
 
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\MessageController;
@@ -35,7 +35,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::resource('categories', CategoryController::class)->except(['show']);
     Route::resource('tags', TagController::class)->except(['show']);
     Route::resource('users', UserController::class);
-    Route::resource('chat', MessageAdminController::class)->only(['index', 'store']);
+    Route::resource('chat', ChatController::class)->only(['index', 'store']);
 });
 
 Route::middleware(['auth'])->group(function () {

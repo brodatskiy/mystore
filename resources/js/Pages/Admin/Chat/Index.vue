@@ -16,17 +16,17 @@ window.Echo.channel("store_message").listen(".store_message", (res) => {
 let chats = ref([
   {
     id: 1,
-    name: "john doe",
+    name: "test person 1",
     active: true,
   },
   {
-    id: 3,
-    name: "scarlett",
+    id: 2,
+    name: "test person 2",
     active: false,
   },
   {
-    id: 4,
-    name: "scarlett",
+    id: 3,
+    name: "test person 3",
     active: false,
   },
 ]);

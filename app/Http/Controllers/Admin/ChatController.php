@@ -10,7 +10,7 @@ use App\Models\Message;
 
 use Inertia\Inertia;
 
-class MessageAdminController extends Controller
+class ChatController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +19,7 @@ class MessageAdminController extends Controller
     {
         $messages = Message::all();
 
-        return Inertia::render('Admin/Message/Index', [
+        return Inertia::render('Admin/Chat/Index', [
             'messages' => MessageResource::collection($messages)
         ]);
     }
