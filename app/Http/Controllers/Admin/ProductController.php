@@ -8,10 +8,10 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Tag;
 use Inertia\Inertia;
-use App\Http\Controllers\BaseController;
+use App\Http\Controllers\MainController;
 use App\Http\Resources\Product\ProductResource;
 
-class ProductController extends BaseController
+class ProductController extends MainController
 {
     /**
      * Display a listing of the resource.

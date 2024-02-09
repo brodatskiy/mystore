@@ -6,10 +6,11 @@ use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Client\CartController;
+use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Client\MessageController;
+use App\Http\Controllers\Client\ProfileController;
 
-use App\Http\Controllers\MainController;
-use App\Http\Controllers\MessageController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -24,10 +25,8 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/',  [MainController::class, 'index'])->name('/');
-Route::get('/cart', function () {
-    return Inertia::render('Cart/Index');
-})->name('cart');
+Route::get('/',  [HomeController::class, 'index'])->name('/');
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');

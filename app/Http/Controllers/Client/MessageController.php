@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Client;
 
 use App\Events\StoreMessageEvent;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Message\StoreRequest;
 use App\Http\Resources\Message\MessageResource;
 use App\Models\Message;
