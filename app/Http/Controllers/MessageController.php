@@ -26,7 +26,7 @@ class MessageController extends Controller
         $data = $request->validated();
         $data['user_id'] = auth()->user()->id;
         $message = Message::create($data);
-        // broadcast(new StoreMessageEvent($message))->toOthers();
+        broadcast(new StoreMessageEvent($message))->toOthers();
 
         return MessageResource::make($message);
     }

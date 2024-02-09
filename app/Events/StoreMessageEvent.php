@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Http\Resources\MessageResource;
+use App\Http\Resources\Message\MessageResource;
 use App\Models\Message;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;

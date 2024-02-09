@@ -4,13 +4,11 @@ import { useForm, Head, Link } from "@inertiajs/vue3";
 import { useGoTo } from "vuetify";
 
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import axios from "axios";
 
 const props = defineProps({ messages: Object });
-const goTo = useGoTo();
 
 window.Echo.channel("store_message").listen(".store_message", (res) => {
-  props.messages.unshift(res.message);
+  props.messages.push(res.message);
 });
 
 const form = useForm({
@@ -72,6 +70,7 @@ function store() {
                 <v-text-field
                   v-model="form.content"
                   label="type a message"
+                  variant="outlined"
                   type="text"
                   no-details
                   append-inner-icon="mdi-send"

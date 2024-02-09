@@ -35,7 +35,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::resource('categories', CategoryController::class)->except(['show']);
     Route::resource('tags', TagController::class)->except(['show']);
     Route::resource('users', UserController::class);
-    Route::resource('chat', MessageAdminController::class)->only(['index']);
+    Route::resource('chat', MessageAdminController::class)->only(['index', 'store']);
 });
 
 Route::middleware(['auth'])->group(function () {
