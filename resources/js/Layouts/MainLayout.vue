@@ -12,8 +12,6 @@ import { Link } from "@inertiajs/vue3";
 // productStore.fetchProducts();
 
 let sidebarExpand = ref(false);
-
-onMounted(() => {});
 </script>
 <template>
   <v-app>
