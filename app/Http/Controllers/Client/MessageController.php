@@ -17,7 +17,7 @@ class MessageController extends Controller
 
         $messages = Message::all();
 
-        return Inertia::render('Message/Index', [
+        return Inertia::render('Client/Message/Index', [
             'messages' => MessageResource::collection($messages)
         ]);
     }
