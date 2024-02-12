@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_groups', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('products', function (Blueprint $table) {
+            $table->foreignId('group_id')->nullable()->index()->constrained('groups')->onDelete('cascade');
         });
     }
 
@@ -22,6 +21,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_groups');
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropForeign(['group_id']);
+            $table->dropColumn(['group_id']);
+        });
     }
 };

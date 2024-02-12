@@ -6,13 +6,12 @@ use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Admin\GroupController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\MessageController;
 use App\Http\Controllers\Client\ProfileController;
-
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +30,7 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::resource('products', ProductController::class);
+    Route::resource('groups', GroupController::class);
     Route::resource('categories', CategoryController::class)->except(['show']);
     Route::resource('tags', TagController::class)->except(['show']);
     Route::resource('users', UserController::class);
