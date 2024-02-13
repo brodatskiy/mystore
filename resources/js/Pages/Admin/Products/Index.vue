@@ -55,6 +55,7 @@ let breadcrumbs = ref([
             <td>{{ product.title }}</td>
             <td>{{ product.price }}</td>
             <td>{{ product.count }}</td>
+            <td>{{ product.group.title }}</td>
             <td>{{ product.isPublished ? "Yes" : "No" }}</td>
             <td>{{ product.category.title }}</td>
             <td>
