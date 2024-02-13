@@ -37,6 +37,7 @@ let breadcrumbs = ref([
             <th class="text-left">Title</th>
             <th class="text-left">Price</th>
             <th class="text-left">Count</th>
+            <th class="text-left">Group</th>
             <th class="text-left">Published</th>
             <th class="text-left">Category</th>
             <th class="text-left">Tags</th>
