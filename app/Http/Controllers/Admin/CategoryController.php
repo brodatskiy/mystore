@@ -49,7 +49,7 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         return Inertia::render('Admin/Categories/Edit', [
-            'categories' => $category
+            'category' => $category
         ]);
     }
 
