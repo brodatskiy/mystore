@@ -10,6 +10,7 @@ use App\Models\Tag;
 use Inertia\Inertia;
 use App\Http\Controllers\MainController;
 use App\Http\Resources\Product\ProductResource;
+use App\Models\Group;
 
 class ProductController extends MainController
 {
@@ -67,11 +68,13 @@ class ProductController extends MainController
      */
     public function edit(Product $product)
     {
-        $tags = Tag::all();
+        $groups = Group::all();
         $categories = Category::all();
+        $tags = Tag::all();
 
         return Inertia::render('Admin/Products/Edit', [
             'product' => new ProductResource($product),
+            'groups' => $groups,
             'categories' => $categories,
             'tags' => $tags,
         ]);
