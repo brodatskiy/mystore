@@ -43,14 +43,13 @@ let breadcrumbs = ref([
               <Link :href="route('tags.edit', tag)">
                 <PrimaryButton> Edit </PrimaryButton>
               </Link>
-            </td>
-            <td class="text-right">
+
               <Link
                 method="delete"
                 :href="route('tags.destroy', tag)"
                 as="button"
               >
-                <DungerButton as="button"> Delete </DungerButton>
+                <DungerButton as="button" class="ml-2"> Delete </DungerButton>
               </Link>
             </td>
           </tr>
