@@ -4,12 +4,10 @@ namespace App\Http\Resources\Product;
 
 use App\Http\Resources\Category\CategoryResource;
 use App\Http\Resources\Tag\TagResource;
-use App\Http\Resources\Product\ProductMinResource;
-use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProductResource extends JsonResource
+class ProductMinResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,9 +16,6 @@ class ProductResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-
-        $products = Product::where('group_id', $this->group_id)->get();
-
         return [
             'id' => $this->id,
             'title' => $this->title,
@@ -32,7 +27,6 @@ class ProductResource extends JsonResource
             'isPublished' => $this->is_published,
             'category' => new CategoryResource($this->category),
             'tags' => TagResource::collection($this->tags),
-            'group_products' => ProductMinResource::collection($products)
         ];
     }
 }
