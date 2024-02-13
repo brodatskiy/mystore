@@ -37,8 +37,8 @@ let breadcrumbs = ref([
             <th class="text-left">Title</th>
             <th class="text-left">Price</th>
             <th class="text-left">Count</th>
-            <th class="text-left">Group</th>
             <th class="text-left">Published</th>
+            <th class="text-left">Group</th>
             <th class="text-left">Category</th>
             <th class="text-left">Tags</th>
           </tr>
@@ -56,8 +56,8 @@ let breadcrumbs = ref([
             <td>{{ product.title }}</td>
             <td>{{ product.price }}</td>
             <td>{{ product.count }}</td>
-            <td>{{ product.group.title }}</td>
             <td>{{ product.isPublished ? "Yes" : "No" }}</td>
+            <td>{{ product.group.title }}</td>
             <td>{{ product.category.title }}</td>
             <td>
               <div v-for="tag in product.tags" :key="tag.id" class="pa-1">
