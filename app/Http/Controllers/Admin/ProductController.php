@@ -30,12 +30,14 @@ class ProductController extends MainController
      */
     public function create()
     {
+        $groups = Group::all();
         $tags = Tag::all();
         $categories = Category::all();
 
         return Inertia::render('Admin/Products/Create', [
+            'groups' => $groups,
+            'categories' => $categories,
             'tags' => $tags,
-            'categories' => $categories
         ]);
     }
 
@@ -88,7 +90,7 @@ class ProductController extends MainController
         $data = $request->validated();
         $product = $this->service->update($data, $product);
 
-        return to_route('products.index', $product);
+        return to_route('products.index');
     }
 
     /**
