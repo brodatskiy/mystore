@@ -40,6 +40,11 @@ let breadcrumbs = ref([
           <tr v-for="tag in tags" :key="tag.id">
             <td>{{ tag.title }}</td>
             <td class="text-right">
+              <Link :href="route('tags.edit', tag)">
+                <PrimaryButton> Edit </PrimaryButton>
+              </Link>
+            </td>
+            <td class="text-right">
               <Link
                 method="delete"
                 :href="route('tags.destroy', tag)"
