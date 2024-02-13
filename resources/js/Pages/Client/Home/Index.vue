@@ -28,20 +28,18 @@ const cols = computed(() => {
   <Head title="Main" />
 
   <MainLayout>
-    <div>
-      <v-container class="pa-0 grid-container">
-        <v-row>
-          <v-col
-            v-for="(product, index) in products"
-            :key="product.id"
-            :cols="cols"
-            class="px-1"
-          >
-            <ProductCard :product="product"></ProductCard>
-          </v-col>
-        </v-row>
-      </v-container>
-    </div>
+    <v-container class="pa-0 grid-container">
+      <v-row>
+        <v-col
+          v-for="(product, index) in products"
+          :key="product.id"
+          :cols="cols"
+          class="px-1"
+        >
+          <ProductCard :product="product"></ProductCard>
+        </v-col>
+      </v-row>
+    </v-container>
   </MainLayout>
 </template>
 
