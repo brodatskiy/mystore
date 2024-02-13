@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Product;
 
 use App\Http\Resources\Category\CategoryResource;
+use App\Http\Resources\Group\GroupResource;
 use App\Http\Resources\Tag\TagResource;
 use App\Http\Resources\Product\ProductMinResource;
 use App\Models\Product;
@@ -29,10 +30,11 @@ class ProductResource extends JsonResource
             'image' => $this->imageUrl,
             'price' => $this->price,
             'count' => $this->count,
-            'isPublished' => $this->is_published,
+            'is_published' => $this->is_published,
+            'group' => new GroupResource($this->group),
+            'product_group' => ProductMinResource::collection($products),
             'category' => new CategoryResource($this->category),
             'tags' => TagResource::collection($this->tags),
-            'group' => ProductMinResource::collection($products)
         ];
     }
 }
