@@ -30,6 +30,14 @@ let breadcrumbs = ref([
     </v-breadcrumbs>
 
     <v-sheet class="pa-4" rounded="xl" elevation="3">
+      <div class="d-flex align-middle justify-center mt-4">
+        <Link :href="route('categories.create')">
+          <PrimaryButton>
+            <v-icon class="mr-4" icon="mdi-plus"></v-icon>
+            Add new category
+          </PrimaryButton>
+        </Link>
+      </div>
       <v-table fixed-header class="mt-6">
         <thead>
           <tr>
@@ -40,25 +48,21 @@ let breadcrumbs = ref([
           <tr v-for="category in categories" :key="category.id">
             <td>{{ category.title }}</td>
             <td class="text-right">
+              <Link :href="route('categories.edit', category)">
+                <PrimaryButton> Edit </PrimaryButton>
+              </Link>
+
               <Link
                 method="delete"
                 :href="route('categories.destroy', category)"
                 as="button"
               >
-                <DungerButton as="button"> Delete </DungerButton>
+                <DungerButton as="button" class="ml-2"> Delete </DungerButton>
               </Link>
             </td>
           </tr>
         </tbody>
       </v-table>
-      <div class="d-flex align-middle justify-center mt-4">
-        <Link :href="route('categories.create')">
-          <PrimaryButton>
-            <v-icon class="mr-4" icon="mdi-plus"></v-icon>
-            Add new category
-          </PrimaryButton>
-        </Link>
-      </div>
     </v-sheet>
   </AdminLayout>
 </template>
