@@ -32,7 +32,7 @@ class ProductResource extends JsonResource
             'isPublished' => $this->is_published,
             'category' => new CategoryResource($this->category),
             'tags' => TagResource::collection($this->tags),
-            'group_products' => ProductMinResource::collection($products)
+            'group' => ProductMinResource::collection($products)
         ];
     }
 }
