@@ -57,11 +57,8 @@ class ProductController extends MainController
      */
     public function show(Product $product)
     {
-        $categories = Category::all();
-
         return Inertia::render('Admin/Products/Show', [
             'product' => new ProductResource($product),
-            'categories' => $categories
         ]);
     }
 
