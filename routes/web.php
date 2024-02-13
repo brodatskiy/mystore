@@ -30,7 +30,7 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::resource('products', ProductController::class);
-    Route::resource('groups', GroupController::class);
+    Route::resource('groups', GroupController::class)->except(['show']);
     Route::resource('categories', CategoryController::class)->except(['show']);
     Route::resource('tags', TagController::class)->except(['show']);
     Route::resource('users', UserController::class);
