@@ -26,10 +26,11 @@ class UpdateRequest extends FormRequest
             'title' => 'required|string',
             'description' => 'required',
             'content' => 'required',
-            'preview_image' => 'nullable|file',
+            'preview_image' => 'nullable|image',
             'price' => 'required|integer',
             'count' => 'required|integer',
             'is_published' => 'bool',
+            'group_id' => 'integer|exists:groups,id',
             'category_id' => 'required|integer',
             'tags' => 'nullable|array',
         ];
@@ -38,7 +39,7 @@ class UpdateRequest extends FormRequest
     public function messages()
     {
         return [
-            'preview_image.file' => 'Must be a file',
+            'preview_image.image' => 'Must be an image',
         ];
     }
 }
