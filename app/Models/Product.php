@@ -10,7 +10,12 @@ class Product extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $with = ['category', 'tags'];
+    protected $with = ['group', 'category', 'tags'];
+
+    public function group()
+    {
+        return $this->belongsTo(Group::class, 'group_id', 'id');
+    }
 
     public function category()
     {
