@@ -29,6 +29,7 @@ class StoreRequest extends FormRequest
             'price' => 'required|integer',
             'count' => 'required|integer',
             'is_published' => 'bool',
+            'group_id' => 'integer|exists:groups,id',
             'category_id' => 'required|integer|exists:categories,id',
             'tags' => 'nullable|array',
             'tags.*' => 'nullable|integer|exists:tags,id',
