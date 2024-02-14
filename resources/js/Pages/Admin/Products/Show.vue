@@ -70,12 +70,12 @@ const breadcrumbs = ref([
               </tr>
               <tr>
                 <td>Is published</td>
-                <td>{{ product.isPublished ? "Yes" : "No" }}</td>
+                <td>{{ product.is_published ? "Yes" : "No" }}</td>
               </tr>
               <tr>
                 <td>Group</td>
 
-                <td>{{ product.group.title }}</td>
+                <td>{{ product.group.title ?? "no group" }}</td>
               </tr>
               <tr>
                 <td>Category</td>
