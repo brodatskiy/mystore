@@ -36,13 +36,16 @@ class ProductService
             DB::beginTransaction();
             if (isset($data['preview_image'])) {
                 $data['preview_image'] = Storage::disk('public')->put('/images', $data['preview_image']);
+            } else {
+                unset($data['preview_image']);
             }
-            $tags = $data['tags'];
-
+            $tags = $data['tags'] ?? null;
             unset($data['tags']);
+            $tags = array_column($tags, 'id');
 
             $product->update($data);
             $product->tags()->sync($tags);
+
             Db::commit();
         } catch (\Exception $exeption) {
             Db::rollBack();
