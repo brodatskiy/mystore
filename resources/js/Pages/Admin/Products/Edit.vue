@@ -7,8 +7,9 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 let props = defineProps({
   product: Object,
-  tags: Array,
+  groups: Array,
   categories: Array,
+  tags: Array,
 });
 
 const form = useForm({
@@ -16,15 +17,14 @@ const form = useForm({
   title: props.product.title,
   description: props.product.description,
   content: props.product.content,
-  preview_image: props.product.image,
+  preview_image: null,
   price: props.product.price,
   count: props.product.count,
-  is_published: true,
+  is_published: !!props.product.is_published,
+  group_id: props.product.group.id,
   category_id: props.product.category.id,
   tags: props.product.tags,
 });
-
-console.log(props.product);
 
 let breadcrumbs = ref([
   { title: "products", disabled: false, href: "products.index" },
@@ -38,7 +38,6 @@ let breadcrumbs = ref([
 
 <template>
   <Head title="Edit product" />
-
   <AdminLayout>
     <v-breadcrumbs :items="breadcrumbs">
       <template v-slot:title="{ item }">
@@ -54,7 +53,7 @@ let breadcrumbs = ref([
     <v-sheet class="pa-4" rounded="xl" elevation="3">
       <div class="w-50 mx-auto">
         <h2 class="text-center mt-2">Edit product</h2>
-        <form @submit.prevent="form.post(route('products.update', product.id))">
+        <form @submit.prevent="form.post(route('products.update', product))">
           <v-text-field
             v-model="form.title"
             label="Title"
@@ -98,6 +97,16 @@ let breadcrumbs = ref([
           />
 
           <v-select
+            v-model="form.group_id"
+            item-value="id"
+            variant="underlined"
+            label="Group"
+            :items="groups"
+            :error="form.errors.group_id ? true : false"
+            :error-messages="form.errors.group_id"
+          ></v-select>
+
+          <v-select
             v-model="form.category_id"
             item-value="id"
             variant="underlined"
@@ -134,7 +143,7 @@ let breadcrumbs = ref([
           ></v-checkbox>
 
           <PrimaryButton class="w-100 mt-3" type="submit">
-            Create
+            Update
           </PrimaryButton>
         </form>
       </div>
