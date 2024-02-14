@@ -6,8 +6,9 @@ import AdminLayout from "@/Layouts/AdminLayout.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 let props = defineProps({
-  tags: Array,
+  groups: Array,
   categories: Array,
+  tags: Array,
 });
 
 const form = useForm({
@@ -18,6 +19,7 @@ const form = useForm({
   price: "",
   count: "",
   is_published: true,
+  group_id: "",
   category_id: "",
   tags: [],
 });
@@ -87,6 +89,16 @@ let breadcrumbs = ref([
             :error="form.errors.count ? true : false"
             :error-messages="form.errors.count"
           />
+
+          <v-select
+            v-model="form.group_id"
+            item-value="id"
+            variant="underlined"
+            label="Group"
+            :items="groups"
+            :error="form.errors.group_id ? true : false"
+            :error-messages="form.errors.group_id"
+          ></v-select>
 
           <v-select
             v-model="form.category_id"
