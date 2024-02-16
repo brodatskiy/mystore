@@ -14,8 +14,6 @@ class GroupSeeder extends Seeder
      */
     public function run()
     {
-        Group::factory()->create(['title' => 'group 1']);
-        Group::factory()->create(['title' => 'group 2']);
-        Group::factory()->create(['title' => 'group 3']);
+        Group::factory()->count(3)->create();
     }
 }
