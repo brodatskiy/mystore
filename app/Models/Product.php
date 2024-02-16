@@ -27,6 +27,11 @@ class Product extends Model
         return $this->belongsToMany(Tag::class, 'product_tag', 'product_id', 'tag_id');
     }
 
+    public function sizes()
+    {
+        return $this->belongsToMany(Size::class, 'product_size', 'product_id', 'size_id');
+    }
+
     public function getImageUrlAttribute()
     {
         return $this->preview_image ? url('storage/' . $this->preview_image) : '';
