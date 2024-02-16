@@ -20,7 +20,5 @@ class SizeSeeder extends Seeder
         Size::factory()->create(['title' => 'm']);
         Size::factory()->create(['title' => 'l']);
         Size::factory()->create(['title' => 'xl']);
-
-        ProductSize::factory(10)->create();
     }
 }
