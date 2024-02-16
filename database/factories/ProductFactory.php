@@ -21,12 +21,10 @@ class ProductFactory extends Factory
     {
         return [
             'title' => fake()->word(),
-            'content' => fake()->paragraph(3),
             'description' => fake()->paragraph(3),
             'group_id' => Group::all()->random()->id,
             'category_id' => Category::all()->random()->id,
             'price' => fake()->numberBetween(1, 1000),
-            'count' => fake()->numberBetween(1, 1000),
             'is_published' => 1
         ];
     }
