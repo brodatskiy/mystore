@@ -18,8 +18,5 @@ class TagSeeder extends Seeder
         Tag::factory()->create(['title' => 'New']);
         Tag::factory()->create(['title' => 'Bestseller']);
         Tag::factory()->create(['title' => 'Sale']);
-
-
-        ProductTag::factory(10)->create();
     }
 }
