@@ -49,9 +49,14 @@ let breadcrumbs = ref([
             <td>{{ group.title }}</td>
 
             <td class="text-right">
-              <Link :href="route('groups.edit', group)">
-                <PrimaryButton> Edit </PrimaryButton>
+              <Link :href="route('groups.show', group)">
+                <PrimaryButton> Show </PrimaryButton>
               </Link>
+
+              <Link :href="route('groups.edit', group)">
+                <PrimaryButton class="ml-2"> Edit </PrimaryButton>
+              </Link>
+
               <Link
                 method="delete"
                 :href="route('groups.destroy', group.id)"
