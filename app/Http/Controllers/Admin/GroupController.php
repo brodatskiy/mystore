@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Group\StoreRequest;
 use App\Http\Requests\Group\UpdateRequest;
+use App\Http\Resources\Product\ProductResource;
 use App\Models\Group;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -36,6 +37,17 @@ class GroupController extends Controller
         Group::firstOrCreate($data);
 
         return to_route('groups.index');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Group $group)
+    {
+
+        return Inertia::render('Admin/Groups/Show', [
+            'products' => ProductResource::collection($group->products()->get()),
+        ]);
     }
 
     /**
