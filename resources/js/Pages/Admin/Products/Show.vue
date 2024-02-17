@@ -57,10 +57,6 @@ const breadcrumbs = ref([
                 <td>{{ product.description }}</td>
               </tr>
               <tr>
-                <td>Content</td>
-                <td>{{ product.content }}</td>
-              </tr>
-              <tr>
                 <td>Price</td>
                 <td>{{ product.price }}</td>
               </tr>

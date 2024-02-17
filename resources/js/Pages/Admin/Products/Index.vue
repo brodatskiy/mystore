@@ -44,7 +44,6 @@ let breadcrumbs = ref([
             <th class="text-left">Image</th>
             <th class="text-left">Title</th>
             <th class="text-left">Price</th>
-            <th class="text-left">Count</th>
             <th class="text-left">Published</th>
             <th class="text-left">Group</th>
             <th class="text-left">Category</th>
@@ -63,7 +62,6 @@ let breadcrumbs = ref([
             </td>
             <td>{{ product.title }}</td>
             <td>{{ product.price }}</td>
-            <td>{{ product.count }}</td>
             <td>{{ product.is_published ? "Yes" : "No" }}</td>
             <td>{{ product.group.title }}</td>
             <td>{{ product.category.title }}</td>
@@ -78,14 +76,12 @@ let breadcrumbs = ref([
               <Link :href="route('products.show', product)">
                 <PrimaryButton> Show </PrimaryButton>
               </Link>
-            </td>
-            <td class="text-right">
               <Link
                 method="delete"
                 :href="route('products.destroy', product.id)"
                 as="button"
               >
-                <DungerButton as="button"> Delete </DungerButton>
+                <DungerButton as="button" class="ml-2"> Delete </DungerButton>
               </Link>
             </td>
           </tr>
