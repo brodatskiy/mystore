@@ -20,7 +20,7 @@ class ProductSeeder extends Seeder
         $sizes = Size::all();
 
         Product::factory()
-            ->count(3)
+            ->count(10)
             ->hasAttached($tags
                 ->random(2))
             ->hasAttached(
