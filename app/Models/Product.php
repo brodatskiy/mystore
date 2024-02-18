@@ -10,7 +10,7 @@ class Product extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $with = ['group', 'category', 'tags'];
+    protected $with = ['group', 'category', 'tags', 'sizes'];
 
     public function group()
     {
@@ -29,7 +29,7 @@ class Product extends Model
 
     public function sizes()
     {
-        return $this->belongsToMany(Size::class, 'product_size', 'product_id', 'size_id');
+        return $this->belongsToMany(Size::class, 'product_size', 'product_id', 'size_id')->withPivot('count');
     }
 
     public function getImageUrlAttribute()
