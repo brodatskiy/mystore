@@ -33,32 +33,31 @@ let breadcrumbs = ref([
       <v-table fixed-header class="mt-6">
         <thead>
           <tr>
-            <th class="text-left">Name</th>
-            <th class="text-left">Age</th>
-            <th class="text-left">Address</th>
-            <th class="text-left">Gender</th>
-            <th class="text-left">Email</th>
-            <th class="text-left">Role</th>
+            <th class="text-center">Name</th>
+            <th class="text-center">Age</th>
+            <th class="text-center">Address</th>
+            <th class="text-center">Gender</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Role</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="user in users" :key="user.id">
-            <td>{{ user.name }}</td>
-            <td>{{ user.age }}</td>
-            <td>{{ user.address }}</td>
-            <td>{{ user.gender }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.role }}</td>
-            <td class="text-right">
+            <td class="text-left">{{ user.name }}</td>
+            <td class="text-left">{{ user.age }}</td>
+            <td class="text-left">{{ user.address }}</td>
+            <td class="text-left">{{ user.gender }}</td>
+            <td class="text-left">{{ user.email }}</td>
+            <td class="text-left">{{ user.role }}</td>
+            <td class="text-left">
               <Link :href="route('users.show', user)">
                 <PrimaryButton> Show </PrimaryButton>
               </Link>
-            </td>
-            <td class="text-right">
               <Link
                 method="delete"
                 :href="route('users.destroy', user.id)"
                 as="button"
+                class="ml-2"
               >
                 <DungerButton as="button"> Delete </DungerButton>
               </Link>
