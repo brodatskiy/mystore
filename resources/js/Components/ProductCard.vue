@@ -14,7 +14,7 @@ defineProps(["product"]);
         <v-img :src="product.image" alt="Card Image" cover aspect-ratio="1.4" />
       </div>
       <div class="d-flex justify-space-between">
-        <div>{{ product.price }}</div>
+        <div>{{ product.price }} $</div>
         <div>{{ product.title }}</div>
         <div>
           <v-icon icon="mdi-heart-outline" size="small" />
@@ -24,16 +24,6 @@ defineProps(["product"]);
       <div class="product__bottom">Размеры и цвета</div>
     </v-card>
   </v-hover>
-  <!-- <star-rating
-                :increment="0.5"
-                :read-only="true"
-                :padding="0"
-                :rating="product?.rating?.rate"
-                :star-size="15"
-                inactive-color="#64748B"
-                active-color="#FCC347"
-                class="mb-2"
-            /> -->
 
   <!-- <p class="text-2xl mb-5">{{ toCurrency(product.price) }}</p> -->
 
@@ -48,9 +38,5 @@ defineProps(["product"]);
 .product__bottom {
   position: relative;
   opacity: 0;
-}
-
-.vue-star-rating-rating-text {
-  margin-top: 5px;
 }
 </style>
