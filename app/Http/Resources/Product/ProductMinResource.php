@@ -23,7 +23,6 @@ class ProductMinResource extends JsonResource
             'content' => $this->content,
             'image' => $this->imageUrl,
             'price' => $this->price,
-            'count' => $this->count,
             'is_published' => $this->is_published,
             'category' => new CategoryResource($this->category),
             'tags' => TagResource::collection($this->tags),
