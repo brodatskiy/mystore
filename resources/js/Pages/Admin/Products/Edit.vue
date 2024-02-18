@@ -19,6 +19,7 @@ const form = useForm({
   content: props.product.content,
   preview_image: null,
   price: props.product.price,
+  color: props.product.color,
   count: props.product.count,
   is_published: !!props.product.is_published,
   group_id: props.product.group.id,
@@ -71,14 +72,6 @@ let breadcrumbs = ref([
           />
 
           <v-text-field
-            v-model="form.content"
-            label="Content"
-            variant="underlined"
-            :error="form.errors.content ? true : false"
-            :error-messages="form.errors.content"
-          />
-
-          <v-text-field
             v-model="form.price"
             type="number"
             label="Price"
@@ -87,14 +80,7 @@ let breadcrumbs = ref([
             :error-messages="form.errors.price"
           />
 
-          <v-text-field
-            v-model="form.count"
-            type="number"
-            label="Count"
-            variant="underlined"
-            :error="form.errors.count ? true : false"
-            :error-messages="form.errors.count"
-          />
+          <v-color-picker v-model="form.color" hide-inputs></v-color-picker>
 
           <v-select
             v-model="form.group_id"
