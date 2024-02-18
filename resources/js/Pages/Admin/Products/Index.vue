@@ -63,7 +63,14 @@ let breadcrumbs = ref([
             </td>
             <td class="text-center">{{ product.title }}</td>
             <td class="text-center">{{ product.price }}</td>
-            <td class="text-center">{{ product.color }}</td>
+            <td class="text-center">
+              <v-sheet
+                width="30"
+                height="30"
+                :color="product.color"
+                rounded="xl"
+              ></v-sheet>
+            </td>
             <td class="text-center">
               {{ product.is_published ? "Yes" : "No" }}
             </td>

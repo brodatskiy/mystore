@@ -74,8 +74,6 @@ let breadcrumbs = ref([
             :error-messages="form.errors.price"
           />
 
-          <v-color-picker v-model="form.color" hide-inputs></v-color-picker>
-
           <v-select
             v-model="form.group_id"
             item-value="id"
@@ -116,6 +114,12 @@ let breadcrumbs = ref([
             :error="form.errors.preview_image ? true : false"
             :error-messages="form.errors.preview_image"
           ></v-file-input>
+
+          <v-color-picker
+            v-model="form.color"
+            hide-inputs
+            hide-sliders
+          ></v-color-picker>
 
           <v-checkbox
             v-model="form.is_published"

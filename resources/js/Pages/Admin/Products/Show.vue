@@ -89,7 +89,14 @@ const breadcrumbs = ref([
               </tr>
               <tr>
                 <td>Color</td>
-                <td>{{ product.color }}</td>
+                <td>
+                  <v-sheet
+                    width="30"
+                    height="30"
+                    :color="product.color"
+                    rounded="xl"
+                  ></v-sheet>
+                </td>
               </tr>
               <tr></tr>
               <tr>
