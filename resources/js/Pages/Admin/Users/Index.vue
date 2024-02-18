@@ -30,7 +30,15 @@ let breadcrumbs = ref([
     </v-breadcrumbs>
 
     <v-sheet class="pa-4" rounded="xl" elevation="3">
-      <v-table fixed-header class="mt-6">
+      <div class="d-flex align-middle justify-center">
+        <Link :href="route('users.create')">
+          <PrimaryButton>
+            Add new user
+            <v-icon class="ml-3" icon="mdi-account-plus"></v-icon>
+          </PrimaryButton>
+        </Link>
+      </div>
+      <v-table fixed-header class="">
         <thead>
           <tr>
             <th class="text-center">Name</th>
@@ -65,14 +73,6 @@ let breadcrumbs = ref([
           </tr>
         </tbody>
       </v-table>
-      <div class="d-flex align-middle justify-center mt-4">
-        <Link :href="route('users.create')">
-          <PrimaryButton>
-            Add new user
-            <v-icon class="ml-3" icon="mdi-account-plus"></v-icon>
-          </PrimaryButton>
-        </Link>
-      </div>
     </v-sheet>
   </AdminLayout>
 </template>

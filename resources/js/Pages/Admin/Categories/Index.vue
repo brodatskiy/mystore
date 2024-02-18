@@ -30,7 +30,7 @@ let breadcrumbs = ref([
     </v-breadcrumbs>
 
     <v-sheet class="pa-4" rounded="xl" elevation="3">
-      <div class="d-flex align-middle justify-center mt-4">
+      <div class="d-flex align-middle justify-center">
         <Link :href="route('categories.create')">
           <PrimaryButton>
             <v-icon class="mr-4" icon="mdi-plus"></v-icon>
@@ -38,7 +38,7 @@ let breadcrumbs = ref([
           </PrimaryButton>
         </Link>
       </div>
-      <v-table fixed-header class="mt-6">
+      <v-table fixed-header class="">
         <thead>
           <tr>
             <th class="text-left">Title</th>
