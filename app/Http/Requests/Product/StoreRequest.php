@@ -26,6 +26,7 @@ class StoreRequest extends FormRequest
             'description' => 'required',
             'content' => 'required',
             'preview_image' => 'required|file',
+            'color' => 'required|string',
             'price' => 'required|integer',
             'count' => 'required|integer',
             'is_published' => 'bool',

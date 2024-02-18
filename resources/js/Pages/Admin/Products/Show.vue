@@ -59,7 +59,7 @@ const breadcrumbs = ref([
             </tbody>
           </v-table>
         </div>
-        <div>
+        <div class="flex-grow-1">
           <div class="d-flex justify-end ml-5">
             <Link :href="route('products.edit', product)">
               <PrimaryButton> Edit </PrimaryButton>
@@ -86,6 +86,10 @@ const breadcrumbs = ref([
               <tr>
                 <td>Price</td>
                 <td>{{ product.price }}</td>
+              </tr>
+              <tr>
+                <td>Color</td>
+                <td>{{ product.color }}</td>
               </tr>
               <tr></tr>
               <tr>

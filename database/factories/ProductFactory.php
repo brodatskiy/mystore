@@ -23,8 +23,9 @@ class ProductFactory extends Factory
     {
         return [
             'title' => fake()->word(),
-            'description' => fake()->paragraph(3),
+            'description' => fake()->paragraph(1),
             'preview_image' => Storage::disk('public')->put('/images', new File(fake()->image(null, 360, 360))),
+            'color' => fake()->safeHexColor(),
             'group_id' => Group::all()->random()->id,
             'category_id' => Category::all()->random()->id,
             'price' => fake()->numberBetween(1, 1000),

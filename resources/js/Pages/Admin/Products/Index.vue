@@ -44,6 +44,7 @@ let breadcrumbs = ref([
             <th class="text-center">Image</th>
             <th class="text-center">Title</th>
             <th class="text-center">Price</th>
+            <th class="text-center">Color</th>
             <th class="text-center">Published</th>
             <th class="text-center">Group</th>
             <th class="text-center">Category</th>
@@ -62,6 +63,7 @@ let breadcrumbs = ref([
             </td>
             <td class="text-center">{{ product.title }}</td>
             <td class="text-center">{{ product.price }}</td>
+            <td class="text-center">{{ product.color }}</td>
             <td class="text-center">
               {{ product.is_published ? "Yes" : "No" }}
             </td>

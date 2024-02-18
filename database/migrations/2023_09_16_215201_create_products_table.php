@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('preview_image');
+            $table->string('color');
             $table->integer('price');
             $table->boolean('is_published')->default(true);
             $table->foreignId('category_id')->index()->constrained('categories')->onDelete('cascade');

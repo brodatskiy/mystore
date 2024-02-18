@@ -21,15 +21,12 @@ defineProps(["product"]);
           <!-- <v-icon icon="mdi-heart" size="small" /> -->
         </div>
       </div>
-      <div class="product__bottom">Размеры и цвета</div>
+      <div class="product__bottom">
+        <div></div>
+        <div></div>
+      </div>
     </v-card>
   </v-hover>
-
-  <!-- <p class="text-2xl mb-5">{{ toCurrency(product.price) }}</p> -->
-
-  <!-- <ButtonStd class="w-full" @click.stop="cartStore.add(product)">
-                Add to cart
-            </ButtonStd> -->
 </template>
 <style scoped>
 .product:hover .product__bottom {
