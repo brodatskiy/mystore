@@ -34,7 +34,7 @@ let breadcrumbs = ref([
 
     <v-sheet class="pa-4" rounded="xl" elevation="3">
       <div class="w-50 mx-auto">
-        <h2 class="text-center mt-2">Edit user</h2>
+        <h2 class="text-center mt-2">Edit group</h2>
         <form @submit.prevent="form.post(route('groups.update', group))">
           <v-text-field
             v-model="form.title"

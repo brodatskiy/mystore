@@ -33,8 +33,8 @@ let breadcrumbs = ref([
       <div class="d-flex align-middle justify-center">
         <Link :href="route('categories.create')">
           <PrimaryButton>
-            <v-icon class="mr-4" icon="mdi-plus"></v-icon>
             Add new category
+            <v-icon class="ml-3" icon="mdi-plus"></v-icon>
           </PrimaryButton>
         </Link>
       </div>
