@@ -41,38 +41,38 @@ let breadcrumbs = ref([
       <v-table fixed-header class="mt-6">
         <thead>
           <tr>
-            <th class="text-left">Image</th>
-            <th class="text-left">Title</th>
-            <th class="text-left">Price</th>
-            <th class="text-left">Published</th>
-            <th class="text-left">Group</th>
-            <th class="text-left">Category</th>
-            <th class="text-left">Tags</th>
+            <th class="text-center">Image</th>
+            <th class="text-center">Title</th>
+            <th class="text-center">Price</th>
+            <th class="text-center">Published</th>
+            <th class="text-center">Group</th>
+            <th class="text-center">Category</th>
+            <th class="text-center">Tags</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="product in products" :key="product.id">
+          <tr v-for="product in products" :key="product.id" height="100">
             <td>
               <v-img
-                :min-width="200"
+                :min-width="60"
                 :src="product.image"
                 alt="product image"
-                class="w-full"
+                rounded="xl"
               />
             </td>
-            <td>{{ product.title }}</td>
-            <td>{{ product.price }}</td>
-            <td>{{ product.is_published ? "Yes" : "No" }}</td>
-            <td>{{ product.group.title }}</td>
-            <td>{{ product.category.title }}</td>
-            <td>
-              <div v-for="tag in product.tags" :key="tag.id" class="pa-1">
-                <v-chip>
-                  {{ tag.title }}
-                </v-chip>
-              </div>
+            <td class="text-center">{{ product.title }}</td>
+            <td class="text-center">{{ product.price }}</td>
+            <td class="text-center">
+              {{ product.is_published ? "Yes" : "No" }}
             </td>
-            <td class="text-right">
+            <td class="text-center">{{ product.group.title }}</td>
+            <td class="text-center">{{ product.category.title }}</td>
+            <td class="text-center">
+              <v-chip v-for="tag in product.tags" :key="tag.id" class="ma-1">
+                {{ tag.title }}
+              </v-chip>
+            </td>
+            <td class="text-center">
               <Link :href="route('products.show', product)">
                 <PrimaryButton> Show </PrimaryButton>
               </Link>

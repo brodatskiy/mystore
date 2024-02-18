@@ -42,11 +42,38 @@ const breadcrumbs = ref([
             :min-width="200"
             :src="product.image"
             alt="product avatar"
-            class="w-full"
+            rounded="xl"
           />
+          <v-table density="compact" class="mt-2">
+            <thead>
+              <tr>
+                <th class="text-center">Size</th>
+                <th class="text-center">Count</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="size in product.sizes" :key="size.title">
+                <td class="text-center">{{ size.title }}</td>
+                <td class="text-center">{{ size.count }}</td>
+              </tr>
+            </tbody>
+          </v-table>
         </div>
         <div>
-          <v-table class="ml-10">
+          <div class="d-flex justify-end ml-5">
+            <Link :href="route('products.edit', product)">
+              <PrimaryButton> Edit </PrimaryButton>
+            </Link>
+            <Link
+              method="delete"
+              :href="route('products.destroy', product.id)"
+              as="button"
+              class="ml-2"
+            >
+              <DungerButton as="button"> Delete </DungerButton>
+            </Link>
+          </div>
+          <v-table class="ml-5">
             <tbody>
               <tr>
                 <td>Title</td>
@@ -60,10 +87,7 @@ const breadcrumbs = ref([
                 <td>Price</td>
                 <td>{{ product.price }}</td>
               </tr>
-              <tr>
-                <td>Count</td>
-                <td>{{ product.count }}</td>
-              </tr>
+              <tr></tr>
               <tr>
                 <td>Is published</td>
                 <td>{{ product.is_published ? "Yes" : "No" }}</td>
@@ -79,28 +103,19 @@ const breadcrumbs = ref([
               </tr>
               <tr>
                 <td>Tags</td>
-                <div v-for="tag in product.tags" :key="tag.id" class="pa-1">
-                  <v-chip>
+                <td>
+                  <v-chip
+                    v-for="tag in product.tags"
+                    :key="tag.id"
+                    class="ma-1"
+                  >
                     {{ tag.title }}
                   </v-chip>
-                </div>
+                </td>
               </tr>
             </tbody>
           </v-table>
         </div>
-      </div>
-      <div class="px-4">
-        <Link :href="route('products.edit', product)">
-          <PrimaryButton> Edit </PrimaryButton>
-        </Link>
-        <Link
-          method="delete"
-          :href="route('products.destroy', product.id)"
-          as="button"
-          class="ml-2"
-        >
-          <DungerButton as="button"> Delete </DungerButton>
-        </Link>
       </div>
     </v-sheet>
   </AdminLayout>
