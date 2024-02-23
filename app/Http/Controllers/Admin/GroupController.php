@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Group\StoreRequest;
 use App\Http\Requests\Group\UpdateRequest;
 use App\Http\Resources\Product\ProductResource;

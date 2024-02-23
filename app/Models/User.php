@@ -15,6 +15,9 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
+    protected $table = 'users';
+    protected $guarded = false;
+
     const ROLE_GUEST = 0;
     const ROLE_ADMIN = 1;
 
@@ -47,13 +50,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Comment::class, 'user_id');
     }
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $table = 'users';
-    protected $guarded = false;
 
     /**
      * The attributes that should be hidden for serialization.

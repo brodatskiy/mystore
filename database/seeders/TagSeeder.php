@@ -15,8 +15,6 @@ class TagSeeder extends Seeder
      */
     public function run()
     {
-        Tag::factory()->create(['title' => 'New']);
-        Tag::factory()->create(['title' => 'Bestseller']);
-        Tag::factory()->create(['title' => 'Sale']);
+        Tag::factory(10)->create();
     }
 }
