@@ -37,7 +37,7 @@ const breadcrumbs = ref([
 
     <v-sheet class="pa-4" rounded="xl" elevation="3">
       <div class="d-flex">
-        <div>
+        <div class="w-25">
           <v-img
             :min-width="200"
             :src="product.image"

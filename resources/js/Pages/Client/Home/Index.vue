@@ -31,7 +31,7 @@ const cols = computed(() => {
     <v-container class="pa-0 grid-container">
       <v-row>
         <v-col
-          v-for="(product, index) in products"
+          v-for="product in products"
           :key="product.id"
           :cols="cols"
           class="px-1"
