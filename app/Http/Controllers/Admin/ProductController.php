@@ -11,6 +11,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\MainController;
 use App\Http\Resources\Product\ProductResource;
 use App\Models\Group;
+use App\Models\Size;
 
 class ProductController extends MainController
 {
@@ -31,13 +32,15 @@ class ProductController extends MainController
     public function create()
     {
         $groups = Group::all();
-        $tags = Tag::all();
         $categories = Category::all();
+        $tags = Tag::all();
+        $sizes = Size::all();
 
         return Inertia::render('Admin/Products/Create', [
             'groups' => $groups,
             'categories' => $categories,
             'tags' => $tags,
+            'sizes' => $sizes,
         ]);
     }
 
