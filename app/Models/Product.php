@@ -12,7 +12,7 @@ class Product extends Model
 
     protected $table = 'products';
     protected $guarded = false;
-    protected $with = ['group', 'category', 'tags', 'sizes'];
+    protected $with = ['group', 'category', 'tags', 'sizes', 'sticker'];
 
     public function group()
     {
@@ -22,6 +22,11 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
+    public function sticker()
+    {
+        return $this->belongsTo(Sticker::class, 'sticker_id', 'id');
     }
 
     public function tags()

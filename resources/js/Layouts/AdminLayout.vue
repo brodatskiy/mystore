@@ -19,6 +19,7 @@ let navLinks = ref([
   },
   { title: "Products", icon: "mdi-tshirt-crew", href: "products.index" },
   { title: "Groups", icon: "mdi-group", href: "groups.index" },
+  { title: "Stickers", icon: "mdi-sticker", href: "stickers.index" },
   { title: "Tags", icon: "mdi-tag-multiple", href: "tags.index" },
   { title: "Categories", icon: "mdi-list-box", href: "categories.index" },
   { title: "Chat", icon: "mdi-chat", href: "chat.index" },

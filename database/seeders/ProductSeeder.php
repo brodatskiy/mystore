@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Product;
 use App\Models\Size;
+use App\Models\Sticker;
 use App\Models\Tag;
 use Illuminate\Database\Seeder;
 
@@ -18,6 +19,7 @@ class ProductSeeder extends Seeder
     {
         $tags = Tag::all();
         $sizes = Size::all();
+
 
         Product::factory()
             ->count(10)

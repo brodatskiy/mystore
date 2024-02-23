@@ -12,10 +12,8 @@ defineProps(["product"]);
     <v-card class="product" variant="text" v-bind="props">
       <div class="product__image-block">
         <v-img :src="product.image" alt="Card Image" cover aspect-ratio="1.4" />
-        <div class="product_stickers">
-          <span v-for="tag in product.tags" class="pa-1 product_sticker">
-            {{ tag.title.toUpperCase() }}
-          </span>
+        <div class="product_sticker px-1">
+          {{ product.sticker.title.toUpperCase() }}
         </div>
       </div>
       <div class="d-flex justify-space-between">
@@ -47,6 +45,8 @@ defineProps(["product"]);
   bottom: 0;
 }
 .product_sticker {
+  position: absolute;
+  bottom: 0;
   font-size: 12px;
   color: rgb(236, 57, 57);
   background: #ffffffd7;

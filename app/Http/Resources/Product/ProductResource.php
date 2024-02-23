@@ -7,6 +7,7 @@ use App\Http\Resources\Group\GroupResource;
 use App\Http\Resources\Tag\TagResource;
 use App\Http\Resources\Product\ProductMinResource;
 use App\Http\Resources\Size\SizeResource;
+use App\Http\Resources\Sticker\StickerResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -26,7 +27,6 @@ class ProductResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'content' => $this->content,
             'image' => $this->imageUrl,
             'color' => $this->color,
             'price' => $this->price,
@@ -35,6 +35,7 @@ class ProductResource extends JsonResource
             'group' => new GroupResource($this->group),
             'product_group' => ProductMinResource::collection($products),
             'category' => new CategoryResource($this->category),
+            'sticker' => new StickerResource($this->sticker),
             'tags' => TagResource::collection($this->tags),
         ];
     }

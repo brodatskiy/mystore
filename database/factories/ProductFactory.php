@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Category;
 use App\Models\Group;
+use App\Models\Sticker;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
@@ -28,6 +29,7 @@ class ProductFactory extends Factory
             'color' => fake()->safeHexColor(),
             'group_id' => Group::all()->random()->id,
             'category_id' => Category::all()->random()->id,
+            'sticker_id' => Sticker::all()->random()->id,
             'price' => fake()->numberBetween(1, 1000),
             'is_published' => 1
         ];

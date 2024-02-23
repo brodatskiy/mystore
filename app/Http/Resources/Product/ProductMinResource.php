@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Product;
 
 use App\Http\Resources\Category\CategoryResource;
+use App\Http\Resources\Sticker\StickerResource;
 use App\Http\Resources\Tag\TagResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -20,14 +21,14 @@ class ProductMinResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'content' => $this->content,
             'image' => $this->imageUrl,
             'color' => $this->color,
             'price' => $this->price,
             'is_published' => $this->is_published,
-            'category' => new CategoryResource($this->category),
-            'tags' => TagResource::collection($this->tags),
             'group' => $this->group_id,
+            'category' => new CategoryResource($this->category),
+            'sticker' => new StickerResource($this->sticker),
+            'tags' => TagResource::collection($this->tags),
         ];
     }
 }
