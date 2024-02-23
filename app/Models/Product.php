@@ -10,6 +10,8 @@ class Product extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'products';
+    protected $guarded = false;
     protected $with = ['group', 'category', 'tags', 'sizes'];
 
     public function group()
@@ -36,8 +38,4 @@ class Product extends Model
     {
         return $this->preview_image ? url('storage/' . $this->preview_image) : '';
     }
-
-
-    protected $table = 'products';
-    protected $guarded = false;
 }
