@@ -9,9 +9,14 @@ defineProps(["product"]);
 </script>
 <template>
   <v-hover v-slot="{ isHovering, props }">
-    <v-card min-width="200" class="product" variant="text" v-bind="props">
-      <div>
+    <v-card class="product" variant="text" v-bind="props">
+      <div class="product__image-block">
         <v-img :src="product.image" alt="Card Image" cover aspect-ratio="1.4" />
+        <div class="product_stickers">
+          <span v-for="tag in product.tags" class="pa-1 product_sticker">
+            {{ tag.title.toUpperCase() }}
+          </span>
+        </div>
       </div>
       <div class="d-flex justify-space-between">
         <div>{{ product.price }} $</div>
@@ -31,5 +36,19 @@ defineProps(["product"]);
 .product__bottom {
   position: relative;
   opacity: 0;
+}
+.product__image-block {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+.product_stickers {
+  position: absolute;
+  bottom: 0;
+}
+.product_sticker {
+  font-size: 12px;
+  color: rgb(236, 57, 57);
+  background: #ffffffd7;
 }
 </style>
