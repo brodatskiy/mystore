@@ -24,16 +24,15 @@ class StoreRequest extends FormRequest
         return [
             'title' => 'required|string',
             'description' => 'required',
-            'content' => 'required',
             'preview_image' => 'required|file',
             'color' => 'required|string',
             'price' => 'required|integer',
-            'count' => 'required|integer',
             'is_published' => 'bool',
             'group_id' => 'integer|exists:groups,id',
             'category_id' => 'required|integer|exists:categories,id',
             'tags' => 'nullable|array',
-            'tags.*' => 'nullable|integer|exists:tags,id',
+            'sizes.*.id' => 'required|integer',
+            'sizes.*.count' => 'required|integer',
         ];
     }
 
@@ -41,6 +40,8 @@ class StoreRequest extends FormRequest
     {
         return [
             'preview_image.file' => 'Must be a file',
+            'sizes.*.count.integer' => 'The field must be an integer',
+            'sizes.*.count.required' => 'The field is required.',
         ];
     }
 }

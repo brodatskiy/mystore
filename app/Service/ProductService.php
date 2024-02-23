@@ -15,14 +15,18 @@ class ProductService
             $data['preview_image'] = Storage::disk('public')->put('/images', $data['preview_image']);
 
             $tags = $data['tags'] ?? null;
-
             unset($data['tags']);
+            $sizes = $data['sizes'];
+            unset($data['sizes']);
 
             $product = Product::firstOrCreate([
                 'title' => $data['title'],
             ], $data);
 
             $product->tags()->attach($tags);
+            foreach ($sizes as $size) {
+                $product->sizes()->attach($size['id'], ['count' => $size['count']]);
+            }
             Db::commit();
         } catch (\Exception $exeption) {
             Db::rollBack();
@@ -41,10 +45,15 @@ class ProductService
             }
             $tags = $data['tags'] ?? null;
             unset($data['tags']);
-            $tags = array_column($tags, 'id');
+            $sizes = $data['sizes'];
+            unset($data['sizes']);
 
             $product->update($data);
             $product->tags()->sync($tags);
+
+            foreach ($sizes as $size) {
+                $product->sizes()->updateExistingPivot($size['id'], ['count' => $size['count']]);
+            }
 
             Db::commit();
         } catch (\Exception $exeption) {

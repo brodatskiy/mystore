@@ -25,15 +25,15 @@ class UpdateRequest extends FormRequest
         return [
             'title' => 'required|string',
             'description' => 'required',
-            'content' => 'required',
             'preview_image' => 'nullable|image',
             'color' => 'required|string',
             'price' => 'required|integer',
-            'count' => 'required|integer',
             'is_published' => 'bool',
             'group_id' => 'integer|exists:groups,id',
             'category_id' => 'required|integer',
             'tags' => 'nullable|array',
+            'sizes.*.id' => 'required|integer',
+            'sizes.*.count' => 'required|integer',
         ];
     }
 
@@ -41,6 +41,8 @@ class UpdateRequest extends FormRequest
     {
         return [
             'preview_image.image' => 'Must be an image',
+            'sizes.*.count.integer' => 'The field must be an integer',
+            'sizes.*.count.required' => 'The field is required.',
         ];
     }
 }
