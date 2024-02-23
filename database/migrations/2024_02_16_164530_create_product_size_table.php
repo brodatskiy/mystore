@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('product_id')->nullable()->index()->constrained('products')->onDelete('cascade');
             $table->foreignId('size_id')->nullable()->index()->constrained('sizes')->onDelete('cascade');
-            $table->string('count');
+            $table->integer('count')->default(0);
             $table->timestamps();
         });
     }
