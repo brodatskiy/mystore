@@ -21,10 +21,6 @@ defineProps(["product"]);
           <!-- <v-icon icon="mdi-heart" size="small" /> -->
         </div>
       </div>
-      <div class="product__bottom">
-        <div></div>
-        <div></div>
-      </div>
     </v-card>
   </v-hover>
 </template>
