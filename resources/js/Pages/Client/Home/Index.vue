@@ -27,7 +27,7 @@ const cols = computed(() => {
   <Head title="Main" />
 
   <MainLayout>
-    <v-container class="pa-0 grid-container">
+    <v-container class="pa-0">
       <v-row>
         <v-col v-for="product in products" :key="product.id" :cols="cols">
           <ProductCard :product="product"></ProductCard>
@@ -36,9 +36,3 @@ const cols = computed(() => {
     </v-container>
   </MainLayout>
 </template>
-
-<style scoped>
-.grid-container {
-  grid-gap: 50px;
-}
-</style>
