@@ -21,7 +21,7 @@ class ProductResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $products = Product::where('group_id', $this->group_id)->get();
+        $products = Product::where('group_id', $this->group_id)->whereNot('id', $this->id)->get();
 
         return [
             'id' => $this->id,
