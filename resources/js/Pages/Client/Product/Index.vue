@@ -36,9 +36,15 @@ const props = defineProps(["product"]);
           <p class="text-h5 mb-2">{{ product.price }}</p>
           <!-- <p class="text-h5 mb-2">{{ product.product_group }}</p> -->
           <div class="d-flex mb-2">
-            <div v-for="item in product.product_group">
+            <div v-for="subProduct in product.product_group">
               <div class="mr-2">
-                {{ item.title }}
+                <v-img
+                  :src="subProduct.image"
+                  alt="Card Image"
+                  min-width="100"
+                  cover
+                  aspect-ratio="1.4"
+                />
               </div>
             </div>
           </div>
