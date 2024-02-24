@@ -35,18 +35,27 @@ const props = defineProps(["product"]);
           <p class="text-h2 mb-2">{{ product.title }}</p>
           <p class="text-h5 mb-2">{{ product.price }}</p>
           <!-- <p class="text-h5 mb-2">{{ product.product_group }}</p> -->
-          <div class="d-flex mb-2">
-            <div v-for="subProduct in product.product_group">
-              <div class="mr-2">
-                <v-img
-                  :src="subProduct.image"
-                  alt="Card Image"
-                  min-width="100"
-                  cover
-                  aspect-ratio="1.4"
-                />
-              </div>
-            </div>
+          <div class="mb-2">
+            <v-slide-group show-arrows selected-class="border">
+              <v-slide-group-item
+                v-for="subProduct in product.product_group"
+                :key="subProduct.id"
+                v-slot="{ toggle, selectedClass }"
+              >
+                <div class="ma-2">
+                  <v-card :class="[selectedClass]">
+                    <v-img
+                      :src="subProduct.image"
+                      alt="Card Image"
+                      width="70"
+                      cover
+                      aspect-ratio="1.4"
+                      @click="toggle"
+                    />
+                  </v-card>
+                </div>
+              </v-slide-group-item>
+            </v-slide-group>
           </div>
           <div class="d-flex mb-2">
             <div v-for="size in product.sizes">
@@ -74,6 +83,9 @@ const props = defineProps(["product"]);
   </MainLayout>
 </template>
 <style scoped>
+.border {
+  border: 1px solid black !important;
+}
 .product__image-block {
   position: relative;
   width: 100%;
