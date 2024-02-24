@@ -8,9 +8,12 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\GroupController;
 use App\Http\Controllers\Admin\StickerController;
+use App\Http\Controllers\Client\WishController;
 use App\Http\Controllers\Client\CartController;
+use App\Http\Controllers\Client\CatalogController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\MessageController;
+use App\Http\Controllers\Client\ProductSingleController;
 use App\Http\Controllers\Client\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +30,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',  [HomeController::class, 'index'])->name('/');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
+Route::get('/wish', [WishController::class, 'index'])->name('wish');
+Route::singleton('catalog', CatalogController::class);
+Route::resource('product', ProductSingleController::class)->only('show');
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
