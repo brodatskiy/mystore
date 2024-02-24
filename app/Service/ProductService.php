@@ -44,12 +44,15 @@ class ProductService
                 unset($data['preview_image']);
             }
             $tags = $data['tags'] ?? null;
+            $tags = array_column($tags, 'id');
             unset($data['tags']);
+
             $sizes = $data['sizes'];
             unset($data['sizes']);
 
             $product->update($data);
             $product->tags()->sync($tags);
+
 
             foreach ($sizes as $size) {
                 $product->sizes()->updateExistingPivot($size['id'], ['count' => $size['count']]);
