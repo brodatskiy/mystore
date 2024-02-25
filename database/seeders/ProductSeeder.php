@@ -22,7 +22,7 @@ class ProductSeeder extends Seeder
 
 
         Product::factory()
-            ->count(10)
+            ->count(24)
             ->hasAttached($tags
                 ->random(2))
             ->hasAttached(
