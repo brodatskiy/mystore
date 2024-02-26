@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class CategoryController extends Controller
+class CommentController extends Controller
 {
 
     public function index()
