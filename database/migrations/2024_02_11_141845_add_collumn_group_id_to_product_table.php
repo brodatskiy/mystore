@@ -21,9 +21,11 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->dropForeign(['group_id']);
-            $table->dropColumn(['group_id']);
-        });
+        if (app()->isLocal()) {
+            Schema::table('products', function (Blueprint $table) {
+                $table->dropForeign(['group_id']);
+                $table->dropColumn(['group_id']);
+            });
+        }
     }
 };
