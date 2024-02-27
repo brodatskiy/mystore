@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -20,7 +21,7 @@ return new class extends Migration
             $table->string('color');
             $table->unsignedInteger('price');
             $table->boolean('is_published')->default(true);
-            $table->foreignId('category_id')->index()->constrained('categories')->onDelete('cascade');
+            $table->foreignIdFor(Category::class)->nullable()->constrained()->cascadeOnUpdate()->nullOnDelete();
 
             $table->timestamps();
             $table->softDeletes();
