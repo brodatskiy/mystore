@@ -2,13 +2,17 @@
 
 namespace App\Models;
 
+use App\Casts\SlugCast;
+use App\Traits\Models\HasSlug;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
+    use HasSlug;
 
     protected $table = 'products';
     protected $guarded = false;
