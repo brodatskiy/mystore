@@ -24,6 +24,7 @@ class ProductFactory extends Factory
     {
         return [
             'title' => fake()->word(),
+            'slug' => fake()->word(),
             'description' => fake()->paragraph(1),
             'preview_image' => Storage::disk('public')->put('/images', new File(fake()->image(null, 360, 360))),
             'color' => fake()->safeHexColor(),
