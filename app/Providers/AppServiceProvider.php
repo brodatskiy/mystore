@@ -29,23 +29,16 @@ class AppServiceProvider extends ServiceProvider
         JsonResource::withoutWrapping();
         Model::shouldBeStrict(!app()->isProduction());
 
-        if (app()->isProduction()) {
-            DB::whenQueryingForLongerThan(CarbonInterval::seconds(5), function (Connection $connection, QueryExecuted $event) {
-                logger()
-                    ->channel('telegram')
-                    ->debug('whenQueryingForLongerThan:' . $connection->totalQueryDuration());
-            });
-
+        if (app()->isLocal()) {
             DB::listen(function ($query) {
                 if ($query->time > 100) {
                     logger()
                         ->channel('telegram')
-                        ->debug('whenQueryingForLongerThan:' . $query->sql, $query->bindings);
+                        ->debug('Query longer than 1ms: ' . $query->sql, $query->bindings);
                 }
             });
 
-            $kernel = app(Kernel::class);
-            $kernel->whenRequestLifecycleIsLongerThan(
+            app(Kernel::class)->whenRequestLifecycleIsLongerThan(
                 CarbonInterval::seconds(4),
                 function () {
                     logger()->channel('telegram')->debug('whenRequestLifecycleIsLongerThan:' . request()->url());
