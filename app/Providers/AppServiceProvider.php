@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
         JsonResource::withoutWrapping();
         Model::shouldBeStrict(!app()->isProduction());
 
-        if (app()->isLocal()) {
+        if (app()->isProduction()) {
             DB::listen(function ($query) {
                 if ($query->time > 100) {
                     logger()
