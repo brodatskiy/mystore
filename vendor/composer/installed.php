@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'd72d6933427ee7cc837666292ec3522d55dc2f25',
+        'reference' => '8275b912b449098959e0df59375de2738e1ac67c',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -28,11 +28,29 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'cocur/slugify' => array(
+            'pretty_version' => 'v4.5.1',
+            'version' => '4.5.1.0',
+            'reference' => '7c6e088228b9f082050876ae8b0cd287b117b840',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../cocur/slugify',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'cordoval/hamcrest-php' => array(
             'dev_requirement' => true,
             'replaced' => array(
                 0 => '*',
             ),
+        ),
+        'cviebrock/eloquent-sluggable' => array(
+            'pretty_version' => '10.0.0',
+            'version' => '10.0.0.0',
+            'reference' => '92f456b10337ca97c1cccfcc853a1cf51d2cedd0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../cviebrock/eloquent-sluggable',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'davedevelopment/hamcrest-php' => array(
             'dev_requirement' => true,
@@ -409,7 +427,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'd72d6933427ee7cc837666292ec3522d55dc2f25',
+            'reference' => '8275b912b449098959e0df59375de2738e1ac67c',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -1093,6 +1111,15 @@
             'install_path' => __DIR__ . '/../spatie/laravel-ignition',
             'aliases' => array(),
             'dev_requirement' => true,
+        ),
+        'spatie/laravel-sluggable' => array(
+            'pretty_version' => '3.6.0',
+            'version' => '3.6.0.0',
+            'reference' => 'a44afe6f317959bcfdadcec3148486859fd5c1f5',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../spatie/laravel-sluggable',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'symfony/console' => array(
             'pretty_version' => 'v6.3.4',

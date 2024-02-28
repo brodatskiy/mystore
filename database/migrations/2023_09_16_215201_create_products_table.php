@@ -15,13 +15,14 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('slug')->unique();
+            $table->string('slug');
             $table->text('description');
             $table->string('preview_image');
             $table->string('color');
             $table->unsignedInteger('price');
             $table->boolean('is_published')->default(true);
             $table->foreignIdFor(Category::class)->nullable()->constrained()->cascadeOnUpdate()->nullOnDelete();
+            $table->foreignId('group_id')->nullable()->index()->constrained('groups')->onDelete('cascade');
 
             $table->timestamps();
             $table->softDeletes();

@@ -92,6 +92,7 @@ class ComposerStaticInit76f0aeab21d8868d48a47686772a4ee3
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
             'Symfony\\Bridge\\PsrHttpMessage\\' => 30,
+            'Spatie\\Sluggable\\' => 17,
             'Spatie\\LaravelIgnition\\' => 23,
             'Spatie\\Ignition\\' => 16,
             'Spatie\\FlareClient\\' => 19,
@@ -183,7 +184,9 @@ class ComposerStaticInit76f0aeab21d8868d48a47686772a4ee3
         ),
         'C' => 
         array (
+            'Cviebrock\\EloquentSluggable\\' => 28,
             'Cron\\' => 5,
+            'Cocur\\Slugify\\' => 14,
             'Carbon\\' => 7,
         ),
         'B' => 
@@ -345,6 +348,10 @@ class ComposerStaticInit76f0aeab21d8868d48a47686772a4ee3
         'Symfony\\Bridge\\PsrHttpMessage\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/psr-http-message-bridge',
+        ),
+        'Spatie\\Sluggable\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/spatie/laravel-sluggable/src',
         ),
         'Spatie\\LaravelIgnition\\' => 
         array (
@@ -571,9 +578,17 @@ class ComposerStaticInit76f0aeab21d8868d48a47686772a4ee3
             0 => __DIR__ . '/../..' . '/database/factories',
             1 => __DIR__ . '/..' . '/laravel/pint/database/factories',
         ),
+        'Cviebrock\\EloquentSluggable\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cviebrock/eloquent-sluggable/src',
+        ),
         'Cron\\' => 
         array (
             0 => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron',
+        ),
+        'Cocur\\Slugify\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cocur/slugify/src',
         ),
         'Carbon\\' => 
         array (
@@ -606,6 +621,7 @@ class ComposerStaticInit76f0aeab21d8868d48a47686772a4ee3
 
     public static $classMap = array (
         'App\\Console\\Commands\\InstallCommand' => __DIR__ . '/../..' . '/app/Console/Commands/InstallCommand.php',
+        'App\\Console\\Commands\\RefreshCommand' => __DIR__ . '/../..' . '/app/Console/Commands/RefreshCommand.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Events\\StoreMessageEvent' => __DIR__ . '/../..' . '/app/Events/StoreMessageEvent.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
@@ -841,6 +857,25 @@ class ComposerStaticInit76f0aeab21d8868d48a47686772a4ee3
         'Carbon\\Translator' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Translator.php',
         'Carbon\\TranslatorImmutable' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/TranslatorImmutable.php',
         'Carbon\\TranslatorStrongTypeInterface' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/TranslatorStrongTypeInterface.php',
+        'Cocur\\Slugify\\Bridge\\Laravel\\SlugifyFacade' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/Laravel/SlugifyFacade.php',
+        'Cocur\\Slugify\\Bridge\\Laravel\\SlugifyServiceProvider' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/Laravel/SlugifyServiceProvider.php',
+        'Cocur\\Slugify\\Bridge\\Latte\\SlugifyHelper' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/Latte/SlugifyHelper.php',
+        'Cocur\\Slugify\\Bridge\\League\\SlugifyServiceProvider' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/League/SlugifyServiceProvider.php',
+        'Cocur\\Slugify\\Bridge\\Nette\\SlugifyExtension' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/Nette/SlugifyExtension.php',
+        'Cocur\\Slugify\\Bridge\\Plum\\SlugifyConverter' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/Plum/SlugifyConverter.php',
+        'Cocur\\Slugify\\Bridge\\Symfony\\CocurSlugifyBundle' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/Symfony/CocurSlugifyBundle.php',
+        'Cocur\\Slugify\\Bridge\\Symfony\\CocurSlugifyExtension' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/Symfony/CocurSlugifyExtension.php',
+        'Cocur\\Slugify\\Bridge\\Symfony\\Configuration' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/Symfony/Configuration.php',
+        'Cocur\\Slugify\\Bridge\\Twig\\SlugifyExtension' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/Twig/SlugifyExtension.php',
+        'Cocur\\Slugify\\Bridge\\ZF2\\Module' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/ZF2/Module.php',
+        'Cocur\\Slugify\\Bridge\\ZF2\\SlugifyService' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/ZF2/SlugifyService.php',
+        'Cocur\\Slugify\\Bridge\\ZF2\\SlugifyViewHelper' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/ZF2/SlugifyViewHelper.php',
+        'Cocur\\Slugify\\Bridge\\ZF2\\SlugifyViewHelperFactory' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/ZF2/SlugifyViewHelperFactory.php',
+        'Cocur\\Slugify\\RuleProvider\\DefaultRuleProvider' => __DIR__ . '/..' . '/cocur/slugify/src/RuleProvider/DefaultRuleProvider.php',
+        'Cocur\\Slugify\\RuleProvider\\FileRuleProvider' => __DIR__ . '/..' . '/cocur/slugify/src/RuleProvider/FileRuleProvider.php',
+        'Cocur\\Slugify\\RuleProvider\\RuleProviderInterface' => __DIR__ . '/..' . '/cocur/slugify/src/RuleProvider/RuleProviderInterface.php',
+        'Cocur\\Slugify\\Slugify' => __DIR__ . '/..' . '/cocur/slugify/src/Slugify.php',
+        'Cocur\\Slugify\\SlugifyInterface' => __DIR__ . '/..' . '/cocur/slugify/src/SlugifyInterface.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Cron\\AbstractField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/AbstractField.php',
         'Cron\\CronExpression' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/CronExpression.php',
@@ -852,6 +887,11 @@ class ComposerStaticInit76f0aeab21d8868d48a47686772a4ee3
         'Cron\\HoursField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/HoursField.php',
         'Cron\\MinutesField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MinutesField.php',
         'Cron\\MonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
+        'Cviebrock\\EloquentSluggable\\ServiceProvider' => __DIR__ . '/..' . '/cviebrock/eloquent-sluggable/src/ServiceProvider.php',
+        'Cviebrock\\EloquentSluggable\\Services\\SlugService' => __DIR__ . '/..' . '/cviebrock/eloquent-sluggable/src/Services/SlugService.php',
+        'Cviebrock\\EloquentSluggable\\Sluggable' => __DIR__ . '/..' . '/cviebrock/eloquent-sluggable/src/Sluggable.php',
+        'Cviebrock\\EloquentSluggable\\SluggableObserver' => __DIR__ . '/..' . '/cviebrock/eloquent-sluggable/src/SluggableObserver.php',
+        'Cviebrock\\EloquentSluggable\\SluggableScopeHelpers' => __DIR__ . '/..' . '/cviebrock/eloquent-sluggable/src/SluggableScopeHelpers.php',
         'Database\\Factories\\CategoryFactory' => __DIR__ . '/../..' . '/database/factories/CategoryFactory.php',
         'Database\\Factories\\GroupFactory' => __DIR__ . '/../..' . '/database/factories/GroupFactory.php',
         'Database\\Factories\\ProductFactory' => __DIR__ . '/../..' . '/database/factories/ProductFactory.php',
@@ -5983,6 +6023,10 @@ class ComposerStaticInit76f0aeab21d8868d48a47686772a4ee3
         'Spatie\\LaravelIgnition\\Support\\StringComparator' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/Support/StringComparator.php',
         'Spatie\\LaravelIgnition\\Views\\BladeSourceMapCompiler' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/Views/BladeSourceMapCompiler.php',
         'Spatie\\LaravelIgnition\\Views\\ViewExceptionMapper' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/Views/ViewExceptionMapper.php',
+        'Spatie\\Sluggable\\Exceptions\\InvalidOption' => __DIR__ . '/..' . '/spatie/laravel-sluggable/src/Exceptions/InvalidOption.php',
+        'Spatie\\Sluggable\\HasSlug' => __DIR__ . '/..' . '/spatie/laravel-sluggable/src/HasSlug.php',
+        'Spatie\\Sluggable\\HasTranslatableSlug' => __DIR__ . '/..' . '/spatie/laravel-sluggable/src/HasTranslatableSlug.php',
+        'Spatie\\Sluggable\\SlugOptions' => __DIR__ . '/..' . '/spatie/laravel-sluggable/src/SlugOptions.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'Symfony\\Bridge\\PsrHttpMessage\\ArgumentValueResolver\\PsrServerRequestResolver' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/ArgumentValueResolver/PsrServerRequestResolver.php',
         'Symfony\\Bridge\\PsrHttpMessage\\EventListener\\PsrResponseListener' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/EventListener/PsrResponseListener.php',

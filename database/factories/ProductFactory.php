@@ -23,8 +23,7 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            'title' => fake()->word(),
-            'slug' => fake()->word(),
+            'title' => fake()->words(1, true),
             'description' => fake()->paragraph(1),
             'preview_image' => Storage::disk('public')->put('/images', new File(fake()->image(null, 360, 360))),
             'color' => fake()->safeHexColor(),
