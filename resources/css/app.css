@@ -1,8 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* a:hover,
+a:hover,
 a:visited,
 a:link,
 a:active {
@@ -18,4 +14,4 @@ input:-webkit-autofill:focus {
 
 .v-footer {
   margin: 0 14px;
-} */
+}

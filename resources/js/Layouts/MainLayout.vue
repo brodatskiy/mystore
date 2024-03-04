@@ -153,7 +153,7 @@ let sidebarExpand = ref(false);
     >
 
     <v-main>
-      <v-container fluid class="mt-5 h-100">
+      <v-container fluid class="h-100">
         <slot />
       </v-container>
       <v-footer height="32" class="">

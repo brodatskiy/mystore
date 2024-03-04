@@ -1,5 +1,4 @@
 <script setup>
-import { Link } from "@inertiajs/vue3";
 // import { useCartStore } from "@/Store/useCartStore";
 // import { toCurrency } from "@/Utils/toCurrency";
 
@@ -9,49 +8,20 @@ defineProps(["product"]);
 </script>
 <template>
   <Link :href="route('product.show', product)">
-    <v-hover v-slot="{ isHovering, props }">
-      <v-card class="product" variant="text" v-bind="props">
-        <div class="product__image-block">
-          <v-img
-            :src="product.image"
-            alt="Card Image"
-            cover
-            aspect-ratio="1.4"
-          />
-          <div class="product_sticker px-1">
-            {{ product.sticker.title.toUpperCase() }}
-          </div>
+    <v-card class="mx-auto" max-width="400" variant="flat">
+      <v-img height="200" :src="product.image" cover>
+        <p class="text-info text-body-2 pa-2">
+          {{ product.sticker.title.toUpperCase() }}
+        </p>
+      </v-img>
+      <div class="d-flex items-center justify-space-between pa-2">
+        <div>{{ product.price }} $</div>
+        <div>{{ product.title }}</div>
+        <div class="">
+          <v-icon icon="mdi-heart" />
         </div>
-        <div class="d-flex justify-space-between">
-          <div>{{ product.price }} $</div>
-          <div>{{ product.title }}</div>
-          <div>
-            <v-icon icon="mdi-heart-outline" size="small" />
-            <!-- <v-icon icon="mdi-heart" size="small" /> -->
-          </div>
-        </div>
-      </v-card>
-    </v-hover>
+      </div>
+    </v-card>
   </Link>
 </template>
-<style scoped>
-.product:hover .product__bottom {
-  opacity: 1;
-}
-.product__bottom {
-  position: relative;
-  opacity: 0;
-}
-.product__image-block {
-  position: relative;
-  width: 100%;
-  height: auto;
-}
-.product_sticker {
-  position: absolute;
-  bottom: 0;
-  font-size: 12px;
-  color: rgb(236, 57, 57);
-  background: #ffffffd7;
-}
-</style>
+<style scoped></style>

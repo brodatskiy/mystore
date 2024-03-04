@@ -27,7 +27,7 @@ const cols = computed(() => {
   <Head title="Main" />
 
   <MainLayout>
-    <v-container class="pa-0">
+    <v-container>
       <v-row>
         <v-col v-for="product in products" :key="product.id" :cols="cols">
           <ProductCard :product="product"></ProductCard>

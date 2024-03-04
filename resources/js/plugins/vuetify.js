@@ -9,8 +9,6 @@ const myCustomLightTheme = {
     background: "#EEEEEE",
     backgroundAdmin: "#FFFFFF",
     surface: "#FFFFFF",
-    surface_light: "#a3a3a3",
-    surfaceAdmin: "#F0E0D6",
     primary: "#111111",
     secondary: "#5b79f0",
     error: "#f04d3e",
