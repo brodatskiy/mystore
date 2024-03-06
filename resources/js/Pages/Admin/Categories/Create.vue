@@ -42,7 +42,9 @@ let breadcrumbs = ref([
             :error-messages="form.errors.title"
           />
 
-          <PrimaryButton class="w-100 mt-3 bg-primary"> Create </PrimaryButton>
+          <PrimaryButton class="w-100 mt-3 bg-primary" type="sumbit">
+            Create
+          </PrimaryButton>
         </v-form>
       </div>
     </v-sheet>
