@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import { Head, Link, useForm } from "@inertiajs/vue3";
+import { useForm } from "@inertiajs/vue3";
 
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
@@ -45,7 +45,9 @@ let breadcrumbs = ref([
           />
 
           <div class="d-flex justify-end">
-            <PrimaryButton class="mt-2" type="submit"> Update </PrimaryButton>
+            <PrimaryButton class="mt-2 bg-primary" type="submit">
+              Update
+            </PrimaryButton>
           </div>
         </form>
       </div>

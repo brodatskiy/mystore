@@ -3,8 +3,7 @@ import { ref } from "vue";
 import { Head, Link } from "@inertiajs/vue3";
 
 import AdminLayout from "@/Layouts/AdminLayout.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import DungerButton from "@/Components/DangerButton.vue";
+import LinkButton from "@/Components/LinkButton.vue";
 
 const props = defineProps(["users"]);
 
@@ -31,12 +30,10 @@ let breadcrumbs = ref([
 
     <v-sheet class="pa-4" rounded="xl" elevation="3">
       <div class="d-flex align-middle justify-center">
-        <Link :href="route('users.create')">
-          <PrimaryButton>
-            Add new user
-            <v-icon class="ml-3" icon="mdi-account-plus"></v-icon>
-          </PrimaryButton>
-        </Link>
+        <LinkButton :href="route('users.create')">
+          Add new user
+          <v-icon class="ml-3" icon="mdi-account-plus"></v-icon>
+        </LinkButton>
       </div>
       <v-table fixed-header class="">
         <thead>
@@ -58,17 +55,15 @@ let breadcrumbs = ref([
             <td class="text-left">{{ user.email }}</td>
             <td class="text-left">{{ user.role }}</td>
             <td class="text-left">
-              <Link :href="route('users.show', user)">
-                <PrimaryButton> Show </PrimaryButton>
-              </Link>
-              <Link
-                method="delete"
+              <LinkButton :href="route('users.show', user)"> Show </LinkButton>
+              <LinkButton
                 :href="route('users.destroy', user.id)"
+                method="delete"
                 as="button"
-                class="ml-2"
+                class="ml-2 bg-error"
               >
-                <DungerButton as="button"> Delete </DungerButton>
-              </Link>
+                Delete
+              </LinkButton>
             </td>
           </tr>
         </tbody>

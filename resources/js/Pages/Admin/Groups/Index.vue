@@ -1,10 +1,8 @@
 <script setup>
 import { ref } from "vue";
-import { Head, Link } from "@inertiajs/vue3";
 
 import AdminLayout from "@/Layouts/AdminLayout.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import DungerButton from "@/Components/DangerButton.vue";
+import LinkButton from "@/Components/LinkButton.vue";
 
 const props = defineProps({ groups: Object });
 
@@ -31,12 +29,10 @@ let breadcrumbs = ref([
 
     <v-sheet class="pa-4" rounded="xl" elevation="3">
       <div class="d-flex align-middle justify-center">
-        <Link :href="route('groups.create')">
-          <PrimaryButton>
-            Add new group
-            <v-icon class="ml-3" icon="mdi-plus"></v-icon>
-          </PrimaryButton>
-        </Link>
+        <LinkButton :href="route('groups.create')">
+          Add new group
+          <v-icon class="ml-3" icon="mdi-plus"></v-icon>
+        </LinkButton>
       </div>
       <v-table fixed-header class="">
         <thead>
@@ -49,21 +45,22 @@ let breadcrumbs = ref([
             <td>{{ group.title }}</td>
 
             <td class="text-right">
-              <Link :href="route('groups.show', group)">
-                <PrimaryButton> Show </PrimaryButton>
-              </Link>
+              <LinkButton :href="route('groups.show', group)">
+                Show
+              </LinkButton>
 
-              <Link :href="route('groups.edit', group)">
-                <PrimaryButton class="ml-2"> Edit </PrimaryButton>
-              </Link>
+              <LinkButton :href="route('groups.edit', group)" class="ml-2">
+                Edit
+              </LinkButton>
 
-              <Link
+              <LinkButton
                 method="delete"
                 :href="route('groups.destroy', group.id)"
+                class="ml-2 bg-error"
                 as="button"
               >
-                <DungerButton as="button" class="ml-2"> Delete </DungerButton>
-              </Link>
+                Delete
+              </LinkButton>
             </td>
           </tr>
         </tbody>

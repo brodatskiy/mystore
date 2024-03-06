@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import { useForm, Head, Link } from "@inertiajs/vue3";
+import { useForm } from "@inertiajs/vue3";
 
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
@@ -42,9 +42,7 @@ let breadcrumbs = ref([
             :error-messages="form.errors.title"
           />
 
-          <PrimaryButton class="w-100 mt-3" type="submit">
-            Create
-          </PrimaryButton>
+          <PrimaryButton class="w-100 mt-3 bg-primary"> Create </PrimaryButton>
         </v-form>
       </div>
     </v-sheet>

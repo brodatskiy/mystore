@@ -1,11 +1,8 @@
 <script setup>
 import { ref } from "vue";
-import { Head, Link } from "@inertiajs/vue3";
 
 import AdminLayout from "@/Layouts/AdminLayout.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import DungerButton from "@/Components/DangerButton.vue";
-import AvatarPlaceholder from "~/assets/images/avatar-placeholder.png";
+import LinkButton from "@/Components/LinkButton.vue";
 
 const props = defineProps(["product"]);
 
@@ -61,17 +58,17 @@ const breadcrumbs = ref([
         </div>
         <div class="flex-grow-1">
           <div class="d-flex justify-end ml-5">
-            <Link :href="route('products.edit', product)">
-              <PrimaryButton> Edit </PrimaryButton>
-            </Link>
-            <Link
-              method="delete"
+            <LinkButton :href="route('products.edit', product)">
+              Edit
+            </LinkButton>
+            <LinkButton
               :href="route('products.destroy', product.id)"
+              method="delete"
               as="button"
-              class="ml-2"
+              class="ml-2 bg-error"
             >
-              <DungerButton as="button"> Delete </DungerButton>
-            </Link>
+              Delete
+            </LinkButton>
           </div>
           <v-table class="ml-5">
             <tbody>

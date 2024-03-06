@@ -3,8 +3,8 @@ import { ref } from "vue";
 import { Head, Link } from "@inertiajs/vue3";
 
 import AdminLayout from "@/Layouts/AdminLayout.vue";
+import LinkButton from "@/Components/LinkButton.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import DungerButton from "@/Components/DangerButton.vue";
 
 const props = defineProps(["categories"]);
 
@@ -31,12 +31,10 @@ let breadcrumbs = ref([
 
     <v-sheet class="pa-4" rounded="xl" elevation="3">
       <div class="d-flex align-middle justify-center">
-        <Link :href="route('categories.create')">
-          <PrimaryButton>
-            Add new category
-            <v-icon class="ml-3" icon="mdi-plus"></v-icon>
-          </PrimaryButton>
-        </Link>
+        <PrimaryButton :href="route('categories.create')">
+          Add new category
+          <v-icon class="ml-3" icon="mdi-plus"></v-icon>
+        </PrimaryButton>
       </div>
       <v-table fixed-header class="">
         <thead>
@@ -48,17 +46,18 @@ let breadcrumbs = ref([
           <tr v-for="category in categories" :key="category.id">
             <td>{{ category.title }}</td>
             <td class="text-right">
-              <Link :href="route('categories.edit', category)">
-                <PrimaryButton> Edit </PrimaryButton>
-              </Link>
+              <LinkButton :href="route('categories.edit', category)">
+                Edit
+              </LinkButton>
 
-              <Link
-                method="delete"
+              <LinkButton
                 :href="route('categories.destroy', category)"
+                method="delete"
                 as="button"
+                class="ml-2 bg-error"
               >
-                <DungerButton as="button" class="ml-2"> Delete </DungerButton>
-              </Link>
+                Delete
+              </LinkButton>
             </td>
           </tr>
         </tbody>

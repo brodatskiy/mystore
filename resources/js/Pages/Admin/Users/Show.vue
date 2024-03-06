@@ -3,8 +3,7 @@ import { ref } from "vue";
 import { Head, Link } from "@inertiajs/vue3";
 
 import AdminLayout from "@/Layouts/AdminLayout.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import DungerButton from "@/Components/DangerButton.vue";
+import LinkButton from "@/Components/LinkButton.vue";
 import AvatarPlaceholder from "~/assets/images/avatar-placeholder.png";
 
 const props = defineProps(["user"]);
@@ -85,17 +84,15 @@ const breadcrumbs = ref([
         </div>
       </div>
       <div class="px-4">
-        <Link :href="route('users.edit', user)">
-          <PrimaryButton> Edit </PrimaryButton>
-        </Link>
-        <Link
-          method="delete"
+        <LinkButton :href="route('users.edit', user)"> Edit </LinkButton>
+        <LinkButton
           :href="route('users.destroy', user.id)"
+          method="delete"
           as="button"
-          class="ml-2"
+          class="ml-2 bg-error"
         >
-          <DungerButton as="button"> Delete </DungerButton>
-        </Link>
+          Delete
+        </LinkButton>
       </div>
     </v-sheet>
   </AdminLayout>

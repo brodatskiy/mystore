@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import { useForm, Head, Link, usePage } from "@inertiajs/vue3";
+import { useForm, usePage } from "@inertiajs/vue3";
 
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
