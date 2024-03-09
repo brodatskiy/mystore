@@ -6,6 +6,7 @@ import { createInertiaApp, Link, Head } from "@inertiajs/vue3";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 
 import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
+import { Icon } from "@iconify/vue";
 
 // Plugins
 import { registerPlugins } from "@/plugins";
@@ -25,6 +26,7 @@ createInertiaApp({
       .use(ZiggyVue, Ziggy)
       .component("Link", Link)
       .component("Head", Head)
+      .component("Icon", Icon)
       .use(registerPlugins)
       .mount(el);
   },
