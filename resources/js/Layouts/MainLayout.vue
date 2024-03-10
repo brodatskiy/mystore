@@ -2,12 +2,14 @@
 import { ref } from "vue";
 
 import LinkButton from "@/Components/LinkButton.vue";
+import Dropdown from "@/Components/Dropdown.vue";
+import DropdownLink from "@/Components/DropdownLink.vue";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 
 // import { useCartStore } from "@/Store/useCartStore";
 
 // const cartStore = useCartStore();
-
+const showingNavigationDropdown = ref(false);
 let sidebarExpand = ref(false);
 </script>
 <template>
@@ -18,69 +20,92 @@ let sidebarExpand = ref(false);
       >
         <div class="flex items-center justify-between">
           <!-- Logo -->
-          <div class="font-bold text-xl">
-            <Link :href="route('/')">MyStore</Link>
+          <div class="font-bold">
+            <ApplicationLogo class="" />
           </div>
-          <div class="flex items-center space-x-4">
+          <div class="flex items-center">
             <!-- Icon Buttons  -->
-            <div>
-              <ul class="flex items-center space-x-4">
-                <li>
-                  <Link :href="route('cart')">
-                    <Icon
-                      icon="mdi:cart-outline"
-                      width="1.5rem"
-                      height="1.5rem"
-                    />
-                  </Link>
-                </li>
-                <li>
-                  <Link :href="route('cart')">
-                    <Icon
-                      icon="mdi:heart-outline"
-                      width="1.5rem"
-                      height="1.5rem"
-                    />
-                  </Link>
-                </li>
-              </ul>
+            <div class="flex items-center space-x-4">
+              <LinkButton :href="route('cart')">
+                <Icon icon="mdi:cart-outline" width="1.5rem" height="1.5rem" />
+              </LinkButton>
+
+              <LinkButton :href="route('cart')">
+                <Icon icon="mdi:heart-outline" width="1.5rem" height="1.5rem" />
+              </LinkButton>
             </div>
             <!-- Auth -->
-            <div
-              v-if="!$page.props.auth.user"
-              class="flex items-center gap-x-1"
-            >
-              <LinkButton :href="route('login')" type="button">
-                <span>Log In</span>
-              </LinkButton>
-              <LinkButton
-                :href="route('register')"
-                class="bg-gray-200"
-                type="button"
+            <div class="ml-3">
+              <div
+                v-if="!$page.props.auth.user"
+                class="flex items-center gap-x-2"
               >
-                Sign in
-              </LinkButton>
-            </div>
-            <div v-else>
-              <Icon icon="mdi:person" width="1.5rem" height="1.5rem" />
+                <LinkButton :href="route('login')" class="py-3" type="button">
+                  <span>Log In</span>
+                </LinkButton>
+                <LinkButton
+                  :href="route('register')"
+                  class="py-3 bg-gray-200"
+                  type="button"
+                >
+                  <span>Sign in</span>
+                </LinkButton>
+              </div>
+              <div v-else>
+                <div class="sm:ml-1">
+                  <!-- Settings Dropdown -->
+                  <div class="ml-3 relative">
+                    <Dropdown align="right" width="48">
+                      <template #trigger>
+                        <button
+                          class="px-4 py-2 font-sans text-xs font-bold text-center bg-gray-100 text-gray-900 uppercase align-middle transition-all rounded-lg select-none disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none hover:bg-gray-900/20 active:bg-gray-900/30"
+                        >
+                          <Icon
+                            icon="mdi:person"
+                            width="1.5rem"
+                            height="1.5rem"
+                          />
+                        </button>
+                      </template>
+
+                      <template #content>
+                        <DropdownLink
+                          v-if="$page.props.auth.user.role === 1"
+                          :href="route('dashboard.index')"
+                        >
+                          Admin panel
+                        </DropdownLink>
+                        <DropdownLink :href="route('profile.edit')">
+                          Profile
+                        </DropdownLink>
+                        <DropdownLink
+                          :href="route('logout')"
+                          method="post"
+                          as="button"
+                        >
+                          Log Out
+                        </DropdownLink>
+                      </template>
+                    </Dropdown>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </nav>
     </header>
 
-    <!-- SideBar -->
-
     <main>
-      <div fluid class="h-100">
+      <div class="mx-auto mt-10 p-4 sm:p-6 lg:p-8">
         <slot />
       </div>
-      <footer height="32" class="">
-        <div class="px-4 py-2 text-end w-100">
-          {{ new Date().getFullYear() }} — <strong>MyStore</strong>
-        </div>
-      </footer>
     </main>
+    <footer>
+      <div class="bg-white px-4 py-2 text-end w-100">
+        {{ new Date().getFullYear() }} — <strong>MyStore</strong>
+      </div>
+    </footer>
   </div>
 </template>
 
