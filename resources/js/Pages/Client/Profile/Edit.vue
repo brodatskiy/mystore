@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { Head, useForm, usePage } from "@inertiajs/vue3";
 
-import MainLayout from "@/Layouts/MainLayout.vue";
+import ShopLayout from "@/Layouts/ShopLayout.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 let props = defineProps({
@@ -32,7 +32,7 @@ const genderItems = ref([
 <template>
   <Head title="Profile" />
 
-  <MainLayout>
+  <ShopLayout>
     <v-sheet class="pa-4" rounded="xl" elevation="3">
       <div class="w-50 mx-auto">
         <h2 class="text-center mt-2">Profile</h2>
@@ -76,6 +76,6 @@ const genderItems = ref([
         </form>
       </div>
     </v-sheet>
-  </MainLayout>
+  </ShopLayout>
 </template>
 <style></style>

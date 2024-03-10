@@ -1,5 +1,5 @@
 <script setup>
-import MainLayout from "@/Layouts/MainLayout.vue";
+import ShopLayout from "@/Layouts/ShopLayout.vue";
 import { useForm, Head, Link } from "@inertiajs/vue3";
 import { useGoTo } from "vuetify";
 
@@ -24,7 +24,7 @@ function store() {
 </script>
 <template>
   <Head title="Chat" />
-  <MainLayout>
+  <ShopLayout>
     <v-sheet class="pa-4" rounded="xl" elevation="3">
       <v-container class="pa-0">
         <v-row>
@@ -84,7 +84,7 @@ function store() {
         </v-row>
       </v-container>
     </v-sheet>
-  </MainLayout>
+  </ShopLayout>
 </template>
 
 <style scoped></style>

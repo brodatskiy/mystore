@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from "vue";
-import MainLayout from "@/Layouts/MainLayout.vue";
+import ShopLayout from "@/Layouts/ShopLayout.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 // import { useProductStore } from "@/Store/useProductStore";
@@ -15,7 +15,7 @@ const props = defineProps(["product"]);
 <template>
   <Head title="Product" />
 
-  <MainLayout>
+  <ShopLayout>
     <v-sheet class="pa-2" rounded="xl">
       <v-container fluid>
         <v-row>
@@ -85,6 +85,6 @@ const props = defineProps(["product"]);
         }}</v-chip>
       </div>
     </v-sheet>
-  </MainLayout>
+  </ShopLayout>
 </template>
 <style scoped></style>

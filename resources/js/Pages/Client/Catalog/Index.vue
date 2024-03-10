@@ -2,7 +2,7 @@
 import { ref, onMounted, computed } from "vue";
 import { useDisplay } from "vuetify";
 
-import MainLayout from "@/Layouts/MainLayout.vue";
+import ShopLayout from "@/Layouts/ShopLayout.vue";
 import { Head, Link } from "@inertiajs/vue3";
 
 import ProductCard from "@/Components/ProductCard.vue";
@@ -26,7 +26,7 @@ const cols = computed(() => {
 <template>
   <Head title="Catalog" />
 
-  <MainLayout>
+  <ShopLayout>
     <v-container class="pa-0">
       <v-row>
         <v-col v-for="product in products" :key="product.id" :cols="cols">
@@ -34,5 +34,5 @@ const cols = computed(() => {
         </v-col>
       </v-row>
     </v-container>
-  </MainLayout>
+  </ShopLayout>
 </template>
