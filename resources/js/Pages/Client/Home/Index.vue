@@ -24,7 +24,7 @@ const cols = computed(() => {
 });
 </script>
 <template>
-  <Head title="Main" />
+  <Head title="Home" />
 
   <MainLayout>
     <v-container>
