@@ -1,18 +1,6 @@
-<script setup>
-import { computed } from "vue";
-import { Link } from "@inertiajs/vue3";
-
-const props = defineProps(["center"]);
-
-const classes = computed(() =>
-  props.center
-    ? "d-flex align-baseline justify-center"
-    : "d-flex align-baseline"
-);
-</script>
 <template>
-  <Link :href="route('/')" :class="classes">
-    <v-icon icon="mdi-store"></v-icon>
-    <p class="font-weight-bold text-h5">MyStore</p>
+  <Link :href="route('/')" class="flex items-center text-lg">
+    <Icon icon="mdi:store" width="1.5rem" height="1.5rem" />
+    <span>MyStore</span>
   </Link>
 </template>
