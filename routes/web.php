@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',  [HomeController::class, 'index'])->name('/');
+Route::get('/',  HomeController::class)->name('/');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::get('/wish', [WishController::class, 'index'])->name('wish');
 Route::singleton('catalog', CatalogController::class);
