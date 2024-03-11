@@ -28,8 +28,7 @@ const cols = computed(() => {
 
   <ShopLayout>
     <div>
-      {{ console.log(products) }}
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         <ProductCard
           v-for="product in products.data"
           :key="product.id"

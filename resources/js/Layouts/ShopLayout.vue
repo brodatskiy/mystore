@@ -97,7 +97,7 @@ let sidebarExpand = ref(false);
     </header>
 
     <main>
-      <div class="mx-auto mt-10 p-4 sm:p-6 lg:p-8">
+      <div class="mx-auto mt-14 p-4 sm:p-6 lg:p-8">
         <slot />
       </div>
     </main>
