@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import { Head, useForm, usePage } from "@inertiajs/vue3";
+import { useForm, usePage } from "@inertiajs/vue3";
 
 import ShopLayout from "@/Layouts/ShopLayout.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
