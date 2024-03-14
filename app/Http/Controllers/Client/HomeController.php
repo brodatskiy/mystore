@@ -15,7 +15,6 @@ class HomeController extends Controller
     public function __invoke(FilterRequest $request)
     {
         $data = $request->validated();
-
         $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($data)]);
         $products = Product::filter($filter)->paginate(8)->withQueryString();
         $products = ProductResource::collection($products);
