@@ -40,7 +40,7 @@ class ProfileController extends Controller
 
         $request->user()->update($data);
 
-        return to_route('profile.edit');
+        return back()->with('message', 'You have updated your profile.');
     }
 
     /**
