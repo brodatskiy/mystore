@@ -8,19 +8,19 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ProductFilter extends AbstractFilter
 {
-    public const TITLE = 'title';
+    public const SEARCH = 'search';
     public const CATEGORY_ID = 'category_id';
 
 
     protected function getCallbacks(): array
     {
         return [
-            self::TITLE => [$this, 'title'],
+            self::SEARCH => [$this, 'search'],
             self::CATEGORY_ID => [$this, 'categoryId'],
         ];
     }
 
-    public function title(Builder $builder, $value)
+    public function search(Builder $builder, $value)
     {
         $builder->where('title', 'like', "%{$value}%");
     }

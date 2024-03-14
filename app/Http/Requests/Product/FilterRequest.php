@@ -22,13 +22,13 @@ class FilterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'string',
+            'search' => 'string',
             'color' => 'string',
             'min_price' => 'integer',
             'max_price' => 'integer',
             'category_id' => 'integer|exists:categories,id',
-            'tags' => 'nullable|array',
-            'sizes.*.id' => 'integer',
+            'tags' => 'array',
+            'sizes' => 'array',
         ];
     }
 
