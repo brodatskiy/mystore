@@ -28,14 +28,21 @@ const cols = computed(() => {
 
   <ShopLayout>
     <div>
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        <ProductCard
-          v-for="product in products.data"
-          :key="product.id"
-          :product="product"
-        ></ProductCard>
-      </div>
+      <v-container class="pa-0 grid-container">
+        <v-row>
+          <v-col
+            v-for="(product, index) in products.data"
+            :key="product.id"
+            :cols="cols"
+            class="px-2"
+          >
+            <ProductCard :product="product"></ProductCard>
+          </v-col>
+        </v-row>
+      </v-container>
+    </div>
 
+    <div>
       <Pagination
         v-if="products.links.next || products.links.prev"
         :links="products.meta.links"

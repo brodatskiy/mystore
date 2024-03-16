@@ -1,130 +1,173 @@
 <script setup>
-import { ref } from "vue";
-
-import LinkButton from "@/Components/LinkButton.vue";
-import Dropdown from "@/Components/Dropdown.vue";
-import DropdownLink from "@/Components/DropdownLink.vue";
-import FlashErrorMessage from "@/Components/FlashErrorMessage.vue";
+import { ref, onMounted } from "vue";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
+import { Link } from "@inertiajs/vue3";
 
 // import { useCartStore } from "@/Store/useCartStore";
+// import { useProductStore } from "@/Store/useProductStore";
 
+// const productStore = useProductStore();
 // const cartStore = useCartStore();
-const showingNavigationDropdown = ref(false);
+
+// productStore.fetchProducts();
+
 let sidebarExpand = ref(false);
 </script>
 <template>
-  <div class="min-h-screen bg-gray-100">
-    <header
-      class="w-full sticky top-0 z-10 px-6 py-3 bg-white border-b border-black"
-    >
-      <div class="flex items-center justify-between">
-        <!-- Logo -->
-        <div class="font-bold">
-          <ApplicationLogo />
+  <v-app>
+    <v-app-bar color="surface" scroll-behavior="elevate">
+      <template v-slot:prepend>
+        <div
+          class="px-2 cursor-pointer"
+          @click.stop="sidebarExpand = !sidebarExpand"
+        >
+          <v-icon icon="mdi-menu" size="large" />
         </div>
-        <div class="flex items-center">
-          <!-- Icon Buttons  -->
-          <div class="flex items-center space-x-4">
-            <LinkButton :href="route('cart')">
-              <Icon icon="mdi:cart-outline" width="1.5rem" height="1.5rem" />
-            </LinkButton>
 
-            <LinkButton :href="route('cart')">
-              <Icon icon="mdi:heart-outline" width="1.5rem" height="1.5rem" />
-            </LinkButton>
+        <!-- <Link :href="route('chat.index')">
+          <div class="ml-2">Chat</div>
+        </Link> -->
+      </template>
+
+      <!-- Logo -->
+      <v-app-bar-title class="header__logo">
+        <ApplicationLogo />
+      </v-app-bar-title>
+
+      <template v-slot:append>
+        <div class="hidden sm:block px-2 text-gray-800 hover:text-red-300">
+          <Link :href="route('/')">
+            <button>
+              <v-icon icon="mdi-magnify" size="large" />
+            </button>
+          </Link>
+        </div>
+
+        <!-- Account Menu -->
+        <div>
+          <!-- Login/Register -->
+          <div v-if="!$page.props.auth.user">
+            <button class="px-2">
+              <v-icon icon="mdi-account" size="large" />
+              <v-menu activator="parent" open-on-hover offset="10">
+                <v-list>
+                  <v-list-item>
+                    <Link :href="route('login')" as="button">
+                      <v-list-item-title> Log in </v-list-item-title>
+                    </Link>
+                  </v-list-item>
+                  <v-list-item>
+                    <Link :href="route('register')" as="button">
+                      <v-list-item-title> Register </v-list-item-title>
+                    </Link>
+                  </v-list-item>
+                </v-list>
+              </v-menu>
+            </button>
           </div>
-          <!-- Auth -->
-          <div class="ml-3">
-            <div
-              v-if="!$page.props.auth.user"
-              class="flex items-center gap-x-2"
-            >
-              <LinkButton :href="route('login')" class="py-3" type="button">
-                <span>Log In</span>
-              </LinkButton>
-              <LinkButton
-                :href="route('register')"
-                class="py-3 bg-gray-200"
-                type="button"
-              >
-                <span>Sign in</span>
-              </LinkButton>
-            </div>
-            <div v-else>
-              <div class="sm:ml-1">
-                <!-- Settings Dropdown -->
-                <div class="ml-3 relative">
-                  <Dropdown align="right" width="48">
-                    <template #trigger>
-                      <button
-                        class="px-4 py-2 font-sans text-xs font-bold text-center bg-gray-100 text-gray-900 uppercase align-middle transition-all rounded-lg select-none disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none hover:bg-gray-900/20 active:bg-gray-900/30"
-                      >
-                        <Icon
-                          icon="mdi:person"
-                          width="1.5rem"
-                          height="1.5rem"
-                        />
-                      </button>
-                    </template>
+          <div v-else>
+            <button class="px-2">
+              <v-icon icon="mdi-account-check" size="large" />
+              <v-menu activator="parent" open-on-hover offset="10">
+                <v-list>
+                  <v-list-item v-if="$page.props.auth.user.role === 1">
+                    <Link :href="route('dashboard.index')" as="button">
+                      <v-list-item-title> Admin panel </v-list-item-title>
+                    </Link>
+                  </v-list-item>
+                  <v-list-item>
+                    <Link :href="route('profile.edit')" as="button">
+                      <v-list-item-title> Profile </v-list-item-title>
+                    </Link>
+                  </v-list-item>
+                  <v-list-item>
+                    <Link :href="route('messages.index')" as="button">
+                      <v-list-item-title> Chat </v-list-item-title>
+                    </Link>
+                  </v-list-item>
 
-                    <template #content>
-                      <DropdownLink
-                        v-if="$page.props.auth.user.role === 1"
-                        :href="route('dashboard.index')"
-                      >
-                        Admin panel
-                      </DropdownLink>
-                      <DropdownLink :href="route('profile.edit')">
-                        Profile
-                      </DropdownLink>
-                      <DropdownLink
-                        :href="route('logout')"
-                        method="post"
-                        as="button"
-                      >
-                        Log Out
-                      </DropdownLink>
-                    </template>
-                  </Dropdown>
-                </div>
-              </div>
-            </div>
+                  <v-divider></v-divider>
+
+                  <v-list-item>
+                    <Link :href="route('logout')" method="post" as="button">
+                      <v-list-item-title> Log out </v-list-item-title>
+                    </Link>
+                  </v-list-item>
+                </v-list>
+              </v-menu>
+            </button>
           </div>
         </div>
-      </div>
-    </header>
+
+        <div class="px-2">
+          <Link :href="route('cart')">
+            <button>
+              <v-icon icon="mdi-heart" />
+            </button>
+          </Link>
+        </div>
+
+        <div class="px-2">
+          <Link :href="route('cart')">
+            <v-badge :content="11">
+              <button>
+                <v-icon icon="mdi-shopping" />
+              </button>
+            </v-badge>
+          </Link>
+        </div>
+      </template>
+    </v-app-bar>
 
     <Transition name="slide-fade">
       <FlashErrorMessage v-if="$page.props.flash.message"></FlashErrorMessage>
     </Transition>
 
-    <main>
-      <div class="mx-auto mt-2 p-4 sm:p-6 lg:p-8">
-        <slot />
+    <!-- NavDrawer -->
+    <v-sheet
+      v-if="sidebarExpand"
+      class="navbar h-100 w-50"
+      position="absolute"
+      color="white"
+      :width="200"
+    >
+      <div
+        class="p-2 cursor-pointer"
+        @click.stop="sidebarExpand = !sidebarExpand"
+      >
+        <v-icon v-if="sidebarExpand" icon="mdi-chevron-left" size="large" />
+        <span>BACK</span>
       </div>
-    </main>
+      <v-list class="flex justify-around">
+        <v-list-item>
+          <Link
+            class="p-2 border-b-2"
+            :href="route('/')"
+            :active="route().current('/')"
+          >
+            Man
+          </Link>
+        </v-list-item>
+        <v-list-item>
+          <Link :href="route('/')" :active="route().current('/cart')">
+            Woman
+          </Link>
+        </v-list-item>
+      </v-list></v-sheet
+    >
 
-    <footer class="w-full sticky top-[100vh] px-6 py-3 bg-white">
-      <div class="flex justify-end items-center">
+    <v-main>
+      <v-container fluid class="h-100">
+        <slot />
+      </v-container>
+    </v-main>
+
+    <v-footer height="32" class="d-flex items-center">
+      <div class="px-4 py-2 text-end w-100">
         {{ new Date().getFullYear() }} — <strong>MyStore</strong>
       </div>
-    </footer>
-  </div>
+    </v-footer>
+  </v-app>
 </template>
 
-<style>
-.slide-fade-enter-active {
-  transition: all 0.3s ease-out;
-}
-
-.slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateX(20px);
-  opacity: 0;
-}
-</style>
+<style scoped></style>
