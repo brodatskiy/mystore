@@ -15,7 +15,7 @@ import { Link } from "@inertiajs/vue3";
         min-width="400"
         max-width="700"
       >
-        <div class="w-75 mt-5">
+        <div class="w-100 px-5 py-3">
           <slot />
         </div>
       </v-card>
