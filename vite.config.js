@@ -22,9 +22,6 @@ export default defineConfig({
       },
     }),
     svgLoader(),
-    vuetify({
-      autoImport: true,
-    }),
   ],
   resolve: {
     alias: {

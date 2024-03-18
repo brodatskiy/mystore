@@ -1,48 +1,25 @@
 <script setup>
 import { computed } from "vue";
-import { useDisplay } from "vuetify";
-
 import ShopLayout from "@/Layouts/ShopLayout.vue";
 
 import ProductCard from "@/Components/ProductCard.vue";
 import Pagination from "@/Components/Pagination.vue";
 
 const props = defineProps(["products"]);
-const { name } = useDisplay();
-
-const cols = computed(() => {
-  switch (name.value) {
-    case "md":
-      return 4;
-    case "lg":
-      return 3;
-    default:
-      return 6;
-  }
-
-  return undefined;
-});
 </script>
 <template>
   <Head title="Home" />
 
   <ShopLayout>
     <div>
-      <v-container class="pa-0 grid-container">
-        <v-row>
-          <v-col
-            v-for="(product, index) in products.data"
-            :key="product.id"
-            :cols="cols"
-            class="px-2"
-          >
-            <ProductCard :product="product"></ProductCard>
-          </v-col>
-        </v-row>
-      </v-container>
-    </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <ProductCard
+          v-for="product in products.data"
+          :key="product.id"
+          :product="product"
+        ></ProductCard>
+      </div>
 
-    <div>
       <Pagination
         v-if="products.links.next || products.links.prev"
         :links="products.meta.links"
