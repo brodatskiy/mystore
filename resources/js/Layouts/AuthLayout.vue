@@ -4,23 +4,21 @@ import { Link } from "@inertiajs/vue3";
 </script>
 
 <template>
-  <v-app>
-    <v-sheet color="background" class="d-flex flex-column align-center ma-auto">
-      <ApplicationLogo />
-
-      <v-card
-        class="d-flex flex-column align-center pa-5 ma-5"
-        color="surface"
-        rounded="xl"
-        min-width="400"
-        max-width="700"
-      >
-        <div class="w-100 px-5 py-3">
-          <slot />
+    <div
+        class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100"
+    >
+        <div>
+            <Link href="/">
+                <ApplicationLogo class="fill-current text-gray-500" />
+            </Link>
         </div>
-      </v-card>
-    </v-sheet>
-  </v-app>
+
+        <div
+            class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg"
+        >
+            <slot />
+        </div>
+    </div>
 </template>
 
 <style></style>
