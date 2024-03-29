@@ -8,6 +8,7 @@ import { ZiggyVue } from "../../vendor/tightenco/ziggy";
 import { Icon } from "@iconify/vue";
 
 // Plugins
+
 import { registerPlugins } from "@/plugins";
 
 const appName = import.meta.env.VITE_APP_NAME || "MyStore";
