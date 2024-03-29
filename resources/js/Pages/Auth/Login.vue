@@ -1,90 +1,114 @@
 <script setup>
 import { ref } from "vue";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
-import { Head, Link, useForm } from "@inertiajs/vue3";
+import { useForm } from "@inertiajs/vue3";
+import { useToast } from "primevue/usetoast";
+
+import Btn from "@/Components/Btn.vue";
+import Toast from "primevue/toast";
+import IconField from "primevue/iconfield";
+import InputIcon from "primevue/inputicon";
+import InputError from "@/Components/InputError.vue";
 
 const props = defineProps({
-  canResetPassword: {
-    type: Boolean,
-  },
-  status: {
-    type: String,
-  },
+    canResetPassword: {
+        type: Boolean,
+    },
+    status: {
+        type: String,
+    },
 });
 
 const form = useForm({
-  email: "",
-  password: "",
-  remember: false,
+    email: "",
+    password: "",
+    remember: false,
 });
 
-const snackbar = ref(props.status);
-const showPassword = ref(false);
+const toast = useToast();
+const visible = ref(false);
 
 const submit = () => {
-  form.post(route("login"), {
-    onFinish: () => form.reset("password"),
-  });
+    form.post(route("login"), {
+        onFinish: () => form.reset("password"),
+    });
 };
 </script>
 
 <template>
-  <AuthLayout>
-    <Head title="Log in" />
+    <AuthLayout>
+        <Head title="Log in" />
 
-    <v-form @submit.prevent="submit">
-      <v-text-field
-        v-model="form.email"
-        type="email"
-        class="mb-2"
-        density="compact"
-        label="Email"
-        prepend-inner-icon="mdi-email-outline"
-        :error="form.errors.email ? true : false"
-        :error-messages="form.errors.email"
-      ></v-text-field>
+        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
+            {{ status }}
+        </div>
 
-      <v-text-field
-        v-model="form.password"
-        :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
-        :type="showPassword ? 'text' : 'password'"
-        density="compact"
-        placeholder="Enter your password"
-        prepend-inner-icon="mdi-lock-outline"
-        label="Password"
-        :error="form.errors.password ? true : false"
-        :error-messages="form.errors.password"
-        @click:append-inner="showPassword = !showPassword"
-      ></v-text-field>
+        <form @submit.prevent="submit">
+            <div class="flex flex-col gap-3">
+                <div>
+                    <IconField iconPosition="left">
+                        <InputIcon>
+                            <Icon
+                                icon="mdi:email"
+                                width="1.5rem"
+                                height="1.5rem"
+                                class="-mt-1"
+                            ></Icon>
+                        </InputIcon>
 
-      <v-checkbox
-        v-model="form.remember"
-        density="compact"
-        label="Remember me"
-        name="remember"
-      ></v-checkbox>
+                        <InputText
+                            v-model="form.email"
+                            id="email"
+                            type="email"
+                            placeholder="Email"
+                            class="peer pl-10 w-full"
+                            :invalid="form.errors.email"
+                        />
+                    </IconField>
+                    <InputError class="mt-1" :message="form.errors.email" />
+                </div>
+                <div>
+                    <IconField iconPosition="left">
+                        <InputIcon>
+                            <Icon
+                                icon="mdi:password"
+                                width="1.5rem"
+                                height="1.5rem"
+                                class="-mt-1"
+                            ></Icon>
+                        </InputIcon>
+                        <InputText
+                            v-model="form.password"
+                            type="password"
+                            placeholder="Password"
+                            class="pl-10 w-full"
+                            :invalid="form.errors.password"
+                        />
+                    </IconField>
+                    <InputError class="mt-1" :message="form.errors.password" />
+                </div>
+                <div class="flex items-center">
+                    <Checkbox
+                        v-model="form.remember"
+                        inputId="remember"
+                        :binary="true"
+                        value="Cheese"
+                    />
+                    <label for="remember" class="ml-2"> Remember me</label>
+                </div>
+                <Btn type="submit" class="w-full">Log In</Btn>
+                <Link v-if="canResetPassword" :href="route('password.request')">
+                    <p class="text-blue-600 hover:text-blue-900">
+                        Forgot your password?
+                    </p>
+                </Link>
+            </div>
+        </form>
 
-      <v-btn
-        block
-        type="submit"
-        :class="{ 'opacity-25': form.processing }"
-        :disabled="form.processing"
-        color="primary"
-        size="large"
-        variant="flat"
-      >
-        Log In
-      </v-btn>
-
-      <Link v-if="canResetPassword" :href="route('password.request')">
-        <p class="text-indigo-darken-2">Forgot your password?</p>
-      </Link>
-    </v-form>
-
-    <v-snackbar v-model="snackbar" rounded="xl">
-      <p class="text-center">{{ status }}</p>
-    </v-snackbar>
-  </AuthLayout>
+        <Toast position="bottom-center">
+            <span>{{ status }}</span>
+        </Toast>
+    </AuthLayout>
 </template>
 
 <style scoped></style>
