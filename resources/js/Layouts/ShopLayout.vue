@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 
-import LinkButton from "@/Components/LinkButton.vue";
+import LinkBtn from "@/Components/LinkBtn.vue";
 import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
 import FlashErrorMessage from "@/Components/FlashErrorMessage.vue";
@@ -26,21 +26,21 @@ let sidebarExpand = ref(false);
                 <div class="flex items-center">
                     <!-- Icon Buttons  -->
                     <div class="flex items-center space-x-4">
-                        <LinkButton :href="route('cart')">
+                        <LinkBtn :href="route('cart')">
                             <Icon
                                 icon="mdi:cart-outline"
                                 width="1.5rem"
                                 height="1.5rem"
                             />
-                        </LinkButton>
+                        </LinkBtn>
 
-                        <LinkButton :href="route('cart')">
+                        <LinkBtn :href="route('cart')">
                             <Icon
                                 icon="mdi:heart-outline"
                                 width="1.5rem"
                                 height="1.5rem"
                             />
-                        </LinkButton>
+                        </LinkBtn>
                     </div>
                     <!-- Auth -->
                     <div class="ml-3">
@@ -48,25 +48,25 @@ let sidebarExpand = ref(false);
                             v-if="!$page.props.auth.user"
                             class="flex items-center gap-x-2"
                         >
-                            <LinkButton
+                            <LinkBtn
                                 :href="route('login')"
                                 class="py-3"
                                 type="button"
                             >
                                 <span>Log In</span>
-                            </LinkButton>
-                            <LinkButton
+                            </LinkBtn>
+                            <LinkBtn
                                 :href="route('register')"
                                 class="py-3 bg-gray-200"
                                 type="button"
                             >
                                 <span>Sign in</span>
-                            </LinkButton>
+                            </LinkBtn>
                         </div>
                         <div v-else>
                             <div class="sm:ml-1">
                                 <!-- Settings Dropdown -->
-                                <div class="ml-3 relative">
+                                <div class="relative">
                                     <Dropdown align="right" width="48">
                                         <template #trigger>
                                             <button
