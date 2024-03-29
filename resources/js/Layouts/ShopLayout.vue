@@ -7,8 +7,6 @@ import DropdownLink from "@/Components/DropdownLink.vue";
 import FlashErrorMessage from "@/Components/FlashErrorMessage.vue";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 
-import Button from "primevue/button";
-
 // import { useCartStore } from "@/Store/useCartStore";
 
 // const cartStore = useCartStore();
