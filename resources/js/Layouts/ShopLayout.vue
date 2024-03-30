@@ -4,7 +4,7 @@ import { ref } from "vue";
 import LinkBtn from "@/Components/LinkBtn.vue";
 import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
-import FlashErrorMessage from "@/Components/FlashErrorMessage.vue";
+import FlashMessage from "@/Components/FlashMessage.vue";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 
 // import { useCartStore } from "@/Store/useCartStore";
@@ -25,7 +25,7 @@ let sidebarExpand = ref(false);
                 </div>
                 <div class="flex items-center">
                     <!-- Icon Buttons  -->
-                    <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-4 ml-4">
                         <LinkBtn :href="route('cart')">
                             <Icon
                                 icon="mdi:cart-outline"
@@ -113,13 +113,11 @@ let sidebarExpand = ref(false);
         </header>
 
         <Transition name="slide-fade">
-            <FlashErrorMessage
-                v-if="$page.props.flash.message"
-            ></FlashErrorMessage>
+            <FlashMessage v-if="$page.props.flash.message"></FlashMessage>
         </Transition>
 
         <main>
-            <div class="mx-auto mt-2 p-4 sm:p-6 lg:p-8">
+            <div class="mx-auto mt-2 p-4 sm:p-6 lg:p-8 min-w-[500px]">
                 <slot />
             </div>
         </main>

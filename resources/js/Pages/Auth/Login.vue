@@ -38,7 +38,6 @@ const submit = () => {
 <template>
     <AuthLayout>
         <Head title="Log in" />
-
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
             {{ status }}
         </div>
@@ -61,8 +60,7 @@ const submit = () => {
                             id="email"
                             type="email"
                             placeholder="Email"
-                            class="peer pl-10 w-full"
-                            :invalid="form.errors.email"
+                            class="pl-10 w-full"
                         />
                     </IconField>
                     <InputError class="mt-1" :message="form.errors.email" />
@@ -82,7 +80,6 @@ const submit = () => {
                             type="password"
                             placeholder="Password"
                             class="pl-10 w-full"
-                            :invalid="form.errors.password"
                         />
                     </IconField>
                     <InputError class="mt-1" :message="form.errors.password" />
@@ -96,7 +93,11 @@ const submit = () => {
                     />
                     <label for="remember" class="ml-2"> Remember me</label>
                 </div>
-                <Btn type="submit" class="w-full">Log In</Btn>
+                <Btn
+                    type="submit"
+                    class="w-full bg-primary-400 hover:bg-primary-500"
+                    >Log In</Btn
+                >
                 <Link v-if="canResetPassword" :href="route('password.request')">
                     <p class="text-blue-600 hover:text-blue-900">
                         Forgot your password?
