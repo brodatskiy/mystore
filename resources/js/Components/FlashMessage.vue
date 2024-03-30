@@ -5,21 +5,14 @@ import { usePage } from "@inertiajs/vue3";
 const flashMessage = ref(usePage().props.flash.message);
 
 onMounted(() => {
-  setTimeout(() => {
-    usePage().props.flash.message = "";
-  }, 3222000);
+    setTimeout(() => {
+        usePage().props.flash.message = "";
+    }, 3000);
 });
 </script>
 
 <template>
-  <v-snackbar
-    v-model="flashMessage"
-    position="absolute"
-    offset=" 100"
-    timeout="4222000"
-  >
-    {{ flashMessage }}
-  </v-snackbar>
+    <Message>{{ flashMessage }}</Message>
 </template>
 
 <style></style>
