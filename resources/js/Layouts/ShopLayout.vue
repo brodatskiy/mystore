@@ -117,7 +117,7 @@ let sidebarExpand = ref(false);
         </Transition>
 
         <main>
-            <div class="mx-auto mt-2 p-4 sm:p-6 lg:p-8 min-w-[500px]">
+            <div class="mx-auto mt-2 p-2 sm:p-4 lg:p-6 min-w-[500px]">
                 <slot />
             </div>
         </main>
