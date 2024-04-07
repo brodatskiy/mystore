@@ -7,23 +7,11 @@ use Illuminate\Support\Facades\Storage;
 
 class RefreshCommand extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
+
     protected $signature = 'my-store:refresh';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Refresh';
 
-    /**
-     * Execute the console command.
-     */
     public function handle()
     {
         if (app()->isProduction()) {
