@@ -96,8 +96,8 @@ const submit = () => {
                 <Btn
                     type="submit"
                     class="w-full bg-primary-400 hover:bg-primary-500"
-                    >Log In</Btn
-                >
+                    >Log In
+                </Btn>
                 <Link v-if="canResetPassword" :href="route('password.request')">
                     <p class="text-blue-600 hover:text-blue-900">
                         Forgot your password?
