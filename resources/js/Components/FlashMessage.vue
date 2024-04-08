@@ -12,7 +12,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <Message>{{ flashMessage }}</Message>
+    <Message class="absolute">{{ flashMessage }}</Message>
 </template>
 
 <style></style>
