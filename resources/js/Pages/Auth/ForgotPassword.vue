@@ -2,6 +2,13 @@
 import { ref } from "vue";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
 import { useForm } from "@inertiajs/vue3";
+import { useToast } from "primevue/usetoast";
+
+import Btn from "@/Components/Btn.vue";
+import Toast from "primevue/toast";
+import IconField from "primevue/iconfield";
+import InputIcon from "primevue/inputicon";
+import InputError from "@/Components/InputError.vue";
 
 const props = defineProps({
     status: {
@@ -30,32 +37,43 @@ const submit = () => {
             you to choose a new one.
         </div>
 
-        <v-form @submit.prevent="submit">
-            <v-text-field
-                type="email"
-                v-model="form.email"
-                density="compact"
-                variant="underlined"
-                label="Email"
-                prepend-inner-icon="mdi-email-outline"
-                :error="form.errors.email ? true : false"
-                :error-messages="form.errors.email"
-            ></v-text-field>
+        <form @submit.prevent="submit">
+            <div class="flex flex-col gap-3">
+                <div>
+                    <IconField iconPosition="left">
+                        <InputIcon>
+                            <Icon
+                                icon="mdi:email"
+                                width="1.5rem"
+                                height="1.5rem"
+                                class="-mt-1"
+                            ></Icon>
+                        </InputIcon>
 
-            <v-btn
-                block
-                type="submit"
-                :class="{ 'opacity-25': form.processing }"
-                :disabled="form.processing"
-                color="primary"
-                size="large"
-                variant="flat"
-            >
-                Log In
-            </v-btn>
-        </v-form>
-        <v-snackbar v-model="snackbar" rounded="xl">
-            <p class="text-center">{{ status }}</p>
-        </v-snackbar>
+                        <InputText
+                            v-model="form.email"
+                            id="email"
+                            type="email"
+                            placeholder="Email"
+                            class="pl-10 w-full"
+                        />
+                    </IconField>
+                    <InputError class="mt-1" :message="form.errors.email" />
+                </div>
+
+                <Btn
+                    block
+                    type="submit"
+                    class="w-full bg-primary-400 hover:bg-primary-500"
+                    :class="{ 'opacity-25': form.processing }"
+                    :disabled="form.processing"
+                >
+                    Send
+                </Btn>
+            </div>
+        </form>
+        <Toast position="bottom-center">
+            <span>{{ status }}</span>
+        </Toast>
     </AuthLayout>
 </template>

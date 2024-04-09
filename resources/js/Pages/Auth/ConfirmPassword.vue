@@ -2,6 +2,11 @@
 import AuthLayout from "@/Layouts/AuthLayout.vue";
 import { useForm } from "@inertiajs/vue3";
 
+import Btn from "@/Components/Btn.vue";
+import IconField from "primevue/iconfield";
+import InputIcon from "primevue/inputicon";
+import InputError from "@/Components/InputError.vue";
+
 const form = useForm({
     password: "",
 });
@@ -22,32 +27,36 @@ const submit = () => {
             password before continuing.
         </div>
 
-        <v-form @submit.prevent="submit">
-            <v-text-field
-                v-model="form.password"
-                :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
-                :type="showPassword ? 'text' : 'password'"
-                density="compact"
-                placeholder="Enter your password"
-                prepend-inner-icon="mdi-lock-outline"
-                variant="underlined"
-                label="Password"
-                :error="form.errors.password ? true : false"
-                :error-messages="form.errors.password"
-                @click:append-inner="showPassword = !showPassword"
-            ></v-text-field>
+        <form @submit.prevent="submit">
+            <div>
+                <IconField iconPosition="left">
+                    <InputIcon>
+                        <Icon
+                            icon="mdi:password"
+                            width="1.5rem"
+                            height="1.5rem"
+                            class="-mt-1"
+                        ></Icon>
+                    </InputIcon>
+                    <InputText
+                        v-model="form.password"
+                        type="password"
+                        placeholder="Password"
+                        class="pl-10 w-full"
+                    />
+                </IconField>
+                <InputError class="mt-1" :message="form.errors.password" />
+            </div>
 
-            <v-btn
+            <Btn
                 block
                 type="submit"
+                class="w-full bg-primary-400 hover:bg-primary-500"
                 :class="{ 'opacity-25': form.processing }"
                 :disabled="form.processing"
-                color="primary"
-                size="large"
-                variant="flat"
             >
                 Confirm
-            </v-btn>
-        </v-form>
+            </Btn>
+        </form>
     </AuthLayout>
 </template>

@@ -1,7 +1,11 @@
 <script setup>
 import AuthLayout from "@/Layouts/AuthLayout.vue";
+import { useForm } from "@inertiajs/vue3";
 
-import { Head, useForm } from "@inertiajs/vue3";
+import Btn from "@/Components/Btn.vue";
+import IconField from "primevue/iconfield";
+import InputIcon from "primevue/inputicon";
+import InputError from "@/Components/InputError.vue";
 
 const props = defineProps({
     email: {
@@ -32,59 +36,80 @@ const submit = () => {
     <AuthLayout>
         <Head title="Reset Password" />
 
-        <v-form @submit.prevent="submit">
-            <v-text-field
-                v-model="form.email"
-                class="mb-2"
-                type="email"
-                density="compact"
-                variant="underlined"
-                label="Email"
-                prepend-inner-icon="mdi-email-outline"
-                :error="form.errors.email ? true : false"
-                :error-messages="form.errors.email"
-            ></v-text-field>
+        <form @submit.prevent="submit">
+            <div class="flex flex-col gap-3">
+                <div>
+                    <IconField iconPosition="left">
+                        <InputIcon>
+                            <Icon
+                                icon="mdi:email"
+                                width="1.5rem"
+                                height="1.5rem"
+                                class="-mt-1"
+                            ></Icon>
+                        </InputIcon>
 
-            <v-text-field
-                v-model="form.password"
-                class="mb-2"
-                :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
-                :type="showPassword ? 'text' : 'password'"
-                density="compact"
-                placeholder="Enter your password"
-                prepend-inner-icon="mdi-lock-outline"
-                variant="underlined"
-                label="Password"
-                :error="form.errors.password ? true : false"
-                :error-messages="form.errors.password"
-                @click:append-inner="showPassword = !showPassword"
-            ></v-text-field>
+                        <InputText
+                            v-model="form.email"
+                            id="email"
+                            type="email"
+                            placeholder="Email"
+                            class="pl-10 w-full"
+                        />
+                    </IconField>
+                    <InputError class="mt-1" :message="form.errors.email" />
+                </div>
 
-            <v-text-field
-                v-model="form.password_confirmation"
-                :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
-                :type="showPassword ? 'text' : 'password'"
-                density="compact"
-                placeholder="Enter your password"
-                prepend-inner-icon="mdi-lock-outline"
-                variant="underlined"
-                label="Password confirmation"
-                :error="form.errors.password ? true : false"
-                :error-messages="form.errors.password"
-                @click:append-inner="showPassword = !showPassword"
-            ></v-text-field>
+                <div>
+                    <IconField iconPosition="left">
+                        <InputIcon>
+                            <Icon
+                                icon="mdi:password"
+                                width="1.5rem"
+                                height="1.5rem"
+                                class="-mt-1"
+                            ></Icon>
+                        </InputIcon>
+                        <InputText
+                            v-model="form.password"
+                            type="password"
+                            placeholder="Password"
+                            class="pl-10 w-full"
+                        />
+                    </IconField>
+                    <InputError class="mt-1" :message="form.errors.password" />
+                </div>
 
-            <v-btn
-                block
-                type="submit"
-                :class="{ 'opacity-25': form.processing }"
-                :disabled="form.processing"
-                color="primary"
-                size="large"
-                variant="flat"
-            >
-                Reset Password
-            </v-btn>
-        </v-form>
+                <div>
+                    <IconField iconPosition="left">
+                        <InputIcon>
+                            <Icon
+                                icon="mdi:lock-outline"
+                                width="1.5rem"
+                                height="1.5rem"
+                                class="-mt-1"
+                            ></Icon>
+                        </InputIcon>
+                        <InputText
+                            v-model="form.password_confirmation"
+                            type="password"
+                            placeholder="Password"
+                            class="pl-10 w-full"
+                        />
+                    </IconField>
+                    <InputError class="mt-1" :message="form.errors.password" />
+                </div>
+
+                <Btn
+                    block
+                    type="submit"
+                    class="w-full bg-primary-400 hover:bg-primary-500"
+                    :class="{ 'opacity-25': form.processing }"
+                    :disabled="form.processing"
+                >
+                    Reset password
+                </Btn>
+            </div>
+        </form>
     </AuthLayout>
 </template>

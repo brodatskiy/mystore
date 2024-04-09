@@ -38,6 +38,7 @@ const submit = () => {
 <template>
     <AuthLayout>
         <Head title="Log in" />
+
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
             {{ status }}
         </div>
@@ -93,10 +94,15 @@ const submit = () => {
                     />
                     <label for="remember" class="ml-2"> Remember me</label>
                 </div>
+
                 <Btn
+                    block
                     type="submit"
                     class="w-full bg-primary-400 hover:bg-primary-500"
-                    >Log In
+                    :class="{ 'opacity-25': form.processing }"
+                    :disabled="form.processing"
+                >
+                    Log In
                 </Btn>
                 <Link v-if="canResetPassword" :href="route('password.request')">
                     <p class="text-blue-600 hover:text-blue-900">
@@ -105,10 +111,6 @@ const submit = () => {
                 </Link>
             </div>
         </form>
-
-        <Toast position="bottom-center">
-            <span>{{ status }}</span>
-        </Toast>
     </AuthLayout>
 </template>
 
