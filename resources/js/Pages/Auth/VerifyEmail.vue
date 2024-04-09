@@ -4,6 +4,7 @@ import AuthLayout from "@/Layouts/AuthLayout.vue";
 import { useForm } from "@inertiajs/vue3";
 
 import Btn from "@/Components/Btn.vue";
+import PrimaryBtn from "@/Components/Buttons/PrimaryBtn.vue";
 
 const props = defineProps({
     status: {
@@ -42,15 +43,14 @@ const verificationLinkSent = computed(
 
         <form @submit.prevent="submit">
             <div class="mt-4 flex items-center justify-between">
-                <Btn
+                <PrimaryBtn
                     block
                     type="submit"
-                    class="w-full bg-primary-400 hover:bg-primary-500"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
                     Log In
-                </Btn>
+                </PrimaryBtn>
 
                 <Link
                     :href="route('logout')"

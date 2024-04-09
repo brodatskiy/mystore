@@ -2,21 +2,18 @@
 import { ref } from "vue";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
 import { useForm } from "@inertiajs/vue3";
-import { useToast } from "primevue/usetoast";
 
-import Btn from "@/Components/Btn.vue";
 import Toast from "primevue/toast";
 import IconField from "primevue/iconfield";
 import InputIcon from "primevue/inputicon";
 import InputError from "@/Components/InputError.vue";
+import PrimaryBtn from "@/Components/Buttons/PrimaryBtn.vue";
 
 const props = defineProps({
     status: {
         type: String,
     },
 });
-
-const snackbar = ref(props.status);
 
 const form = useForm({
     email: "",
@@ -35,6 +32,10 @@ const submit = () => {
             Forgot your password? No problem. Just let us know your email
             address and we will email you a password reset link that will allow
             you to choose a new one.
+        </div>
+
+        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
+            {{ status }}
         </div>
 
         <form @submit.prevent="submit">
@@ -61,19 +62,15 @@ const submit = () => {
                     <InputError class="mt-1" :message="form.errors.email" />
                 </div>
 
-                <Btn
+                <PrimaryBtn
                     block
                     type="submit"
-                    class="w-full bg-primary-400 hover:bg-primary-500"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
                     Send
-                </Btn>
+                </PrimaryBtn>
             </div>
         </form>
-        <Toast position="bottom-center">
-            <span>{{ status }}</span>
-        </Toast>
     </AuthLayout>
 </template>

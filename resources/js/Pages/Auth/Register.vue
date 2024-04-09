@@ -7,6 +7,7 @@ import Btn from "@/Components/Btn.vue";
 import IconField from "primevue/iconfield";
 import InputIcon from "primevue/inputicon";
 import InputError from "@/Components/InputError.vue";
+import PrimaryBtn from "@/Components/Buttons/PrimaryBtn.vue";
 
 const form = useForm({
     name: "",
@@ -113,15 +114,14 @@ const submit = () => {
                     <InputError class="mt-1" :message="form.errors.password" />
                 </div>
 
-                <Btn
+                <PrimaryBtn
                     block
                     type="submit"
-                    class="w-full bg-primary-400 hover:bg-primary-500"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
                     Register
-                </Btn>
+                </PrimaryBtn>
 
                 <Link :href="route('login')">
                     <p class="text-blue-600 hover:text-blue-900">

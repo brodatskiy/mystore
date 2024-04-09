@@ -2,10 +2,10 @@
 import AuthLayout from "@/Layouts/AuthLayout.vue";
 import { useForm } from "@inertiajs/vue3";
 
-import Btn from "@/Components/Btn.vue";
 import IconField from "primevue/iconfield";
 import InputIcon from "primevue/inputicon";
 import InputError from "@/Components/InputError.vue";
+import PrimaryBtn from "@/Components/Buttons/PrimaryBtn.vue";
 
 const props = defineProps({
     email: {
@@ -100,15 +100,14 @@ const submit = () => {
                     <InputError class="mt-1" :message="form.errors.password" />
                 </div>
 
-                <Btn
+                <PrimaryBtn
                     block
                     type="submit"
-                    class="w-full bg-primary-400 hover:bg-primary-500"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
                     Reset password
-                </Btn>
+                </PrimaryBtn>
             </div>
         </form>
     </AuthLayout>

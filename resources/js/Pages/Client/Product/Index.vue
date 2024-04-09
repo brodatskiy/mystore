@@ -1,7 +1,6 @@
 <script setup>
-import { computed } from "vue";
-
 import ShopLayout from "@/Layouts/ShopLayout.vue";
+import PrimaryBtn from "@/Components/Buttons/PrimaryBtn.vue";
 
 // import { useCartStore } from "@/Store/useCartStore";
 
@@ -55,9 +54,9 @@ const props = defineProps(["product"]);
                     <div class="flex mb-2 overflow-hidden">
                         <div v-for="size in product.sizes">
                             <div v-if="size.count > 0" class="mr-1">
-                                <Button>
+                                <PrimaryBtn>
                                     {{ size.title }}
-                                </Button>
+                                </PrimaryBtn>
                             </div>
                         </div>
                     </div>
@@ -65,12 +64,12 @@ const props = defineProps(["product"]);
                         {{ product.description }}
                     </div>
 
-                    <Button
+                    <PrimaryBtn
                         class="mt-auto"
                         @click.stop="cartStore.add(product)"
                     >
                         Add to cart
-                    </Button>
+                    </PrimaryBtn>
                 </div>
             </div>
             <div class="mt-4">
