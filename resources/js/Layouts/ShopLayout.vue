@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 
-import LinkBtn from "@/Components/LinkBtn.vue";
+import LinkBtn from "@/Components/Buttons/LinkBtn.vue";
 import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
 import FlashMessage from "@/Components/FlashMessage.vue";

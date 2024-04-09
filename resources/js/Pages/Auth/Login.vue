@@ -2,13 +2,11 @@
 import { ref } from "vue";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
 import { useForm } from "@inertiajs/vue3";
-import { useToast } from "primevue/usetoast";
 
-import Btn from "@/Components/Btn.vue";
-import Toast from "primevue/toast";
 import IconField from "primevue/iconfield";
 import InputIcon from "primevue/inputicon";
 import InputError from "@/Components/InputError.vue";
+import PrimaryBtn from "@/Components/Buttons/PrimaryBtn.vue";
 
 const props = defineProps({
     canResetPassword: {
@@ -25,7 +23,6 @@ const form = useForm({
     remember: false,
 });
 
-const toast = useToast();
 const visible = ref(false);
 
 const submit = () => {
@@ -95,15 +92,14 @@ const submit = () => {
                     <label for="remember" class="ml-2"> Remember me</label>
                 </div>
 
-                <Btn
+                <PrimaryBtn
                     block
                     type="submit"
-                    class="w-full bg-primary-400 hover:bg-primary-500"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
                     Log In
-                </Btn>
+                </PrimaryBtn>
                 <Link v-if="canResetPassword" :href="route('password.request')">
                     <p class="text-blue-600 hover:text-blue-900">
                         Forgot your password?
