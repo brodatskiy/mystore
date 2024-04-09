@@ -7,6 +7,7 @@ use App\Http\Filters\ProductFilter;
 use App\Http\Requests\Product\FilterRequest;
 use App\Http\Resources\Product\ProductResource;
 use App\Models\Product;
+use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 
 
@@ -18,6 +19,7 @@ class HomeController extends Controller
         $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($data)]);
         $products = Product::filter($filter)->paginate(8)->withQueryString();
         $products = ProductResource::collection($products);
+
         return Inertia::render('Client/Home/Index', [
             'products' => $products,
         ]);
