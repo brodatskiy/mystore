@@ -116,6 +116,13 @@ let sidebarExpand = ref(false);
             <FlashMessage v-if="$page.props.flash.message"></FlashMessage>
         </Transition>
 
+        <!-- Page Heading -->
+        <header class="bg-white shadow" v-if="$slots.header">
+            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <slot name="header" />
+            </div>
+        </header>
+
         <main>
             <div class="mx-auto mt-2 p-2 sm:p-4 lg:p-6 min-w-[500px]">
                 <slot />
