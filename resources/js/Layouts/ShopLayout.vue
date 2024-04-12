@@ -16,7 +16,7 @@ let sidebarExpand = ref(false);
 <template>
     <div class="min-h-screen bg-gray-100">
         <header
-            class="w-full sticky top-0 z-10 px-6 py-3 bg-white border-b border-black"
+            class="w-full sticky top-0 z-20 px-6 py-3 bg-white border-b border-black"
         >
             <div class="flex items-center justify-between">
                 <!-- Logo -->
