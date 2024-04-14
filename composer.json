@@ -13,7 +13,7 @@
         "inertiajs/inertia-laravel": "^0.6.8",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
-        "laravel/telescope": "^4.16",
+        "laravel/telescope": "^5.0",
         "laravel/tinker": "^2.8",
         "pusher/pusher-php-server": "^7.2",
         "sentry/sentry-laravel": "^4.2",
@@ -60,7 +60,9 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "laravel/telescope"
+            ]
         }
     },
     "config": {
