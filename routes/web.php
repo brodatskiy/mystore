@@ -34,16 +34,16 @@ Route::get('/wish', [WishController::class, 'index'])->name('wish');
 Route::singleton('catalog', CatalogController::class);
 Route::resource('product', ProductSingleController::class)->only('show');
 
-Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-    Route::resource('products', ProductController::class);
-    Route::resource('groups', GroupController::class);
-    Route::resource('stickers', StickerController::class)->except(['show']);
-    Route::resource('categories', CategoryController::class)->except(['show']);
-    Route::resource('tags', TagController::class)->except(['show']);
-    Route::resource('users', UserController::class);
-    Route::resource('chat', ChatController::class)->only(['index', 'store']);
-});
+// Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+//     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+//     Route::resource('products', ProductController::class);
+//     Route::resource('groups', GroupController::class);
+//     Route::resource('stickers', StickerController::class)->except(['show']);
+//     Route::resource('categories', CategoryController::class)->except(['show']);
+//     Route::resource('tags', TagController::class)->except(['show']);
+//     Route::resource('users', UserController::class);
+//     Route::resource('chat', ChatController::class)->only(['index', 'store']);
+// });
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('/messages', MessageController::class)->only(['index', 'store']);
