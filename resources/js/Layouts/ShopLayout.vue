@@ -82,15 +82,6 @@ let sidebarExpand = ref(false);
 
                                         <template #content>
                                             <DropdownLink
-                                                v-if="
-                                                    $page.props.auth.user
-                                                        .role === 1
-                                                "
-                                                :href="route('dashboard.index')"
-                                            >
-                                                Admin panel
-                                            </DropdownLink>
-                                            <DropdownLink
                                                 :href="route('profile.edit')"
                                             >
                                                 Profile
