@@ -39,6 +39,11 @@ class PlatformProvider extends OrchidServiceProvider
                 ->title('Navigation')
                 ->route(config('platform.index')),
 
+            Menu::make('Email sender')
+                ->icon('envelope-letter')
+                ->route('platform.email')
+                ->title('Tools'),
+
             Menu::make('Sample Screen')
                 ->icon('bs.collection')
                 ->route('platform.example')
