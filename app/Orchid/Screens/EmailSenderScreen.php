@@ -30,7 +30,7 @@ class EmailSenderScreen extends Screen
 
     public function name(): ?string
     {
-        return "Email sender";
+        return __('Email sender');
     }
 
 
