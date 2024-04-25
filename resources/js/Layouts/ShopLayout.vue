@@ -14,7 +14,6 @@ const { locale } = useI18n({ useScope: "global" });
 
 // const cartStore = useCartStore();
 
-// const locale = ref(usePage().props.locale);
 const showingNavigationDropdown = ref(false);
 let sidebarExpand = ref(false);
 
@@ -54,11 +53,14 @@ const setLocale = async (lang) => {
 
                         <template #content>
                             <button
-                                v-for="locale in $i18n.availableLocales"
+                                v-for="lang in $i18n.availableLocales"
                                 class="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
-                                @click="setLocale(locale)"
+                                @click="setLocale(lang)"
+                                :class="{
+                                    'bg-primary-400': locale == lang,
+                                }"
                             >
-                                {{ locale }}
+                                {{ lang }}
                             </button>
                         </template>
                     </Dropdown>
