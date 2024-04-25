@@ -11,10 +11,6 @@ import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 
 // const cartStore = useCartStore();
 
-import { getActiveLanguage } from "laravel-vue-i18n";
-
-const lang = getActiveLanguage(); // en
-
 const showingNavigationDropdown = ref(false);
 let sidebarExpand = ref(false);
 </script>
@@ -38,14 +34,6 @@ let sidebarExpand = ref(false);
                                 height="1.5rem"
                             />
                         </LinkBtn>
-                        <LinkBtn :href="route('cart')">
-                            <Icon
-                                icon="mdi:cart-outline"
-                                width="1.5rem"
-                                height="1.5rem"
-                            />
-                        </LinkBtn>
-                        {{ 123 }}
                         <LinkBtn :href="route('cart')">
                             <Icon
                                 icon="mdi:heart-outline"
@@ -96,7 +84,7 @@ let sidebarExpand = ref(false);
                                             <DropdownLink
                                                 :href="route('profile.edit')"
                                             >
-                                                {{ $t("Profile") }}
+                                                {{ "Profile" }}
                                             </DropdownLink>
                                             <DropdownLink
                                                 :href="route('logout')"

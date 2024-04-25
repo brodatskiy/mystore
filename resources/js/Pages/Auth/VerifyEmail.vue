@@ -3,7 +3,6 @@ import { computed } from "vue";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
 import { useForm } from "@inertiajs/vue3";
 
-import Btn from "@/Components/Btn.vue";
 import PrimaryBtn from "@/Components/Buttons/PrimaryBtn.vue";
 
 const props = defineProps({
