@@ -60,14 +60,14 @@ const form = useForm({
                 <InputError :message="form.errors.email" />
             </div>
 
-            <div>
+            <!-- <div>
                 <label for="avatar">Upload avatar</label>
                 <FileUpload
                     mode="basic"
                     class="mt-1"
                     @input="form.avatar = $event.target.files[0]"
                 />
-            </div>
+            </div> -->
             <div
                 v-if="props.mustVerifyEmail && user.email_verified_at === null"
             >
