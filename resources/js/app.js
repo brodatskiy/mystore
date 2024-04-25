@@ -7,6 +7,10 @@ import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy";
 import { Icon } from "@iconify/vue";
 
+import { createI18n } from "vue-i18n";
+import ru from "../../lang/ru.json";
+import en from "../../lang/en.json";
+
 // Plugins
 
 import { registerPlugins } from "@/plugins";
@@ -21,9 +25,17 @@ createInertiaApp({
             import.meta.glob("./Pages/**/*.vue")
         ),
     setup({ el, App, props, plugin }) {
+        const i18n = createI18n({
+            legacy: false,
+            locale: props.initialPage.props.locale, // user locale by props
+            fallbackLocale: "en", // set fallback locale
+            messages: { ru, en },
+        });
+
         return createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
+            .use(i18n)
             .component("Link", Link)
             .component("Head", Head)
             .component("Icon", Icon)

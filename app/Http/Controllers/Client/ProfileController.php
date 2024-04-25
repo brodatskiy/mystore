@@ -34,7 +34,7 @@ class ProfileController extends Controller
 
         $request->user()->update($data);
 
-        return back()->with('message', 'You have updated your profile.');
+        return back()->with('message', __('You have updated your profile.'));
     }
 
     public function destroy(Request $request): RedirectResponse

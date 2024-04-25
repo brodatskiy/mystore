@@ -28,7 +28,6 @@ class UpdateRequest extends FormRequest
         return [
             'name' => 'required|string',
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($this->user()->id)],
-            'avatar' => 'nullable|file',
         ];
     }
 }

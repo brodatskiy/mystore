@@ -15,6 +15,7 @@ use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\MessageController;
 use App\Http\Controllers\Client\ProductSingleController;
 use App\Http\Controllers\Client\ProfileController;
+use App\Http\Controllers\SetLocaleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::post('/locale', [SetLocaleController::class, 'locale'])->name('locale');
 
 Route::get('/',  HomeController::class)->name('/');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
