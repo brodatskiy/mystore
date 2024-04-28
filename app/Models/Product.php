@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\Traits\Filterable;
+use App\Models\Traits\HasFilter;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Orchid\Attachment\Attachable;
+use Orchid\Filters\Filterable;
+use Orchid\Screen\AsSource;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -14,8 +17,9 @@ class Product extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use Filterable;
+    use HasFilter;
     use HasSlug;
+    use AsSource, Filterable, Attachable;
 
     protected $table = 'products';
     protected $guarded = false;
