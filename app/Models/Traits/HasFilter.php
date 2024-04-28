@@ -7,7 +7,7 @@ namespace App\Models\Traits;
 use App\Http\Filters\FilterInterface;
 use Illuminate\Database\Eloquent\Builder;
 
-trait Filterable
+trait HasFilter
 {
     /**
      * @param Builder $builder
