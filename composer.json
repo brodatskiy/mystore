@@ -15,6 +15,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/telescope": "^5.0",
         "laravel/tinker": "^2.8",
+        "orchid/crud": "^4.2",
         "orchid/platform": "^14.22",
         "pusher/pusher-php-server": "^7.2",
         "sentry/sentry-laravel": "^4.2",
