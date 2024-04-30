@@ -9,6 +9,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Orchid\Attachment\Attachable;
 use Orchid\Filters\Filterable;
+use Orchid\Filters\Types\Like;
+use Orchid\Filters\Types\Where;
+use Orchid\Filters\Types\WhereDate;
+use Orchid\Filters\Types\WhereDateStartEnd;
+use Orchid\Filters\Types\WhereIn;
+use Orchid\Filters\Types\WhereMaxMin;
 use Orchid\Screen\AsSource;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
@@ -24,6 +30,15 @@ class Product extends Model
     protected $table = 'products';
     protected $guarded = false;
     protected $with = ['group', 'category', 'tags', 'sizes', 'sticker'];
+
+    protected $allowedSorts = [
+        'id',
+        'title',
+        'price',
+        'is_published',
+        'updated_at',
+        'created_at',
+    ];
 
     public function getSlugOptions(): SlugOptions
     {
