@@ -49,17 +49,24 @@ Route::screen('email', EmailSenderScreen::class)
 
 // Platform > System > Products > Product > Edit
 Route::screen('products/{product}/edit', ProductEditScreen::class)
-    ->name('platform.systems.products.edit')
+    ->name('platform.products.edit')
     ->breadcrumbs(fn (Trail $trail, $product) => $trail
-        ->parent('platform.systems.products')
-        ->push($product, route('platform.systems.products.edit', $product)));
+        ->parent('platform.products')
+        ->push($product, route('platform.products.edit', $product)));
+
+// Platform > System > Products > Create
+Route::screen('products/create', ProductEditScreen::class)
+    ->name('platform.products.create')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('platform.products')
+        ->push(__('Create'), route('platform.products.create')));
 
 // Platform > System > Products
 Route::screen('products', ProductListScreen::class)
-    ->name('platform.systems.products')
+    ->name('platform.products')
     ->breadcrumbs(fn (Trail $trail) => $trail
         ->parent('platform.index')
-        ->push(__('Products'), route('platform.systems.products')));
+        ->push(__('Products'), route('platform.products')));
 
 // Platform > Profile
 Route::screen('profile', UserProfileScreen::class)
