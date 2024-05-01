@@ -45,8 +45,8 @@ class PlatformProvider extends OrchidServiceProvider
                 ->title(__('Access Controls')),
 
             Menu::make(__('Products'))
-                ->icon('bs.x-diamond')
-                ->route('platform.systems.products'),
+                ->icon('bs.folder')
+                ->route('platform.products'),
 
             Menu::make(__('Roles'))
                 ->icon('bs.shield')
