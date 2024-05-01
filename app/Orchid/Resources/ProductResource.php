@@ -3,15 +3,22 @@
 namespace App\Orchid\Resources;
 
 use App\Models\Category;
+use App\Models\Group;
+use App\Models\Sticker;
+use App\Models\Tag;
 use Orchid\Crud\Filters\DefaultSorted;
 use Orchid\Crud\Resource;
 use Orchid\Screen\Components\Cells\Boolean;
 use Orchid\Screen\Components\Cells\Currency;
 use Orchid\Screen\Components\Cells\DateTimeSplit;
+use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Cropper;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Picture;
+use Orchid\Screen\Fields\Radio;
 use Orchid\Screen\Fields\Relation;
+use Orchid\Screen\Fields\Select;
+use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Sight;
 use Orchid\Screen\TD;
 
@@ -34,7 +41,28 @@ class ProductResource extends Resource
         return [
             Input::make('title')
                 ->title('Title')
-                ->placeholder('Enter title here'),
+                ->placeholder('Title')
+                ->required(),
+
+            TextArea::make('description')
+                ->title('Description')
+                ->placeholder('Description')
+                ->required(),
+
+            Cropper::make('preview_image'),
+
+            Input::make('color')
+                ->type('color')
+                ->title('Color')
+                ->placeholder('Color')
+                ->required(),
+
+            Input::make('price')
+                ->type('number')
+                ->title('Price')
+                ->placeholder('Price')
+                ->required(),
+
         ];
     }
 
@@ -55,7 +83,6 @@ class ProductResource extends Resource
                     <span class='small text-muted mt-1 mb-0'># {$model->id}</span>")
                 ->sort(),
             TD::make('title')->sort(),
-            TD::make('slug')->defaultHidden(),
             TD::make('description')->width(200)->defaultHidden(),
             TD::make('color')
                 ->render(fn ($model) => "<div class='rounded' style='height:16px; width:16px; background:{$model->color}'></div>")
