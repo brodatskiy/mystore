@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace App\Orchid\Screens\Product;
 
+use App\Models\Product;
 use App\Orchid\Layouts\Role\RolePermissionLayout;
-use App\Orchid\Layouts\User\UserEditLayout;
-use App\Orchid\Layouts\User\UserPasswordLayout;
-use App\Orchid\Layouts\User\UserRoleLayout;
+use App\Orchid\Layouts\Product\ProductEditLayout;
+use App\Orchid\Layouts\Product\ProductPasswordLayout;
+use App\Orchid\Layouts\Product\ProductRoleLayout;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Orchid\Access\Impersonation;
-use Orchid\Platform\Models\User;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
@@ -24,22 +26,20 @@ use Orchid\Support\Facades\Toast;
 class ProductEditScreen extends Screen
 {
     /**
-     * @var User
+     * @var Product
      */
-    public $user;
+    public $product;
 
     /**
      * Fetch data to be displayed on the screen.
      *
      * @return array
      */
-    public function query(User $user): iterable
+    public function query(Product $product): iterable
     {
-        $user->load(['roles']);
 
         return [
-            'user'       => $user,
-            'permission' => $user->getStatusPermission(),
+            'product' => $product,
         ];
     }
 
@@ -48,7 +48,7 @@ class ProductEditScreen extends Screen
      */
     public function name(): ?string
     {
-        return $this->user->exists ? 'Edit User' : 'Create User';
+        return $this->product->exists ? 'Edit Product' : 'Create Product';
     }
 
     /**
@@ -56,14 +56,12 @@ class ProductEditScreen extends Screen
      */
     public function description(): ?string
     {
-        return 'User profile and privileges, including their associated role.';
+        return 'Product page.';
     }
 
     public function permission(): ?iterable
     {
-        return [
-            'platform.systems.users',
-        ];
+        return [];
     }
 
     /**
@@ -74,17 +72,10 @@ class ProductEditScreen extends Screen
     public function commandBar(): iterable
     {
         return [
-            Button::make(__('Impersonate user'))
-                ->icon('bg.box-arrow-in-right')
-                ->confirm(__('You can revert to your original state by logging out.'))
-                ->method('loginAs')
-                ->canSee($this->user->exists && $this->user->id !== \request()->user()->id),
-
             Button::make(__('Remove'))
                 ->icon('bs.trash3')
-                ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
-                ->method('remove')
-                ->canSee($this->user->exists),
+                ->confirm(__('Once the product is deleted, all of its resources and data will be permanently deleted.'))
+                ->method('remove'),
 
             Button::make(__('Save'))
                 ->icon('bs.check-circle')
@@ -99,47 +90,13 @@ class ProductEditScreen extends Screen
     {
         return [
 
-            Layout::block(UserEditLayout::class)
-                ->title(__('Profile Information'))
-                ->description(__('Update your account\'s profile information and email address.'))
+            Layout::block(ProductEditLayout::class)
+                ->title(__('Product Information'))
+                ->description(__('Update your product information.'))
                 ->commands(
                     Button::make(__('Save'))
                         ->type(Color::BASIC)
                         ->icon('bs.check-circle')
-                        ->canSee($this->user->exists)
-                        ->method('save')
-                ),
-
-            Layout::block(UserPasswordLayout::class)
-                ->title(__('Password'))
-                ->description(__('Ensure your account is using a long, random password to stay secure.'))
-                ->commands(
-                    Button::make(__('Save'))
-                        ->type(Color::BASIC)
-                        ->icon('bs.check-circle')
-                        ->canSee($this->user->exists)
-                        ->method('save')
-                ),
-
-            Layout::block(UserRoleLayout::class)
-                ->title(__('Roles'))
-                ->description(__('A Role defines a set of tasks a user assigned the role is allowed to perform.'))
-                ->commands(
-                    Button::make(__('Save'))
-                        ->type(Color::BASIC)
-                        ->icon('bs.check-circle')
-                        ->canSee($this->user->exists)
-                        ->method('save')
-                ),
-
-            Layout::block(RolePermissionLayout::class)
-                ->title(__('Permissions'))
-                ->description(__('Allow the user to perform some actions that are not provided for by his roles'))
-                ->commands(
-                    Button::make(__('Save'))
-                        ->type(Color::BASIC)
-                        ->icon('bs.check-circle')
-                        ->canSee($this->user->exists)
                         ->method('save')
                 ),
 
@@ -149,34 +106,19 @@ class ProductEditScreen extends Screen
     /**
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function save(User $user, Request $request)
+    public function save(Product $product, Request $request)
     {
-        $request->validate([
-            'user.email' => [
-                'required',
-                Rule::unique(User::class, 'email')->ignore($user),
-            ],
-        ]);
-
-        $permissions = collect($request->get('permissions'))
-            ->map(fn ($value, $key) => [base64_decode($key) => $value])
-            ->collapse()
-            ->toArray();
-
-        $user->when($request->filled('user.password'), function (Builder $builder) use ($request) {
-            $builder->getModel()->password = Hash::make($request->input('user.password'));
-        });
-
-        $user
-            ->fill($request->collect('user')->except(['password', 'permissions', 'roles'])->toArray())
-            ->forceFill(['permissions' => $permissions])
-            ->save();
-
-        $user->replaceRoles($request->input('user.roles'));
-
-        Toast::info(__('User was saved.'));
-
-        return redirect()->route('platform.systems.users');
+        try {
+            DB::beginTransaction();
+            $product->fill($request->collect('product')->except(['tags'])->toArray())->save();
+            $product->tags()->sync($request->input('product.tags'));
+            Toast::info(__('Product was saved.'));
+            Db::commit();
+            return redirect()->route('platform.products');
+        } catch (\Exception $exeption) {
+            DB::rollBack();
+            abort(500);
+        }
     }
 
     /**
@@ -184,24 +126,12 @@ class ProductEditScreen extends Screen
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function remove(User $user)
+    public function remove(Product $product)
     {
-        $user->delete();
+        $product->delete();
 
-        Toast::info(__('User was removed'));
+        Toast::info(__('Product was removed'));
 
-        return redirect()->route('platform.systems.users');
-    }
-
-    /**
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function loginAs(User $user)
-    {
-        Impersonation::loginAs($user);
-
-        Toast::info(__('You are now impersonating this user'));
-
-        return redirect()->route(config('platform.index'));
+        return redirect()->route('platform.products');
     }
 }
