@@ -25,7 +25,7 @@ class ProductListScreen extends Screen
     public function query(): iterable
     {
         return [
-            'products' => Product::all()
+            'products' => Product::filters()->defaultSort('id', 'desc')->paginate()
         ];
     }
 
@@ -45,6 +45,10 @@ class ProductListScreen extends Screen
         return 'A list of all products.';
     }
 
+    public function permission(): ?iterable
+    {
+        return [];
+    }
 
     /**
      * The screen's action buttons.
@@ -70,23 +74,6 @@ class ProductListScreen extends Screen
         return [
             ProductListLayout::class,
         ];
-    }
-
-    /**
-     * @return array
-     */
-    public function asyncGetProduct(Product $product): iterable
-    {
-        return [
-            'product' => $product,
-        ];
-    }
-
-    public function saveProduct(Request $request, User $product): void
-    {
-        $product->fill($request->input('product'))->save();
-
-        Toast::info(__('Product was saved.'));
     }
 
     public function remove(Request $request): void
