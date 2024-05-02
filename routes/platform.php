@@ -52,7 +52,7 @@ Route::screen('products/{product}/edit', ProductEditScreen::class)
     ->name('platform.products.edit')
     ->breadcrumbs(fn (Trail $trail, $product) => $trail
         ->parent('platform.products')
-        ->push($product, route('platform.products.edit', $product)));
+        ->push($product->id, route('platform.products.edit', $product)));
 
 // Platform > System > Products > Create
 Route::screen('products/create', ProductEditScreen::class)
