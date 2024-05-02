@@ -33,16 +33,16 @@ class ProductListLayout extends Table
         return [
             TD::make('id', 'ID')
                 ->width('120')
-                ->render(fn ($model) =>
-                "<img src='$model->imageUrl'
+                ->render(fn (Product $product) =>
+                "<img src='$product->preview_image'
                       alt='preview_image'
                       class='mw-100 d-block img-fluid rounded-1 w-100'>
-                    <span class='small text-muted mt-1 mb-0'># {$model->id}</span>")
+                    <span class='small text-muted mt-1 mb-0'># {$product->id}</span>")
                 ->sort(),
             TD::make('title')->sort(),
             TD::make('description')->width(200)->defaultHidden(),
             TD::make('color')
-                ->render(fn ($model) => "<div class='rounded' style='height:16px; width:16px; background:{$model->color}'></div>")
+                ->render(fn (Product $product) => "<div class='rounded' style='height:16px; width:16px; background:{$product->color}'></div>")
                 ->align(TD::ALIGN_CENTER),
             TD::make('price')
                 ->usingComponent(Currency::class, after: '₽')
@@ -50,9 +50,9 @@ class ProductListLayout extends Table
                 ->sort(),
             TD::make('tags', 'Tags')
                 ->render(
-                    function ($model) {
+                    function (Product $product) {
                         return view('components.chip', [
-                            'tags' => $model->tags
+                            'tags' => $product->tags
                         ]);
                     }
                 )
@@ -60,19 +60,20 @@ class ProductListLayout extends Table
             TD::make('sticker', 'Sticker')
                 ->defaultHidden()
                 ->render(
-                    function ($model) {
-                        return $model->sticker->title;
+                    function (Product $product) {
+                        return $product->sticker->title;
                     }
                 )
                 ->align(TD::ALIGN_CENTER),
             TD::make('category')
-                ->render(function ($model) {
-                    return $model->category->title;
+                ->render(function (Product $product) {
+                    return $product->category->title;
                 })
                 ->align(TD::ALIGN_CENTER),
+
             TD::make('group_id', "Group")
-                ->render(function ($model) {
-                    return $model->group->title;
+                ->render(function (Product $product) {
+                    return $product->group->title;
                 })
                 ->align(TD::ALIGN_CENTER),
 
@@ -89,6 +90,25 @@ class ProductListLayout extends Table
                 ->usingComponent(DateTimeSplit::class)
                 ->align(TD::ALIGN_RIGHT)
                 ->sort(),
+
+            TD::make(__('Actions'))
+                ->align(TD::ALIGN_CENTER)
+                ->width('100px')
+                ->render(fn (Product $product) => DropDown::make()
+                    ->icon('bs.three-dots-vertical')
+                    ->list([
+
+                        Link::make(__('Edit'))
+                            ->route('platform.products.edit', $product->id)
+                            ->icon('bs.pencil'),
+
+                        Button::make(__('Delete'))
+                            ->icon('bs.trash3')
+                            ->confirm(__('Once the product is deleted, all of its resources and data will be permanently deleted.'))
+                            ->method('remove', [
+                                'id' => $product->id,
+                            ]),
+                    ])),
         ];
     }
 }
