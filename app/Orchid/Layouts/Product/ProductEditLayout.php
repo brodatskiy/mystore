@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Group;
 use App\Models\Sticker;
 use App\Models\Tag;
+use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Field;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Cropper;
@@ -15,6 +16,7 @@ use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Layouts\Rows;
+use Orchid\Support\Color;
 
 class ProductEditLayout extends Rows
 {
@@ -37,11 +39,6 @@ class ProductEditLayout extends Rows
                 ->title('Description')
                 ->placeholder('Description')
                 ->required(),
-
-            Cropper::make('product.preview_image')
-                ->width(300)
-                ->height(500)
-                ->targetRelativeUrl(),
 
             Input::make('product.color')
                 ->type('color')
@@ -75,6 +72,12 @@ class ProductEditLayout extends Rows
                 ->value(1)
                 ->sendTrueOrFalse()
                 ->title(__('Published')),
+
+            Button::make(__('Save'))
+                ->class('btn btn-link float-end')
+                ->type(Color::BASIC)
+                ->icon('bs.check-circle')
+                ->method('save')
         ];
     }
 }

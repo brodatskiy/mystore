@@ -5,17 +5,10 @@ declare(strict_types=1);
 namespace App\Orchid\Screens\Product;
 
 use App\Models\Product;
-use App\Orchid\Layouts\Role\RolePermissionLayout;
+use App\Orchid\Layouts\Product\ProductCropperLayout;
 use App\Orchid\Layouts\Product\ProductEditLayout;
-use App\Orchid\Layouts\Product\ProductPasswordLayout;
-use App\Orchid\Layouts\Product\ProductRoleLayout;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\Rule;
-use Orchid\Access\Impersonation;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
@@ -92,15 +85,23 @@ class ProductEditScreen extends Screen
     {
         return [
 
-            Layout::block(ProductEditLayout::class)
-                ->title(__('Product Information'))
-                ->description(__('Update your product information.'))
-                ->commands(
-                    Button::make(__('Save'))
-                        ->type(Color::BASIC)
-                        ->icon('bs.check-circle')
-                        ->method('save')
-                ),
+            Layout::split([
+                ProductCropperLayout::class,
+                ProductEditLayout::class,
+            ])->ratio('40/60'),
+
+
+            // Layout::block(ProductEditLayout::class)
+            //     ->title(__('Product Information'))
+            //     ->description(__('Update your product information.')),
+            // Layout::block(ProductCropperLayout::class)
+            //     ->title(__('Product image'))
+            //     ->commands(
+            //         Button::make(__('Save'))
+            //             ->type(Color::BASIC)
+            //             ->icon('bs.check-circle')
+            //             ->method('save')
+            //     ),
 
         ];
     }
