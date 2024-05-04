@@ -76,9 +76,4 @@ class Product extends Model
     {
         return $this->morphMany(Image::class, 'imageable');
     }
-
-    public function getImageUrlAttribute()
-    {
-        return $this->preview_image ? url('storage/' . $this->preview_image) : '';
-    }
 }
