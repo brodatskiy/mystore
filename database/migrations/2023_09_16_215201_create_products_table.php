@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('color');
             $table->unsignedInteger('price');
             $table->boolean('is_published')->default(true);
-            $table->foreignIdFor(Category::class)->nullable()->constrained()->cascadeOnUpdate()->nullOnDelete();
+            $table->foreignIdFor(Category::class)->constrained()->cascadeOnUpdate()->nullOnDelete();
             $table->foreignIdFor(Sticker::class)->nullable()->constrained()->cascadeOnUpdate()->nullOnDelete();
             $table->foreignId('group_id')->nullable()->index()->constrained('groups')->onDelete('cascade');
 
