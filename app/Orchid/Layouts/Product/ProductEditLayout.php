@@ -29,29 +29,32 @@ class ProductEditLayout extends Rows
     {
         return [
             Input::make('product.title')
+                ->required()
                 ->type('text')
                 ->max(255)
-                ->required()
                 ->title(__('Title'))
                 ->placeholder(__('Title')),
 
             TextArea::make('product.description')
+                ->required()
                 ->title('Description')
-                ->placeholder('Description')
-                ->required(),
+                ->placeholder('Description'),
 
             Input::make('product.color')
+                ->required()
                 ->type('color')
                 ->title('Color')
                 ->value('#563d7c')
                 ->horizontal(),
 
             Input::make('product.price')
+                ->required()
                 ->type('number')
                 ->title(__('Price'))
                 ->placeholder(__('Price')),
 
             Select::make('product.tags.')
+                ->required()
                 ->fromModel(Tag::class, 'title')
                 ->multiple()
                 ->title(__('Tag')),
@@ -61,6 +64,7 @@ class ProductEditLayout extends Rows
                 ->title(__('Sticker')),
 
             Select::make('product.category_id')
+                ->required()
                 ->fromModel(Category::class, 'title')
                 ->title(__('Category')),
 
