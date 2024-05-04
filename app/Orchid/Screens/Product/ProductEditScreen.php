@@ -72,10 +72,12 @@ class ProductEditScreen extends Screen
     public function commandBar(): iterable
     {
         return [
+
             Button::make(__('Remove'))
                 ->icon('bs.trash3')
-                ->confirm(__('Once the product is deleted, all of its resources and data will be permanently deleted.'))
-                ->method('remove'),
+                ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted.'))
+                ->method('remove')
+                ->canSee($this->product->exists),
 
             Button::make(__('Save'))
                 ->icon('bs.check-circle')
