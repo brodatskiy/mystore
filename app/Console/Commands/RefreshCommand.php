@@ -18,10 +18,10 @@ class RefreshCommand extends Command
             return self::FAILURE;
         }
 
-        Storage::deleteDirectory('images/products');
+        Storage::deleteDirectory('public');
 
         $this->call('migrate:fresh', ['--seed' => true]);
-
+        $this->call('orchid:admin', ['name' => 'admin', 'email' => 'admin@admin.com', 'password' => 'password']);
 
         return self::SUCCESS;
     }
