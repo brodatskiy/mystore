@@ -12,6 +12,7 @@ use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Components\Cells\Boolean;
 use Orchid\Screen\Components\Cells\Currency;
 use Orchid\Screen\Components\Cells\DateTimeSplit;
+use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Layouts\Card;
 use Orchid\Screen\Layouts\Persona;
@@ -94,21 +95,22 @@ class ProductListLayout extends Table
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)
                 ->width('100px')
-                ->render(fn (Product $product) => DropDown::make()
-                    ->icon('bs.three-dots-vertical')
-                    ->list([
+                ->render(fn (Product $product) => Group::make([
+                    Link::make(__('View'))
+                        ->icon('bs.eye')
+                        ->route('platform.products.view', $product->id),
 
-                        Link::make(__('Edit'))
-                            ->route('platform.products.edit', $product->id)
-                            ->icon('bs.pencil'),
+                    Link::make(__('Edit'))
+                        ->icon('bs.pencil')
+                        ->route('platform.products.edit', $product->id),
 
-                        Button::make(__('Delete'))
-                            ->icon('bs.trash3')
-                            ->confirm(__('Once the product is deleted, all of its resources and data will be permanently deleted.'))
-                            ->method('remove', [
-                                'id' => $product->id,
-                            ]),
-                    ])),
+                    Button::make(__('Delete'))
+                        ->icon('bs.trash3')
+                        ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted.'))
+                        ->method('remove', [
+                            'id' => $product->id,
+                        ]),
+                ]))
         ];
     }
 }
