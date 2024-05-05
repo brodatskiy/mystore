@@ -14,6 +14,7 @@ use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Product\ProductEditScreen;
+use App\Orchid\Screens\Product\ProductViewScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
@@ -47,12 +48,21 @@ Route::screen('email', EmailSenderScreen::class)
             ->push('Email sender');
     });
 
+
+
 // Platform > System > Products > Product > Edit
 Route::screen('products/{product}/edit', ProductEditScreen::class)
     ->name('platform.products.edit')
     ->breadcrumbs(fn (Trail $trail, $product) => $trail
         ->parent('platform.products')
         ->push($product->id, route('platform.products.edit', $product)));
+
+// Platform > System > Products > Product > View
+Route::screen('products/{product}/view', ProductViewScreen::class)
+    ->name('platform.products.view')
+    ->breadcrumbs(fn (Trail $trail, $product) => $trail
+        ->parent('platform.products')
+        ->push($product->id, route('platform.products.view', $product)));
 
 // Platform > System > Products > Create
 Route::screen('products/create', ProductEditScreen::class)
