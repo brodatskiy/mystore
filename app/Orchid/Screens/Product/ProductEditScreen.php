@@ -84,25 +84,10 @@ class ProductEditScreen extends Screen
     public function layout(): iterable
     {
         return [
-
             Layout::split([
                 ProductCropperLayout::class,
                 ProductEditLayout::class,
             ])->ratio('40/60'),
-
-
-            // Layout::block(ProductEditLayout::class)
-            //     ->title(__('Product Information'))
-            //     ->description(__('Update your product information.')),
-            // Layout::block(ProductCropperLayout::class)
-            //     ->title(__('Product image'))
-            //     ->commands(
-            //         Button::make(__('Save'))
-            //             ->type(Color::BASIC)
-            //             ->icon('bs.check-circle')
-            //             ->method('save')
-            //     ),
-
         ];
     }
 
