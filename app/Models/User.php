@@ -20,6 +20,12 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'age',
+        'address',
+        'avatar',
+        'gender',
+        'role',
+        'email_verified_at'
     ];
 
     /**
@@ -31,6 +37,8 @@ class User extends Authenticatable
         'password',
         'remember_token',
         'permissions',
+        'role',
+        'email_verified_at'
     ];
 
     /**
@@ -68,4 +76,9 @@ class User extends Authenticatable
         'updated_at',
         'created_at',
     ];
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'user_id');
+    }
 }
