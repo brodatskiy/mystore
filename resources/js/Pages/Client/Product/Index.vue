@@ -12,24 +12,24 @@ const props = defineProps(["product"]);
     <Head title="Product" />
 
     <ShopLayout>
-        <div class="pa-2" rounded="xl">
-            <div class="grid grid-cols-2 gap-3">
+        <div class="flex items-center justify-center bg-gray-100">
+            <div class="mx-auto">
+            <div class="grid grid-cols-2 gap-4 rounded-lg bg-white p-4">
+
                 <div class="relative">
                     <img
-                        class="w-full h-auto object-cover"
+                        class="w-full rounded-lg object-cover object-center"
                         :src="product.image"
+                        :alt="product.title"
                     >
-                        <div class="absolute top-2 right-2">
-                            {{
-                                product.sticker.title.toUpperCase()
-                            }}
-                        </div>
+                        <div class="absolute top-2 right-2">{{product.sticker.title.toUpperCase()}}</div>
                     </img>
                 </div>
 
                 <div class="flex flex-col">
-                    <div class="mb-2">{{ product.title }}</div>
-                    <div class="mb-2">{{ product.price }} $</div>
+                    <div class="space-y-4">
+                    <p class="text-2xl font-bold ">{{ product.title }}</p>
+                    <p class=" text-xl font-semibold text-gray-800">${{ product.price }}</p>
                     <!-- <div class="mb-2">
                         <v-slide-group show-arrows>
                             <v-slide-group-item
@@ -51,10 +51,10 @@ const props = defineProps(["product"]);
                             </v-slide-group-item>
                         </v-slide-group>
                     </div> -->
-                    <div class="flex mb-2 overflow-hidden">
+                    <div class="flex overflow-hidden">
                         <div v-for="size in product.sizes">
                             <div v-if="size.count > 0" class="mr-1">
-                                <PrimaryBtn>
+                                <PrimaryBtn class="w-12">
                                     {{ size.title }}
                                 </PrimaryBtn>
                             </div>
@@ -63,7 +63,7 @@ const props = defineProps(["product"]);
                     <div class="mb-2">
                         {{ product.description }}
                     </div>
-
+                </div>
                     <PrimaryBtn
                         class="mt-auto"
                         @click.stop="cartStore.add(product)"
@@ -77,6 +77,7 @@ const props = defineProps(["product"]);
                     tag.title
                 }}</Chip>
             </div>
+        </div>
         </div>
     </ShopLayout>
 </template>
