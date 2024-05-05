@@ -1,7 +1,4 @@
 <script setup>
-// import { useCartStore } from "@/Store/useCartStore";
-// const cartStore = useCartStore();
-
 defineProps(["product"]);
 </script>
 <template>
