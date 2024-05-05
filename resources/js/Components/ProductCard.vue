@@ -6,23 +6,24 @@ defineProps(["product"]);
 </script>
 <template>
   <Link :href="route('product.show', product)">
-    <div class="w-58"  >
-        <div class="relative">
-            <img class=" w-full h-auto object-cover" width="300" height="300" :src="product.image" >
+    <div class="flex items-center justify-center bg-gray-100">
+        <div class="mx-auto px-5">
+          <div class="max-w-xs cursor-pointer rounded-lg bg-white p-2 shadow duration-150 hover:scale-105 hover:shadow-md">
+            <div class="relative">
+            <img class="w-full rounded-lg object-cover object-center" :src="product.image" :alt="product.title" >
             <div class="absolute top-2 right-2">
-              {{ product.sticker.title.toUpperCase() }}
+                {{ product.sticker.title.toUpperCase() }}
+              </div>
+            </img>
             </div>
-          </img>
-        </div>
-
-      <div class="flex items-center justify-between pa-2">
-        <div>{{ product.price }} $</div>
-        <div>{{ product.title }}</div>
-        <div class="">
-          <Icon icon="mdi-heart-outline" />
+            <div class="flex items-center justify-between py-2">
+                <p class=" text-l font-semibold text-gray-800">${{ product.price }}</p>
+                <p class="font-bold text-gray-500">{{ product.title }}</p>
+                <p ><Icon icon="mdi-heart-outline" /></p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
   </Link>
 </template>
 <style scoped></style>
