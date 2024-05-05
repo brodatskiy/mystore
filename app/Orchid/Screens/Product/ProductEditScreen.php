@@ -54,7 +54,9 @@ class ProductEditScreen extends Screen
 
     public function permission(): ?iterable
     {
-        return [];
+        return [
+            'platform.systems.products',
+        ];
     }
 
     /**
