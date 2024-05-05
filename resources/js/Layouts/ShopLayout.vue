@@ -13,9 +13,7 @@ import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 </script>
 <template>
     <div class="min-h-screen bg-gray-100">
-        <header
-            class="w-full sticky top-0 z-20 px-6 py-3 bg-white border-b border-black"
-        >
+        <header class="w-full sticky top-0 z-20 px-6 py-3 bg-white shadow">
             <div class="flex items-center justify-between">
                 <!-- Logo -->
                 <div class="font-bold">
