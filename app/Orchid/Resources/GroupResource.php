@@ -2,9 +2,13 @@
 
 namespace App\Orchid\Resources;
 
+use App\Models\Group;
+use App\Models\Product;
 use Orchid\Crud\Filters\DefaultSorted;
 use Orchid\Crud\Resource;
 use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Matrix;
+use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Sight;
 use Orchid\Screen\TD;
 
@@ -65,6 +69,14 @@ class GroupResource extends Resource
         return [
             Sight::make('id'),
             Sight::make('title'),
+            Sight::make('products')->render(
+                function (Group $group) {
+                    return view('components.card', [
+                        'products' => $group->products
+                    ]);
+                }
+            ),
+
             Sight::make('created_at', 'Date of creation')->render(function ($model) {
                 return $model->created_at->toDateTimeString();
             }),
