@@ -40,6 +40,10 @@ class Product extends Model
         'created_at',
     ];
 
+    protected $allowedFilters = [
+        'title'       => Like::class,
+    ];
+
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
