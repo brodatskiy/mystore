@@ -29,7 +29,7 @@ class ProductCropperLayout extends Rows
             Cropper::make('product.preview_image')
                 ->required()
                 ->width(300)
-                ->height(500)
+                ->height(400)
                 ->targetRelativeUrl(),
         ];
     }
