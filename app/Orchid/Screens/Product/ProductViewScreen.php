@@ -123,6 +123,9 @@ class ProductViewScreen extends Screen
                     Sight::make('category_id', 'Category')->render(function (Product $product) {
                         return $product->category->title;
                     }),
+                    Sight::make('group_id', 'Group')->render(function (Product $product) {
+                        return $product->group->title;
+                    }),
                     Sight::make('is_published', "Publised")->usingComponent(Boolean::class),
                     Sight::make('created_at', "Date of creation")->usingComponent(DateTimeSplit::class),
                     Sight::make('updated_at', "Update date")->usingComponent(DateTimeSplit::class),
