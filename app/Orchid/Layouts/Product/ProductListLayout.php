@@ -39,8 +39,9 @@ class ProductListLayout extends Table
                       alt='preview_image'
                       class='mw-100 d-block img-fluid rounded-1 w-100'>
                     <span class='small text-muted mt-1 mb-0'># {$product->id}</span>")
+
                 ->sort(),
-            TD::make('title')->sort(),
+            TD::make('title')->sort()->filter(Input::make()),
             TD::make('description')->width(200)->defaultHidden(),
             TD::make('color')
                 ->render(fn (Product $product) => "<div class='rounded' style='height:16px; width:16px; background:{$product->color}'></div>")
