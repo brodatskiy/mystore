@@ -30,7 +30,7 @@ class ProductFactory extends Factory
             'group_id' => Group::all()->random()->id,
             'category_id' => Category::all()->random()->id,
             'sticker_id' => Sticker::all()->random()->id,
-            'price' => fake()->numberBetween(1, 1000),
+            'price' => fake()->numberBetween(100, 1000),
             'is_published' => 1
         ];
     }
