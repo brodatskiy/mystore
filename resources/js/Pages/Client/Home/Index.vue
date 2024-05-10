@@ -53,27 +53,24 @@ const setSearch = (value) => {
     <Head title="Home" />
 
     <ShopLayout>
+        <div class="pb-2">
+            <ul class="flex justify-center mx-auto max-w-2xl">
+                <li
+                    v-for="category in categories"
+                    :key="category.id"
+                    @click="selectCategory()"
+                    class="text-zinc-500 cursor-pointer px-2 py-1"
+                >
+                    <Link href="">{{ category.title }}</Link>
+                </li>
+            </ul>
+        </div>
         <div class="flex">
             <div class="sm:w-64 sm:border-r">
                 <ProductSearch
                     :search="filters.search"
                     @setSearch="setSearch"
                 ></ProductSearch>
-
-                <ul>
-                    <li
-                        v-for="category in categories"
-                        :key="category.id"
-                        @click="selectCategory()"
-                        class="text-zinc-500 flex items-start cursor-pointer px-2 py-1"
-                    >
-                        <div
-                            class="flex justify-center items-center cursor-pointer"
-                        >
-                            <Link href="">{{ category.title }}</Link>
-                        </div>
-                    </li>
-                </ul>
 
                 <!-- <ProductCategoryFilter
                     :category="filters.category"
