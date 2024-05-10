@@ -29,4 +29,14 @@ class ProductFilter extends AbstractFilter
     {
         $builder->where('category_id', $value);
     }
+
+    public function price(Builder $builder, $value)
+    {
+        //
+    }
+
+    public function tags(Builder $builder, $value)
+    {
+        //
+    }
 }
