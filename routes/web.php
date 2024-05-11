@@ -1,19 +1,11 @@
 <?php
 
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\ChatController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\TagController;
-use App\Http\Controllers\Admin\GroupController;
-use App\Http\Controllers\Admin\StickerController;
 use App\Http\Controllers\Client\WishController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\CatalogController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\MessageController;
-use App\Http\Controllers\Client\ProductSingleController;
+use App\Http\Controllers\Client\ProductController;
 use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\SetLocaleController;
 use Illuminate\Support\Facades\Route;
@@ -34,8 +26,8 @@ Route::post('/locale', [SetLocaleController::class, 'locale'])->name('locale');
 Route::get('/',  HomeController::class)->name('/');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::get('/wish', [WishController::class, 'index'])->name('wish');
-Route::singleton('catalog', CatalogController::class);
-Route::resource('product', ProductSingleController::class)->only('show');
+Route::get('/catalog/{category:slug}', CatalogController::class)->name('catalog');
+Route::resource('/product', ProductController::class)->only('show');
 
 // Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 //     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');

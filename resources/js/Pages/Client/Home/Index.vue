@@ -13,7 +13,12 @@ import SortProducts from "@/Components/Filters/SortProducts.vue";
 import debounce from "lodash/debounce";
 import pickBy from "lodash/pickBy";
 
+import { usePage } from "@inertiajs/vue3";
+
+const location = usePage().props.ziggy.location;
+
 const props = defineProps({
+    category: String,
     products: Object,
     filters: Object,
     categories: Array,
@@ -30,19 +35,11 @@ const filters = ref({
     sortBy: props.sortBy,
 });
 
-// watch(
-//     filters.value,
-//     debounce(function (value) {
-//         router.get(
-//             "/",
-//             { search: value.search },
-//             { preserveState: true, replace: true }
-//         );
-//     }, 300)
-// );
-
 watch(filters.value, (value) => {
-    router.get("/", pickBy(value), { preserveState: true, replace: true });
+    router.get(location, pickBy(value), {
+        preserveState: true,
+        replace: true,
+    });
 });
 
 const setSearch = (value) => {
@@ -61,7 +58,9 @@ const setSearch = (value) => {
                     @click="selectCategory()"
                     class="text-zinc-500 cursor-pointer px-2 py-1"
                 >
-                    <Link href="">{{ category.title }}</Link>
+                    <Link :href="route('catalog', category.slug)">{{
+                        category.title
+                    }}</Link>
                 </li>
             </ul>
         </div>
