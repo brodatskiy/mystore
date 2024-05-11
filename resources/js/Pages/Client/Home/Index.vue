@@ -24,7 +24,7 @@ const props = defineProps({
     categories: Array,
     search: String,
     price: String,
-    sortBy: String,
+    sort: String,
 });
 
 const filters = ref({
@@ -32,7 +32,7 @@ const filters = ref({
     category: props.category,
     min_price: props.min_price,
     max_price: props.max_price,
-    sortBy: props.sortBy,
+    sort: props.sort,
 });
 
 watch(filters.value, (value) => {
@@ -45,12 +45,16 @@ watch(filters.value, (value) => {
 const setSearch = (value) => {
     filters.value.search = value;
 };
+
+const setSort = (value) => {
+    filters.value.sort = value;
+};
 </script>
 <template>
     <Head title="Home" />
 
     <ShopLayout>
-        <div class="pb-2">
+        <div class="pb-2 flex">
             <ul class="flex justify-center mx-auto max-w-2xl">
                 <li
                     v-for="category in categories"
@@ -63,6 +67,10 @@ const setSearch = (value) => {
                     }}</Link>
                 </li>
             </ul>
+            <SortProducts
+                :sort="filters.sort"
+                @setSort="setSort"
+            ></SortProducts>
         </div>
         <div class="flex">
             <div class="sm:w-64 sm:border-r">

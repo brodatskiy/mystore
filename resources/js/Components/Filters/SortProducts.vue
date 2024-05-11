@@ -1,29 +1,34 @@
 <script setup>
 import { ref, watch } from "vue";
+import Dropdown from "primevue/dropdown";
 
 const props = defineProps({
-    sortBy: String,
+    sort: String,
 });
 
-const emits = defineEmits(["setSortBy"]);
+const sortOptions = ref([
+    { title: "Price ascending", value: "price" },
+    { title: "Price descending", value: "-price" },
+]);
 
-const sortField = ref(props.sortBy);
+const emits = defineEmits(["setSort"]);
 
-watch(sortField, (value) => {
-    emits("setSortBy", value);
+const sortField = ref(props.sort);
+
+watch(sortField, (option) => {
+    emits("setSort", option.value);
 });
 </script>
 
 <template>
     <div>
-        <select
+        <Dropdown
             v-model="sortField"
-            class="border border-zinc-300 rounded text-xs focus:border-transparent focus:ring focus:ring-zinc-300 focus:ring-opacity-80"
-        >
-            <option value="">Sort by</option>
-            <option value="best_selling">Best selling</option>
-            <option value="price_desc">Price desc</option>
-            <option value="price_asc">Price asc</option>
-        </select>
+            :options="sortOptions"
+            :optionValue="sortOptions.value"
+            optionLabel="title"
+            placeholder="Sort by"
+            class=""
+        />
     </div>
 </template>
