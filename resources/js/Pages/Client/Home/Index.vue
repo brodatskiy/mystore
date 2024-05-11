@@ -15,7 +15,7 @@ import pickBy from "lodash/pickBy";
 
 import { usePage } from "@inertiajs/vue3";
 
-const location = usePage().props.ziggy.location;
+const currentLocation = usePage().props.ziggy.location;
 
 const props = defineProps({
     category: String,
@@ -36,7 +36,7 @@ const filters = ref({
 });
 
 watch(filters.value, (value) => {
-    router.get(location, pickBy(value), {
+    router.get(currentLocation, pickBy(value), {
         preserveState: true,
         replace: true,
     });
