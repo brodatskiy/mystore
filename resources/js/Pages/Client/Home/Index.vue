@@ -23,23 +23,15 @@ const props = defineProps({
     filters: Object,
     categories: Array,
     search: String,
-    price: String,
+    price: Object,
     sort: String,
 });
 
 const filters = ref({
     search: props.search,
     category: props.category,
-    min_price: props.min_price,
-    max_price: props.max_price,
+    price: props.price,
     sort: props.sort,
-});
-
-watch(filters.value, (value) => {
-    router.get(currentLocation, pickBy(value), {
-        preserveState: true,
-        replace: true,
-    });
 });
 
 const setSearch = (value) => {
@@ -49,6 +41,17 @@ const setSearch = (value) => {
 const setSort = (value) => {
     filters.value.sort = value;
 };
+
+const setPrice = (value) => {
+    filters.value.price = value;
+};
+
+watch(filters.value, (value) => {
+    router.get(currentLocation, pickBy(value), {
+        preserveState: true,
+        replace: true,
+    });
+});
 </script>
 <template>
     <Head title="Home" />
@@ -85,11 +88,10 @@ const setSort = (value) => {
                     @setCategory="setCategory"
                 ></ProductCategoryFilter> -->
 
-                <!-- <ProductPriceFilter
-                    :min_price="props.min_price"
-                    :max_price="props.max_price"
+                <ProductPriceFilter
+                    :price="filters.price"
                     @setPrice="setPrice"
-                ></ProductPriceFilter> -->
+                ></ProductPriceFilter>
             </div>
             <div>
                 <div
