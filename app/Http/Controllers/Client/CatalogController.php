@@ -22,12 +22,15 @@ class CatalogController extends Controller
         $categories = Category::all();
         // $colors = Color::all();
         $tags = Tag::all();
-        $maxPrice = Product::orderBy('price', 'DESC')->first()->price;
+
         $minPrice = Product::orderBy('price', 'ASC')->first()->price;
+        $maxPrice = Product::orderBy('price', 'DESC')->first()->price;
 
         return Inertia::render('Client/Home/Index', [
             'products' => $products,
             'categories' => $categories,
+            'tags' => $tags,
+            'price' => [$minPrice, $maxPrice],
         ]);
     }
 }
