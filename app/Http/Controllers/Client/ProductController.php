@@ -8,7 +8,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class ProductSingleController extends Controller
+class ProductController extends Controller
 {
     public function show(Product $product)
     {
