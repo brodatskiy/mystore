@@ -30,7 +30,7 @@ class CatalogController extends Controller
             'products' => $products,
             'categories' => $categories,
             'tags' => $tags,
-            'price' => ['from' => $minPrice, 'to' => $maxPrice],
+            'price' => ['min' => $minPrice, 'max' => $maxPrice],
         ]);
     }
 }
