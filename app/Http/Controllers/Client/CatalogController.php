@@ -18,7 +18,13 @@ class CatalogController extends Controller
     {
         $data = $request->validated();
         $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($data)]);
-        $products = ProductResource::collection($category->products()->filter($filter)->paginate(8)->withQueryString());
+
+        $products = $category->products()
+            ->filter($filter)
+
+            ->paginate(8)
+            ->withQueryString();
+
         $categories = Category::all();
         // $colors = Color::all();
         $tags = Tag::all();
@@ -27,9 +33,11 @@ class CatalogController extends Controller
         $maxPrice = Product::orderBy('price', 'DESC')->first()->price;
 
         return Inertia::render('Client/Home/Index', [
-            'products' => $products,
-            'categories' => $categories,
+            'products' => ProductResource::collection($products),
+            'sortBy' => $request->sortBy ?? '',
+            'search' => $request->search ?? '',
             'tags' => $tags,
+            'categories' => $categories,
             'price' => ['min' => $minPrice, 'max' => $maxPrice],
         ]);
     }

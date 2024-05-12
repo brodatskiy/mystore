@@ -18,10 +18,9 @@ import { usePage } from "@inertiajs/vue3";
 const currentLocation = usePage().props.ziggy.location;
 
 const props = defineProps({
-    category: String,
     products: Object,
-    filters: Object,
     categories: Array,
+    tags: Array,
     search: String,
     price: Object,
     sort: String,
@@ -62,7 +61,6 @@ watch(filters.value, (value) => {
                 <li
                     v-for="category in categories"
                     :key="category.id"
-                    @click="selectCategory()"
                     class="text-zinc-500 cursor-pointer px-2 py-1"
                 >
                     <Link :href="route('catalog', category.slug)">{{
@@ -88,10 +86,10 @@ watch(filters.value, (value) => {
                     @setCategory="setCategory"
                 ></ProductCategoryFilter> -->
 
-                <ProductPriceFilter
+                <!-- <ProductPriceFilter
                     :price="filters.price"
                     @setPrice="setPrice"
-                ></ProductPriceFilter>
+                ></ProductPriceFilter> -->
             </div>
             <div>
                 <div
