@@ -31,19 +31,6 @@ class Product extends Model
     protected $guarded = false;
     protected $with = ['group', 'category', 'tags', 'sizes', 'sticker'];
 
-    protected $allowedSorts = [
-        'id',
-        'title',
-        'price',
-        'is_published',
-        'updated_at',
-        'created_at',
-    ];
-
-    protected $allowedFilters = [
-        'title'       => Like::class,
-    ];
-
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
@@ -80,4 +67,18 @@ class Product extends Model
     {
         return $this->morphMany(Image::class, 'imageable');
     }
+
+    //Orchid
+    protected $allowedSorts = [
+        'id',
+        'title',
+        'price',
+        'is_published',
+        'updated_at',
+        'created_at',
+    ];
+
+    protected $allowedFilters = [
+        'title'       => Like::class,
+    ];
 }
