@@ -28,9 +28,8 @@ return new class extends Migration
                 ->index()
                 ->constrained()
                 ->cascadeOnUpdate()
-                ->nullOnDelete();
+                ->cascadeOnDelete();
             $table->foreignIdFor(Sticker::class)
-
                 ->nullable()
                 ->constrained()
                 ->cascadeOnUpdate()
