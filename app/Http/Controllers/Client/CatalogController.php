@@ -38,7 +38,7 @@ class CatalogController extends Controller
             'products' => ProductResource::collection($products),
             'tags' => $tags,
             'categories' => $categories,
-            'price' => ['min' => $minPrice, 'max' => $maxPrice],
+            'price' => [$minPrice, $maxPrice],
         ]);
     }
 }

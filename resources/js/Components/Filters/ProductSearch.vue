@@ -23,16 +23,6 @@ watch(
 
 <template>
     <section>
-        <IconField iconPosition="left">
-            <InputIcon>
-                <Icon
-                    icon="mdi:search"
-                    width="1.5rem"
-                    height="1.5rem"
-                    class="-mt-1"
-                ></Icon>
-            </InputIcon>
-            <InputText v-model="search" type="text" placeholder="Search" />
-        </IconField>
+        <InputText v-model="search" type="text" placeholder="Search" />
     </section>
 </template>
