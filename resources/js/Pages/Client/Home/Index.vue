@@ -80,12 +80,6 @@ watch(filters.value, (value) => {
                     @setSearch="setSearch"
                 ></ProductSearch>
 
-                <!-- <ProductCategoryFilter
-                    :category="filters.category"
-                    :categories="props.categories"
-                    @setCategory="setCategory"
-                ></ProductCategoryFilter> -->
-
                 <ProductPriceFilter
                     :price="filters.price"
                     @setPrice="setPrice"
