@@ -21,7 +21,7 @@ class CatalogController extends Controller
 
         $products = $category->products()
             ->filter($filter)
-
+            ->sorted()
             ->paginate(8)
             ->withQueryString();
 
@@ -34,7 +34,7 @@ class CatalogController extends Controller
 
         return Inertia::render('Client/Home/Index', [
             'products' => ProductResource::collection($products),
-            'sortBy' => $request->sortBy ?? '',
+            'sort' => $request->sort ?? '',
             'search' => $request->search ?? '',
             'tags' => $tags,
             'categories' => $categories,

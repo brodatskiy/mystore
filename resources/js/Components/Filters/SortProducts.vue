@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from "vue";
+import { ref, watch, computed } from "vue";
 import Dropdown from "primevue/dropdown";
 
 const props = defineProps({
@@ -11,9 +11,13 @@ const sortOptions = ref([
     { title: "Price descending", value: "-price" },
 ]);
 
-const emits = defineEmits(["setSort"]);
+const sort = computed(() => {
+    return sortOptions.value.filter((option) => option.value === props.sort)[0];
+});
 
-const sortField = ref(props.sort);
+const sortField = ref(sort.value);
+
+const emits = defineEmits(["setSort"]);
 
 watch(sortField, (option) => {
     emits("setSort", option.value);

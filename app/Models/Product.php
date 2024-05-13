@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Traits\HasFilter;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -36,6 +37,19 @@ class Product extends Model
         return SlugOptions::create()
             ->generateSlugsFrom('title')
             ->saveSlugsTo('slug');
+    }
+
+    public function scopeSorted(Builder $query)
+    {
+        $sortBy = request('sort');
+        // dd($query);
+        $query->when($sortBy, function (Builder $q, $sortBy) {
+            if ($sortBy == 'price') {
+                $q->orderBy('price', 'ASC');
+            } elseif ($sortBy == '-price') {
+                $q->orderBy('price', 'DESC');
+            }
+        });
     }
 
     public function group()
