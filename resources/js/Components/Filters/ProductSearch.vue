@@ -2,6 +2,9 @@
 import { ref, watch } from "vue";
 import debounce from "lodash/debounce";
 
+import IconField from "primevue/iconfield";
+import InputIcon from "primevue/inputicon";
+
 const props = defineProps({
     search: String,
 });
@@ -19,15 +22,17 @@ watch(
 </script>
 
 <template>
-    <div class="pt-[34px] px-6 pb-0">
-        <div class="relative">
-            <input
-                type="text"
-                v-model="search"
-                id="search"
-                placeholder="Search among products"
-                class="border border-zinc-300 p-2 px-3 text-xs w-full placeholder-zinc-400 rounded focus:border-transparent focus:ring focus:ring-zinc-300 focus:ring-opacity-80"
-            />
-        </div>
-    </div>
+    <section>
+        <IconField iconPosition="left">
+            <InputIcon>
+                <Icon
+                    icon="mdi:search"
+                    width="1.5rem"
+                    height="1.5rem"
+                    class="-mt-1"
+                ></Icon>
+            </InputIcon>
+            <InputText v-model="search" type="text" placeholder="Search" />
+        </IconField>
+    </section>
 </template>
