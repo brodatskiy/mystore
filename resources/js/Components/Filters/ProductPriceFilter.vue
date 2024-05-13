@@ -15,26 +15,36 @@ watch(price, (price) => {
 </script>
 
 <template>
-    <section class="p-6 pb-0">
-        <span class="block font-medium text-xs uppercase mb-4">Price</span>
+    <section class="">
+        <h3 class="font-medium text-xs uppercase mb-4">Price</h3>
+        <div class="space-y-6">
+            <div class="flex items-center justify-between">
+                <div class="space-x-2">
+                    <span>from</span>
+                    <InputNumber
+                        v-model="price[0]"
+                        :useGrouping="false"
+                        pt:input:root:class="w-20"
+                        :ptOptions="{ mergeProps: true }"
+                    />
+                </div>
 
-        <div>
-            <div class="flex items-center justify-between space-x-2">
-                <input
-                    type="number"
-                    step="5"
-                    min="0"
-                    v-model="price.min"
-                    placeholder="Min"
-                    class="w-full bg-zinc-200 text-zinc-600 placeholder-zinc-400 rounded border-none focus:ring focus:ring-zinc-300 focus:ring-opacity-80 text-xs"
-                />
-                <input
-                    type="number"
-                    step="5"
-                    min="0"
-                    v-model="price.max"
-                    placeholder="Max"
-                    class="w-full bg-zinc-200 text-zinc-600 placeholder-zinc-400 rounded border-none focus:ring focus:ring-zinc-300 focus:ring-opacity-80 text-xs"
+                <div class="space-x-2">
+                    <span>to</span>
+                    <InputNumber
+                        v-model="price[1]"
+                        :useGrouping="false"
+                        pt:input:root:class="w-20"
+                        :ptOptions="{ mergeProps: true }"
+                    />
+                </div>
+            </div>
+            <div>
+                <Slider
+                    v-model="price"
+                    :min="props.price[0]"
+                    :max="props.price[1]"
+                    range
                 />
             </div>
         </div>
