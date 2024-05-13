@@ -91,9 +91,9 @@ watch(filters.value, (value) => {
                     @setPrice="setPrice"
                 ></ProductPriceFilter> -->
             </div>
-            <div>
+            <div class="flex-1">
                 <div
-                    class="mx-auto grid max-w-6xl grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+                    class="mx-auto grid max-w-6xl grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4"
                 >
                     <ProductCard
                         v-for="product in products.data"
