@@ -86,10 +86,10 @@ watch(filters.value, (value) => {
                     @setCategory="setCategory"
                 ></ProductCategoryFilter> -->
 
-                <!-- <ProductPriceFilter
+                <ProductPriceFilter
                     :price="filters.price"
                     @setPrice="setPrice"
-                ></ProductPriceFilter> -->
+                ></ProductPriceFilter>
             </div>
             <div class="flex-1">
                 <div
