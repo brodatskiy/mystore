@@ -33,9 +33,9 @@ class CatalogController extends Controller
         $maxPrice = Product::orderBy('price', 'DESC')->first()->price;
 
         return Inertia::render('Client/Home/Index', [
-            'products' => ProductResource::collection($products),
             'sort' => $request->sort ?? '',
             'search' => $request->search ?? '',
+            'products' => ProductResource::collection($products),
             'tags' => $tags,
             'categories' => $categories,
             'price' => ['min' => $minPrice, 'max' => $maxPrice],
