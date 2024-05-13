@@ -68,20 +68,18 @@ watch(filters.value, (value) => {
                     }}</Link>
                 </li>
             </ul>
-            <SortProducts
-                :sort="filters.sort"
-                @setSort="setSort"
-            ></SortProducts>
+
+            <SortProducts :sort="props.sort" @setSort="setSort"></SortProducts>
         </div>
         <div class="flex">
-            <div class="sm:w-64 sm:border-r">
+            <div class="space-y-2 p-4">
                 <ProductSearch
-                    :search="filters.search"
+                    :search="props.search"
                     @setSearch="setSearch"
                 ></ProductSearch>
 
                 <ProductPriceFilter
-                    :price="filters.price"
+                    :price="props.price"
                     @setPrice="setPrice"
                 ></ProductPriceFilter>
             </div>
