@@ -58,20 +58,23 @@ const visible = ref(false);
     <ShopLayout>
         <div class="relative flex">
             <div class="mx-auto">
-                <ul class="flex">
-                    <li
-                        v-for="category in categories"
-                        :key="category.id"
-                        class="text-zinc-500 cursor-pointer px-2 py-1"
-                    >
-                        <Link :href="route('catalog', category.slug)">{{
-                            category.title
-                        }}</Link>
-                    </li>
-                </ul>
+                <ProductSearch
+                    :search="props.search"
+                    @setSearch="setSearch"
+                ></ProductSearch>
             </div>
-            <div class="absolute right-0 flex space-x-8">
-                <button @click="visible = true">Filters</button>
+            <div class="absolute right-0 flex items-center space-x-8">
+                <button
+                    @click="visible = true"
+                    class="flex hover:text-primary-600"
+                >
+                    <Icon
+                        icon="mdi:filter-variant"
+                        width="1.5rem"
+                        height="1.5rem"
+                    />
+                    <span>Filters</span>
+                </button>
                 <SortProducts
                     :sort="props.sort"
                     @setSort="setSort"
@@ -97,18 +100,14 @@ const visible = ref(false);
             ></Pagination>
         </div>
 
-        <div class="card flex justify-content-center">
+        <div>
             <Sidebar
                 v-model:visible="visible"
                 header="Filters"
                 position="right"
+                :modal="false"
             >
                 <div class="space-y-2 p-4">
-                    <ProductSearch
-                        :search="props.search"
-                        @setSearch="setSearch"
-                    ></ProductSearch>
-
                     <ProductPriceFilter
                         :price="props.price"
                         @setPrice="setPrice"

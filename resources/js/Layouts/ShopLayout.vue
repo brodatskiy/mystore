@@ -10,6 +10,39 @@ import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 
 // import { useCartStore } from "@/Store/useCartStore";
 // const cartStore = useCartStore();
+const categories = ref([
+    {
+        title: "Sneakers",
+        slug: "sneakers",
+    },
+    {
+        title: "Boots",
+        slug: "boots",
+    },
+    {
+        title: "Shorts",
+        slug: "Shorts",
+    },
+    {
+        title: "Jeans",
+        slug: "Jeans",
+    },
+    {
+        title: "Hoodie",
+        slug: "hoodie",
+    },
+    {
+        title: "Sweatshirt",
+        slug: "sweatshirt",
+    },
+    {
+        title: "Hats",
+        slug: "hats",
+    },
+]);
+const setCategories = (value) => {
+    categories.value = value;
+};
 const categoryExpand = ref(false);
 </script>
 <template>
@@ -122,7 +155,7 @@ const categoryExpand = ref(false);
         <!-- Page Heading -->
         <header class="bg-white shadow" v-if="$slots.header">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                <slot name="header" />
+                <slot name="header" @categories="setCategories" />
             </div>
         </header>
 
@@ -137,6 +170,28 @@ const categoryExpand = ref(false);
                 {{ new Date().getFullYear() }} — <strong>MyStore</strong>
             </div>
         </footer>
+
+        <Sidebar
+            v-model:visible="categoryExpand"
+            header="Categories"
+            position="left"
+            :modal="false"
+            :showCloseIcon="false"
+        >
+            <div class="">
+                <ul>
+                    <li
+                        v-for="category in categories"
+                        :key="category.id"
+                        class="cursor-pointer px-2 py-1 hover:text-primary-600"
+                    >
+                        <Link :href="route('catalog', category.slug)">{{
+                            category.title
+                        }}</Link>
+                    </li>
+                </ul>
+            </div>
+        </Sidebar>
     </div>
 </template>
 
