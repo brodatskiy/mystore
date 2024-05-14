@@ -10,16 +10,26 @@ import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 
 // import { useCartStore } from "@/Store/useCartStore";
 // const cartStore = useCartStore();
+const categoryExpand = ref(false);
 </script>
 <template>
     <div class="min-h-screen bg-gray-100">
         <header class="w-full sticky top-0 z-20 px-6 py-3 bg-white shadow">
             <div class="flex items-center justify-between">
+                <div class="flex-1">
+                    <button
+                        @click="categoryExpand = !categoryExpand"
+                        class="hover:text-primary-600"
+                    >
+                        Categories
+                    </button>
+                </div>
+
                 <!-- Logo -->
-                <div class="font-bold">
+                <div class="flex-1 flex justify-center">
                     <ApplicationLogo />
                 </div>
-                <div class="flex items-center">
+                <div class="flex-1 flex items-center justify-end">
                     <!-- Icon Buttons  -->
                     <LocaleSwitcher />
                     <div class="flex items-center space-x-4 ml-4">
