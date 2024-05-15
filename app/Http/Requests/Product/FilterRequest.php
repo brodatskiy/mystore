@@ -24,7 +24,7 @@ class FilterRequest extends FormRequest
         return [
             'search' => 'string',
             'color' => 'string',
-            'min_price' => 'integer',
+            'price' => 'array',
             'max_price' => 'integer',
             'category_id' => 'integer|exists:categories,id',
             'tags' => 'array',
