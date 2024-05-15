@@ -1,17 +1,18 @@
 <script setup>
-import { ref, watch } from "vue";
-import { router } from "@inertiajs/vue3";
-import ShopLayout from "@/Layouts/ShopLayout.vue";
+import { ref } from "vue";
+import { usePage } from "@inertiajs/vue3";
 
+import ShopLayout from "@/Layouts/ShopLayout.vue";
 import ProductCard from "@/Components/ProductCard.vue";
 import Pagination from "@/Components/Pagination.vue";
 import ProductPriceFilter from "@/Components/Filters/ProductPriceFilter.vue";
 import ProductSearch from "@/Components/Filters/ProductSearch.vue";
 // import AppliedFilters from "@/Components/Filters/AppliedFilters.vue";
 import SortProducts from "@/Components/Filters/SortProducts.vue";
-import pickBy from "lodash/pickBy";
 
-import { usePage } from "@inertiajs/vue3";
+import { useFilterStore } from "@/Store/useFilterStore";
+
+const filterStore = useFilterStore();
 
 const currentLocation = usePage().props.ziggy.location;
 
@@ -24,49 +25,29 @@ const props = defineProps({
     sort: String,
 });
 
+filterStore.setStore(props);
+
 const filters = ref({
-    search: props.search,
-    category: props.category,
-    price: props.price,
-    sort: props.sort,
+    search: filterStore.search,
+    price: filterStore.price,
+    sort: filterStore.sort,
 });
 
-const setSearch = (value) => {
-    filters.value.search = value;
-};
+function applyFilters() {
+    filterStore.applyFilters(currentLocation, filters);
+}
 
-const setSort = (value) => {
-    filters.value.sort = value;
-};
-
-const setPrice = (value) => {
-    filters.value.price = value;
-};
-
-watch(filters.value, (value) => {
-    router.get(currentLocation, pickBy(value), {
-        preserveState: true,
-        replace: true,
-    });
-});
-
-const visible = ref(false);
+const filterExpand = ref(false);
 </script>
 <template>
     <Head title="Home" />
 
     <ShopLayout>
-        <div class="relative flex">
-            <div class="mx-auto">
-                <ProductSearch
-                    :search="props.search"
-                    @setSearch="setSearch"
-                ></ProductSearch>
-            </div>
-            <div class="absolute right-0 flex items-center space-x-8">
+        <div class="flex justify-end">
+            <div class="flex space-x-8">
                 <button
-                    @click="visible = true"
-                    class="flex hover:text-primary-600"
+                    @click="filterExpand = true"
+                    class="flex items-center hover:text-primary-600"
                 >
                     <Icon
                         icon="mdi:filter-variant"
@@ -77,7 +58,7 @@ const visible = ref(false);
                 </button>
                 <SortProducts
                     :sort="props.sort"
-                    @setSort="setSort"
+                    @change="applyFilters"
                 ></SortProducts>
             </div>
         </div>
@@ -102,18 +83,28 @@ const visible = ref(false);
 
         <div>
             <Sidebar
-                v-model:visible="visible"
+                v-model:visible="filterExpand"
                 header="Filters"
                 position="right"
                 :modal="false"
             >
-                <div class="space-y-2 p-4">
-                    <ProductPriceFilter
-                        :price="props.price"
-                        @setPrice="setPrice"
-                    ></ProductPriceFilter>
+                <div class="space-y-8 p-4">
+                    <div>
+                        <ProductSearch></ProductSearch>
+                    </div>
+
+                    <div>
+                        <ProductPriceFilter></ProductPriceFilter>
+                    </div>
+
+                    <div class="flex justify-center">
+                        <Button @click="applyFilters" class="w-full">
+                            Apply</Button
+                        >
+                    </div>
                 </div>
             </Sidebar>
         </div>
     </ShopLayout>
 </template>
+applyFilters
