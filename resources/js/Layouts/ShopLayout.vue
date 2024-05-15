@@ -9,7 +9,9 @@ import FlashMessage from "@/Components/FlashMessage.vue";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 
 // import { useCartStore } from "@/Store/useCartStore";
+
 // const cartStore = useCartStore();
+
 const categories = ref([
     {
         title: "Sneakers",
@@ -40,9 +42,7 @@ const categories = ref([
         slug: "hats",
     },
 ]);
-const setCategories = (value) => {
-    categories.value = value;
-};
+
 const categoryExpand = ref(false);
 </script>
 <template>
@@ -155,7 +155,7 @@ const categoryExpand = ref(false);
         <!-- Page Heading -->
         <header class="bg-white shadow" v-if="$slots.header">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                <slot name="header" @categories="setCategories" />
+                <slot name="header" />
             </div>
         </header>
 
