@@ -20,19 +20,26 @@ class HomeController extends Controller
     public function __invoke(FilterRequest $request)
     {
         $data = $request->validated();
-        $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($data)]);
-        $products = Product::filter($filter)->paginate(8)->withQueryString();
-        $products = ProductResource::collection($products);
 
-        $categories = Category::all();
+        $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($data)]);
+
+        $products = Product::query()
+            ->filter($filter)
+            ->sorted()
+            ->paginate(8)
+            ->withQueryString();
+
         // $colors = Color::all();
         $tags = Tag::all();
-        $maxPrice = Product::orderBy('price', 'DESC')->first()->price;
         $minPrice = Product::orderBy('price', 'ASC')->first()->price;
+        $maxPrice = Product::orderBy('price', 'DESC')->first()->price;
 
         return Inertia::render('Client/Home/Index', [
-            'products' => $products,
-            'categories' => $categories,
+            'sort' => $request->sort ?? '',
+            'search' => $request->search ?? '',
+            'products' => ProductResource::collection($products),
+            'tags' => $tags,
+            'price' => $request->price ?? [$minPrice, $maxPrice],
         ]);
     }
 }
