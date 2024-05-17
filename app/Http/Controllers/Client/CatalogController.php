@@ -17,6 +17,7 @@ class CatalogController extends Controller
     public function __invoke(FilterRequest $request, Category $category)
     {
         $data = $request->validated();
+
         $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($data)]);
 
         $products = $category->products()
@@ -25,19 +26,16 @@ class CatalogController extends Controller
             ->paginate(8)
             ->withQueryString();
 
-        $categories = Category::all();
         // $colors = Color::all();
         $tags = Tag::all();
-
         $minPrice = Product::orderBy('price', 'ASC')->first()->price;
         $maxPrice = Product::orderBy('price', 'DESC')->first()->price;
 
-        return Inertia::render('Client/Home/Index', [
+        return Inertia::render('Client/Catalog/Index', [
             'sort' => $request->sort ?? '',
             'search' => $request->search ?? '',
             'products' => ProductResource::collection($products),
             'tags' => $tags,
-            'categories' => $categories,
             'price' => $request->price ?? [$minPrice, $maxPrice],
         ]);
     }
