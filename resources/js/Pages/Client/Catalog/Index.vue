@@ -27,7 +27,7 @@ const props = defineProps({
 filterStore.setStore(props);
 
 function applyFilters() {
-    filterStore.applyFilters(currentLocation, filters);
+    filterStore.applyFilters(currentLocation);
 }
 
 const filterExpand = ref(false);
