@@ -5,15 +5,10 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Http\Filters\ProductFilter;
 use App\Http\Requests\Product\FilterRequest;
-use App\Http\Resources\Product\ProductResource;
-use App\Models\Category;
+use App\Http\Resources\Product\ProductCardResource;
 use App\Models\Product;
 use App\Models\Tag;
-
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Request;
 use Inertia\Inertia;
-
 
 class HomeController extends Controller
 {
@@ -24,12 +19,14 @@ class HomeController extends Controller
         $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($data)]);
 
         $products = Product::query()
+            ->with('sticker')
             ->filter($filter)
             ->sorted()
             ->paginate(8)
             ->withQueryString();
 
         // $colors = Color::all();
+
         $tags = Tag::all();
         $minPrice = Product::orderBy('price', 'ASC')->first()->price;
         $maxPrice = Product::orderBy('price', 'DESC')->first()->price;
@@ -37,7 +34,7 @@ class HomeController extends Controller
         return Inertia::render('Client/Home/Index', [
             'sort' => $request->sort ?? '',
             'search' => $request->search ?? '',
-            'products' => ProductResource::collection($products),
+            'products' => ProductCardResource::collection($products),
             'tags' => $tags,
             'price' => $request->price ?? [$minPrice, $maxPrice],
         ]);

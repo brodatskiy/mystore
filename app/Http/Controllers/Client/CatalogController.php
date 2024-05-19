@@ -5,11 +5,10 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Http\Filters\ProductFilter;
 use App\Http\Requests\Product\FilterRequest;
-use App\Http\Resources\Product\ProductResource;
+use App\Http\Resources\Product\ProductCardResource;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Tag;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class CatalogController extends Controller
@@ -34,7 +33,7 @@ class CatalogController extends Controller
         return Inertia::render('Client/Catalog/Index', [
             'sort' => $request->sort ?? '',
             'search' => $request->search ?? '',
-            'products' => ProductResource::collection($products),
+            'products' => ProductCardResource::collection($products),
             'tags' => $tags,
             'price' => $request->price ?? [$minPrice, $maxPrice],
         ]);
