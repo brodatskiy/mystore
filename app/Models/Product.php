@@ -42,7 +42,7 @@ class Product extends Model
     public function scopeSorted(Builder $query)
     {
         $sortBy = request('sort');
-        // dd($query);
+
         $query->when($sortBy, function (Builder $q, $sortBy) {
             if ($sortBy == 'price') {
                 $q->orderBy('price', 'ASC');
@@ -93,6 +93,6 @@ class Product extends Model
     ];
 
     protected $allowedFilters = [
-        'title'       => Like::class,
+        'title' => Like::class,
     ];
 }
