@@ -16,28 +16,20 @@ use Orchid\Screen\AsSource;
 class User extends Authenticatable
 {
     use AsSource, Chartable, Filterable, HasFactory, Notifiable, UserAccess;
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'age',
-        'address',
-        'avatar',
-        'gender',
-        'role',
-        'email_verified_at'
-    ];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
+    protected $table = 'users';
+    protected $guarded = false;
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'user_id');
+    }
+
+    public function cart()
+    {
+        return $this->belongsToMany(Product::class, 'carts', 'user_id', 'product_id')->withPivot('quantity')->withTimestamps();
+    }
+
     protected $hidden = [
         'password',
         'remember_token',
@@ -46,21 +38,11 @@ class User extends Authenticatable
         'email_verified_at'
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'permissions'          => 'array',
         'email_verified_at'    => 'datetime',
     ];
 
-    /**
-     * The attributes for which you can use filters in url.
-     *
-     * @var array
-     */
     protected $allowedFilters = [
         'id'         => Where::class,
         'name'       => Like::class,
@@ -69,11 +51,6 @@ class User extends Authenticatable
         'created_at' => WhereDateStartEnd::class,
     ];
 
-    /**
-     * The attributes for which can use sort in url.
-     *
-     * @var array
-     */
     protected $allowedSorts = [
         'id',
         'name',
@@ -81,9 +58,4 @@ class User extends Authenticatable
         'updated_at',
         'created_at',
     ];
-
-    public function comments()
-    {
-        return $this->hasMany(Comment::class, 'user_id');
-    }
 }

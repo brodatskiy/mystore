@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\Traits\HasFilter;
-use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,11 +10,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Orchid\Attachment\Attachable;
 use Orchid\Filters\Filterable;
 use Orchid\Filters\Types\Like;
-use Orchid\Filters\Types\Where;
-use Orchid\Filters\Types\WhereDate;
-use Orchid\Filters\Types\WhereDateStartEnd;
-use Orchid\Filters\Types\WhereIn;
-use Orchid\Filters\Types\WhereMaxMin;
 use Orchid\Screen\AsSource;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
@@ -31,26 +25,6 @@ class Product extends Model
     protected $table = 'products';
     protected $guarded = false;
     protected $with = ['group', 'category', 'tags', 'sizes', 'sticker'];
-
-    public function getSlugOptions(): SlugOptions
-    {
-        return SlugOptions::create()
-            ->generateSlugsFrom('title')
-            ->saveSlugsTo('slug');
-    }
-
-    public function scopeSorted(Builder $query)
-    {
-        $sortBy = request('sort');
-
-        $query->when($sortBy, function (Builder $q, $sortBy) {
-            if ($sortBy == 'price') {
-                $q->orderBy('price', 'ASC');
-            } elseif ($sortBy == '-price') {
-                $q->orderBy('price', 'DESC');
-            }
-        });
-    }
 
     public function group()
     {
@@ -80,6 +54,31 @@ class Product extends Model
     public function images()
     {
         return $this->morphMany(Image::class, 'imageable');
+    }
+
+    public function cart()
+    {
+        return $this->belongsToMany(User::class, 'carts', 'product_id', 'user_id');
+    }
+
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('title')
+            ->saveSlugsTo('slug');
+    }
+
+    public function scopeSorted(Builder $query)
+    {
+        $sortBy = request('sort');
+
+        $query->when($sortBy, function (Builder $q, $sortBy) {
+            if ($sortBy == 'price') {
+                $q->orderBy('price', 'ASC');
+            } elseif ($sortBy == '-price') {
+                $q->orderBy('price', 'DESC');
+            }
+        });
     }
 
     //Orchid
