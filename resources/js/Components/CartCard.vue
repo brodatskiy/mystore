@@ -1,35 +1,86 @@
+<script setup>
+import { ref } from "vue";
+import { router } from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
+import SecondaryBtn from "./Buttons/SecondaryBtn.vue";
+
+defineProps(["product"]);
+
+const processing = ref(false);
+
+function increase(product) {
+    router.patch(route("cart.increase", { product: product }), {
+        onStart: () => {
+            processing.value = true;
+        },
+        onFinish: () => {
+            processing.value = false;
+        },
+    });
+}
+
+function decrease(product) {
+    router.patch(route("cart.decrease", { product: product }), {
+        onStart: () => {
+            processing.value = true;
+        },
+        onFinish: () => {
+            processing.value = false;
+        },
+    });
+}
+
+function destroy(product) {
+    router.delete(route("cart.destroy", { product: product }), {
+        onStart: () => {
+            processing.value = true;
+        },
+        onFinish: () => {
+            processing.value = false;
+        },
+    });
+}
+</script>
 <template>
-    <div
-        class="flex flex-col md:flex-row w-full mx-auto border rounded-xl p-3 mb-2"
-    >
-        <div class="p-3 w-1/3">
-            <Link :href="route('product.show', product)">
-                <img
-                    :src="product.image"
-                    alt="Card Image"
-                    class="object-contain w-32 mx-auto"
-                />
-            </Link>
-        </div>
-        <div class="flex items-center p-8 w-2/3 space-x-5">
-            <div>
-                <Link :href="route('product.show', product)">
-                    <h2 class="text-xl font-bold mb-3">
-                        {{ product.title }}
-                    </h2>
-                </Link>
-                <p class="mb-5">
-                    {{ product.description }}
-                </p>
-                <p class="text-xl mb-5">
-                    {{ product.price }}
-                </p>
+    <div class="mb-6 rounded-lg bg-white p-4 shadow-md flex">
+        <Link :href="route('product.show', product)">
+            <img
+                :src="product.image"
+                alt="Card Image"
+                class="w-full rounded-lg sm:w-40"
+            />
+        </Link>
+        <div class="flex justify-between w-full px-4">
+            <div class="flex flex-col">
+                <div class="flex-1">
+                    <Link :href="route('product.show', product)">
+                        <h2 class="text-lg font-bold text-gray-900">
+                            {{ product.title }}
+                        </h2>
+                    </Link>
+                    <p class="mt-1 text-xs text-gray-700">
+                        {{ product.description }}
+                    </p>
+                </div>
+                <div class="flex space-x-2">
+                    <SecondaryBtn>
+                        <Icon icon="mdi:heart-outline" class="h-5 w-5 m-2" />
+                    </SecondaryBtn>
+                    <SecondaryBtn @click="destroy(product)">
+                        <Icon icon="mdi:trash-outline" class="h-5 w-5 m-2" />
+                    </SecondaryBtn>
+                </div>
             </div>
-            <div class="">
-                <div class="btn-group">
+            <div class="flex items-center space-x-3">
+                <div class="">
+                    <p class="text-center">
+                        ${{ product.price * product.quantity }}
+                    </p>
+                </div>
+                <div class="flex">
                     <button
                         class="rounded-l-md bg-primary-300 hover:bg-primary-400 active:bg-primary-500 px-3 py-2"
-                        @click="cartStore.remove(product)"
+                        @click="decrease(product)"
                     >
                         -
                     </button>
@@ -38,7 +89,7 @@
                     </button>
                     <button
                         class="rounded-r-md bg-primary-300 hover:bg-primary-400 active:bg-primary-500 px-3 py-2"
-                        @click="cartStore.add(product)"
+                        @click="increase(product)"
                     >
                         +
                     </button>
@@ -47,14 +98,5 @@
         </div>
     </div>
 </template>
-
-<script setup>
-import { Link } from "@inertiajs/vue3";
-import { useCartStore } from "@/Store/useCartStore";
-
-const cartStore = useCartStore();
-
-defineProps(["product"]);
-</script>
 
 <style scoped></style>

@@ -66,14 +66,14 @@ const categoryExpand = ref(false);
                     <!-- Icon Buttons  -->
                     <LocaleSwitcher />
                     <div class="flex items-center space-x-4 ml-4">
-                        <LinkBtn :href="route('cart')">
+                        <LinkBtn :href="route('cart.index')">
                             <Icon
                                 icon="mdi:cart-outline"
                                 width="1.5rem"
                                 height="1.5rem"
                             />
                         </LinkBtn>
-                        <LinkBtn :href="route('cart')">
+                        <LinkBtn :href="route('cart.index')">
                             <Icon
                                 icon="mdi:heart-outline"
                                 width="1.5rem"

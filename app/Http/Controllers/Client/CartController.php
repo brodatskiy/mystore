@@ -3,100 +3,49 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Product\ProductCartResource;
+use App\Http\Resources\CartItem\CartItemResource;
 use App\Models\Cart;
 use App\Models\Product;
+use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
-
 
 class CartController extends Controller
 {
     public function index()
     {
-        $products = Cart::getContent();
-
-        $total = Cart::getCartTotal($products);
+        $cartItems = Cart::getItems();
 
         return Inertia::render('Client/Cart/Index', [
-            'products' => ProductCartResource::collection($products),
-            'total' => $total,
+            'products' => CartItemResource::collection($cartItems),
+            'total' => Cart::getTotal()
         ]);
     }
 
-    public function store(Product $product)
+    public function add(Product $product): RedirectResponse
     {
-        $productInCart = auth()->user()->cart()
-            ->firstWhere('product_id', $product->id);
-
-        if ($productInCart) {
-            return $this->increaseQty($productInCart);
-        }
-
-        auth()->user()->cart()
-            ->attach($product->id, ['quantity' => 1]);
+        Cart::add($product);
 
         return back();
     }
 
     public function increase(Product $product)
     {
-        $productInCart = auth()->user()->cart()
-            ->firstWhere('product_id', $product->id);
+        Cart::increase($product);
 
-        $this->increaseQty($productInCart);
-
-        return back()->with('success', true);
+        return back();
     }
 
     public function decrease(Product $product)
     {
-        $productInCart = auth()->user()->cart()
-            ->firstWhere('product_id', $product->id);
-
-        $this->decreaseQty($productInCart);
-
-        return back()->with('success', true);
-    }
-
-    public function destroy(Product $product)
-    {
-        auth()->user()->cart()
-            ->detach(['product_id' => $product->id]);
+        Cart::decrease($product);
 
         return back();
     }
 
-    public function empty()
+    public function destroy(Product $product): RedirectResponse
     {
-        Cart::empty();
+        Cart::destoyItem($product);
 
         return back();
-    }
-
-    protected function increaseQty($productInCart)
-    {
-        if ($productInCart->available_quantity > $productInCart->pivot->quantity) {
-            $productInCart->pivot->quantity = $productInCart->pivot->quantity + 1;
-            $productInCart->pivot->save();
-        } else {
-            return back()->with('error', 'The selected quantity is not available at the moment.');
-        }
-    }
-
-    /**
-     * @param Product $productInCart
-     * @return void
-     */
-    protected function decreaseQty($productInCart)
-    {
-        if ($productInCart->pivot->quantity === 1) {
-            auth()->user()->cart()
-                ->detach(['product_id' => $productInCart->pivot->product_id]);
-
-            return;
-        }
-
-        $productInCart->pivot->quantity = $productInCart->pivot->quantity - 1;
-        $productInCart->pivot->save();
     }
 }
