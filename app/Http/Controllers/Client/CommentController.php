@@ -7,6 +7,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Requests\Category\StoreRequest;
 use App\Http\Requests\Category\UpdateRequest;
 use App\Models\Category;
+use App\Models\Comment;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -36,7 +37,7 @@ class CommentController extends Controller
     public function store(StoreRequest $request)
     {
         $data = $request->validated();
-        Category::firstOrCreate($data);
+        Comment::firstOrCreate($data);
 
         return redirect()->route('categories.index');
     }

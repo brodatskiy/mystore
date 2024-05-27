@@ -13,6 +13,9 @@ use Orchid\Metrics\Chartable;
 use Orchid\Platform\Models\User as Authenticatable;
 use Orchid\Screen\AsSource;
 
+/**
+ * @method array cart()
+ */
 class User extends Authenticatable
 {
     use AsSource, Chartable, Filterable, HasFactory, Notifiable, UserAccess;
