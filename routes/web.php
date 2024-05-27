@@ -5,6 +5,7 @@ use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\CatalogController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\MessageController;
+use App\Http\Controllers\Client\OrderController;
 use App\Http\Controllers\Client\ProductController;
 use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\SetLocaleController;
@@ -26,6 +27,7 @@ Route::post('/locale', [SetLocaleController::class, 'locale'])->name('locale');
 //Shop
 Route::get('/',  HomeController::class)->name('/');
 Route::get('/wish', [WishController::class, 'index'])->name('wish');
+Route::get('/order', [OrderController::class, 'index'])->name('order');
 Route::get('/catalog/{category:slug}', CatalogController::class)->name('catalog');
 Route::resource('/product', ProductController::class)->only('show');
 
@@ -42,7 +44,6 @@ Route::controller(CartController::class)
 
 //Profile
 Route::middleware(['auth'])->group(function () {
-    Route::resource('/messages', MessageController::class)->only(['index', 'store']);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
