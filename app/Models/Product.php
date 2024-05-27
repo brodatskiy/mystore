@@ -24,7 +24,7 @@ class Product extends Model
 
     protected $table = 'products';
     protected $guarded = false;
-    protected $with = ['group', 'category', 'tags', 'sizes', 'sticker'];
+    protected $with = ['group', 'category', 'sticker', 'tags'];
 
     public function group()
     {
@@ -39,6 +39,11 @@ class Product extends Model
     public function sticker()
     {
         return $this->belongsTo(Sticker::class, 'sticker_id', 'id');
+    }
+
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class);
     }
 
     public function tags()
