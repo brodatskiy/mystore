@@ -29,7 +29,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             $table->unsignedBigInteger('price');
-            $table->unsignedInteger('quantity')->default(1);
+            $table->unsignedInteger('quantity')->default(0);
 
             $table->timestamps();
         });

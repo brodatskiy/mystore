@@ -45,13 +45,13 @@ class Cart extends Model
                 ]
             );
 
-        $cartItem = $cart->cartItems()->firstOrNew([
+        $cartItem = $cart->cartItems()->updateOrCreate([
             'product_id' => $product->getKey()
-        ], ['price' => $product->price]);
+        ], [
+            'price' => $product->price,
+        ]);
         $cartItem->increment('quantity');
         $cartItem->save();
-
-        return $cart;
     }
 
     public static function increase(Product $product): void
