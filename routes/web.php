@@ -37,8 +37,7 @@ Route::controller(CartController::class)
         Route::post('/{product}/add', 'add')->name('cart.add');
         Route::patch('/{product}/increase', 'increase')->name('cart.increase');
         Route::patch('/{product}/decrease', 'decrease')->name('cart.decrease');
-        Route::post('/{item}', 'quantity')->name('cart.quantity');
-        Route::delete('/{item}', 'destroy')->name('cart.destroy');
+        Route::delete('/{product}', 'destroy')->name('cart.destroy');
     });
 
 //Profile
