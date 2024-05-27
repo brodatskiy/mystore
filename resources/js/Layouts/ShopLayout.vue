@@ -23,11 +23,11 @@ const categories = ref([
     },
     {
         title: "Shorts",
-        slug: "Shorts",
+        slug: "shorts",
     },
     {
         title: "Jeans",
-        slug: "Jeans",
+        slug: "jeans",
     },
     {
         title: "Hoodie",
