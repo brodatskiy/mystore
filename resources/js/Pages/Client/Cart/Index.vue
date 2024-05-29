@@ -2,6 +2,7 @@
 import ShopLayout from "@/Layouts/ShopLayout.vue";
 import CartCard from "@/Components/CartCard.vue";
 import { useCartStore } from "@/Store/useCartStore";
+import { router } from "@inertiajs/vue3";
 
 const cartStore = useCartStore();
 
@@ -11,6 +12,9 @@ const props = defineProps({
 });
 
 // cartStore.products = props.products;
+function order() {
+    router.post(route("cart.order"));
+}
 </script>
 <template>
     <Head title="Cart" />
@@ -38,8 +42,9 @@ const props = defineProps({
                 </div>
                 <button
                     class="mt-6 w-full rounded-md bg-primary-500 py-1.5 font-medium text-primary-50 hover:bg-primary-600"
+                    @click="order()"
                 >
-                    Check out
+                    Order
                 </button>
             </div>
         </div>
