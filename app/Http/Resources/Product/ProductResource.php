@@ -25,7 +25,6 @@ class ProductResource extends JsonResource
             'image' => $this->preview_image,
             'color' => $this->color,
             'price' => $this->price,
-            'sizes' => SizeResource::collection($this->sizes),
             'is_published' => $this->is_published,
             'group' => new GroupResource($this->group),
             'product_group' => ProductMinResource::collection($products),

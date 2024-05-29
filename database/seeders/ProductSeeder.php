@@ -18,17 +18,11 @@ class ProductSeeder extends Seeder
     public function run()
     {
         $tags = Tag::all();
-        $sizes = Size::all();
-
 
         Product::factory()
             ->count(100)
             ->hasAttached($tags
                 ->random(2))
-            ->hasAttached(
-                $sizes,
-                ['count' => 10]
-            )
             ->create();
     }
 }
