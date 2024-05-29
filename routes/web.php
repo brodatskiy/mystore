@@ -28,6 +28,7 @@ Route::post('/locale', [SetLocaleController::class, 'locale'])->name('locale');
 //Shop
 Route::get('/',  HomeController::class)->name('/');
 Route::get('/wishlist', [WishController::class, 'index'])->name('wishlist');
+Route::post('/{wish}/add', [WishController::class, 'add'])->name('wish.add');
 Route::get('/catalog/{category:slug}', CatalogController::class)->name('catalog');
 Route::resource('/product', ProductController::class)->only('show');
 
