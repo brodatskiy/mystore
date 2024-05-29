@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Support\Collection;
@@ -87,7 +88,7 @@ class Cart extends Model
             return $item->quantity * $item->price;
         });
 
-        return number_format($total, 2);
+        return $total;
     }
 
     public static function destoyItem(Product $product): void
@@ -99,6 +100,11 @@ class Cart extends Model
     public static function empty(): void
     {
         self::get()?->delete();
+    }
+
+    public function user(): BelongsTo
+    {
+        return  $this->belongsTo(User::class);
     }
 
     public function cartItems(): HasMany
