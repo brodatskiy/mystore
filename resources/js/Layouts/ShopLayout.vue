@@ -73,7 +73,7 @@ const categoryExpand = ref(false);
                                 height="1.5rem"
                             />
                         </LinkBtn>
-                        <LinkBtn :href="route('cart.index')">
+                        <LinkBtn :href="route('wishlist')">
                             <Icon
                                 icon="mdi:heart-outline"
                                 width="1.5rem"
@@ -130,6 +130,11 @@ const categoryExpand = ref(false);
                                                 :href="route('profile.edit')"
                                             >
                                                 {{ $t("Profile") }}
+                                            </DropdownLink>
+                                            <DropdownLink
+                                                :href="route('orderlist')"
+                                            >
+                                                {{ $t("Orders") }}
                                             </DropdownLink>
                                             <DropdownLink
                                                 :href="route('logout')"
