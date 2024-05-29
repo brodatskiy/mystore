@@ -1,11 +1,18 @@
 <script setup>
 import { router } from "@inertiajs/vue3";
 import PrimaryBtn from './Buttons/PrimaryBtn.vue';
+import { useWishStore } from "@/Store/useWishStore";
+
+const wishStore = useWishStore();
 
 defineProps(["product"]);
 
 function add(product) {
     router.post(route('cart.add', { product: product }) )
+}
+
+function addToWishlist(product) {
+    router.post(route('wish.add', { product: product }) )
 }
 </script>
 <template>
@@ -23,7 +30,7 @@ function add(product) {
                 <div class="flex items-center justify-between py-2">
                     <p class=" text-l font-semibold text-gray-800">${{ product.price }}</p>
                     <p class="font-bold text-gray-500">{{ product.title }}</p>
-                    <p ><Icon icon="mdi-heart-outline" /></p>
+                    <button @click.prevent="addToWishlist(product)"><Icon icon="mdi-heart-outline" /></button>
                 </div>
                 <PrimaryBtn
                     class="w-full"
