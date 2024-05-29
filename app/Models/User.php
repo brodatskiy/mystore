@@ -30,7 +30,17 @@ class User extends Authenticatable
 
     public function cart()
     {
-        return $this->belongsToMany(Product::class, 'carts', 'user_id', 'product_id')->withPivot('quantity')->withTimestamps();
+        return $this->hasOne(Product::class);
+    }
+
+    public function order()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function wishes()
+    {
+        return $this->hasMany(Wish::class);
     }
 
     protected $hidden = [

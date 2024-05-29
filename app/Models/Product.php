@@ -41,19 +41,9 @@ class Product extends Model
         return $this->belongsTo(Sticker::class, 'sticker_id', 'id');
     }
 
-    public function cartItems()
-    {
-        return $this->hasMany(CartItem::class);
-    }
-
     public function tags()
     {
         return $this->belongsToMany(Tag::class, 'product_tag', 'product_id', 'tag_id');
-    }
-
-    public function sizes()
-    {
-        return $this->belongsToMany(Size::class, 'product_size', 'product_id', 'size_id')->withPivot('count');
     }
 
     public function images()
@@ -61,9 +51,9 @@ class Product extends Model
         return $this->morphMany(Image::class, 'imageable');
     }
 
-    public function cart()
+    public function cartItems()
     {
-        return $this->belongsToMany(User::class, 'carts', 'product_id', 'user_id');
+        return $this->hasMany(CartItem::class);
     }
 
     public function getSlugOptions(): SlugOptions
