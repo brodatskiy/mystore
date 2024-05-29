@@ -1,5 +1,12 @@
 <script setup>
+import { router } from "@inertiajs/vue3";
+import PrimaryBtn from './Buttons/PrimaryBtn.vue';
+
 defineProps(["product"]);
+
+function add(product) {
+    router.post(route('cart.add', { product: product }) )
+}
 </script>
 <template>
     <div class="">
@@ -18,6 +25,12 @@ defineProps(["product"]);
                     <p class="font-bold text-gray-500">{{ product.title }}</p>
                     <p ><Icon icon="mdi-heart-outline" /></p>
                 </div>
+                <PrimaryBtn
+                    class="w-full"
+                    @click.prevent="add(product)"
+                >
+                    Add to cart
+                </PrimaryBtn>
             </div>
         </Link>
     </div>
