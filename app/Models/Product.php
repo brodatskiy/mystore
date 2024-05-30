@@ -63,6 +63,11 @@ class Product extends Model
             ->saveSlugsTo('slug');
     }
 
+    public function usersWish()
+    {
+        return $this->belongsToMany(User::class, 'wish', 'product_id', 'user_id');
+    }
+
     public function scopeSorted(Builder $query)
     {
         $sortBy = request('sort');
