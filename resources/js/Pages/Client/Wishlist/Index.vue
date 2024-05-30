@@ -1,15 +1,10 @@
 <script setup>
 import ShopLayout from "@/Layouts/ShopLayout.vue";
-import { useCartStore } from "@/Store/useCartStore";
 import ProductCard from "@/Components/ProductCard.vue";
-
-const cartStore = useCartStore();
 
 const props = defineProps({
     wishlist: Array,
 });
-
-// cartStore.products = props.products;
 </script>
 <template>
     <Head title="Wishlist" />
@@ -19,11 +14,15 @@ const props = defineProps({
             class="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0"
         >
             <div class="w-full">
-                <ProductCard
-                    v-for="product in props.wishlist"
-                    :key="product.id"
-                    :product="product"
-                ></ProductCard>
+                <div
+                    class="mx-auto grid max-w-6xl grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4"
+                >
+                    <ProductCard
+                        v-for="product in props.wishlist"
+                        :key="product.id"
+                        :product="product"
+                    ></ProductCard>
+                </div>
             </div>
         </div>
     </ShopLayout>
