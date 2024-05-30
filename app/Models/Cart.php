@@ -71,7 +71,7 @@ class Cart extends Model
 
     public static function getItems()
     {
-        return self::get()?->cartItems()->get() ?? collect([]);
+        return self::get()?->cartItems()->orderBy('id')->get() ?? collect([]);
     }
 
 
