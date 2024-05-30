@@ -1,9 +1,6 @@
 <script setup>
 import { router } from "@inertiajs/vue3";
 import PrimaryBtn from './Buttons/PrimaryBtn.vue';
-import { useWishStore } from "@/Store/useWishStore";
-
-const wishStore = useWishStore();
 
 defineProps(["product"]);
 
