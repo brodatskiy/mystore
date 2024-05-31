@@ -8,7 +8,7 @@ const cartStore = useCartStore();
 
 const props = defineProps({
     products: Object,
-    total: String,
+    total: Number,
 });
 
 // cartStore.products = props.products;
