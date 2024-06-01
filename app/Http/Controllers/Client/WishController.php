@@ -30,11 +30,6 @@ class WishController extends Controller
 
         $user = auth()->user();
         $user->wishes()->toggle([$product->id]);
-        // Wish::firstOrCreate([
-        //     'user_id' => auth()->id()
-        // ], [
-        //     'product_id' => $product->id,
-        // ]);
 
         return back();
     }
