@@ -40,7 +40,7 @@ class User extends Authenticatable
 
     public function wishes()
     {
-        return $this->belongsToMany(Product::class, 'wish', 'user_id', 'product_id');
+        return $this->belongsToMany(Product::class, 'wish', 'user_id', 'product_id')->withTimestamps();
     }
 
     protected $hidden = [
