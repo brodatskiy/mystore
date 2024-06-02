@@ -30,7 +30,8 @@ class Cart extends Model
     public static function get()
     {
         return Cart::query()
-            ->where('storage_id', session()->getId())
+            ->where('user_id', auth()->id())
+            ->orWhere('storage_id', session()->getId())
             ->first();
     }
 
