@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -30,7 +31,7 @@ class Cart extends Model
     public static function get()
     {
         return Cart::query()
-            ->where('user_id', auth()->id())
+            ->when(auth()->check(), fn (Builder $q) => $q->where('user_id', auth()->id()))
             ->orWhere('storage_id', session()->getId())
             ->first();
     }
