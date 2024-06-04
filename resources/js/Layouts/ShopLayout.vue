@@ -8,10 +8,6 @@ import LocaleSwitcher from "@/Components/LocaleSwitcher.vue";
 import FlashMessage from "@/Components/FlashMessage.vue";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 
-// import { useCartStore } from "@/Store/useCartStore";
-
-// const cartStore = useCartStore();
-
 const categories = ref([
     {
         title: "Sneakers",
