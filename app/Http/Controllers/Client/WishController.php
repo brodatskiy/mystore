@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Product\ProductCardResource;
 use App\Http\Resources\Wish\WishResource;
 use App\Models\Product;
 use App\Models\Wish;
@@ -15,17 +16,14 @@ class WishController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $wishlist = $user?->wishes()->get() ?? collect([]);
-        $wishlist = Wish::where('user_id', auth()->id())->with('product')->get();
+        $wishlist = $user->wishes()->get() ?? collect([]);
 
-        $wishlist = WishResource::collection($wishlist);
-        // dd($wishlist);
         return Inertia::render('Client/Wishlist/Index', [
-            'wishlist' => $wishlist,
+            'wishlist' => ProductCardResource::collection($wishlist),
         ]);
     }
 
-    public function add(Product $product): RedirectResponse
+    public function toggle(Product $product): RedirectResponse
     {
 
         $user = auth()->user();
