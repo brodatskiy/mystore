@@ -34,7 +34,7 @@ Route::resource('/product', ProductController::class)->only('show');
 Route::middleware(['auth'])->group(function () {
     Route::get('/orderlist', [OrderController::class, 'index'])->name('orderlist');
     Route::get('/wishlist', [WishController::class, 'index'])->name('wishlist');
-    Route::post('/{product}/add', [WishController::class, 'add'])->name('wish.add');
+    Route::post('/{product}/toggle', [WishController::class, 'toggle'])->name('wish.toggle');
 });
 
 //Cart

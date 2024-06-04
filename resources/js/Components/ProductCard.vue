@@ -8,8 +8,8 @@ function add(product) {
     router.post(route('cart.add', { product: product }) )
 }
 
-function addToWishlist(product) {
-    router.post(route('wish.add', { product: product }) )
+function toggleWish(product) {
+    router.post(route('wish.toggle', { product: product }) )
 }
 </script>
 <template>
@@ -27,7 +27,7 @@ function addToWishlist(product) {
                 <div class="flex items-center justify-between py-2">
                     <p class=" text-l font-semibold text-gray-800">${{ product.price }}</p>
                     <p class="font-bold text-gray-500">{{ product.title }}</p>
-                    <button v-if="$page.props.auth.user" @click.prevent="addToWishlist(product)">
+                    <button v-if="$page.props.auth.user" @click.prevent="toggleWish(product)">
                         <Icon v-if="product.wished" icon="mdi-heart" />
                         <Icon v-else icon="mdi-heart-outline" />
                     </button>
