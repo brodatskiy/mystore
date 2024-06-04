@@ -27,13 +27,14 @@ Route::post('/locale', [SetLocaleController::class, 'locale'])->name('locale');
 
 //Shop
 Route::get('/',  HomeController::class)->name('/');
-Route::get('/wishlist', [WishController::class, 'index'])->name('wishlist');
-Route::post('/{product}/add', [WishController::class, 'add'])->name('wish.add');
+
 Route::get('/catalog/{category:slug}', CatalogController::class)->name('catalog');
 Route::resource('/product', ProductController::class)->only('show');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/orderlist', [OrderController::class, 'index'])->name('orderlist');
+    Route::get('/wishlist', [WishController::class, 'index'])->name('wishlist');
+    Route::post('/{product}/add', [WishController::class, 'add'])->name('wish.add');
 });
 
 //Cart
