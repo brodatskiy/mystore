@@ -1,10 +1,8 @@
 <?php
 
-use App\Http\Controllers\Client\WishlistController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\CatalogController;
 use App\Http\Controllers\Client\HomeController;
-use App\Http\Controllers\Client\MessageController;
 use App\Http\Controllers\Client\OrderController;
 use App\Http\Controllers\Client\ProductController;
 use App\Http\Controllers\Client\ProfileController;
@@ -12,22 +10,10 @@ use App\Http\Controllers\Client\WishController;
 use App\Http\Controllers\SetLocaleController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::post('/locale', [SetLocaleController::class, 'locale'])->name('locale');
 
 //Shop
 Route::get('/',  HomeController::class)->name('/');
-
 Route::get('/catalog/{category:slug}', CatalogController::class)->name('catalog');
 Route::resource('/product', ProductController::class)->only('show');
 
