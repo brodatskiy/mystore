@@ -6,7 +6,6 @@ use App\Http\Resources\Category\CategoryResource;
 use App\Http\Resources\Group\GroupResource;
 use App\Http\Resources\Tag\TagResource;
 use App\Http\Resources\Product\ProductMinResource;
-use App\Http\Resources\Size\SizeResource;
 use App\Http\Resources\Sticker\StickerResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
