@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 use Orchid\Access\UserAccess;
 use Orchid\Filters\Filterable;
@@ -13,9 +16,6 @@ use Orchid\Metrics\Chartable;
 use Orchid\Platform\Models\User as Authenticatable;
 use Orchid\Screen\AsSource;
 
-/**
- * @method array cart()
- */
 class User extends Authenticatable
 {
     use AsSource, Chartable, Filterable, HasFactory, Notifiable, UserAccess;
@@ -23,22 +23,22 @@ class User extends Authenticatable
     protected $table = 'users';
     protected $guarded = false;
 
-    public function comments()
+    public function comments(): HasMany
     {
         return $this->hasMany(Comment::class, 'user_id');
     }
 
-    public function cart()
+    public function cart(): HasOne
     {
         return $this->hasOne(Product::class);
     }
 
-    public function order()
+    public function order(): HasMany
     {
         return $this->hasMany(Order::class);
     }
 
-    public function wishes()
+    public function wishes(): BelongsToMany
     {
         return $this->belongsToMany(Product::class, 'wish', 'user_id', 'product_id')->withTimestamps();
     }
