@@ -186,9 +186,9 @@ const categoryExpand = ref(false);
                         :key="category.id"
                         class="cursor-pointer px-2 py-1 hover:text-primary-600"
                     >
-                        <Link :href="route('catalog', category.slug)">{{
-                            category.title
-                        }}</Link>
+                        <LinkBtn :href="route('catalog', category.slug)">
+                            {{category.title}}
+                        </LinkBtn>
                     </li>
                 </ul>
             </div>
