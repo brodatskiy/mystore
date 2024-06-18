@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\CatalogController;
 use App\Http\Controllers\Client\HomeController;
@@ -15,6 +16,7 @@ Route::post('/locale', [SetLocaleController::class, 'locale'])->name('locale');
 //Shop
 Route::get('/',  HomeController::class)->name('/');
 Route::get('/catalog/{category:slug}', CatalogController::class)->name('catalog');
+Route::get('/categories', [CategoryController::class, 'index'])->name('category');
 Route::resource('/product', ProductController::class)->only('show');
 
 Route::middleware(['auth'])->group(function () {

@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import {ref, onMounted} from "vue";
 
 import LinkBtn from "@/Components/Buttons/LinkBtn.vue";
 import Dropdown from "@/Components/Dropdown.vue";
@@ -8,36 +8,18 @@ import LocaleSwitcher from "@/Components/LocaleSwitcher.vue";
 import FlashMessage from "@/Components/FlashMessage.vue";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 
-const categories = ref([
-    {
-        title: "Sneakers",
-        slug: "sneakers",
-    },
-    {
-        title: "Boots",
-        slug: "boots",
-    },
-    {
-        title: "Shorts",
-        slug: "shorts",
-    },
-    {
-        title: "Jeans",
-        slug: "jeans",
-    },
-    {
-        title: "Hoodie",
-        slug: "hoodie",
-    },
-    {
-        title: "Sweatshirt",
-        slug: "sweatshirt",
-    },
-    {
-        title: "Hats",
-        slug: "hats",
-    },
-]);
+const categories = ref([]);
+
+function getCategories() {
+    axios.get(`/categories`)
+        .then(res => {
+            categories.value = res.data;
+        })
+}
+
+onMounted(() => {
+    getCategories();
+})
 
 const categoryExpand = ref(false);
 </script>
@@ -56,11 +38,11 @@ const categoryExpand = ref(false);
 
                 <!-- Logo -->
                 <div class="flex-1 flex justify-center">
-                    <ApplicationLogo />
+                    <ApplicationLogo/>
                 </div>
                 <div class="flex-1 flex items-center justify-end">
                     <!-- Icon Buttons  -->
-                    <LocaleSwitcher />
+                    <LocaleSwitcher/>
                     <div class="flex items-center space-x-4 ml-4">
                         <LinkBtn :href="route('cart.index')">
                             <Icon
@@ -156,13 +138,13 @@ const categoryExpand = ref(false);
         <!-- Page Heading -->
         <header class="bg-white shadow" v-if="$slots.header">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                <slot name="header" />
+                <slot name="header"/>
             </div>
         </header>
 
         <main>
             <div class="mx-auto mt-2 p-2 sm:p-4 lg:p-6 min-w-[500px]">
-                <slot />
+                <slot/>
             </div>
         </main>
 
@@ -187,7 +169,7 @@ const categoryExpand = ref(false);
                         class="cursor-pointer px-2 py-1 hover:text-primary-600"
                     >
                         <LinkBtn :href="route('catalog', category.slug)">
-                            {{category.title}}
+                            {{ category.title }}
                         </LinkBtn>
                     </li>
                 </ul>
