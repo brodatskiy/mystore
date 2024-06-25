@@ -24,12 +24,7 @@ class Category extends Model
     protected $table = 'categories';
     protected $guarded = false;
 
-    public function getSlugOptions(): SlugOptions
-    {
-        return SlugOptions::create()
-            ->generateSlugsFrom('title')
-            ->saveSlugsTo('slug');
-    }
+
     public function children(): HasMany
     {
         return $this->hasMany(Category::class, 'parent_id', 'id');
@@ -45,6 +40,12 @@ class Category extends Model
         return $this->hasMany(Product::class, 'category_id', 'id');
     }
 
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('title')
+            ->saveSlugsTo('slug');
+    }
     public function sluggable(): array
     {
         return [
