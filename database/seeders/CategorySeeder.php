@@ -14,12 +14,8 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        Category::factory()->create(['title' => 'Clothing']);
-        Category::factory()->create(['title' => 'Shoes']);
-        Category::factory()->create(['title' => 'Jewelry']);
-        Category::factory()->create(['title' => 'Handbags']);
-        Category::factory()->create(['title' => 'Hoodie']);
-        Category::factory()->create(['title' => 'Sweatshirt']);
-        Category::factory()->create(['title' => 'Hats']);
+        Category::factory(48)->create(['parent_id' => function () {
+            return rand(1, 21);
+        }]);
     }
 }
