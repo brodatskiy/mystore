@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Orchid\Attachment\Attachable;
 use Orchid\Filters\Filterable;
@@ -18,7 +19,7 @@ class Group extends Model
     protected $table = 'groups';
     protected $guarded = false;
 
-    public function products()
+    public function products(): HasMany
     {
         return $this->hasMany(Product::class, 'group_id', 'id');
     }
