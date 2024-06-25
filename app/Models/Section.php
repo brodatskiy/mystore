@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -14,12 +15,12 @@ class Section extends Model
 
     protected $guarded = false;
 
-    public function categories()
+    public function categories(): HasMany
     {
         return $this->hasMany(Category::class, 'section_id', 'id');
     }
 
-    public function parentCategories()
+    public function parentCategories(): HasMany
     {
         return $this->hasMany(Category::class, 'section_id', 'id')
             ->whereNull('parent_id');
