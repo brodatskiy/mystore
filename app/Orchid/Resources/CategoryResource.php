@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Resources;
 
+use App\Models\Category;
 use Orchid\Crud\Filters\DefaultSorted;
 use Orchid\Crud\Resource;
 use Orchid\Screen\Fields\Input;
@@ -15,7 +16,7 @@ class CategoryResource extends Resource
      *
      * @var string
      */
-    public static $model = \App\Models\Category::class;
+    public static $model = Category::class;
 
     /**
      * Get the fields displayed by the resource.

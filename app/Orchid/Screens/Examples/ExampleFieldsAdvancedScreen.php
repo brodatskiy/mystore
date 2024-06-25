@@ -23,6 +23,7 @@ use Orchid\Screen\Fields\Upload;
 use Orchid\Screen\Fields\UTM;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
+use Throwable;
 
 class ExampleFieldsAdvancedScreen extends Screen
 {
@@ -71,7 +72,7 @@ class ExampleFieldsAdvancedScreen extends Screen
     /**
      * The screen's layout elements.
      *
-     * @throws \Throwable
+     * @throws Throwable
      *
      * @return \Orchid\Screen\Layout[]
      */

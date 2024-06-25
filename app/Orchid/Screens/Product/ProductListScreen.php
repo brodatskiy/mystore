@@ -10,6 +10,7 @@ use App\Orchid\Layouts\Product\ProductListLayout;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Orchid\Platform\Models\User;
+use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
@@ -55,7 +56,7 @@ class ProductListScreen extends Screen
     /**
      * The screen's action buttons.
      *
-     * @return \Orchid\Screen\Action[]
+     * @return Action[]
      */
     public function commandBar(): iterable
     {

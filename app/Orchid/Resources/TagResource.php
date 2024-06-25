@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Resources;
 
+use App\Models\Tag;
 use Orchid\Crud\Filters\DefaultSorted;
 use Orchid\Crud\Resource;
 use Orchid\Screen\Fields\Input;
@@ -15,7 +16,7 @@ class TagResource extends Resource
      *
      * @var string
      */
-    public static $model = \App\Models\Tag::class;
+    public static $model = Tag::class;
 
     /**
      * Get the fields displayed by the resource.

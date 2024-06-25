@@ -11,6 +11,7 @@ use Orchid\Screen\Sight;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
+use Throwable;
 
 class ExampleCardsScreen extends Screen
 {
@@ -55,7 +56,7 @@ class ExampleCardsScreen extends Screen
     /**
      * The screen's layout elements.
      *
-     * @throws \Throwable
+     * @throws Throwable
      *
      * @return array
      */

@@ -10,6 +10,7 @@ use Orchid\Screen\Fields\Quill;
 use Orchid\Screen\Fields\SimpleMDE;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
+use Throwable;
 
 class ExampleTextEditorsScreen extends Screen
 {
@@ -56,7 +57,7 @@ class ExampleTextEditorsScreen extends Screen
     /**
      * The screen's layout elements.
      *
-     * @throws \Throwable
+     * @throws Throwable
      *
      * @return \Orchid\Screen\Layout[]
      */

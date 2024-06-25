@@ -5,6 +5,7 @@ namespace App\Orchid\Screens\Examples;
 use Orchid\Screen\Action;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
+use Throwable;
 
 class ExampleGridScreen extends Screen
 {
@@ -51,7 +52,7 @@ class ExampleGridScreen extends Screen
     /**
      * The screen's layout elements.
      *
-     * @throws \Throwable
+     * @throws Throwable
      *
      * @return array
      */

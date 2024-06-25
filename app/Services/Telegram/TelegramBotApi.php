@@ -3,6 +3,7 @@
 namespace App\Services\Telegram;
 
 use Illuminate\Support\Facades\Http;
+use Throwable;
 
 class TelegramBotApi
 {
@@ -14,7 +15,7 @@ class TelegramBotApi
                 'chat_id' => $chatId,
                 'text' => $text
             ]);
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             //throw $th;
         }
     }

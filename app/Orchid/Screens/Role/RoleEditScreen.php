@@ -6,6 +6,8 @@ namespace App\Orchid\Screens\Role;
 
 use App\Orchid\Layouts\Role\RoleEditLayout;
 use App\Orchid\Layouts\Role\RolePermissionLayout;
+use Exception;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Orchid\Platform\Models\Role;
@@ -101,7 +103,7 @@ class RoleEditScreen extends Screen
     }
 
     /**
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function save(Request $request, Role $role)
     {
@@ -127,9 +129,9 @@ class RoleEditScreen extends Screen
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function remove(Role $role)
     {

@@ -8,6 +8,8 @@ use App\Models\Product;
 use App\Orchid\Layouts\Product\ProductCropperLayout;
 use App\Orchid\Layouts\Product\ProductEditLayout;
 use App\Orchid\Layouts\Product\ProductViewLayout;
+use Exception;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Orchid\Screen\Action;
@@ -136,7 +138,7 @@ class ProductViewScreen extends Screen
     }
 
     /**
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function save(Product $product, Request $request)
     {
@@ -147,16 +149,16 @@ class ProductViewScreen extends Screen
             Toast::info(__('Product was saved.'));
             Db::commit();
             return redirect()->route('platform.products');
-        } catch (\Exception $exeption) {
+        } catch (Exception $exeption) {
             DB::rollBack();
             abort(500);
         }
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function remove(Product $product)
     {

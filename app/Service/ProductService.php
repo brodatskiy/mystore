@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Models\Product;
+use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -28,7 +29,7 @@ class ProductService
                 $product->sizes()->attach($size['id'], ['count' => $size['count']]);
             }
             Db::commit();
-        } catch (\Exception $exeption) {
+        } catch (Exception $exeption) {
             Db::rollBack();
             abort(500);
         }
@@ -59,7 +60,7 @@ class ProductService
             }
 
             Db::commit();
-        } catch (\Exception $exeption) {
+        } catch (Exception $exeption) {
             Db::rollBack();
             abort(500);
         }

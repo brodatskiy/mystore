@@ -7,6 +7,7 @@ use App\Http\Resources\CartItem\CartItemResource;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Product;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -51,7 +52,7 @@ class CartController extends Controller
                 Db::commit();
 
                 return back();
-            } catch (\Exception $exeption) {
+            } catch (Exception $exeption) {
                 Db::rollBack();
                 abort(500);
             }

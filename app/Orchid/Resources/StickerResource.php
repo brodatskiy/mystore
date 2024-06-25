@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Resources;
 
+use App\Models\Sticker;
 use Orchid\Crud\Filters\DefaultSorted;
 use Orchid\Crud\Resource;
 use Orchid\Screen\Fields\Input;
@@ -15,7 +16,7 @@ class StickerResource extends Resource
      *
      * @var string
      */
-    public static $model = \App\Models\Sticker::class;
+    public static $model = Sticker::class;
 
     /**
      * Get the fields displayed by the resource.

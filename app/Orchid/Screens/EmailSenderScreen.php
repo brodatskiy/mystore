@@ -4,6 +4,7 @@ namespace App\Orchid\Screens;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Orchid\Screen\Action;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Quill;
 use Orchid\Screen\Fields\Relation;
@@ -42,7 +43,7 @@ class EmailSenderScreen extends Screen
     /**
      * The screen's action buttons.
      *
-     * @return \Orchid\Screen\Action[]
+     * @return Action[]
      */
     public function commandBar(): iterable
     {

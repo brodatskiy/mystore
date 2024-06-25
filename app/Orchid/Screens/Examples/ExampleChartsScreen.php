@@ -6,8 +6,10 @@ use App\Orchid\Layouts\Examples\ChartBarExample;
 use App\Orchid\Layouts\Examples\ChartLineExample;
 use App\Orchid\Layouts\Examples\ChartPercentageExample;
 use App\Orchid\Layouts\Examples\ChartPieExample;
+use Orchid\Screen\Action;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
+use Throwable;
 
 class ExampleChartsScreen extends Screen
 {
@@ -63,7 +65,7 @@ class ExampleChartsScreen extends Screen
     /**
      * The screen's action buttons.
      *
-     * @return \Orchid\Screen\Action[]
+     * @return Action[]
      */
     public function commandBar(): iterable
     {
@@ -73,7 +75,7 @@ class ExampleChartsScreen extends Screen
     /**
      * The screen's layout elements.
      *
-     * @throws \Throwable
+     * @throws Throwable
      *
      * @return string[]|\Orchid\Screen\Layout[]
      */

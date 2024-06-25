@@ -19,7 +19,7 @@ class GroupResource extends Resource
      *
      * @var string
      */
-    public static $model = \App\Models\Group::class;
+    public static $model = Group::class;
 
     /**
      * Get the fields displayed by the resource.
