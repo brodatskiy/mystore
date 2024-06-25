@@ -6,6 +6,9 @@ use App\Models\Traits\HasFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Orchid\Attachment\Attachable;
 use Orchid\Filters\Filterable;
@@ -26,22 +29,22 @@ class Product extends Model
     protected $guarded = false;
     protected $with = ['group', 'category', 'sticker', 'tags'];
 
-    public function group()
+    public function group(): BelongsTo
     {
         return $this->belongsTo(Group::class, 'group_id', 'id');
     }
 
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
-    public function sticker()
+    public function sticker(): BelongsTo
     {
         return $this->belongsTo(Sticker::class, 'sticker_id', 'id');
     }
 
-    public function tags()
+    public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class, 'product_tag', 'product_id', 'tag_id');
     }
@@ -51,7 +54,7 @@ class Product extends Model
         return $this->morphMany(Image::class, 'imageable');
     }
 
-    public function cartItems()
+    public function cartItems(): HasMany
     {
         return $this->hasMany(CartItem::class);
     }
@@ -63,12 +66,12 @@ class Product extends Model
             ->saveSlugsTo('slug');
     }
 
-    public function wishedBy()
+    public function wishedBy(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'wish', 'product_id', 'user_id')->withTimestamps();
     }
 
-    public function scopeSorted(Builder $query)
+    public function scopeSorted(Builder $query): void
     {
         $sortBy = request('sort');
 
