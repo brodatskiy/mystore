@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Section;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +19,7 @@ class CategoryFactory extends Factory
     {
         return [
             'title' => fake()->word(),
+            'section_id' => Section::all()->random()->id,
         ];
     }
 }
