@@ -8,6 +8,7 @@ use App\Http\Controllers\Client\OrderController;
 use App\Http\Controllers\Client\ProductController;
 use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\Client\WishController;
+use App\Http\Controllers\SectionController;
 use App\Http\Controllers\SetLocaleController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,7 @@ Route::post('/locale', [SetLocaleController::class, 'locale'])->name('locale');
 Route::get('/',  HomeController::class)->name('/');
 Route::get('/catalog/{category:slug}', CatalogController::class)->name('catalog');
 Route::get('/categories', [CategoryController::class, 'index'])->name('category');
+Route::get('/sections', [SectionController::class, 'index'])->name('section');
 Route::resource('/product', ProductController::class)->only('show');
 
 Route::middleware(['auth'])->group(function () {
