@@ -8,20 +8,33 @@ import LocaleSwitcher from "@/Components/LocaleSwitcher.vue";
 import FlashMessage from "@/Components/FlashMessage.vue";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 
-const categories = ref([]);
+const sectionsExpand = ref(false);
+const parentCategoriesExpand = ref(false);
+const subCategoriesExpand = ref(false);
 
-function getCategories() {
-    axios.get(`/categories`)
-        .then(res => {
-            categories.value = res.data;
-        })
+const sectionsWithCategories = ref([]);
+const parentCategories = ref([]);
+const subCategories = ref([]);
+
+function getSectionsWithCategories() {
+    axios.get(`/sections`).then((res) => {
+        sectionsWithCategories.value = res.data;
+    });
+}
+
+function parentCategoriesExpander(categories) {
+    parentCategoriesExpand.value = true;
+    parentCategories.value = categories;
+}
+
+function subCategoriesExpander(categories) {
+    subCategoriesExpand.value = true;
+    subCategories.value = categories;
 }
 
 onMounted(() => {
-    getCategories();
-})
-
-const categoryExpand = ref(false);
+    getSectionsWithCategories();
+});
 </script>
 <template>
     <div class="min-h-screen bg-gray-100">
@@ -29,8 +42,8 @@ const categoryExpand = ref(false);
             <div class="flex items-center justify-between">
                 <div class="flex-1">
                     <button
-                        @click="categoryExpand = !categoryExpand"
-                        class="hover:text-primary-600"
+                        @click="sectionsExpand = !sectionsExpand"
+                        class="font-bold hover:text-primary-600"
                     >
                         Categories
                     </button>
@@ -153,29 +166,55 @@ const categoryExpand = ref(false);
                 {{ new Date().getFullYear() }} — <strong>MyStore</strong>
             </div>
         </footer>
-
         <Sidebar
-            v-model:visible="categoryExpand"
+            v-model:visible="sectionsExpand"
             header="Categories"
             position="left"
             :modal="false"
             :showCloseIcon="false"
+            @mouseleave="sectionsExpand = false"
+            class="w-96"
         >
-            <div class="">
-                <ul>
-                    <li
-                        v-for="category in categories"
-                        :key="category.id"
-                        class="cursor-pointer px-2 py-1 hover:text-primary-600"
+            <div class="overflow-y-auto flex">
+                <div class="flex flex-col w-1/3">
+                    <Link
+                        v-for="section in sectionsWithCategories"
+                        :href="route('section', section.slug)"
+                        :key="section.id"
+                        @mouseenter="parentCategoriesExpander(section.parentCategories)"
+                        class="py-2 hover:text-primary-600"
                     >
-                        <LinkBtn :href="route('catalog', category.slug)">
+                        {{ section.title }}
+                    </Link>
+                </div>
+                <div @mouseleave="subCategoriesExpand = false" class="flex w-2/3">
+                    <div v-show="parentCategoriesExpand" class="flex flex-col w-1/2">
+                        <Link
+                            v-for="category in parentCategories"
+                            :href="route('category', category.slug)"
+                            :key="category.id"
+                            @mouseenter="subCategoriesExpander(category.children)"
+                            class="py-2 hover:text-primary-600"
+                        >
                             {{ category.title }}
-                        </LinkBtn>
-                    </li>
-                </ul>
+                        </Link>
+                    </div>
+                    <div v-show="subCategoriesExpand" class="flex flex-col w-1/2">
+                        <Link
+                            v-for="category in subCategories"
+                            :href="route('category', category.slug)"
+                            :key="category.id"
+                            class=" py-2 hover:text-primary-600"
+                        >
+                            {{ category.title }}
+                        </Link>
+                    </div>
+                </div>
             </div>
         </Sidebar>
     </div>
+
+
 </template>
 
 <style></style>
