@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Product;
 use App\Models\Size;
-use App\Models\Sticker;
 use App\Models\Tag;
 use Illuminate\Database\Seeder;
 
@@ -18,11 +17,14 @@ class ProductSeeder extends Seeder
     public function run()
     {
         $tags = Tag::all();
-
-        Product::factory()
+        $products = Product::factory()
             ->count(100)
-            ->hasAttached($tags
-                ->random(2))
             ->create();
+
+        $products->each(function ($product) use ($tags){
+            $product->tags()->attach(
+                $tags->random(rand(1, 3))->pluck('id')->toArray()
+            );
+        });
     }
 }
