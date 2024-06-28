@@ -15,12 +15,10 @@ return new class extends Migration
     {
         Schema::create('product_tag', function (Blueprint $table) {
             $table->foreignIdFor(Product::class)
-                ->nullable()
                 ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->foreignIdFor(Tag::class)
-                ->nullable()
                 ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
