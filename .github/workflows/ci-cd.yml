@@ -6,3 +6,5 @@ jobs:
     steps:
       - name: Var
         run: echo ${{ github.event.head_commit.message }}
+      - name: My test var
+        run: echo $TEST
