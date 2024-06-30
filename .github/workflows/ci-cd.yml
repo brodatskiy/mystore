@@ -5,4 +5,4 @@ jobs:
     runs-on: ubuntu 24.04
     steps:
       - name: Var
-        uses: echo ${{ github.event.head_commit.message }}
+        run: echo ${{ github.event.head_commit.message }}
