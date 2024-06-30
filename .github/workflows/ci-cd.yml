@@ -4,7 +4,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Var
-        run: echo ${{ github.event.head_commit.message }}
+      - name: commit sha
+        run: echo ${{ github.sha }}
       - name: My test var
-        run: echo $TEST
+        run: echo ${{ vars.TEST }}
