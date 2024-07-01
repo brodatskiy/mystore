@@ -58,13 +58,16 @@ jobs:
 
   deploy:
       runs-on: self-hosted
+      environment: production
       steps:
-        - run: echo ${{ steps.artifact.outputs.bundle-path }} bundle-path
-        - run: echo ${{ env.CONTAINER_PREFIX }}
-        - run: docker stop $(docker ps -a | grep ${{ env.CONTAINER_PREFIX }}_ | awk '{print $1}') || true
-        - run: docker rm $(docker ps -a | grep ${{ env.CONTAINER_PREFIX }}_ | awk '{print $1}') || true
-        - run: docker volume rm $(docker volume ls | grep ${{ env.CONTAINER_PREFIX }}_ | awk '{print $2}') || true
-        - run: docker-compose -p ${{ env.CONTAINER_PREFIX }} -f docker-compose.dev.yml up -d
+        - name: Stop all containers
+          run: docker container prune
+        - name: Remove all the unused images
+          run: docker image prune
+        - name: Remove all the volumes
+          run: docker volume prune
+        - name: Docker compose up
+          run: docker compose -f docker-compose.prod.yml up -d
         - run: docker exec ${{ env.CONTAINER_PREFIX }}_app composer update
         - run: docker exec ${{ env.CONTAINER_PREFIX }}_app composer install
         - run: docker exec ${{ env.CONTAINER_PREFIX }}_app php artisan migrate
