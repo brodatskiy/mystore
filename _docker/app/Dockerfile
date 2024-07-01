@@ -21,8 +21,8 @@ COPY ./_docker/app/php.ini /usr/local/etc/php/conf.d/php.ini
 # Install composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN curl -sS https://getcomposer.org/installer | php -- \
---filename=composer \
---install-dir=/usr/local/bin
+    --filename=composer \
+    --install-dir=/usr/local/bin
 
 # Install nodejs
 RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - \
