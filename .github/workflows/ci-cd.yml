@@ -37,6 +37,7 @@ jobs:
         id: push
         uses: docker/build-push-action@v5
         with:
+          context: .
           file: ./_docker/github/app/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
