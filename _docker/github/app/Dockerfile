@@ -28,14 +28,15 @@ COPY routes         /var/www/routes
 COPY storage        /var/www/storage
 COPY artisan        /var/www/artisan
 COPY package.json   /var/www/package.json
+COPY vite.config.js /var/www/vite.config.js
 
 COPY composer.*  ./
 
 # Install composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN curl -sS https://getcomposer.org/installer | php -- \
-    --filename=composer \
-    --install-dir=/usr/local/bin \
+    && --filename=composer \
+    && --install-dir=/usr/local/bin \
 
 # alias
 RUN echo "alias a='artisan'" >> /root/.bashrc
