@@ -7,6 +7,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  CONTAINER_PREFIX: my-store
 
 jobs:
   build:
@@ -48,8 +49,26 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 
       - name: Generate artifact attestation
+        id: artifact
         uses: actions/attest-build-provenance@v1
         with:
           subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
+
+  deploy:
+      runs-on: self-hosted
+      steps:
+        - run: echo ${{ steps.artifact.outputs.bundle-path }} bundle-path
+        - run: export ${{ env.CONTAINER_PREFIX }}=my-store
+        - run: docker stop $(docker ps -a | grep ${{ env.CONTAINER_PREFIX }}_ | awk '{print $1}') || true
+        - run: docker rm $(docker ps -a | grep ${{ env.CONTAINER_PREFIX }}_ | awk '{print $1}') || true
+        - run: docker volume rm $(docker volume ls | grep ${{ env.CONTAINER_PREFIX }}_ | awk '{print $2}') || true
+        - run: docker-compose -p ${{ env.CONTAINER_PREFIX }} -f docker-compose.dev.yml up -d
+        - run: docker exec ${{ env.CONTAINER_PREFIX }}_app composer update
+        - run: docker exec ${{ env.CONTAINER_PREFIX }}_app composer install
+        - run: docker exec ${{ env.CONTAINER_PREFIX }}_app php artisan migrate
+        - run: docker exec ${{ env.CONTAINER_PREFIX }}_app php artisan cache:clear
+        - run: docker exec ${{ env.CONTAINER_PREFIX }}_app php artisan config:cache
+
+

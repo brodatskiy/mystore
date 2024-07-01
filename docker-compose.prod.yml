@@ -12,9 +12,7 @@ services:
         container_name: my-store_nginx
 
     app:
-        build:
-            context: .
-            dockerfile: _docker/app/Dockerfile
+        image: ${{env.APP_NAME}}
         volumes:
             - ./:/var/www
         ports:
