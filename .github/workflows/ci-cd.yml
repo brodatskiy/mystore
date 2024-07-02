@@ -80,7 +80,7 @@ jobs:
 
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app composer update
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app composer install
-      - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan migrate
+      - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan migrate --force
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan cache:clear
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan config:cache
 
