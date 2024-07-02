@@ -58,7 +58,7 @@ jobs:
 
       - name: Inspect
         run: |
-          docker image inspect ${{ steps.artifact.outputs.bundle-path }}
+          docker image inspect ${{ steps.meta.outputs.tags }}
 
   deploy:
     needs: [build]
