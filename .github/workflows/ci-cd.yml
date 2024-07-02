@@ -58,7 +58,7 @@ jobs:
 
       - name: Inspect
         run: |
-          echo ${{ steps.arifact.outputs.bundle-path }}
+          docker image inspect ${{ steps.artifact.outputs.bundle-path }}
 
   deploy:
       runs-on: self-hosted
