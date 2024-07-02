@@ -57,7 +57,7 @@ jobs:
 
       - name: sha
         run: |
-          echo ${{ gihub.sha }}
+          echo ${{ github.sha }}
 
       - name: Inspect
         run: |
