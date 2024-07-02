@@ -6,6 +6,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
   CONTAINER_PREFIX: my-store
 
 jobs:
@@ -17,7 +18,8 @@ jobs:
       contents: read
       attestations: write
     steps:
-      - name: Checkout
+      -
+        name: Checkout
         uses: actions/checkout@v4
 
       -
@@ -54,48 +56,27 @@ jobs:
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
 
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v4
-        with:
-          name: php-app
-          path: .
-
       - name: Inspect
         run: |
           docker image inspect ${{ steps.artifact.outputs.bundle-path }}
 
   deploy:
-      needs: build
-      runs-on: self-hosted
-      environment: production
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v4
+    runs-on: self-hosted
+    environment: production
+    steps:
+      - name: Stop all containers
+        run: docker stop $(docker ps -a -q)
 
-        - name: test
-          run: ls -la
+      - name: Remove unused containers in addition to other Docker resources, such as (unused) images and networks.
+        run: docker system prune -f
 
-        - name: Download artifact from build job
-          uses: actions/download-artifact@v4
-          with:
-            name: php-app
+      - name: Docker compose up
+        run: docker compose -f docker-compose.prod.yml up -d
 
-        - name: Stop all containers
-          run: docker stop $(docker ps -a -q) || true
-
-        - name: Stop all containers
-          run: docker stop $(docker ps -a -q) || true
-
-        - name: Remove unused containers in addition to other Docker resources, such as (unused) images and networks.
-          run: docker system prune -f || true
-
-        - name: Docker compose up
-          run: docker compose -f docker-compose.prod.yml up -d
-
-        - run: docker exec ${{ env.CONTAINER_PREFIX }}_app composer update
-        - run: docker exec ${{ env.CONTAINER_PREFIX }}_app composer install
-        - run: docker exec ${{ env.CONTAINER_PREFIX }}_app php artisan migrate
-        - run: docker exec ${{ env.CONTAINER_PREFIX }}_app php artisan cache:clear
-        - run: docker exec ${{ env.CONTAINER_PREFIX }}_app php artisan config:cache
+      - run: docker exec ${{ env.CONTAINER_PREFIX }}_app composer update
+      - run: docker exec ${{ env.CONTAINER_PREFIX }}_app composer install
+      - run: docker exec ${{ env.CONTAINER_PREFIX }}_app php artisan migrate
+      - run: docker exec ${{ env.CONTAINER_PREFIX }}_app php artisan cache:clear
+      - run: docker exec ${{ env.CONTAINER_PREFIX }}_app php artisan config:cache
 
 
