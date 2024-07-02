@@ -12,6 +12,8 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      APP_IMAGE: ${{ steps.step1.outputs.APP_IMAGE }}
     permissions:
       id-token: write
       packages: write
@@ -55,9 +57,8 @@ jobs:
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
 
-      - name: sha
-        run: |
-          echo ${{ steps.push.outputs.digest }}
+      - id: step1
+        run: echo "APP_IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.push.outputs.digest }}" >> "$GITHUB_OUTPUT"
 
       - name: Inspect
         run: |
@@ -67,9 +68,9 @@ jobs:
     needs: [build]
     runs-on: self-hosted
     env:
-      APP_IMAGE: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.push.outputs.digest }}
-      DB_DATABASE: ${{ env.DB_DATABASE}}
-      DB_USERNAME: ${{ env.DB_USERNAME}}
+      APP_IMAGE: ${{needs.build.outputs.APP_IMAGE}}
+      DB_DATABASE: ${{ vars.DB_DATABASE }}
+      DB_USERNAME: ${{ vars.DB_USERNAME }}
       POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
     steps:
       - name: Checkout
