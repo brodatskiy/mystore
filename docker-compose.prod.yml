@@ -12,7 +12,7 @@ services:
         container_name: my-store_nginx
 
     app:
-        image: ${ env.REGISTRY }/${ env.IMAGE_NAME }@${ steps.push.outputs.digest }
+        image: ${ env.REGISTRY }
         volumes:
             - ./:/var/www
         ports:
@@ -27,9 +27,9 @@ services:
         volumes:
             - ./tmp/db:/var/lib/pgsql
         environment:
-            - POSTGRES_DB=${DB_DATABASE}
-            - POSTGRES_USER=${DB_USERNAME}
-            - POSTGRES_PASSWORD=${DB_PASSWORD}
+            - POSTGRES_DB=${env.DB_DATABASE}
+            - POSTGRES_USER=${env.DB_USERNAME}
+            - POSTGRES_PASSWORD=${env.DB_PASSWORD}
         ports:
             - '${DB_PORT:-5432}:5432'
         container_name: my-store_db
