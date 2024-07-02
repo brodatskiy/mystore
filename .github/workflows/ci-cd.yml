@@ -17,10 +17,6 @@ jobs:
       contents: read
       attestations: write
     steps:
-      - name: lowercase REPO-Name
-        run: |
-          echo "REPO=${GITHUB_REPOSITORY@L}" >> "${GITHUB_ENV}"
-
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -66,11 +62,7 @@ jobs:
 
       - name: Inspect
         run: |
-          docker image inspect ${{ env.REGISTRY }}/${{ GITHUB_REPOSITORY }}@${{ steps.push.outputs.digest }}
-
-      - name: Echo
-        run: |
-          echo ghcr.io/${{ GITHUB_REPOSITORY }}:${{ github.sha }}
+          docker image inspect ${{ steps.artifact.outputs.bundle-path }}
 
   deploy:
       needs: build
