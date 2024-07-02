@@ -61,7 +61,7 @@ jobs:
 
       - name: Inspect
         run: |
-          docker image inspect ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          docker image inspect ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@sha256:${{ github.sha }}
 
   deploy:
     needs: [build]
