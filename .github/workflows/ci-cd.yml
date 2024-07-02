@@ -61,14 +61,15 @@ jobs:
           docker image inspect ${{ steps.artifact.outputs.bundle-path }}
 
   deploy:
+    needs: [build]
     runs-on: self-hosted
     environment: production
     steps:
       - name: Stop all containers
-        run: docker stop $(docker ps -a -q)
+        run: docker stop $(docker ps -a -q) || true
 
       - name: Remove unused containers in addition to other Docker resources, such as (unused) images and networks.
-        run: docker system prune -f
+        run: docker system prune || true
 
       - name: Docker compose up
         run: docker compose -f docker-compose.prod.yml up -d
