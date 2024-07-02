@@ -55,9 +55,13 @@ jobs:
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
 
+      - name: sha
+        run: |
+          echo ${{ gihub.sha }}
+
       - name: Inspect
         run: |
-          docker image inspect ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}:latest
+          docker image inspect ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
 
   deploy:
     needs: [build]
