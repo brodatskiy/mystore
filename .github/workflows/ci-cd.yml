@@ -8,12 +8,11 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
   CONTAINER_PREFIX: my-store
+  APP_IMAGE: ${{ steps.setImageName.outputs.APP_IMAGE }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    outputs:
-      APP_IMAGE: ${{ steps.setImageName.outputs.APP_IMAGE }}
     permissions:
       id-token: write
       packages: write
@@ -67,11 +66,9 @@ jobs:
   deploy:
     needs: [build]
     runs-on: self-hosted
+    environment: production
     env:
-      APP_IMAGE: ${{needs.build.outputs.APP_IMAGE}}
-      DB_DATABASE: ${{ vars.DB_DATABASE }}
-      DB_USERNAME: ${{ vars.DB_USERNAME }}
-      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      APP_IMAGE: ${{env.APP_IMAGE}}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -85,10 +82,10 @@ jobs:
       - name: Docker compose up
         run: docker compose -f docker-compose.prod.yml up -d
 
-      - run: docker exec ${{ env.CONTAINER_PREFIX }}_app composer update
-      - run: docker exec ${{ env.CONTAINER_PREFIX }}_app composer install
-      - run: docker exec ${{ env.CONTAINER_PREFIX }}_app php artisan migrate
-      - run: docker exec ${{ env.CONTAINER_PREFIX }}_app php artisan cache:clear
-      - run: docker exec ${{ env.CONTAINER_PREFIX }}_app php artisan config:cache
+      - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app composer update
+      - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app composer install
+      - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan migrate
+      - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan cache:clear
+      - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan config:cache
 
 
