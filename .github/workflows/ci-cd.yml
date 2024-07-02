@@ -61,7 +61,7 @@ jobs:
 
       - name: Inspect
         run: |
-          docker image inspect ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@sha256:${{ steps.push.outputs.digest }}
+          docker image inspect ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.push.outputs.digest }}
 
   deploy:
     needs: [build]
