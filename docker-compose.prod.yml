@@ -12,7 +12,7 @@ services:
         container_name: my-store_nginx
 
     app:
-        image: ${{env.APP_NAME}}
+        image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@sha256:${{ steps.push.outputs.digest }}
         volumes:
             - ./:/var/www
         ports:

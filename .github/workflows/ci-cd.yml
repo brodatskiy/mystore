@@ -57,11 +57,11 @@ jobs:
 
       - name: sha
         run: |
-          echo ${{ github.sha }}
+          echo ${{ steps.push.outputs.digest }}
 
       - name: Inspect
         run: |
-          docker image inspect ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@sha256:${{ github.sha }}
+          docker image inspect ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@sha256:${{ steps.push.outputs.digest }}
 
   deploy:
     needs: [build]
