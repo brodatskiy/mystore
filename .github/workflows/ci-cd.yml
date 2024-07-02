@@ -56,14 +56,39 @@ jobs:
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
 
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v4
+        with:
+          name: php-app
+          path: .
+
       - name: Inspect
         run: |
-          docker image inspect ${{ steps.meta.outputs.tags }}
+          docker image inspect ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}${{ steps.push.outputs.digest }}
+
+      - name: Echo
+        run: |
+          echo ghcr.io/${{ env.REPO }}:${{ github.sha }}
 
   deploy:
+      needs: build
       runs-on: self-hosted
       environment: production
       steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+
+        - name: test
+          run: ls -la
+
+        - name: Download artifact from build job
+          uses: actions/download-artifact@v4
+          with:
+            name: php-app
+
+        - name: Stop all containers
+          run: docker stop $(docker ps -a -q) || true
+
         - name: Stop all containers
           run: docker stop $(docker ps -a -q) || true
 
