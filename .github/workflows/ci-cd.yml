@@ -6,7 +6,6 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
   CONTAINER_PREFIX: my-store
 
 jobs:
@@ -18,8 +17,11 @@ jobs:
       contents: read
       attestations: write
     steps:
-      -
-        name: Checkout
+      - name: lowercase REPO-Name
+        run: |
+          echo "REPO=${GITHUB_REPOSITORY@L}" >> "${GITHUB_ENV}"
+
+      - name: Checkout
         uses: actions/checkout@v4
 
       -
@@ -64,11 +66,11 @@ jobs:
 
       - name: Inspect
         run: |
-          docker image inspect ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}${{ steps.push.outputs.digest }}
+          docker image inspect ${{ env.REGISTRY }}/${{ GITHUB_REPOSITORY }}@${{ steps.push.outputs.digest }}
 
       - name: Echo
         run: |
-          echo ghcr.io/${{ env.REPO }}:${{ github.sha }}
+          echo ghcr.io/${{ GITHUB_REPOSITORY }}:${{ github.sha }}
 
   deploy:
       needs: build
