@@ -56,18 +56,23 @@ jobs:
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
 
+      - name: Inspect
+        run: |
+          docker image inspect ${{ steps.arifact.outputs.bundle-path }}
+
   deploy:
       runs-on: self-hosted
       environment: production
       steps:
         - name: Stop all containers
-          run: docker container prune
-        - name: Remove all the unused images
-          run: docker image prune
-        - name: Remove all the volumes
-          run: docker volume prune
+          run: docker stop $(docker ps -a -q)
+
+        - name: Remove unused containers in addition to other Docker resources, such as (unused) images and networks.
+          run: docker system prune -f
+
         - name: Docker compose up
           run: docker compose -f docker-compose.prod.yml up -d
+
         - run: docker exec ${{ env.CONTAINER_PREFIX }}_app composer update
         - run: docker exec ${{ env.CONTAINER_PREFIX }}_app composer install
         - run: docker exec ${{ env.CONTAINER_PREFIX }}_app php artisan migrate
