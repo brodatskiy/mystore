@@ -23,23 +23,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      -
-        name: Login to GitHub Container Registry
+
+      - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      -
-        name: Docker meta
+
+      - name: Docker meta
         id: meta
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      -
-        name: Build and push
+
+      - name: Build and push
         id: push
         uses: docker/build-push-action@v5
         with:
@@ -59,6 +59,7 @@ jobs:
 
       - id: setImageName
         run: echo "APP_IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.push.outputs.digest }}" >> "$GITHUB_OUTPUT"
+
   deploy:
     needs: [build]
     runs-on: self-hosted
@@ -81,6 +82,8 @@ jobs:
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app composer install
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app npm install
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app npm run build
+      - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app cat .env
+      - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app docker ps
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan migrate --force
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan cache:clear
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan config:cache
