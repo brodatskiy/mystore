@@ -119,6 +119,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Docker containers
+        run: docker ps
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app composer install
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app npm install
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app npm run build
