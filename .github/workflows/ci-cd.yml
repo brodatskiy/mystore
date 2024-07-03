@@ -74,7 +74,7 @@ jobs:
         run: docker stop $(docker ps -a -q) || true
 
       - name: Remove unused containers in addition to other Docker resources, such as (unused) images and networks.
-        run: docker system prune || true
+        run: docker system prune -f || true
 
       - name: Docker compose up
         run: docker compose -f docker-compose.prod.yml up -d
