@@ -100,7 +100,7 @@ jobs:
           DB_HOST: ${{vars.DB_HOST}}
           DB_PASSWORD: ${{secrets.DB_PASSWORD}}
         options:
-          --name my-store_app
+          --domainname my-store_app
 
       db:
         image: postgres:16.3-alpine3.20
@@ -113,7 +113,7 @@ jobs:
           POSTGRES_USER: ${{vars.DB_USERNAME}}
           POSTGRES_PASSWORD: ${{secrets.DB_PASSWORD}}
         options:
-          --name my-store_db
+          --hostname my-store_db
 
     steps:
       - name: Checkout
