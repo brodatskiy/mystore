@@ -17,7 +17,7 @@ services:
           APP_URL: '${APP_URL}'
           DB_CONNECTION: '${DB_CONNECTION}'
           DB_HOST: '${DB_HOST}'
-          DB_PASSWORD: '${secrets.DB_PASSWORD}'
+          DB_PASSWORD: '${DB_PASSWORD}'
         volumes:
             - ./:/var/www
         ports:
