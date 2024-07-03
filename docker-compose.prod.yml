@@ -16,7 +16,7 @@ services:
     volumes:
       - ./:/var/www
     environment:
-      DB_PASSWORD:$${DB_PASSWORD}
+      - DB_PASSWORD=$${DB_PASSWORD}
     ports:
       - '${VITE_PORT:-5173}:5173'
     depends_on:
