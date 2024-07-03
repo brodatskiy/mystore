@@ -60,15 +60,13 @@ jobs:
       - id: setImageName
         run: echo "APP_IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.push.outputs.digest }}" >> "$GITHUB_OUTPUT"
 
-  deploy:
+  clean-up:
     needs: [build]
     runs-on: self-hosted
     environment: production
-    env:
-      APP_IMAGE: ${{needs.build.outputs.APP_IMAGE}}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: qwe
+        run: echo ${{vars}}
 
       - name: Stop all containers
         run: docker stop $(docker ps -a -q) || true
@@ -76,8 +74,58 @@ jobs:
       - name: Remove unused containers in addition to other Docker resources, such as (unused) images and networks.
         run: docker system prune -f || true
 
-      - name: Docker compose up
-        run: docker compose --env-file .env.production -f docker-compose.prod.yml up -d
+  deploy:
+    needs: [clean-up]
+    runs-on: self-hosted
+    environment: production
+    env:
+      APP_IMAGE: ${{needs.build.outputs.APP_IMAGE}}
+    services:
+      nginx:
+        image: nginx:1.27.0-alpine-slim
+        ports:
+          - 80:80
+        volumes:
+          - ./_docker/nginx/conf.d:/etc/nginx/conf.d
+          - ./:/var/www
+        options:
+          --name my-store_nginx
+
+
+      app:
+        image: ${{APP_IMAGE}}
+        ports:
+          - 5173:5173
+        volumes:
+          - ./:/var/www
+        env:
+          APP_URL: ${vars.APP_URL}
+          DB_CONNECTION: ${vars.DB_CONNECTION}
+          DB_HOST: ${vars.DB_HOST}
+          DB_PASSWORD: ${secrets.DB_PASSWORD}
+        options:
+          --name my-store_app
+
+      db:
+        image: postgres:16.3-alpine3.20
+        ports:
+          - 5432:5432
+        volumes:
+          - ./var/tmp/db:/var/lib/pgsql
+        env:
+          POSTGRES_DB: ${vars.DB_DATABASE}
+          POSTGRES_USER: ${vars.DB_USERNAME}
+          POSTGRES_PASSWORD: ${secrets.DB_PASSWORD}
+        options:
+          --name my-store_db
+
+  set-up:
+    needs: [ deploy ]
+    runs-on: self-hosted
+    environment: production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app composer install
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app npm install

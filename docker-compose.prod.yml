@@ -12,7 +12,7 @@ services:
         container_name: my-store_nginx
 
     app:
-        image: ${vars.DB_DATABASE}
+        image: ${APP_IMAGE}
         environment:
           APP_URL: '${vars.APP_URL}'
           DB_CONNECTION: '${vars.DB_CONNECTION}'
