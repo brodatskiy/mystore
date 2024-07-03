@@ -84,11 +84,10 @@ jobs:
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app npm install
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app npm run build
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app ls -la
-      - run: docker ps
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan migrate --force
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan cache:clear
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan config:cache
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan key:generate
-      - run: chmod -R 775 /var/www/storage
-      - run: chmod -R 775 /var/www/bootstrap/cache
+      - run: chmod -R 775 ./storage
+      - run: chmod -R 775 ./bootstrap/cache
 
