@@ -62,8 +62,8 @@ jobs:
     runs-on: self-hosted
     environment: production
     steps:
-      - name: qwe
-        run: echo ${{vars}}
+      - name: vars env
+        run: echo ${{vars.DB_USERNAME}}
 
       - name: Stop all containers
         run: docker stop $(docker ps -a -q) || true
@@ -78,15 +78,18 @@ jobs:
     env:
       APP_IMAGE: ${{needs.build.outputs.APP_IMAGE}}
     services:
-      nginx:
-        image: nginx:1.27.0-alpine-slim
+      db:
+        image: postgres:16.3-alpine3.20
         ports:
-          - 80:80
+          - 5432:5432
         volumes:
-          - ./_docker/nginx/conf.d:/etc/nginx/conf.d
-          - ./:/var/www
+          - ./var/tmp/db:/var/lib/pgsql
+        env:
+          POSTGRES_DB: ${{vars.DB_DATABASE}}
+          POSTGRES_USER: ${{vars.DB_USERNAME}}
+          POSTGRES_PASSWORD: ${{secrets.DB_PASSWORD}}
         options:
-          --name my-store_nginx
+          --name my-store_db
 
       app:
         image: ${{vars.APP_IMAGE}}
@@ -100,20 +103,17 @@ jobs:
           DB_HOST: ${{vars.DB_HOST}}
           DB_PASSWORD: ${{secrets.DB_PASSWORD}}
         options:
-          --domainname my-store_app
+          --name my-store_app
 
-      db:
-        image: postgres:16.3-alpine3.20
+      nginx:
+        image: nginx:1.27.0-alpine-slim
         ports:
-          - 5432:5432
+          - 80:80
         volumes:
-          - ./var/tmp/db:/var/lib/pgsql
-        env:
-          POSTGRES_DB: ${{vars.DB_DATABASE}}
-          POSTGRES_USER: ${{vars.DB_USERNAME}}
-          POSTGRES_PASSWORD: ${{secrets.DB_PASSWORD}}
+          - ./_docker/nginx/conf.d:/etc/nginx/conf.d
+          - ./:/var/www
         options:
-          --hostname my-store_db
+          --name my-store_nginx
 
     steps:
       - name: Checkout
