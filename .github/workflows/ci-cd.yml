@@ -83,8 +83,6 @@ jobs:
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app composer install
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app npm install
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app npm run build
-      - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app ls -la
-      - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan migrate --force
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan cache:clear
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan config:cache
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan key:generate
