@@ -57,13 +57,23 @@ jobs:
       - id: setImageName
         run: echo "APP_IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.push.outputs.digest }}" >> "$GITHUB_OUTPUT"
 
-  clean-up:
+
+  deploy:
     needs: [build]
     runs-on: self-hosted
     environment: production
+    env:
+      APP_IMAGE: ${{needs.build.outputs.APP_IMAGE}}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
     steps:
-      - name: vars env
-        run: echo ${{vars.DB_USERNAME}}
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: look env
+        run: echo ${{env.DB_PASSWORD}}
+
+      - name: look prod
+        run: echo ${{secrets.DB_PASSWORD}}
 
       - name: Stop all containers
         run: docker stop $(docker ps -a -q) || true
@@ -71,53 +81,8 @@ jobs:
       - name: Remove unused containers in addition to other Docker resources, such as (unused) images and networks.
         run: docker system prune -f || true
 
-  deploy:
-    needs: [clean-up]
-    runs-on: self-hosted
-    environment: production
-    env:
-      APP_IMAGE: ${{needs.build.outputs.APP_IMAGE}}
-    services:
-      db:
-        image: postgres:16.3-alpine3.20
-        ports:
-          - 5432:5432
-        volumes:
-          - ./var/tmp/db:/var/lib/pgsql
-        env:
-          POSTGRES_DB: ${{vars.DB_DATABASE}}
-          POSTGRES_USER: ${{vars.DB_USERNAME}}
-          POSTGRES_PASSWORD: ${{secrets.DB_PASSWORD}}
-        options:
-          --name my-store_db
-
-      app:
-        image: ${{vars.APP_IMAGE}}
-        ports:
-          - 5173:5173
-        volumes:
-          - ./:/var/www
-        env:
-          APP_URL: ${{vars.APP_URL}}
-          DB_CONNECTION: ${{vars.DB_CONNECTION}}
-          DB_HOST: ${{vars.DB_HOST}}
-          DB_PASSWORD: ${{secrets.DB_PASSWORD}}
-        options:
-          --name my-store_app
-
-      nginx:
-        image: nginx:1.27.0-alpine-slim
-        ports:
-          - 80:80
-        volumes:
-          - ./_docker/nginx/conf.d:/etc/nginx/conf.d
-          - ./:/var/www
-        options:
-          --name my-store_nginx
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Docker compose up
+        run: docker compose --env-file .env.production -f docker-compose.prod.yml up -d
 
       - name: Docker containers
         run: docker ps
