@@ -88,7 +88,7 @@ jobs:
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan cache:clear
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan config:cache
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan key:generate
-      - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app chmod -R 777 ./storage
+      - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app chmod -R 775 ./storage
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app chmod -R 775 ./bootstrap/cache
 
 
