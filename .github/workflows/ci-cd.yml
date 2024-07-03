@@ -72,9 +72,6 @@ jobs:
       - name: look env
         run: echo ${{env.DB_PASSWORD}}
 
-      - name: look prod
-        run: echo ${{secrets.DB_PASSWORD}}
-
       - name: Stop all containers
         run: docker stop $(docker ps -a -q) || true
 
