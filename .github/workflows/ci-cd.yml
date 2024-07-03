@@ -82,7 +82,7 @@ jobs:
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app composer install
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app npm install
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app npm run build
-      - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app cat .env
+      - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app cat ls -la
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app docker ps
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan migrate --force
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan cache:clear
