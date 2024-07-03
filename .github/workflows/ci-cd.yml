@@ -70,6 +70,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: qweqweqw
+        run: ${{vars.DB_DATABASE}}
+
       - name: Stop all containers
         run: docker stop $(docker ps -a -q) || true
 
@@ -77,7 +80,7 @@ jobs:
         run: docker system prune -f || true
 
       - name: Docker compose up
-        run: docker compose -f docker-compose.prod.yml up -d
+        run: docker compose --env-file .env.production -f docker-compose.prod.yml up -d
 
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app composer install
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app npm install
