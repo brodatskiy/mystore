@@ -88,9 +88,8 @@ jobs:
         options:
           --name my-store_nginx
 
-
       app:
-        image: ${{APP_IMAGE}}
+        image: $APP_IMAGE
         ports:
           - 5173:5173
         volumes:
