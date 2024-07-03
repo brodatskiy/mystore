@@ -57,19 +57,16 @@ jobs:
       - id: setImageName
         run: echo "APP_IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.push.outputs.digest }}" >> "$GITHUB_OUTPUT"
 
-
   deploy:
     needs: [build]
     runs-on: self-hosted
     environment: production
     env:
       APP_IMAGE: ${{needs.build.outputs.APP_IMAGE}}
+      DB_PASSWORD: ${{vars.DB_PASSWORD}}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: look env
-        run: echo ${{env.DB_PASSWORD}}
 
       - name: Stop all containers
         run: docker stop $(docker ps -a -q) || true
@@ -83,8 +80,6 @@ jobs:
       - name: Docker compose up
         run: docker compose -f docker-compose.prod.yml up -d
 
-      - name: Docker containers
-        run: docker ps
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app composer install
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app npm install
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app npm run build
@@ -94,3 +89,6 @@ jobs:
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan cache:clear
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan config:cache
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan key:generate
+      - run: chmod -R 775 /var/www/storage
+      - run: chmod -R 775 /var/www/bootstrap/cache
+
