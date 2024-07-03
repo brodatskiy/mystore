@@ -78,8 +78,11 @@ jobs:
       - name: Remove unused containers in addition to other Docker resources, such as (unused) images and networks.
         run: docker system prune -f || true
 
+      - name: Copy .env
+        run: cp .env.production .env
+
       - name: Docker compose up
-        run: docker compose --env-file .env.production -f docker-compose.prod.yml up -d
+        run: docker compose -f docker-compose.prod.yml up -d
 
       - name: Docker containers
         run: docker ps
