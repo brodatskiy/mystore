@@ -89,16 +89,16 @@ jobs:
           --name my-store_nginx
 
       app:
-        image: ${{env.APP_IMAGE}}
+        image: ${{vars.APP_IMAGE}}
         ports:
           - 5173:5173
         volumes:
           - ./:/var/www
         env:
-          APP_URL: ${vars.APP_URL}
-          DB_CONNECTION: ${vars.DB_CONNECTION}
-          DB_HOST: ${vars.DB_HOST}
-          DB_PASSWORD: ${secrets.DB_PASSWORD}
+          APP_URL: ${{vars.APP_URL}}
+          DB_CONNECTION: ${{vars.DB_CONNECTION}}
+          DB_HOST: ${{vars.DB_HOST}}
+          DB_PASSWORD: ${{secrets.DB_PASSWORD}}
         options:
           --name my-store_app
 
@@ -109,9 +109,9 @@ jobs:
         volumes:
           - ./var/tmp/db:/var/lib/pgsql
         env:
-          POSTGRES_DB: ${vars.DB_DATABASE}
-          POSTGRES_USER: ${vars.DB_USERNAME}
-          POSTGRES_PASSWORD: ${secrets.DB_PASSWORD}
+          POSTGRES_DB: ${{vars.DB_DATABASE}}
+          POSTGRES_USER: ${{vars.DB_USERNAME}}
+          POSTGRES_PASSWORD: ${{secrets.DB_PASSWORD}}
         options:
           --name my-store_db
 
