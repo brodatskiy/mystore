@@ -5,7 +5,7 @@
 
 import PrimeVue from "primevue/config";
 import ToastService from "primevue/toastservice";
-import Lara from "~/presets/Lara";
+import Aura from '@primevue/themes/aura';
 
 // Plugins
 import { createPinia } from "pinia";
@@ -13,7 +13,11 @@ import { createPinia } from "pinia";
 const pinia = createPinia();
 
 export function registerPlugins(app) {
-    app.use(PrimeVue, { unstyled: true, pt: Lara })
+    app.use(PrimeVue, {
+        theme: {
+            preset: Aura
+        }
+    })
         .use(ToastService)
         .use(pinia);
 }
