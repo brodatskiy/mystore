@@ -28,7 +28,6 @@ class FilterRequest extends FormRequest
             'price' => 'array',
             'category_id' => 'integer|exists:categories,id',
             'tags' => 'array',
-            'sizes' => 'array',
         ];
     }
 
