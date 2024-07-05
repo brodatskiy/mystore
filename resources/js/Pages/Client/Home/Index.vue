@@ -7,8 +7,9 @@ import ProductCard from "@/Components/ProductCard.vue";
 import Pagination from "@/Components/Pagination.vue";
 import ProductPriceFilter from "@/Components/Filters/ProductPriceFilter.vue";
 import ProductSearch from "@/Components/Filters/ProductSearch.vue";
-// import AppliedFilters from "@/Components/Filters/AppliedFilters.vue";
 import SortProducts from "@/Components/Filters/SortProducts.vue";
+
+import Drawer from 'primevue/drawer';
 
 import { useFilterStore } from "@/Store/useFilterStore";
 
@@ -82,7 +83,7 @@ const filterExpand = ref(false);
         </div>
 
         <div>
-            <Sidebar
+            <Drawer
                 v-model:visible="filterExpand"
                 header="Filters"
                 position="right"
@@ -103,7 +104,7 @@ const filterExpand = ref(false);
                         >
                     </div>
                 </div>
-            </Sidebar>
+            </Drawer>
         </div>
     </ShopLayout>
 </template>

@@ -1,13 +1,15 @@
 <script setup>
 import {ref, onMounted} from "vue";
 
-import { Link } from '@inertiajs/vue3'
+import {Link} from '@inertiajs/vue3'
 import LinkBtn from "@/Components/Buttons/LinkBtn.vue";
 import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
 import LocaleSwitcher from "@/Components/LocaleSwitcher.vue";
 import FlashMessage from "@/Components/FlashMessage.vue";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
+
+import Drawer from 'primevue/drawer';
 
 const sectionsExpand = ref(false);
 const parentCategoriesExpand = ref(false);
@@ -167,17 +169,17 @@ onMounted(() => {
                 {{ new Date().getFullYear() }} — <strong>MyStore</strong>
             </div>
         </footer>
-        <Sidebar
+        <Drawer
             v-model:visible="sectionsExpand"
             header="Categories"
             position="left"
             :modal="false"
             :showCloseIcon="false"
             @mouseleave="sectionsExpand = false"
-            class="w-96"
+            class="!w-[25rem]"
         >
             <div class="overflow-y-auto flex">
-                <div class="flex flex-col w-1/3">
+                <div class="flex flex-col w-1/3 px-1">
                     <Link
                         v-for="section in sectionsWithCategories"
                         :href="route('section', section.slug)"
@@ -189,7 +191,7 @@ onMounted(() => {
                     </Link>
                 </div>
                 <div @mouseleave="subCategoriesExpand = false" class="flex w-2/3">
-                    <div v-show="parentCategoriesExpand" class="flex flex-col w-1/2">
+                    <div v-show="parentCategoriesExpand" class="flex flex-col w-1/2 px-1">
                         <Link
                             v-for="category in parentCategories"
                             :href="route('category', category.slug)"
@@ -200,7 +202,7 @@ onMounted(() => {
                             {{ category.title }}
                         </Link>
                     </div>
-                    <div v-show="subCategoriesExpand" class="flex flex-col w-1/2">
+                    <div v-show="subCategoriesExpand" class="flex flex-col w-1/2 px-1">
                         <Link
                             v-for="category in subCategories"
                             :href="route('category', category.slug)"
@@ -212,7 +214,7 @@ onMounted(() => {
                     </div>
                 </div>
             </div>
-        </Sidebar>
+        </Drawer>
     </div>
 
 
