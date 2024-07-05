@@ -73,12 +73,6 @@ class ProductListLayout extends Table
                 })
                 ->align(TD::ALIGN_CENTER),
 
-            TD::make('group_id', "Group")
-                ->render(fn (Product $product) => Link::make(__($product->group->title))
-                    ->route('platform.resource.view', ['group-resources', $product->group->id]))
-
-                ->align(TD::ALIGN_CENTER),
-
             TD::make('is_published', "Publised")->usingComponent(Boolean::class)
                 ->align(TD::ALIGN_CENTER)
                 ->sort(),

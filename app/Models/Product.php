@@ -27,12 +27,7 @@ class Product extends Model
 
     protected $table = 'products';
     protected $guarded = false;
-    protected $with = ['group', 'category', 'sticker', 'tags'];
-
-    public function group(): BelongsTo
-    {
-        return $this->belongsTo(Group::class, 'group_id', 'id');
-    }
+    protected $with = ['category', 'sticker', 'tags'];
 
     public function category(): BelongsTo
     {

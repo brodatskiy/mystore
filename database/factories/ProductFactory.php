@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Category;
-use App\Models\Group;
 use App\Models\Product;
 use App\Models\Sticker;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -28,7 +27,6 @@ class ProductFactory extends Factory
             'description' => fake()->paragraph(1),
             'preview_image' => fake()->imageUrl(300, 400),
             'color' => fake()->safeHexColor(),
-            'group_id' => Group::all()->random()->id,
             'category_id' => Category::all()->random()->id,
             'sticker_id' => Sticker::all()->random()->id,
             'price' => fake()->numberBetween(100, 1000),

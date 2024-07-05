@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Orchid\Layouts\Product;
 
 use App\Models\Category;
-use App\Models\Group;
 use App\Models\Sticker;
 use App\Models\Tag;
 use Orchid\Screen\Actions\Button;
@@ -67,10 +66,6 @@ class ProductEditLayout extends Rows
                 ->required()
                 ->fromModel(Category::class, 'title')
                 ->title(__('Category')),
-
-            Select::make('product.group_id')
-                ->fromModel(Group::class, 'title')
-                ->title(__('Group')),
 
             CheckBox::make('product.is_published')
                 ->value(1)

@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Category;
-use App\Models\Group;
 use App\Models\Sticker;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -30,12 +29,6 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->foreignIdFor(Sticker::class)
-                ->index()
-                ->nullable()
-                ->constrained()
-                ->cascadeOnUpdate()
-                ->nullOnDelete();
-            $table->foreignIdFor(Group::class)
                 ->index()
                 ->nullable()
                 ->constrained()
