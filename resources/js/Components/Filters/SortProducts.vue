@@ -1,14 +1,11 @@
 <script setup>
 import { ref, watch, computed } from "vue";
-import Dropdown from "primevue/dropdown";
+
+import Select from 'primevue/select';
 
 import { useFilterStore } from "@/Store/useFilterStore";
 
 const filterStore = useFilterStore();
-
-// const props = defineProps({
-//     sort: String,
-// });
 
 const emits = defineEmits(["change"]);
 
@@ -20,21 +17,11 @@ const sortOptions = ref([
 const sort = computed(() => {
     return sortOptions.value.filter((option) => option.value === props.sort)[0];
 });
-
-// const sortField = ref(sort.value);
-
-// watch(sortField, (option) => {
-//     emits("change", option.value);
-// });
-
-// function applyFilters() {
-//     console.log("test");
-// }
 </script>
 
 <template>
     <div>
-        <Dropdown
+        <Select
             v-model="filterStore.sort"
             :options="sortOptions"
             optionValue="value"
