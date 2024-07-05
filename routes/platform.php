@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Orchid\Screens\EmailSenderScreen;
 use App\Orchid\Screens\Examples\ExampleActionsScreen;
 use App\Orchid\Screens\Examples\ExampleCardsScreen;
 use App\Orchid\Screens\Examples\ExampleChartsScreen;
@@ -38,17 +37,6 @@ use Tabuna\Breadcrumbs\Trail;
 // Main
 Route::screen('/main', PlatformScreen::class)
     ->name('platform.main');
-
-// Platform > Email
-Route::screen('email', EmailSenderScreen::class)
-    ->name('platform.email')
-    ->breadcrumbs(function (Trail $trail) {
-        return $trail
-            ->parent('platform.index')
-            ->push('Email sender');
-    });
-
-
 
 // Platform > System > Products > Product > Edit
 Route::screen('products/{product}/edit', ProductEditScreen::class)

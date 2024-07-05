@@ -52,11 +52,6 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('bs.shield')
                 ->route('platform.systems.roles')
                 ->permission('platform.systems.roles'),
-
-            Menu::make('Email sender')
-                ->icon('bs.envelope')
-                ->route('platform.email')
-                ->title('Tools'),
         ];
     }
 
