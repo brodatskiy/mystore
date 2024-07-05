@@ -15,8 +15,6 @@ class ProductResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
-        $products = Product::where('group_id', $this->group_id)->get();
-
         return [
             'id' => $this->id,
             'title' => $this->title,
@@ -25,8 +23,6 @@ class ProductResource extends JsonResource
             'color' => $this->color,
             'price' => $this->price,
             'is_published' => $this->is_published,
-            'group' => new GroupResource($this->group),
-            'product_group' => ProductMinResource::collection($products),
             'category' => new CategoryResource($this->category),
             'sticker' => new StickerResource($this->sticker),
             'tags' => TagResource::collection($this->tags),
