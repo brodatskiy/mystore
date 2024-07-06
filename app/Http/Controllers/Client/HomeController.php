@@ -19,7 +19,6 @@ class HomeController extends Controller
         $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($data)]);
 
         $products = Product::query()
-            ->with('sticker')
             ->filter($filter)
             ->sorted()
             ->paginate(8)
