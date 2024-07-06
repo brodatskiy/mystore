@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from "vue";
+import { Head } from '@inertiajs/vue3'
 import { usePage } from "@inertiajs/vue3";
 
 import ShopLayout from "@/Layouts/ShopLayout.vue";
@@ -35,7 +36,7 @@ const filters = ref({
 });
 
 function applyFilters() {
-    filterStore.applyFilters(currentLocation, filters);
+    filterStore.applyFilters(currentLocation);
 }
 
 const filterExpand = ref(false);
