@@ -1,6 +1,8 @@
 <script setup>
-import { ref, watch } from "vue";
-import { useFilterStore } from "@/Store/useFilterStore";
+import {ref, watch} from "vue";
+import {useFilterStore} from "@/Store/useFilterStore";
+
+import InputNumber from 'primevue/inputnumber';
 
 const filterStore = useFilterStore();
 
@@ -20,23 +22,21 @@ watch(price, (price) => {
         <p class="font-medium text-xl mb-4">Price</p>
         <div class="space-y-6">
             <div class="flex items-center justify-between">
-                <div class="space-x-2">
-                    <span>from</span>
+                <div class="space-x-2 flex">
                     <InputNumber
                         v-model="filterStore.price[0]"
                         :useGrouping="false"
-                        pt:input:root:class="w-20"
-                        :ptOptions="{ mergeProps: true }"
+                        inputClass="w-20"
                     />
                 </div>
 
-                <div class="space-x-2">
-                    <span>to</span>
+                <div>-</div>
+
+                <div class="space-x-2 flex">
                     <InputNumber
                         v-model="filterStore.price[1]"
                         :useGrouping="false"
-                        pt:input:root:class="w-20"
-                        :ptOptions="{ mergeProps: true }"
+                        inputClass="w-20"
                     />
                 </div>
             </div>
