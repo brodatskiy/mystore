@@ -89,8 +89,9 @@ const filterExpand = ref(false);
                 header="Filters"
                 position="right"
                 :modal="false"
+                class="!w-[20rem]"
             >
-                <div class="space-y-8 p-4">
+                <div class="space-y-8 py-4">
                     <div>
                         <ProductSearch></ProductSearch>
                     </div>
