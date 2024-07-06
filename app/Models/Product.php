@@ -70,13 +70,17 @@ class Product extends Model
     {
         $sortBy = request('sort');
 
-        $query->when($sortBy, function (Builder $q, $sortBy) {
+        $query->when($sortBy, function (Builder $query, $sortBy) {
             if ($sortBy == 'price') {
-                $q->orderBy('price', 'ASC');
+                $query->orderBy('price', 'ASC');
             } elseif ($sortBy == '-price') {
-                $q->orderBy('price', 'DESC');
+                $query->orderBy('price', 'DESC');
             }
-        });
+        }, function (Builder $query) {
+            $query->orderBy('price', 'ASC');
+        }
+
+        );
     }
 
     //Orchid
