@@ -194,7 +194,7 @@ onMounted(() => {
                     <div v-show="parentCategoriesExpand" class="flex flex-col w-1/2 px-1">
                         <Link
                             v-for="category in parentCategories"
-                            :href="route('category', category.slug)"
+                            :href="route('catalog', category.slug)"
                             :key="category.id"
                             @mouseenter="subCategoriesExpander(category.children)"
                             class="py-2 hover:text-primary-600"
@@ -205,7 +205,7 @@ onMounted(() => {
                     <div v-show="subCategoriesExpand" class="flex flex-col w-1/2 px-1">
                         <Link
                             v-for="category in subCategories"
-                            :href="route('category', category.slug)"
+                            :href="route('catalog', category.slug)"
                             :key="category.id"
                             class=" py-2 hover:text-primary-600"
                         >
