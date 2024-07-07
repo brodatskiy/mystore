@@ -22,7 +22,7 @@ class Category extends Model
 
     protected $table = 'categories';
     protected $guarded = false;
-
+    protected $with = ['section', 'parent'];
 
     public function children(): HasMany
     {
@@ -32,6 +32,11 @@ class Category extends Model
     public function parent(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'parent_id', 'id');
+    }
+
+    public function section(): BelongsTo
+    {
+        return $this->belongsTo(Section::class, 'section_id', 'id');
     }
 
     public function products(): HasMany
