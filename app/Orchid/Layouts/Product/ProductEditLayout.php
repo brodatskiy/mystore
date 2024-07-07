@@ -60,6 +60,7 @@ class ProductEditLayout extends Rows
 
             Select::make('product.sticker_id')
                 ->fromModel(Sticker::class, 'title')
+                ->empty('No select')
                 ->title(__('Sticker')),
 
             Select::make('product.category_id')
