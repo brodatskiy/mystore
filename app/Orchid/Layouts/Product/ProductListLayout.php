@@ -59,11 +59,10 @@ class ProductListLayout extends Table
                     }
                 )
                 ->align(TD::ALIGN_CENTER),
-            TD::make('sticker', 'Sticker')
-                ->defaultHidden()
+            TD::make('sticker_id', 'Sticker')
                 ->render(
                     function (Product $product) {
-                        return $product->sticker->title;
+                        return $product->sticker->title ?? null;
                     }
                 )
                 ->align(TD::ALIGN_CENTER),
