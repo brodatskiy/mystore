@@ -26,7 +26,7 @@ function add(product) {
                         :src="product.image"
                         :alt="product.title"
                     >
-                        <div class="absolute top-2 right-2">{{product.sticker.title.toUpperCase()}}</div>
+                        <div v-if="product.sticker" class="absolute top-2 right-2">{{product.sticker.title.toUpperCase()}}</div>
                     </img>
                 </div>
 

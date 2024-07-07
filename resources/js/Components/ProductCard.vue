@@ -19,7 +19,7 @@ function toggleWish(product) {
                 <div class="relative">
                     <div v-if="!product.image" class="w-full h-72 bg-gray-300 rounded" ></div>
                     <img v-else class="w-full h-72 rounded-lg object-cover object-center"  :src="product.image" :alt="product.title" >
-                    <div class="absolute top-2 right-2">
+                    <div v-if="product.sticker" class="absolute top-2 right-2">
                         {{ product.sticker.title.toUpperCase() }}
                     </div>
                     </img>
