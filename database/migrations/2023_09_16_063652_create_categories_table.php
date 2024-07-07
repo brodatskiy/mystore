@@ -18,7 +18,12 @@ return new class extends Migration {
                 ->constrained('sections')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->foreignId('parent_id')->index()->nullable()->constrained('categories');
+            $table->foreignId('parent_id')
+                ->index()
+                ->nullable()
+                ->constrained('categories')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();;
             $table->string('slug')->unique();
             $table->timestamps();
 
