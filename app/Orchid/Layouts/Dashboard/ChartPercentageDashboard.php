@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Orchid\Layouts\Examples;
+namespace App\Orchid\Layouts\Dashboard;
 
 use Orchid\Screen\Layouts\Chart;
 
-class ChartPieExample extends Chart
+class ChartPercentageDashboard extends Chart
 {
     /**
      * Available options:
@@ -15,10 +15,10 @@ class ChartPieExample extends Chart
      *
      * @var string
      */
-    protected $type = self::TYPE_PIE;
+    protected $type = self::TYPE_PERCENTAGE;
 
     /**
      * @var int
      */
-    protected $height = 350;
+    protected $height = 160;
 }

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Orchid\Layouts\Examples;
+namespace App\Orchid\Layouts\Dashboard;
 
 use Orchid\Screen\Layouts\Chart;
 
-class ChartBarExample extends Chart
+class ChartPieDashboard extends Chart
 {
     /**
      * Available options:
@@ -15,12 +15,10 @@ class ChartBarExample extends Chart
      *
      * @var string
      */
-    protected $type = self::TYPE_BAR;
+    protected $type = self::TYPE_PIE;
 
     /**
-     * Height of the chart.
-     *
      * @var int
      */
-    protected $height = 300;
+    protected $height = 350;
 }
