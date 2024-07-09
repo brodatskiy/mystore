@@ -27,7 +27,7 @@ services:
     image: postgres:16.3-alpine3.20
     restart: always
     volumes:
-      - /var/lib/pgsql:/var/lib/pgsql
+      - db-pgsql:/var/lib/pgsql
     environment:
       - POSTGRES_DB=${DB_DATABASE}
       - POSTGRES_USER=${DB_USERNAME}
@@ -36,4 +36,7 @@ services:
       - '${DB_PORT:-5432}:5432'
     container_name: my-store_db
 
-
+volumes:
+  db-pgsql:
+    driver: local
+    name: "my-store-pgsql"
