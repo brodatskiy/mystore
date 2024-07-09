@@ -17,6 +17,7 @@ class CategoryWithChildrenResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
+            'slug' => $this->slug,
             'section_id' => $this->section_id,
             'parent_id' => $this->parent_id,
             'children' => CategoryResource::collection($this->children),
