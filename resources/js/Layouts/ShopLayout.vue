@@ -180,15 +180,14 @@ onMounted(() => {
         >
             <div class="overflow-y-auto flex">
                 <div class="flex flex-col w-1/3 px-1">
-                    <Link
+                    <a
                         v-for="section in sectionsWithCategories"
-                        :href="route('section', section.slug)"
                         :key="section.id"
                         @mouseenter="parentCategoriesExpander(section.parentCategories)"
                         class="py-2 hover:text-primary-600"
                     >
                         {{ section.title }}
-                    </Link>
+                    </a>
                 </div>
                 <div @mouseleave="subCategoriesExpand = false" class="flex w-2/3">
                     <div v-show="parentCategoriesExpand" class="flex flex-col w-1/2 px-1">
@@ -205,7 +204,7 @@ onMounted(() => {
                     <div v-show="subCategoriesExpand" class="flex flex-col w-1/2 px-1">
                         <Link
                             v-for="category in subCategories"
-                            :href="route('catalog', category.slug)"
+                            :href="route('catalog', category)"
                             :key="category.id"
                             class=" py-2 hover:text-primary-600"
                         >
