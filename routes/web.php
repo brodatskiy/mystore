@@ -16,9 +16,13 @@ Route::post('/locale', [SetLocaleController::class, 'locale'])->name('locale');
 
 //Shop
 Route::get('/',  HomeController::class)->name('/');
+
 Route::get('/catalog/{category:slug}', CatalogController::class)->name('catalog');
 Route::get('/categories', [CategoryController::class, 'index'])->name('category');
+
 Route::get('/sections', [SectionController::class, 'index'])->name('section');
+Route::get('/sections/{section}', [SectionController::class, 'show'])->name('section.show');
+
 Route::resource('/product', ProductController::class)->only('show');
 
 Route::middleware(['auth'])->group(function () {
