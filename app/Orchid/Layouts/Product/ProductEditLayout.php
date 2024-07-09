@@ -43,7 +43,6 @@ class ProductEditLayout extends Rows
                 ->required()
                 ->type('color')
                 ->title('Color')
-                ->value('#563d7c')
                 ->horizontal(),
 
             Input::make('product.price')
