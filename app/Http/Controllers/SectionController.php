@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Product\ProductCardResource;
+use App\Http\Resources\Product\ProductResource;
 use App\Http\Resources\Section\SectionWithCategoriesResource;
 use App\Models\Section;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class SectionController extends Controller
 {
@@ -38,9 +41,9 @@ class SectionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Section $section)
     {
-        //
+         //
     }
 
     /**
