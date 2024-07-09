@@ -27,7 +27,7 @@ services:
     image: postgres:16.3-alpine3.20
     restart: always
     volumes:
-      - ../var/tmp/db:/var/lib/pgsql
+      - ../../var/tmp/db:/var/lib/pgsql
     environment:
       - POSTGRES_DB=${DB_DATABASE}
       - POSTGRES_USER=${DB_USERNAME}
