@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use App\Orchid\Screens\Category\CategoryEditScreen;
 use App\Orchid\Screens\Category\CategoryListScreen;
-use App\Orchid\Screens\Category\CategoryViewScreen;
 use App\Orchid\Screens\DashboardScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Product\ProductEditScreen;
