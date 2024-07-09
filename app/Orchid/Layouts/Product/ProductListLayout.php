@@ -100,7 +100,7 @@ class ProductListLayout extends Table
 
                     Button::make(__('Delete'))
                         ->icon('bs.trash3')
-                        ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted.'))
+                        ->confirm(__('Are you sure?'))
                         ->method('remove', [
                             'id' => $product->id,
                         ]),
