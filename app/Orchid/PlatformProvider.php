@@ -34,19 +34,18 @@ class PlatformProvider extends OrchidServiceProvider
     public function menu(): array
     {
         return [
-            Menu::make('Dashboard')
-                ->icon('bs.collection')
-                ->route('platform.example'),
-
             Menu::make(__('Users'))
                 ->icon('bs.people')
                 ->route('platform.systems.users')
-                ->permission('platform.systems.users')
-                ->title(__('Access Controls')),
+                ->permission('platform.systems.users'),
 
             Menu::make(__('Products'))
                 ->icon('bs.folder')
                 ->route('platform.products'),
+
+            Menu::make(__('Categories'))
+                ->icon('bs.bookmarks')
+                ->route('platform.categories'),
 
             Menu::make(__('Roles'))
                 ->icon('bs.shield')
@@ -66,7 +65,8 @@ class PlatformProvider extends OrchidServiceProvider
             ItemPermission::group(__('System'))
                 ->addPermission('platform.systems.roles', __('Roles'))
                 ->addPermission('platform.systems.users', __('Users'))
-                ->addPermission('platform.systems.products', __('Products')),
+                ->addPermission('platform.systems.products', __('Products'))
+                ->addPermission('platform.systems.categories', __('Categories')),
         ];
     }
 }
