@@ -74,6 +74,9 @@ jobs:
       - name: Remove unused containers.
         run: docker rm $(docker ps --filter status=exited -q) || true
 
+      - name: Remove unused images.
+        run: docker image prune -a -f || true
+
       - name: Remove remove anonymous local volumes.
         run:  docker volume prune -f || true
 
