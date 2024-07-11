@@ -41,7 +41,7 @@ class ProductListLayout extends Table
                     <span class='small text-muted mt-1 mb-0'># {$product->id}</span>")
 
                 ->sort(),
-            TD::make('title')->sort()->filter(Input::make()),
+            TD::make('title')->width(120)->sort()->filter(Input::make()),
             TD::make('description')->width(200)->defaultHidden(),
             TD::make('color')
                 ->render(fn (Product $product) => "<div class='rounded' style='height:16px; width:16px; background:{$product->color}'></div>")
@@ -79,12 +79,14 @@ class ProductListLayout extends Table
             TD::make('created_at', 'Date of creation')
                 ->usingComponent(DateTimeSplit::class)
                 ->align(TD::ALIGN_RIGHT)
-                ->sort(),
+                ->sort()
+                ->defaultHidden(),
 
             TD::make('updated_at', 'Update date')
                 ->usingComponent(DateTimeSplit::class)
                 ->align(TD::ALIGN_RIGHT)
-                ->sort(),
+                ->sort()
+                ->defaultHidden(),
 
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)
