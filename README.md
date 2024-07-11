@@ -1,6 +1,9 @@
 # Installation
 ```
--php artisan my-store:install
+docker compose up -d
+php artisan migrate
+php artisan db:seed
+php artisan my-store:install
 ```
 # Login
 
