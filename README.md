@@ -2,4 +2,6 @@
 
 -php artisan my-store:install
 
-# Deploy
+# Login
+email: admin@admin.com
+password: password
