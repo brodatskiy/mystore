@@ -36,8 +36,8 @@ class PlatformProvider extends OrchidServiceProvider
         return [
             Menu::make(__('Users'))
                 ->icon('bs.people')
-                ->route('platform.systems.users')
-                ->permission('platform.systems.users'),
+                ->route('platform.users')
+                ->permission('platform.users'),
 
             Menu::make(__('Products'))
                 ->icon('bs.folder')
@@ -49,8 +49,8 @@ class PlatformProvider extends OrchidServiceProvider
 
             Menu::make(__('Roles'))
                 ->icon('bs.shield')
-                ->route('platform.systems.roles')
-                ->permission('platform.systems.roles'),
+                ->route('platform.roles')
+                ->permission('platform.roles'),
         ];
     }
 
@@ -63,10 +63,10 @@ class PlatformProvider extends OrchidServiceProvider
     {
         return [
             ItemPermission::group(__('System'))
-                ->addPermission('platform.systems.roles', __('Roles'))
-                ->addPermission('platform.systems.users', __('Users'))
-                ->addPermission('platform.systems.products', __('Products'))
-                ->addPermission('platform.systems.categories', __('Categories')),
+                ->addPermission('platform.roles', __('Roles'))
+                ->addPermission('platform.users', __('Users'))
+                ->addPermission('platform.products', __('Products'))
+                ->addPermission('platform.categories', __('Categories')),
         ];
     }
 }

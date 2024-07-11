@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Components\Cells\Boolean;
 use Orchid\Screen\Components\Cells\Currency;
 use Orchid\Screen\Components\Cells\DateTimeSplit;
@@ -61,7 +62,7 @@ class ProductViewScreen extends Screen
     public function permission(): ?iterable
     {
         return [
-            'platform.systems.products',
+            'platform.products',
         ];
     }
 
@@ -73,10 +74,9 @@ class ProductViewScreen extends Screen
     public function commandBar(): iterable
     {
         return [
-            Button::make(__('Edit'))
+            Link::make(__('Edit'))
                 ->icon('bs.pencil')
                 ->route('platform.products.edit', $this->product->id),
-
 
             Button::make(__('Remove'))
                 ->icon('bs.trash3')

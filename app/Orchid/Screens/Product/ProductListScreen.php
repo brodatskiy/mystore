@@ -49,7 +49,7 @@ class ProductListScreen extends Screen
     public function permission(): ?iterable
     {
         return [
-            'platform.systems.products',
+            'platform.products',
         ];
     }
 
