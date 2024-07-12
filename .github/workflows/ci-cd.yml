@@ -88,9 +88,7 @@ jobs:
       - name: Copy .env
         run: cp .env.production .env
 
-      - name: Docker compose up
-        run: docker compose -f docker-compose.prod.yml up -d
-
+      - run: docker compose -p ${{ vars.CONTAINER_PREFIX }} -f docker-compose.prod.yml up -d
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app composer install
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app npm install
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app npm run build
