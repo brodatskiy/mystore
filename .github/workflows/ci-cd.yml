@@ -66,13 +66,6 @@ jobs:
       APP_IMAGE: ${{needs.build.outputs.APP_IMAGE}}
       DB_PASSWORD: ${{vars.DB_PASSWORD}}
     steps:
-      - run: sudo chmod -R 775 *
-
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          sparse-checkout: .
-
       - name: Stop all containers
         run: docker stop $(docker ps -a -q) || true
 
