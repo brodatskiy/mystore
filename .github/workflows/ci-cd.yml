@@ -70,6 +70,8 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          sparse-checkout: .
 
       - name: Stop all containers
         run: docker stop $(docker ps -a -q) || true
