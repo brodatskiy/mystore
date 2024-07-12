@@ -66,10 +66,11 @@ jobs:
       APP_IMAGE: ${{needs.build.outputs.APP_IMAGE}}
       DB_PASSWORD: ${{vars.DB_PASSWORD}}
     steps:
+      - name: Chown
+        run: sudo chown -R brodatskiy *
+
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          clean: 'false'
 
       - name: Stop all containers
         run: docker stop $(docker ps -a -q) || true
