@@ -70,7 +70,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           sparse-checkout: .
-          path: './conf.d'
 
       - name: Stop all containers
         run: docker stop $(docker ps -a -q) || true
