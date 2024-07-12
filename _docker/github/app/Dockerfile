@@ -53,7 +53,6 @@ RUN composer install \
       --no-autoloader \
       --prefer-dist
 
-RUN npm install
 
 RUN composer dump-autoload  --no-scripts --optimize && \
     chown -R root:www-data /var/www && \
