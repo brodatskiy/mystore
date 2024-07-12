@@ -67,7 +67,7 @@ jobs:
       DB_PASSWORD: ${{vars.DB_PASSWORD}}
     steps:
       - name: Chown
-        run: sudo chown -R brodatskiy *
+        run: sudo chown -R brodatskiy ./
 
       - name: Checkout
         uses: actions/checkout@v4
