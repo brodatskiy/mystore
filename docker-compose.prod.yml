@@ -15,7 +15,6 @@ services:
     image: ${APP_IMAGE}
     volumes:
       - ./:/var/www
-      - storage-volume:/var/www/storage
     environment:
       - DB_PASSWORD=$${DB_PASSWORD}
     ports:
@@ -41,6 +40,3 @@ volumes:
   db-volume:
     driver: local
     name: "my-store-pgsql"
-  storage-volume:
-    driver: local
-    name: "my-store-storage"
