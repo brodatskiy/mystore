@@ -66,6 +66,12 @@ jobs:
       APP_IMAGE: ${{needs.build.outputs.APP_IMAGE}}
       DB_PASSWORD: ${{vars.DB_PASSWORD}}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: .
+          clean: 'false'
+
       - name: Stop all containers
         run: docker stop $(docker ps -a -q) || true
 
@@ -78,7 +84,7 @@ jobs:
       - name: Remove remove anonymous local volumes.
         run:  docker volume prune -f || true
 
-      - run: docker compose -p ${{ vars.CONTAINER_PREFIX }} -f docker-compose.prod.yml up -d
+      - run: docker compose -f docker-compose.prod.yml up -d
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app composer install
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app npm install
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app npm run build
