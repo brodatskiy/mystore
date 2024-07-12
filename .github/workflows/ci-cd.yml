@@ -85,9 +85,6 @@ jobs:
       - name: Remove remove anonymous local volumes.
         run:  docker volume prune -f || true
 
-      - name: Copy .env
-        run: cp .env.production .env
-
       - run: docker compose -p ${{ vars.CONTAINER_PREFIX }} -f docker-compose.prod.yml up -d
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app composer install
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app npm install
@@ -95,6 +92,7 @@ jobs:
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan migrate --force
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan cache:clear
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan config:cache
+      - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan route:cache
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan key:generate
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan my-store:install
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app chmod -R 777 ./storage
