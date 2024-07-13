@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Product\ProductCardResource;
-use App\Http\Resources\Product\ProductResource;
-use App\Http\Resources\Section\SectionWithCategoriesResource;
+use App\Http\Resources\Section\SectionResource;
+use App\Http\Resources\Section\SectionWithParentCategoriesResource;
 use App\Models\Section;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 
 class SectionController extends Controller
 {
@@ -19,7 +17,7 @@ class SectionController extends Controller
         $section = Section::with('parentCategories')->get();
         $section->load('categories');
 
-        return SectionWithCategoriesResource::collection($section);
+        return SectionWithParentCategoriesResource::collection($section);
     }
 
     /**
