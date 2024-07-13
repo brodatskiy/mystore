@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
 import { useForm } from "@inertiajs/vue3";
+import { Head } from "@inertiajs/vue3";
 
 import IconField from "primevue/iconfield";
 import InputIcon from "primevue/inputicon";
