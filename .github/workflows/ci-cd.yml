@@ -66,8 +66,6 @@ jobs:
       APP_IMAGE: ${{needs.build.outputs.APP_IMAGE}}
       DB_PASSWORD: ${{vars.DB_PASSWORD}}
     steps:
-      - run: sudo chown -R brodatskiy ./
-
       - name: Checkout
         uses: actions/checkout@v4
         with:
