@@ -14,10 +14,7 @@ class SectionController extends Controller
      */
     public function index()
     {
-        $section = Section::with('parentCategories')->get();
-        $section->load('categories');
-
-        return SectionWithParentCategoriesResource::collection($section);
+        //
     }
 
     /**
