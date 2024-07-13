@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Orchid\Attachment\Attachable;
 use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
@@ -19,16 +20,21 @@ class Section extends Model
 
     protected $guarded = false;
 
+    public function products(): HasManyThrough
+    {
+         return $this->hasManyThrough(Product::class, Category::class);
+    }
+
     public function categories(): HasMany
     {
         return $this->hasMany(Category::class, 'section_id', 'id');
     }
-
     public function parentCategories(): HasMany
     {
         return $this->hasMany(Category::class, 'section_id', 'id')
             ->whereNull('parent_id');
     }
+
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()

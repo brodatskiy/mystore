@@ -24,6 +24,10 @@ class Category extends Model
     protected $guarded = false;
     protected $with = ['section', 'parent'];
 
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class, 'category_id', 'id');
+    }
     public function children(): HasMany
     {
         return $this->hasMany(Category::class, 'parent_id', 'id');
@@ -37,11 +41,6 @@ class Category extends Model
     public function section(): BelongsTo
     {
         return $this->belongsTo(Section::class, 'section_id', 'id');
-    }
-
-    public function products(): HasMany
-    {
-        return $this->hasMany(Product::class, 'category_id', 'id');
     }
 
     public function getSlugOptions(): SlugOptions
