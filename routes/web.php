@@ -17,10 +17,14 @@ Route::post('/locale', [SetLocaleController::class, 'locale'])->name('locale');
 //Shop
 Route::get('/',  HomeController::class)->name('/');
 
-Route::get('/catalog/{category:slug}', CatalogController::class)->name('catalog');
-Route::get('/categories', [CategoryController::class, 'index'])->name('category');
+Route::get('/catalog', [CatalogController::class, 'index'])->name('catalog.index');
+Route::get('/catalog/navigation', [CatalogController::class, 'navigation'])->name('catalog.navigation.index');
+Route::get('/catalog/{section:slug}', [CatalogController::class, 'sectionIndex'])->name('catalog.section.index');
+Route::get('/catalog/{section:slug}/category/{category:slug}', [CatalogController::class, 'categoryIndex'])->name('catalog.section.category.index');
 
-Route::get('/sections', [SectionController::class, 'index'])->name('section');
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+
+Route::get('/sections', [SectionController::class, 'index'])->name('section.index');
 Route::get('/sections/{section}', [SectionController::class, 'show'])->name('section.show');
 
 Route::resource('/product', ProductController::class)->only('show');
