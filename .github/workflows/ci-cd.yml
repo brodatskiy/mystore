@@ -3,6 +3,8 @@ name: ci-cd
 on:
   push:
     branches: ['production']
+  pull_request:
+      branches: [ "production" ]
 
 env:
   REGISTRY: ghcr.io
