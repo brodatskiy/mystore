@@ -101,10 +101,8 @@ const submit = () => {
                 >
                     Log In
                 </PrimaryBtn>
-                <Link v-if="canResetPassword" :href="route('password.request')">
-                    <p class="text-blue-600 hover:text-blue-900">
+                <Link v-if="canResetPassword" :href="route('password.request')" class="text-blue-600 hover:text-blue-900">
                         Forgot your password?
-                    </p>
                 </Link>
             </div>
         </form>
