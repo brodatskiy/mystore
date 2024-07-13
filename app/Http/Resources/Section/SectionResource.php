@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Section;
 
+use App\Http\Resources\Category\CategoryWithChildrenResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -17,6 +18,7 @@ class SectionResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
+            'slug' => $this->slug,
         ];
     }
 }
