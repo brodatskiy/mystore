@@ -25,7 +25,7 @@ class ProductFilter extends AbstractFilter
 
     public function search(Builder $builder, $value)
     {
-        $builder->where('title', 'like', "%{$value}%");
+        $builder->where('products.' . 'title', 'like', "%{$value}%");
     }
 
     public function categoryId(Builder $builder, $value)
