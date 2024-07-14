@@ -171,7 +171,7 @@ onMounted(() => {
             @mouseleave="navigationExpand = false"
         >
             <div class="overflow-y-auto flex">
-                <div class="flex flex-col w-1/3 px-1">
+                <div class="flex flex-col w-1/2 px-1">
                     <p v-for="section in navigation"
                        :key="section.id"
                        @mouseenter="CategoriesExpander(section)">
@@ -184,8 +184,8 @@ onMounted(() => {
                         </Link>
                     </p>
                 </div>
-                <div class="flex w-2/3">
-                    <div v-if="CategoriesExpand" class="flex flex-col w-1/2 px-1">
+                <div class="flex w-1/2">
+                    <div v-if="CategoriesExpand" class="flex flex-col px-1">
                         <p v-for="category in currentSection.parentCategories"
                            :key="category.id"
                            @mouseenter="subCategoriesExpander(category.children)">
