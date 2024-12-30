@@ -31,18 +31,22 @@ function CategoriesExpander(section) {
 onMounted(() => {
     getNavigation();
 });
+
+function toggleDarkMode() {
+    document.documentElement.classList.toggle('my-store-dark');
+}
 </script>
 <template>
     <div class="min-h-screen bg-gray-100">
         <header class="w-full sticky top-0 z-20 px-6 py-3 bg-white shadow">
             <div class="flex items-center justify-between">
                 <div class="flex-1">
-                    <button
+                    <Button
                         @click="navigationExpand = !navigationExpand"
-                        class="font-bold hover:text-primary-600"
+                        class="font-bold"
                     >
                         Categories
-                    </button>
+                    </Button>
                 </div>
 
                 <!-- Logo -->
@@ -53,6 +57,7 @@ onMounted(() => {
                     <!-- Icon Buttons  -->
                     <LocaleSwitcher/>
                     <div class="flex items-center space-x-4 ml-4">
+                        <Button label="Toggle Dark Mode" @click="toggleDarkMode()" />
                         <LinkBtn :href="route('cart.index')">
                             <Icon
                                 icon="mdi:cart-outline"
