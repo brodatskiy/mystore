@@ -9,7 +9,7 @@ services:
         restart: always
         depends_on:
             - app
-        container_name: my-store_nginx
+        container_name: nginx
 
     app:
         build:
@@ -23,7 +23,7 @@ services:
             - db
         environment:
             PHP_IDE_CONFIG: "serverName=my-store"
-        container_name: my-store_app
+        container_name: app
 
     db:
         image: postgres
@@ -37,15 +37,14 @@ services:
             - POSTGRES_PASSWORD=${DB_PASSWORD}
         ports:
             - '${DB_PORT:-5432}:5432'
-        container_name: my-store_db
+        container_name: db
 
     redis:
         image: redis
         restart: unless-stopped
         ports:
             - "6379:6379"
-        container_name: auction_redis
-
+        container_name: redis
 
 volumes:
     db-volume:
