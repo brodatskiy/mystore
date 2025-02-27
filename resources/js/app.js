@@ -2,7 +2,7 @@ import "./bootstrap";
 import "../css/app.css";
 
 import { createApp, h } from "vue";
-import { createInertiaApp, Link, Head } from "@inertiajs/vue3";
+import { createInertiaApp } from "@inertiajs/vue3";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy";
 import { Icon } from "@iconify/vue";
@@ -36,8 +36,6 @@ createInertiaApp({
             .use(plugin)
             .use(ZiggyVue)
             .use(i18n)
-            .component("Link", Link)
-            .component("Head", Head)
             .component("Icon", Icon)
             .use(registerPlugins)
             .mount(el);

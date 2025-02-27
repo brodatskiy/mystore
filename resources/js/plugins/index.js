@@ -5,11 +5,9 @@
 
 import PrimeVue from "primevue/config";
 import ToastService from "primevue/toastservice";
-import {definePreset} from '@primevue/themes';
-import Aura from '@primevue/themes/aura';
-
-// Plugins
+import { definePreset } from '@primeuix/themes';
 import {createPinia} from "pinia";
+import Aura from '@primeuix/themes/aura';
 
 const pinia = createPinia();
 
