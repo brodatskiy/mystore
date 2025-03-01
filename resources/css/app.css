@@ -1,9 +1,18 @@
 @import "tailwindcss";
 @import "tailwindcss-primeui";
+@custom-variant dark (&:where(.dark, .dark *));
 
 body {
     min-width: 540px;
     margin: 0 !important;
+    background-color: var(--body-bg);
+}
+
+:root {
+    --body-bg: var(--p-surface-200);
+}
+:root[class~="dark"] {
+    --body-bg: var(--p-surface-600);
 }
 
 .slide-fade-enter-active {
