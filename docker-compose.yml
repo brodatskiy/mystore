@@ -20,6 +20,7 @@ services:
             - ./:/var/www
         ports:
             - '${VITE_PORT:-5173}:5173'
+        restart: always
         depends_on:
             db:
                 condition: service_healthy
