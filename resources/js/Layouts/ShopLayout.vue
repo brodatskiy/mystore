@@ -1,7 +1,6 @@
 <script setup>
 import {ref, onMounted} from "vue";
 
-import {Link} from '@inertiajs/vue3'
 import LinkBtn from "@/Components/Buttons/LinkBtn.vue";
 import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
@@ -12,14 +11,12 @@ import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import Drawer from 'primevue/drawer';
 import Button from 'primevue/button';
 
-import Chip from 'primevue/chip';
-
-import PrimaryBtn from "@/Components/Buttons/PrimaryBtn.vue";
+import DrawerBtnLink from "@/Components/Buttons/DrawerBtnLink.vue";
 
 const navigation = ref([]);
 const currentSection = ref(null);
 
-const navigationExpand = ref(false);
+const navigationExpand = ref(true);
 const CategoriesExpand = ref(false);
 
 function getNavigation() {
@@ -40,87 +37,45 @@ onMounted(() => {
 function toggleDarkMode() {
     document.documentElement.classList.toggle('dark');
 }
-const items = ref([
-    {
-        label: 'Home',
-        icon: 'pi pi-home'
-    },
-    {
-        label: 'Projects',
-        icon: 'pi pi-search',
-        badge: 3,
-        items: [
-            {
-                label: 'Core',
-                icon: 'pi pi-bolt',
-                shortcut: '⌘+S'
-            },
-            {
-                label: 'Blocks',
-                icon: 'pi pi-server',
-                shortcut: '⌘+B'
-            },
-            {
-                separator: true
-            },
-            {
-                label: 'UI Kit',
-                icon: 'pi pi-pencil',
-                shortcut: '⌘+U'
-            }
-        ]
-    }
-]);
 </script>
 <template>
     <div class="min-h-screen">
-        <Menubar :model="items">
-            <template #start>
-                <svg width="35" height="40" viewBox="0 0 35 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-8">
-                    <path d="..." fill="var(--p-primary-color)" />
-                    <path d="..." fill="var(--p-text-color)" />
-                </svg>
-            </template>
-            <template #item="{ item, props, hasSubmenu, root }">
-                <a v-ripple class="flex items-center" v-bind="props.action">
-                    <span>{{ item.label }}</span>
-                    <Badge v-if="item.badge" :class="{ 'ml-auto': !root, 'ml-2': root }" :value="item.badge" />
-                    <span v-if="item.shortcut" class="ml-auto border border-surface rounded bg-emphasis text-muted-color text-xs p-1">{{ item.shortcut }}</span>
-                    <i v-if="hasSubmenu" :class="['pi pi-angle-down ml-auto', { 'pi-angle-down': root, 'pi-angle-right': !root }]"></i>
-                </a>
-            </template>
-            <template #end>
-                <div class="flex items-center gap-2">
-                    <InputText placeholder="Search" type="text" class="w-32 sm:w-auto" />
-                    <Avatar image="/images/avatar/amyelsner.png" shape="circle" />
-                </div>
-            </template>
-        </Menubar>
-        <header class="w-full sticky top-0 z-20 px-6 py-3 shadow dark:bg-surface-800">
-            <div class="flex items-center justify-between">
-                <div class="flex-1">
-                    <Button
-                        @click="navigationExpand = !navigationExpand"
-                        class="font-bold"
-                    >
-                        Categories
-                    </Button>
+        <header class="w-full sticky top-0 z-20 px-6 py-3 shadow-md bg-surface-200 dark:bg-surface-700">
+            <div class="flex items-center justify-between space-x-4">
+                <!-- Start -->
+                <div class="flex space-x-4">
+                    <div class="flex">
+                        <Button
+                            @click="navigationExpand = !navigationExpand"
+                            class="font-bold"
+                        >
+                            <Icon
+                                icon="mdi:menu"
+                                width="1.5rem"
+                                height="1.5rem"
+                            />
+                        </Button>
+                    </div>
+                    <div class="flex">
+                        <ApplicationLogo/>
+                    </div>
                 </div>
 
-                <!-- Logo -->
-                <div class="flex-1 flex justify-center">
-                    <ApplicationLogo/>
+                <!-- Search -->
+                <div class="flex-1">
+                    <InputText placeholder="Search" type="text" class="min-w-32 sm:w-full"/>
                 </div>
-                <div class="flex-1 flex items-center justify-end">
+                <!-- End -->
+                <div class="flex items-center justify-end">
                     <!-- Icon Buttons  -->
                     <LocaleSwitcher/>
                     <div class="flex items-center space-x-4 ml-4">
-                        <Button  @click="toggleDarkMode()" >
-                        <Icon
-                            icon="mdi:theme-light-dark"
-                            width="1.5rem"
-                            height="1.5rem"
-                        />
+                        <Button @click="toggleDarkMode()">
+                            <Icon
+                                icon="mdi:theme-light-dark"
+                                width="1.5rem"
+                                height="1.5rem"
+                            />
                         </Button>
                         <LinkBtn :href="route('cart.index')">
                             <Icon
@@ -214,14 +169,14 @@ const items = ref([
         </Transition>
 
         <!-- Page Heading -->
-        <header class="bg-white shadow" v-if="$slots.header">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <header class="" v-if="$slots.header">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <slot name="header"/>
             </div>
         </header>
 
         <main>
-            <div class="mx-auto mt-2 p-2 sm:p-4 lg:p-6 min-w-[500px]">
+            <div class="mx-auto p-1 sm:p-2 lg:p-4 min-w-[500px]">
                 <slot/>
             </div>
         </main>
@@ -237,42 +192,33 @@ const items = ref([
             position="left"
             :modal="false"
             :showCloseIcon="false"
-            @mouseleave="navigationExpand = false"
+            @mouseleave="navigationExpand = true"
+            :pt="{
+                content: {class: 'p-0!'},
+            }"
         >
-            <div class="overflow-y-auto flex">
-                <div class="flex flex-col w-1/2 px-1">
-                    <p v-for="section in navigation"
-                       :key="section.id"
-                       @mouseenter="CategoriesExpander(section)">
-                        <Link
-                            :href="route('catalog.section.index', section.slug)"
-                            class="py-2 hover:text-primary-600"
-                            as="button"
-                        >
-                            {{ section.title }}
-                        </Link>
-                    </p>
+            <div class="flex">
+                <div class="flex flex-col w-1/2 ">
+                    <DrawerBtnLink v-for="section in navigation"
+                                   :key="section.id"
+                                   :href="route('catalog.section.index', section.slug)"
+                                   @mouseenter="CategoriesExpander(section)"
+                    >
+                        {{ section.title }}
+                    </DrawerBtnLink>
                 </div>
-                <div class="flex w-1/2">
-                    <div v-if="CategoriesExpand" class="flex flex-col px-1">
-                        <p v-for="category in currentSection.parentCategories"
-                           :key="category.id"
-                           @mouseenter="subCategoriesExpander(category.children)">
-                            <Link
-                                :href="route('catalog.section.category.index', [currentSection.slug, category.slug])"
-                                class="py-2 hover:text-primary-600"
-                                as="button"
-                            >
-                                {{ category.title }}
-                            </Link>
-                        </p>
-                    </div>
+
+                <div v-if="CategoriesExpand" class="flex flex-col w-1/2">
+                    <DrawerBtnLink v-for="category in currentSection.parentCategories"
+                                   :key="category.id"
+                                   :href="route('catalog.section.category.index', [currentSection.slug, category.slug])"
+                    >
+                        {{ category.title }}
+                    </DrawerBtnLink>
                 </div>
             </div>
         </Drawer>
     </div>
-
-
 </template>
 
 <style></style>

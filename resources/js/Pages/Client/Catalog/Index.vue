@@ -75,7 +75,7 @@ const filterExpand = ref(false);
         </div>
 
         <div>
-            <Sidebar
+            <Drawer
                 v-model:visible="filterExpand"
                 header="Filters"
                 position="right"
@@ -96,7 +96,7 @@ const filterExpand = ref(false);
                         >
                     </div>
                 </div>
-            </Sidebar>
+            </Drawer>
         </div>
     </ShopLayout>
 </template>

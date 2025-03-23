@@ -9,29 +9,29 @@ const pinia = createPinia();
 const Noir = definePreset(Aura, {
     semantic: {
         primary: {
-            50: '{zinc.50}',
-            100: '{zinc.100}',
-            200: '{zinc.200}',
-            300: '{zinc.300}',
-            400: '{zinc.400}',
-            500: '{zinc.500}',
-            600: '{zinc.600}',
-            700: '{zinc.700}',
-            800: '{zinc.800}',
-            900: '{zinc.900}',
-            950: '{zinc.950}'
+            50: '{rose.50}',
+            100: '{rose.100}',
+            200: '{rose.200}',
+            300: '{rose.300}',
+            400: '{rose.400}',
+            500: '{rose.500}',
+            600: '{rose.600}',
+            700: '{rose.700}',
+            800: '{rose.800}',
+            900: '{rose.900}',
+            950: '{rose.950}'
         },
         colorScheme: {
             light: {
                 primary: {
-                    color: '{zinc.950}',
-                    inverseColor: '#ffffff',
-                    hoverColor: '{zinc.900}',
-                    activeColor: '{zinc.800}'
+                    color: '{neutral.950}',
+                    inverseColor: '{neutral.50}',
+                    hoverColor: '{neutral.900}',
+                    activeColor: '{neutral.800}'
                 },
                 highlight: {
-                    background: '{zinc.950}',
-                    focusBackground: '{zinc.700}',
+                    background: '{neutral.950}',
+                    focusBackground: '{neutral.700}',
                     color: '#ffffff',
                     focusColor: '#ffffff'
                 },
@@ -51,10 +51,10 @@ const Noir = definePreset(Aura, {
             },
             dark: {
                 primary: {
-                    color: '{zinc.50}',
+                    color: '{zinc.100}',
                     inverseColor: '{zinc.950}',
-                    hoverColor: '{zinc.100}',
-                    activeColor: '{zinc.200}'
+                    hoverColor: '{zinc.200}',
+                    activeColor: '{zinc.300}'
                 },
                 highlight: {
                     background: '{zinc.950}',
@@ -62,18 +62,31 @@ const Noir = definePreset(Aura, {
                     color: '#ffffff',
                     focusColor: '#ffffff'
                 },
+                formField: {
+                    background: '{zinc.700}',
+                    color: '{zinc.100}',
+                    placeholderColor: '{zinc.400}',
+                    borderColor: '{zinc.500}',
+                    hoverBorderColor: '{zinc.400}',
+                    focusBorderColor: '{zinc.300}',
+                },
+                overlay: {
+                    modal: {
+                        background: '{zinc.800}',
+                    },
+                },
                 surface: {
-                    50: '{slate.50}',
-                    100: '{slate.100}',
-                    200: '{slate.200}',
-                    300: '{slate.300}',
-                    400: '{slate.400}',
-                    500: '{slate.500}',
-                    600: '{slate.600}',
-                    700: '{slate.700}',
-                    800: '{slate.800}',
-                    900: '{slate.900}',
-                    950: '{slate.950}'
+                    50: '{zinc.50}',
+                    100: '{zinc.100}',
+                    200: '{zinc.200}',
+                    300: '{zinc.300}',
+                    400: '{zinc.400}',
+                    500: '{zinc.500}',
+                    600: '{zinc.600}',
+                    700: '{zinc.700}',
+                    800: '{zinc.800}',
+                    900: '{zinc.900}',
+                    950: '{zinc.950}'
                 },
             }
         }
