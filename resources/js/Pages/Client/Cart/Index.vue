@@ -1,8 +1,8 @@
 <script setup>
 import ShopLayout from "@/Layouts/ShopLayout.vue";
-import CartCard from "@/Components/CartCard.vue";
+import CartProductCard from "@/Components/CartProductCard.vue";
 import { useCartStore } from "@/Store/useCartStore";
-import { router } from "@inertiajs/vue3";
+import { router, Head } from "@inertiajs/vue3";
 
 const cartStore = useCartStore();
 
@@ -24,11 +24,11 @@ function order() {
             class="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0"
         >
             <div class="md:w-2/3">
-                <CartCard
+                <CartProductCard
                     v-for="product in props.products"
                     :key="product.id"
                     :product="product"
-                ></CartCard>
+                ></CartProductCard>
             </div>
             <!-- Sub total -->
             <div

@@ -1,13 +1,11 @@
 <script setup>
 import { ref } from "vue";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
-import { useForm } from "@inertiajs/vue3";
-import { Head } from "@inertiajs/vue3";
+import { useForm, Head  } from "@inertiajs/vue3";
 
 import IconField from "primevue/iconfield";
 import InputIcon from "primevue/inputicon";
 import InputError from "@/Components/InputError.vue";
-import PrimaryBtn from "@/Components/Buttons/PrimaryBtn.vue";
 
 const props = defineProps({
     canResetPassword: {
@@ -46,12 +44,7 @@ const submit = () => {
                 <div>
                     <IconField iconPosition="left">
                         <InputIcon>
-                            <Icon
-                                icon="mdi:email"
-                                width="1.5rem"
-                                height="1.5rem"
-                                class="-mt-1"
-                            ></Icon>
+                            <i class="pi pi-at -mt-1"></i>
                         </InputIcon>
 
                         <InputText
@@ -67,12 +60,7 @@ const submit = () => {
                 <div>
                     <IconField iconPosition="left">
                         <InputIcon>
-                            <Icon
-                                icon="mdi:password"
-                                width="1.5rem"
-                                height="1.5rem"
-                                class="-mt-1"
-                            ></Icon>
+                            <i class="pi pi-unlock -mt-1"></i>
                         </InputIcon>
                         <InputText
                             v-model="form.password"
@@ -93,14 +81,13 @@ const submit = () => {
                     <label for="remember" class="ml-2"> Remember me</label>
                 </div>
 
-                <PrimaryBtn
-                    block
+                <Button
                     type="submit"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
                     Log In
-                </PrimaryBtn>
+                </Button>
                 <Link v-if="canResetPassword" :href="route('password.request')" class="text-blue-600 hover:text-blue-900">
                         Forgot your password?
                 </Link>

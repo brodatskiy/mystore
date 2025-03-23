@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { router } from "@inertiajs/vue3";
 import { Link } from "@inertiajs/vue3";
-import SecondaryBtn from "./Buttons/SecondaryBtn.vue";
+import Button from "primevue/button";
 
 defineProps(["product"]);
 
@@ -51,7 +51,7 @@ function destroy(product) {
             />
         </Link>
         <div class="flex justify-between w-full px-4">
-            <div class="flex flex-col">
+            <div class="flex flex-col space-y-2">
                 <div class="flex-1">
                     <Link :href="route('product.show', product)">
                         <h2 class="text-lg font-bold text-gray-900">
@@ -62,13 +62,13 @@ function destroy(product) {
                         {{ product.description }}
                     </p>
                 </div>
-                <div class="flex space-x-2">
-                    <SecondaryBtn>
-                        <Icon icon="mdi:heart-outline" class="h-5 w-5 m-2" />
-                    </SecondaryBtn>
-                    <SecondaryBtn @click="destroy(product)">
-                        <Icon icon="mdi:trash-outline" class="h-5 w-5 m-2" />
-                    </SecondaryBtn>
+                <div class="space-x-2">
+                    <Button severity="secondary">
+                        <i class="pi pi-heart"></i>
+                    </Button>
+                    <Button @click="destroy(product)" severity="danger">
+                        <i class="pi pi-trash"></i>
+                    </Button>
                 </div>
             </div>
             <div class="flex items-center space-x-3">

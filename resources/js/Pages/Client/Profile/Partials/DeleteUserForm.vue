@@ -1,12 +1,10 @@
 <script setup>
-import { useForm } from "@inertiajs/vue3";
-import { nextTick, ref } from "vue";
+import {useForm} from "@inertiajs/vue3";
+import {ref} from "vue";
 
-import DangerBtn from "@/Components/Buttons/DangerBtn.vue";
 import IconField from "primevue/iconfield";
 import InputIcon from "primevue/inputicon";
 import InputError from "@/Components/InputError.vue";
-import SecondaryBtn from "@/Components/Buttons/SecondaryBtn.vue";
 
 import Dialog from "primevue/dialog";
 
@@ -49,8 +47,7 @@ const closeModal = () => {
             </p>
         </header>
 
-        {{ console.log(passwordInput) }}
-        <DangerBtn @click="confirmUserDeletion">Delete Account</DangerBtn>
+        <Button severity="danger" @click="confirmUserDeletion">Delete Account</Button>
 
         <Dialog :visible="confirmingUserDeletion" modal header="Delete Profile">
             <div class="p-6">
@@ -67,12 +64,7 @@ const closeModal = () => {
                 <div class="mt-6">
                     <IconField iconPosition="left">
                         <InputIcon>
-                            <Icon
-                                icon="mdi:password"
-                                width="1.5rem"
-                                height="1.5rem"
-                                class="-mt-1"
-                            ></Icon>
+                            <i class="pi pi-unlock -mt-1"></i>
                         </InputIcon>
                         <InputText
                             v-model="form.password"
@@ -84,11 +76,11 @@ const closeModal = () => {
                             class="pl-10 w-full"
                         />
                     </IconField>
-                    <InputError class="mt-1" :message="form.errors.password" />
+                    <InputError class="mt-1" :message="form.errors.password"/>
                 </div>
 
                 <div class="mt-6 flex justify-end">
-                    <SecondaryBtn @click="closeModal"> Cancel </SecondaryBtn>
+                    <SecondaryBtn @click="closeModal"> Cancel</SecondaryBtn>
 
                     <DangerBtn
                         class="ml-3"

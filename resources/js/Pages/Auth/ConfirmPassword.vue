@@ -31,12 +31,7 @@ const submit = () => {
             <div>
                 <IconField iconPosition="left">
                     <InputIcon>
-                        <Icon
-                            icon="mdi:password"
-                            width="1.5rem"
-                            height="1.5rem"
-                            class="-mt-1"
-                        ></Icon>
+                        <i class="pi pi-key -mt-1"></i>
                     </InputIcon>
                     <InputText
                         v-model="form.password"
@@ -48,14 +43,13 @@ const submit = () => {
                 <InputError class="mt-1" :message="form.errors.password" />
             </div>
 
-            <PrimaryBtn
-                block
+            <Button
                 type="submit"
                 :class="{ 'opacity-25': form.processing }"
                 :disabled="form.processing"
             >
                 Confirm
-            </PrimaryBtn>
+            </Button>
         </form>
     </AuthLayout>
 </template>

@@ -1,11 +1,10 @@
 import "./bootstrap";
 import "../css/app.css";
 
-import { createApp, h } from "vue";
-import { createInertiaApp, Link, Head } from "@inertiajs/vue3";
-import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
-import { ZiggyVue } from "../../vendor/tightenco/ziggy";
-import { Icon } from "@iconify/vue";
+import {createApp, h} from "vue";
+import {createInertiaApp, Link} from "@inertiajs/vue3";
+import {resolvePageComponent} from "laravel-vite-plugin/inertia-helpers";
+import {ZiggyVue} from "../../vendor/tightenco/ziggy";
 
 import {createI18n} from "vue-i18n";
 import ru from "../../lang/ru.json";
@@ -14,8 +13,6 @@ import en from "../../lang/en.json";
 // Plugins
 
 import {registerPlugins} from "@/plugins";
-
-import Chip from 'primevue/chip';
 
 const appName = import.meta.env.VITE_APP_NAME || "MyStore";
 
@@ -39,12 +36,10 @@ createInertiaApp({
             .use(ZiggyVue)
             .use(i18n)
             .component("Link", Link)
-            .component("Head", Head)
-            .component("Icon", Icon)
             .use(registerPlugins)
             .mount(el);
     },
     progress: {
-        color: "#4B5563",
+        color: "rgb(216 180 254)",
     },
 });

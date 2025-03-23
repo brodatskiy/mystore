@@ -1,23 +1,29 @@
 <script setup>
 import {ref, onMounted} from "vue";
 
-import LinkBtn from "@/Components/Buttons/LinkBtn.vue";
+import ButtonLink from "@/Components/Buttons/ButtonLink.vue";
+import DrawerButtonLink from "@/Components/Buttons/DrawerButtonLink.vue";
 import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
 import LocaleSwitcher from "@/Components/LocaleSwitcher.vue";
 import FlashMessage from "@/Components/FlashMessage.vue";
-import ApplicationLogo from "@/Components/ApplicationLogo.vue";
+import ApplicationLogo from "@/Components/Buttons/ApplicationLogo.vue";
+
 
 import Drawer from 'primevue/drawer';
 import Button from 'primevue/button';
+import SignUpButtonLink from "@/Components/Buttons/SignUpButtonLink.vue";
+import ButtonPrimary from "@/Components/Buttons/ButtonPrimary.vue";
 
-import DrawerBtnLink from "@/Components/Buttons/DrawerBtnLink.vue";
+
 
 const navigation = ref([]);
+const darkMode = ref(isDarkMode());
 const currentSection = ref(null);
 
-const navigationExpand = ref(true);
+const navigationExpand = ref(false);
 const CategoriesExpand = ref(false);
+
 
 function getNavigation() {
     axios.get(`/catalog/navigation`).then((res) => {
@@ -36,6 +42,11 @@ onMounted(() => {
 
 function toggleDarkMode() {
     document.documentElement.classList.toggle('dark');
+    darkMode.value = !darkMode.value;
+}
+
+function isDarkMode() {
+    return document.documentElement.classList.contains('dark');
 }
 </script>
 <template>
@@ -45,16 +56,13 @@ function toggleDarkMode() {
                 <!-- Start -->
                 <div class="flex space-x-4">
                     <div class="flex">
-                        <Button
+                        <ButtonPrimary
                             @click="navigationExpand = !navigationExpand"
-                            class="font-bold"
+                            variant="text"
                         >
-                            <Icon
-                                icon="mdi:menu"
-                                width="1.5rem"
-                                height="1.5rem"
-                            />
-                        </Button>
+                            <i class="pi pi-bars" style="font-size: 1.25rem"></i>
+                        </ButtonPrimary>
+
                     </div>
                     <div class="flex">
                         <ApplicationLogo/>
@@ -70,27 +78,16 @@ function toggleDarkMode() {
                     <!-- Icon Buttons  -->
                     <LocaleSwitcher/>
                     <div class="flex items-center space-x-4 ml-4">
-                        <Button @click="toggleDarkMode()">
-                            <Icon
-                                icon="mdi:theme-light-dark"
-                                width="1.5rem"
-                                height="1.5rem"
-                            />
-                        </Button>
-                        <LinkBtn :href="route('cart.index')">
-                            <Icon
-                                icon="mdi:cart-outline"
-                                width="1.5rem"
-                                height="1.5rem"
-                            />
-                        </LinkBtn>
-                        <LinkBtn :href="route('wishlist')">
-                            <Icon
-                                icon="mdi:heart-outline"
-                                width="1.5rem"
-                                height="1.5rem"
-                            />
-                        </LinkBtn>
+                        <ButtonPrimary @click="toggleDarkMode()">
+                            <i v-if=darkMode class="pi pi-moon" style="font-size: 1.25rem"></i>
+                            <i v-else class="pi pi-sun" style="font-size: 1.25rem"></i>
+                        </ButtonPrimary>
+                        <ButtonLink :href="route('cart.index')">
+                            <i class="pi pi-shopping-cart" style="font-size: 1.25rem"></i>
+                        </ButtonLink>
+                        <ButtonLink :href="route('wishlist')">
+                            <i class="pi pi-heart" style="font-size: 1.25rem"></i>
+                        </ButtonLink>
                     </div>
                     <!-- Auth -->
                     <div class="ml-3">
@@ -98,20 +95,10 @@ function toggleDarkMode() {
                             v-if="!$page.props.auth.user"
                             class="flex items-center gap-x-2"
                         >
-                            <LinkBtn
+                            <SignUpButtonLink
                                 :href="route('login')"
-                                class="py-3"
-                                type="button"
                             >
-                                <span>Log In</span>
-                            </LinkBtn>
-                            <LinkBtn
-                                :href="route('register')"
-                                class="py-3 bg-gray-200"
-                                type="button"
-                            >
-                                <span>Sign in</span>
-                            </LinkBtn>
+                            </SignUpButtonLink>
                         </div>
                         <div v-else>
                             <div class="sm:ml-1">
@@ -119,15 +106,11 @@ function toggleDarkMode() {
                                 <div class="relative">
                                     <Dropdown align="right" width="48">
                                         <template #trigger>
-                                            <button
-                                                class="px-4 py-2 font-sans text-xs font-bold text-center bg-gray-100 text-gray-900 uppercase align-middle transition-all rounded-lg select-none disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none hover:bg-gray-900/20 active:bg-gray-900/30"
+                                            <Button
+                                                variant="text"
                                             >
-                                                <Icon
-                                                    icon="mdi:person"
-                                                    width="1.5rem"
-                                                    height="1.5rem"
-                                                />
-                                            </button>
+                                                <i class="pi pi-user" style="font-size: 1.25rem"></i>
+                                            </Button>
                                         </template>
 
                                         <template #content>
@@ -199,22 +182,22 @@ function toggleDarkMode() {
         >
             <div class="flex">
                 <div class="flex flex-col w-1/2 ">
-                    <DrawerBtnLink v-for="section in navigation"
+                    <DrawerButtonLink v-for="section in navigation"
                                    :key="section.id"
                                    :href="route('catalog.section.index', section.slug)"
                                    @mouseenter="CategoriesExpander(section)"
                     >
                         {{ section.title }}
-                    </DrawerBtnLink>
+                    </DrawerButtonLink>
                 </div>
 
                 <div v-if="CategoriesExpand" class="flex flex-col w-1/2">
-                    <DrawerBtnLink v-for="category in currentSection.parentCategories"
+                    <DrawerButtonLink v-for="category in currentSection.parentCategories"
                                    :key="category.id"
                                    :href="route('catalog.section.category.index', [currentSection.slug, category.slug])"
                     >
                         {{ category.title }}
-                    </DrawerBtnLink>
+                    </DrawerButtonLink>
                 </div>
             </div>
         </Drawer>

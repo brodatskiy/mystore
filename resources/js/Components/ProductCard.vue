@@ -1,6 +1,7 @@
 <script setup>
 import {router} from "@inertiajs/vue3";
-import PrimaryBtn from './Buttons/PrimaryBtn.vue';
+import {Link} from "@inertiajs/vue3";
+import 'primeicons/primeicons.css'
 
 defineProps(["product"]);
 
@@ -30,16 +31,16 @@ function toggleWish(product) {
                     <p class=" text-l font-semibold text-gray-800">${{ product.price }}</p>
                     <p class="font-bold text-gray-500">{{ product.title }}</p>
                     <Button v-if="$page.props.auth.user" @click.prevent="toggleWish(product)">
-                        <Icon v-if="product.wished" icon="mdi-heart"/>
-                        <Icon v-else icon="mdi-heart-outline"/>
+                        <i v-if="product.wished" class="pi pi-heart-fill"></i>
+                        <i v-else class="pi pi-heart"></i>
                     </Button>
                 </div>
-                <PrimaryBtn
+                <Button
                     class="w-full"
                     @click.prevent="add(product)"
                 >
                     Add to cart
-                </PrimaryBtn>
+                </Button>
             </div>
         </Link>
     </div>

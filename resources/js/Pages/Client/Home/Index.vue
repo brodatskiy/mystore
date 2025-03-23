@@ -1,7 +1,7 @@
 <script setup>
-import { ref } from "vue";
-import { Head } from '@inertiajs/vue3'
-import { usePage } from "@inertiajs/vue3";
+import {ref} from "vue";
+import {Head} from '@inertiajs/vue3'
+import {usePage} from "@inertiajs/vue3";
 
 import ShopLayout from "@/Layouts/ShopLayout.vue";
 import ProductCard from "@/Components/ProductCard.vue";
@@ -12,7 +12,7 @@ import SortProducts from "@/Components/Filters/SortProducts.vue";
 
 import Drawer from 'primevue/drawer';
 
-import { useFilterStore } from "@/Store/useFilterStore";
+import {useFilterStore} from "@/Store/useFilterStore";
 
 const filterStore = useFilterStore();
 
@@ -42,22 +42,18 @@ function applyFilters() {
 const filterExpand = ref(false);
 </script>
 <template>
-    <Head title="Home" />
+    <Head title="Home"/>
 
     <ShopLayout>
         <div class="flex justify-end">
             <div class="flex space-x-8">
-                <button
+                <Button
                     @click="filterExpand = true"
-                    class="flex items-center hover:text-primary-600"
+                    variant="text"
                 >
-                    <Icon
-                        icon="mdi:filter-variant"
-                        width="1.5rem"
-                        height="1.5rem"
-                    />
+                    <i class="pi pi-filter"></i>
                     <span>Filters</span>
-                </button>
+                </Button>
                 <SortProducts
                     :sort="props.sort"
                     @change="applyFilters"
@@ -102,7 +98,8 @@ const filterExpand = ref(false);
 
                     <div class="flex justify-center">
                         <Button @click="applyFilters" class="w-full">
-                            Apply</Button
+                            Apply
+                        </Button
                         >
                     </div>
                 </div>
