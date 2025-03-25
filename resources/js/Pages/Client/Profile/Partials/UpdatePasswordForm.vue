@@ -1,8 +1,8 @@
 <script setup>
-import PrimaryBtn from "@/Components/Buttons/PrimaryBtn.vue";
-import InputError from "@/Components/InputError.vue";
 import { useForm } from "@inertiajs/vue3";
 import { ref } from "vue";
+
+import InputError from "@/Components/InputError.vue";
 
 const passwordInput = ref(null);
 const currentPasswordInput = ref(null);
@@ -94,7 +94,7 @@ const updatePassword = () => {
             </div>
 
             <div class="flex items-center gap-4">
-                <PrimaryBtn :disabled="form.processing">Save</PrimaryBtn>
+                <Button :disabled="form.processing">Save</Button>
 
                 <Transition
                     enter-from-class="opacity-0"

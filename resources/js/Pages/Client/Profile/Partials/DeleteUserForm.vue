@@ -80,16 +80,17 @@ const closeModal = () => {
                 </div>
 
                 <div class="mt-6 flex justify-end">
-                    <SecondaryBtn @click="closeModal"> Cancel</SecondaryBtn>
+                    <Button severity="secondary" @click="closeModal"> Cancel</Button>
 
-                    <DangerBtn
+                    <Button
+                        severity="secondary"
                         class="ml-3"
                         :class="{ 'opacity-25': form.processing }"
                         :disabled="form.processing"
                         @click="deleteUser"
                     >
                         Delete Account
-                    </DangerBtn>
+                    </Button>
                 </div>
             </div>
         </Dialog>

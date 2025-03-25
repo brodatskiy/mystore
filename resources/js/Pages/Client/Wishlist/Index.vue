@@ -1,4 +1,5 @@
 <script setup>
+import { Head } from "@inertiajs/vue3";
 import ShopLayout from "@/Layouts/ShopLayout.vue";
 import ProductCard from "@/Components/ProductCard.vue";
 

@@ -1,29 +1,24 @@
 <script setup>
 import {ref, onMounted} from "vue";
+import {router} from '@inertiajs/vue3';
+import {useI18n} from 'vue-i18n'
 
 import ButtonLink from "@/Components/Buttons/ButtonLink.vue";
 import DrawerButtonLink from "@/Components/Buttons/DrawerButtonLink.vue";
-import Dropdown from "@/Components/Dropdown.vue";
-import DropdownLink from "@/Components/DropdownLink.vue";
 import LocaleSwitcher from "@/Components/LocaleSwitcher.vue";
 import FlashMessage from "@/Components/FlashMessage.vue";
 import ApplicationLogo from "@/Components/Buttons/ApplicationLogo.vue";
-
-
-import Drawer from 'primevue/drawer';
-import Button from 'primevue/button';
 import SignUpButtonLink from "@/Components/Buttons/SignUpButtonLink.vue";
 import ButtonPrimary from "@/Components/Buttons/ButtonPrimary.vue";
 
-
+const {t} = useI18n()
 
 const navigation = ref([]);
 const darkMode = ref(isDarkMode());
+const menu = ref(null);
 const currentSection = ref(null);
-
 const navigationExpand = ref(false);
 const CategoriesExpand = ref(false);
-
 
 function getNavigation() {
     axios.get(`/catalog/navigation`).then((res) => {
@@ -36,9 +31,44 @@ function CategoriesExpander(section) {
     CategoriesExpand.value = true;
 }
 
-onMounted(() => {
-    getNavigation();
-});
+const overlayMenuItems = ref([
+    {
+        label: () => t('Profile'),
+        icon: 'pi pi-id-card',
+        command: () => {
+            router.visit(route('profile.edit'))
+        },
+    },
+    {
+        label: () => t('Orders'),
+        icon: 'pi pi-shopping-bag',
+        command: () => {
+            router.visit(route('orderlist'))
+        },
+    },
+    {
+        separator: true
+    },
+    {
+        label: () => t('Admin panel'),
+        icon: 'pi pi-objects-column',
+        command: () => {
+            router.get(route('platform.index'))
+        },
+    },
+    {
+        label: () => t('Log Out'),
+        icon: 'pi pi-sign-out',
+        command: () => {
+            router.post(route('logout'))
+        },
+    },
+]);
+
+
+function toggleMenu(event) {
+    menu.value.toggle(event);
+}
 
 function toggleDarkMode() {
     document.documentElement.classList.toggle('dark');
@@ -48,6 +78,10 @@ function toggleDarkMode() {
 function isDarkMode() {
     return document.documentElement.classList.contains('dark');
 }
+
+onMounted(() => {
+    getNavigation();
+});
 </script>
 <template>
     <div class="min-h-screen">
@@ -102,43 +136,11 @@ function isDarkMode() {
                         </div>
                         <div v-else>
                             <div class="sm:ml-1">
-                                <!-- Settings Dropdown -->
                                 <div class="relative">
-                                    <Dropdown align="right" width="48">
-                                        <template #trigger>
-                                            <Button
-                                                variant="text"
-                                            >
-                                                <i class="pi pi-user" style="font-size: 1.25rem"></i>
-                                            </Button>
-                                        </template>
-
-                                        <template #content>
-                                            <a
-                                                class="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
-                                                :href="route('platform.index')"
-                                            >
-                                                {{ $t("Admin panel") }}
-                                            </a>
-                                            <DropdownLink
-                                                :href="route('profile.edit')"
-                                            >
-                                                {{ $t("Profile") }}
-                                            </DropdownLink>
-                                            <DropdownLink
-                                                :href="route('orderlist')"
-                                            >
-                                                {{ $t("Orders") }}
-                                            </DropdownLink>
-                                            <DropdownLink
-                                                :href="route('logout')"
-                                                method="post"
-                                                as="button"
-                                            >
-                                                {{ $t("Log Out") }}
-                                            </DropdownLink>
-                                        </template>
-                                    </Dropdown>
+                                    <Menu ref="menu" :model="overlayMenuItems" :popup="true"/>
+                                    <ButtonPrimary @click="toggleMenu">
+                                        <i class="pi pi-user" style="font-size: 1.25rem"></i>
+                                    </ButtonPrimary>
                                 </div>
                             </div>
                         </div>
@@ -153,8 +155,10 @@ function isDarkMode() {
 
         <!-- Page Heading -->
         <header class="" v-if="$slots.header">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <slot name="header"/>
+            <div class="mx-auto py-2 sm:py-4 text-center text-2xl font-bold">
+                <h2>
+                    <slot name="header"/>
+                </h2>
             </div>
         </header>
 
@@ -164,7 +168,7 @@ function isDarkMode() {
             </div>
         </main>
 
-        <footer class="w-full sticky top-[100vh] px-6 py-3 bg-white">
+        <footer class="w-full sticky top-[100vh] px-6 py-3 bg-surface-200 dark:bg-surface-700">
             <div class="flex justify-end items-center">
                 {{ new Date().getFullYear() }} — <strong>MyStore</strong>
             </div>
@@ -183,9 +187,9 @@ function isDarkMode() {
             <div class="flex">
                 <div class="flex flex-col w-1/2 ">
                     <DrawerButtonLink v-for="section in navigation"
-                                   :key="section.id"
-                                   :href="route('catalog.section.index', section.slug)"
-                                   @mouseenter="CategoriesExpander(section)"
+                                      :key="section.id"
+                                      :href="route('catalog.section.index', section.slug)"
+                                      @mouseenter="CategoriesExpander(section)"
                     >
                         {{ section.title }}
                     </DrawerButtonLink>
@@ -193,8 +197,8 @@ function isDarkMode() {
 
                 <div v-if="CategoriesExpand" class="flex flex-col w-1/2">
                     <DrawerButtonLink v-for="category in currentSection.parentCategories"
-                                   :key="category.id"
-                                   :href="route('catalog.section.category.index', [currentSection.slug, category.slug])"
+                                      :key="category.id"
+                                      :href="route('catalog.section.category.index', [currentSection.slug, category.slug])"
                     >
                         {{ category.title }}
                     </DrawerButtonLink>

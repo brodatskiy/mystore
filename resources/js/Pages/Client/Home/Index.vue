@@ -45,21 +45,21 @@ const filterExpand = ref(false);
     <Head title="Home"/>
 
     <ShopLayout>
-        <div class="flex justify-end">
-            <div class="flex space-x-8">
-                <Button
-                    @click="filterExpand = true"
-                    variant="text"
-                >
-                    <i class="pi pi-filter"></i>
-                    <span>Filters</span>
-                </Button>
-                <SortProducts
-                    :sort="props.sort"
-                    @change="applyFilters"
-                ></SortProducts>
+            <div class="flex justify-end">
+                <div class="flex space-x-8">
+                    <Button
+                        @click="filterExpand = true"
+                        variant="text"
+                    >
+                        <i class="pi pi-filter"></i>
+                        <span>Filters</span>
+                    </Button>
+                    <SortProducts
+                        :sort="props.sort"
+                        @change="applyFilters"
+                    ></SortProducts>
+                </div>
             </div>
-        </div>
 
         <div class="flex flex-col">
             <div

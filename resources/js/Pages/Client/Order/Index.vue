@@ -1,4 +1,5 @@
 <script setup>
+import {Head} from "@inertiajs/vue3";
 import OrderCard from "@/Components/OrderCard.vue";
 import ShopLayout from "@/Layouts/ShopLayout.vue";
 
@@ -9,7 +10,10 @@ const props = defineProps({
 <template>
     <Head title="Orders" />
     <ShopLayout>
-        <h1 class="mb-6 text-center text-2xl font-bold">Orders</h1>
+        <template #header>
+            {{ $t("Orders") }}
+        </template>
+
         <div
             class="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0"
         >

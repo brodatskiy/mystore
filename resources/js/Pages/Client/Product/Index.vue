@@ -1,8 +1,6 @@
 <script setup>
-import { ref, computed } from "vue";
-import { router } from "@inertiajs/vue3";
+import { router, Head } from "@inertiajs/vue3";
 import ShopLayout from "@/Layouts/ShopLayout.vue";
-import PrimaryBtn from "@/Components/Buttons/PrimaryBtn.vue";
 
 import { useCartStore } from "@/Store/useCartStore";
 

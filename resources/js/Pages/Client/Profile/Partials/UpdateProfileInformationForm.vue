@@ -1,8 +1,7 @@
 <script setup>
-import PrimaryBtn from "@/Components/Buttons/PrimaryBtn.vue";
-import InputError from "@/Components/InputError.vue";
-
 import { useForm, usePage } from "@inertiajs/vue3";
+
+import InputError from "@/Components/InputError.vue";
 
 const props = defineProps({
     mustVerifyEmail: Boolean,
@@ -92,7 +91,7 @@ const form = useForm({
             </div>
 
             <div class="flex items-center gap-4">
-                <PrimaryBtn :disabled="form.processing">Save</PrimaryBtn>
+                <Button :disabled="form.processing">Save</Button>
 
                 <Transition
                     enter-from-class="opacity-0"
