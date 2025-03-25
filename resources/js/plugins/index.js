@@ -43,7 +43,7 @@ const Noir = definePreset(Aura, {
                     activeColor: '{primary.400}'
                 },
                 text: {
-                    color: '{primary.500}',
+                    color: '{surface.950}',
                 },
                 formField: {
                     background: '{surface.300}',
@@ -71,7 +71,7 @@ const Noir = definePreset(Aura, {
                     activeColor: '{primary.500}'
                 },
                 text: {
-                    color: '{primary.300}',
+                    color: '{surface.50}',
                 },
                 formField: {
                     background: '{surface.700}',
