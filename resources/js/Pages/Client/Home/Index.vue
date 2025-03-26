@@ -71,7 +71,6 @@ const filterExpand = ref(false);
                     :product="product"
                 ></ProductCard>
             </div>
-
             <Pagination
                 v-if="products.links.next || products.links.prev"
                 :links="products.meta.links"
