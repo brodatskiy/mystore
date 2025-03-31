@@ -30,7 +30,6 @@ function decrease(product) {
         },
     });
 }
-
 function destroy(product) {
     router.delete(route("cart.destroy", {product: product}), {
         onStart: () => {
