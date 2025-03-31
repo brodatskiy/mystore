@@ -2,7 +2,7 @@
 import {ref} from "vue";
 import {useI18n} from "vue-i18n";
 
-import ButtonPrimary from "@/Components/Buttons/ButtonPrimary.vue";
+import ButtonPrimary from "@/Components/Buttons/ButtonNav.vue";
 
 const {locale} = useI18n({useScope: "global"});
 const menu = ref(null);
