@@ -45,21 +45,21 @@ const filterExpand = ref(false);
     <Head title="Home"/>
 
     <ShopLayout>
-            <div class="flex justify-end">
-                <div class="flex space-x-8">
-                    <Button
-                        @click="filterExpand = true"
-                        variant="text"
-                    >
-                        <i class="pi pi-filter"></i>
-                        <span>Filters</span>
-                    </Button>
-                    <SortProducts
-                        :sort="props.sort"
-                        @change="applyFilters"
-                    ></SortProducts>
-                </div>
+        <div class="flex justify-end">
+            <div class="flex space-x-8">
+                <Button
+                    @click="filterExpand = true"
+                    variant="text"
+                >
+                    <i class="pi pi-filter"></i>
+                    <span>Filters</span>
+                </Button>
+                <SortProducts
+                    :sort="props.sort"
+                    @change="applyFilters"
+                ></SortProducts>
             </div>
+        </div>
 
         <div class="flex flex-col">
             <div
@@ -71,11 +71,13 @@ const filterExpand = ref(false);
                     :product="product"
                 ></ProductCard>
             </div>
-            <Pagination
-                v-if="products.links.next || products.links.prev"
-                :links="products.meta.links"
-                :meta="products.links"
-            ></Pagination>
+            <div class="mt-2">
+                <Pagination
+                    v-if="products.links.next || products.links.prev"
+                    :links="products.meta.links"
+                    :meta="products.links"
+                ></Pagination>
+            </div>
         </div>
 
         <div>

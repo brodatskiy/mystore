@@ -155,7 +155,7 @@ onMounted(() => {
 
         <!-- Page Heading -->
         <header class="" v-if="$slots.header">
-            <div class="mx-auto py-2 sm:py-4 text-center text-2xl font-bold">
+            <div class="mx-auto mt-2 sm:mt-4 text-center text-2xl font-bold">
                 <h2>
                     <slot name="header"/>
                 </h2>
