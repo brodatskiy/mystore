@@ -10,7 +10,6 @@ class ProductCardResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
-
         if (auth()->check()) {
             $wished = $this->wishedBy()->wherePivot('user_id', auth()->user()->id)->first() ? true : false;
         } else {

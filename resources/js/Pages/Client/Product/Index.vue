@@ -16,7 +16,7 @@ function toggleWish(product) {
     <Head title="Product"/>
 
     <ShopLayout>
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="flex flex-column rounded-lg bg-surface-50 dark:bg-surface-800 p-4 space-x-4">
                 <div class="flex-1 relative">
                     <img
@@ -30,23 +30,20 @@ function toggleWish(product) {
                 </div>
 
                 <div class="flex flex-col">
-                    <div class="space-y-4">
+                    <div class="flex-1 space-y-4">
                         <p class="text-2xl font-bold ">{{ product.title }}</p>
                         <p class=" text-xl font-semibold text-gray-600 dark:text-gray-100">${{ product.price }}</p>
                         <div class="mb-2">
                             {{ product.description }}
                         </div>
                     </div>
-                    <div class="mt-auto">
+                    <div class="space-x-4">
                         <Button
                             class=" w-50"
                             @click="add(product)"
                         >
                             Add to cart
                         </Button>
-                        <pre>
-                            {{ product }}
-                        </pre>
                         <Button severity="secondary" v-if="$page.props.auth.user" @click.prevent="toggleWish(product)">
                             <i v-if="product.wished" class="pi pi-heart-fill" style="color: red"></i>
                             <i v-else class="pi pi-heart" style="color: red"></i>
@@ -54,11 +51,8 @@ function toggleWish(product) {
                     </div>
                 </div>
             </div>
-            <div class="mt-4">
-                <Chip v-for="tag in product.tags" class="mr-2">{{
-                        tag.title
-                    }}
-                </Chip>
+            <div class="mt-2">
+                <Tag severity="secondary" v-for="tag in product.tags" :value="tag.title" class="mr-2"></Tag>
             </div>
         </div>
     </ShopLayout>
