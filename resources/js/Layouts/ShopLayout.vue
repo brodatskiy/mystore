@@ -9,7 +9,7 @@ import LocaleSwitcher from "@/Components/LocaleSwitcher.vue";
 import FlashMessage from "@/Components/FlashMessage.vue";
 import ApplicationLogo from "@/Components/Buttons/ApplicationLogo.vue";
 import SignUpButtonLink from "@/Components/Buttons/SignUpButtonLink.vue";
-import ButtonPrimary from "@/Components/Buttons/ButtonPrimary.vue";
+import ButtonPrimary from "@/Components/Buttons/ButtonNav.vue";
 
 const {t} = useI18n()
 

@@ -1,8 +1,9 @@
 <script setup>
 import ShopLayout from "@/Layouts/ShopLayout.vue";
-import CartProductCard from "@/Components/CartProductCard.vue";
+import CartProductCard from "@/Components/ProductCardCart.vue";
 import { useCartStore } from "@/Store/useCartStore";
 import { router, Head } from "@inertiajs/vue3";
+import ButtonPrimary from "@/Components/Buttons/ButtonPrimary.vue";
 
 const cartStore = useCartStore();
 
@@ -19,7 +20,10 @@ function order() {
 <template>
     <Head title="Cart" />
     <ShopLayout>
-        <h1 class="mb-6 text-center text-2xl font-bold">Cart Items</h1>
+        <template #header>
+            {{ $t("Cart") }}
+        </template>
+
         <div
             class="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0"
         >
@@ -32,7 +36,7 @@ function order() {
             </div>
             <!-- Sub total -->
             <div
-                class="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3"
+                class="h-full rounded-lg bg-surface-50 dark:bg-surface-600 p-6 shadow-md md:mt-0 md:w-1/3"
             >
                 <div class="flex justify-between">
                     <p class="text-lg font-bold">Total</p>
@@ -40,12 +44,12 @@ function order() {
                         <p class="ml-1 text-lg font-bold">${{ props.total }}</p>
                     </div>
                 </div>
-                <button
-                    class="mt-6 w-full rounded-md bg-primary-500 py-1.5 font-medium text-primary-50 hover:bg-primary-600"
+                <ButtonPrimary
+                    class="mt-6 w-full"
                     @click="order()"
                 >
                     Order
-                </button>
+                </ButtonPrimary>
             </div>
         </div>
     </ShopLayout>
