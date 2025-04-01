@@ -16,7 +16,7 @@ function toggleWish(product) {
 <template>
     <Link :href="route('product.show', product)">
         <div
-            class="max-w-72 cursor-pointer rounded-lg bg-surface-100 dark:bg-surface-800 p-2 shadow duration-150 hover:scale-105 hover:shadow-md">
+            class="max-w-72 min-w-52 cursor-pointer rounded-lg bg-surface-100 dark:bg-surface-800 p-2 shadow duration-150 hover:scale-105 hover:shadow-md">
             <div class="relative">
                 <div v-if="!product.image" class="w-full h-72 bg-gray-300 rounded"></div>
                 <img v-else class="w-full h-72 rounded-lg object-cover object-center" :src="product.image"
@@ -27,7 +27,6 @@ function toggleWish(product) {
             </div>
             <div class="flex items-center justify-between py-2">
                 <p class=" text-l font-semibold text-surface-800 dark:text-surface-200">${{ product.price }}</p>
-                <p class="font-bold text-surface-800 dark:text-surface-200">{{ product.title }}</p>
                 <Button severity="secondary" text v-if="$page.props.auth.user" @click.prevent="toggleWish(product)">
                     <i v-if="product.wished" class="pi pi-heart-fill" style="color: red"></i>
                     <i v-else class="pi pi-heart" style="color: red"></i>
