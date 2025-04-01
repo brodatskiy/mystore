@@ -92,16 +92,13 @@ const filterExpand = ref(false);
                     <div>
                         <ProductSearch></ProductSearch>
                     </div>
-
                     <div>
                         <ProductPriceFilter></ProductPriceFilter>
                     </div>
-
                     <div class="flex justify-center">
                         <Button @click="applyFilters" class="w-full">
                             Apply
-                        </Button
-                        >
+                        </Button>
                     </div>
                 </div>
             </Drawer>

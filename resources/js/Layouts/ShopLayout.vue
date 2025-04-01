@@ -10,6 +10,7 @@ import FlashMessage from "@/Components/FlashMessage.vue";
 import ApplicationLogo from "@/Components/Buttons/ApplicationLogo.vue";
 import SignUpButtonLink from "@/Components/Buttons/SignUpButtonLink.vue";
 import ButtonPrimary from "@/Components/Buttons/ButtonNav.vue";
+import ProductSearch from "@/Components/Filters/ProductSearch.vue";
 
 const {t} = useI18n()
 
@@ -105,7 +106,7 @@ onMounted(() => {
 
                 <!-- Search -->
                 <div class="flex-1">
-                    <InputText placeholder="Search" type="text" class="min-w-32 sm:w-full"/>
+                    <ProductSearch placeholder="Search" type="text" class="min-w-32 sm:w-full"/>
                 </div>
                 <!-- End -->
                 <div class="flex items-center justify-end">

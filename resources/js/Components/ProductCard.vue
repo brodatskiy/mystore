@@ -28,7 +28,7 @@ function toggleWish(product) {
             <div class="flex items-center justify-between py-2">
                 <p class=" text-l font-semibold text-surface-800 dark:text-surface-200">${{ product.price }}</p>
                 <p class="font-bold text-surface-800 dark:text-surface-200">{{ product.title }}</p>
-                <Button severity="secondary" v-if="$page.props.auth.user" @click.prevent="toggleWish(product)">
+                <Button severity="secondary" text v-if="$page.props.auth.user" @click.prevent="toggleWish(product)">
                     <i v-if="product.wished" class="pi pi-heart-fill" style="color: red"></i>
                     <i v-else class="pi pi-heart" style="color: red"></i>
                 </Button>
@@ -37,7 +37,7 @@ function toggleWish(product) {
                 class="w-full"
                 @click.prevent="add(product)"
             >
-                Add to cart
+                {{ $t("Add to cart") }}
             </ButtonPrimary>
         </div>
     </Link>
