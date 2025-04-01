@@ -79,7 +79,7 @@ const Noir = definePreset(Aura, {
                 },
                 overlay: {
                     modal: {
-                        background: '{surface.700}',
+                        background: '{surface.800}',
                     },
                 },
             }

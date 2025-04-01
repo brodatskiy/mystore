@@ -1,7 +1,6 @@
 <script setup>
 import {ref} from "vue";
-import {Head} from '@inertiajs/vue3'
-import {usePage} from "@inertiajs/vue3";
+import {Head, usePage} from '@inertiajs/vue3'
 
 import ShopLayout from "@/Layouts/ShopLayout.vue";
 import ProductCard from "@/Components/ProductCard.vue";
@@ -13,6 +12,7 @@ import SortProducts from "@/Components/Filters/SortProducts.vue";
 import Drawer from 'primevue/drawer';
 
 import {useFilterStore} from "@/Store/useFilterStore";
+import ButtonPrimary from "@/Components/Buttons/ButtonPrimary.vue";
 
 const filterStore = useFilterStore();
 
@@ -45,14 +45,14 @@ const filterExpand = ref(false);
     <Head title="Home"/>
 
     <ShopLayout>
-        <div class="flex justify-end">
+        <div class="flex justify-center">
             <div class="flex space-x-8">
                 <Button
-                    @click="filterExpand = true"
+                    @click="filterExpand = !filterExpand"
                     variant="text"
                 >
                     <i class="pi pi-filter"></i>
-                    <span>Filters</span>
+                    <span>{{ $t("Filters") }}</span>
                 </Button>
                 <SortProducts
                     :sort="props.sort"
@@ -83,10 +83,9 @@ const filterExpand = ref(false);
         <div>
             <Drawer
                 v-model:visible="filterExpand"
-                header="Filters"
+                :header='$t("Filters")'
                 position="right"
                 :modal="false"
-                class="!w-[20rem]"
             >
                 <div class="space-y-8 py-4">
                     <div>
@@ -96,13 +95,12 @@ const filterExpand = ref(false);
                         <ProductPriceFilter></ProductPriceFilter>
                     </div>
                     <div class="flex justify-center">
-                        <Button @click="applyFilters" class="w-full">
-                            Apply
-                        </Button>
+                        <ButtonPrimary @click="applyFilters" class="w-full">
+                            {{ $t("Apply") }}
+                        </ButtonPrimary>
                     </div>
                 </div>
             </Drawer>
         </div>
     </ShopLayout>
 </template>
-applyFilters

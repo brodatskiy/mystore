@@ -18,8 +18,8 @@ watch(price, (price) => {
 </script>
 
 <template>
-    <section>
-        <p class="font-medium text-xl mb-4">Price</p>
+    <div>
+        <p class="font-medium text-xl mb-4">{{ $t("Price")}}</p>
         <div class="space-y-6">
             <div class="flex items-center justify-between">
                 <div class="space-x-2 flex">
@@ -29,9 +29,6 @@ watch(price, (price) => {
                         inputClass="w-20"
                     />
                 </div>
-
-                <div>-</div>
-
                 <div class="space-x-2 flex">
                     <InputNumber
                         v-model="filterStore.price[1]"
@@ -49,5 +46,5 @@ watch(price, (price) => {
                 />
             </div>
         </div>
-    </section>
+    </div>
 </template>
