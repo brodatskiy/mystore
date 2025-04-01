@@ -1,3 +1,9 @@
+
+<script setup>
+import { useProductStore } from "@/Store/useProductStore";
+
+const productStore = useProductStore();
+</script>
 <template>
     <div class="filter mb-3 flex">
         <select
@@ -22,11 +28,4 @@
         </select>
     </div>
 </template>
-
-<script setup>
-import { useProductStore } from "@/Store/useProductStore";
-
-const productStore = useProductStore();
-</script>
-
 <style></style>

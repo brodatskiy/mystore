@@ -5,8 +5,6 @@ const props = defineProps({
     links: Array,
     meta: Object,
 });
-
-console.log(props);
 </script>
 
 <template>

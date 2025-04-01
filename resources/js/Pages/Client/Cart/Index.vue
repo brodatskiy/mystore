@@ -48,7 +48,7 @@ function order() {
                     class="mt-6 w-full"
                     @click="order()"
                 >
-                    Order
+                    {{ $t("Order") }}
                 </ButtonPrimary>
             </div>
         </div>

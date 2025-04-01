@@ -2,27 +2,25 @@
 defineProps(["order"]);
 </script>
 <template>
-    <div class="mb-6 rounded-lg bg-white p-4 shadow-md flex">
-        <div class="flex justify-around w-full px-4">
-            <div>
+    <div class="mb-4 rounded-lg bg-surface-300 dark:bg-surface-600 p-4 shadow-md flex">
+        <div class="flex justify-between align-items-center w-full px-4">
+            <div class="flex">
                 <p class="font-bold">ID:</p>
-                <p class="text-xs text-gray-700">
+                <span class="ml-2 text-gray-600 dark:text-gray-300">
                     {{ order.id }}
-                </p>
+                </span>
             </div>
-            <div>
+            <div class="flex">
                 <p class="font-bold">Status:</p>
-
-                <p class="text-xs text-gray-700">
+                <span class="ml-2 text-gray-600 dark:text-gray-300">
                     {{ order.status }}
-                </p>
+                </span>
             </div>
-            <div>
+            <div class="flex">
                 <p class="font-bold">Total:</p>
-
-                <p class="text-xs text-gray-700">
+                <span class="ml-2 text-gray-600 dark:text-gray-300">
                     {{ order.total }}
-                </p>
+                </span>
             </div>
         </div>
     </div>
