@@ -2,7 +2,7 @@
 import {ref} from "vue";
 import {useI18n} from "vue-i18n";
 
-import ButtonPrimary from "@/Components/Buttons/ButtonNav.vue";
+import ButtonDD from "@/Components/Buttons/ButtonDD.vue";
 
 const {locale} = useI18n({useScope: "global"});
 const menu = ref(null);
@@ -38,9 +38,9 @@ const setLocale = async (lang) => {
 
 <template>
     <Menu ref="menu" :model="overlayMenuItems" :popup="true"/>
-    <ButtonPrimary @click="toggleMenu">
+    <ButtonDD @click="toggleMenu">
         <i class="pi pi-language" style="font-size: 1.25rem"></i>
-    </ButtonPrimary>
+    </ButtonDD>
 </template>
 
 <style></style>

@@ -5,6 +5,7 @@ import {useForm, Head} from "@inertiajs/vue3";
 import IconField from "primevue/iconfield";
 import InputIcon from "primevue/inputicon";
 import InputError from "@/Components/InputError.vue";
+import ButtonPrimary from "@/Components/Buttons/ButtonPrimary.vue";
 
 const props = defineProps({
     status: {
@@ -54,13 +55,13 @@ const submit = () => {
                     <InputError class="mt-1" :message="form.errors.email"/>
                 </div>
 
-                <Button
+                <ButtonPrimary
                     type="submit"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
                     Send
-                </Button>
+                </ButtonPrimary>
             </div>
         </form>
     </AuthLayout>

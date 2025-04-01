@@ -1,11 +1,11 @@
 <script setup>
 import AuthLayout from "@/Layouts/AuthLayout.vue";
-import { useForm } from "@inertiajs/vue3";
+import { useForm, Head } from "@inertiajs/vue3";
 
 import IconField from "primevue/iconfield";
 import InputIcon from "primevue/inputicon";
 import InputError from "@/Components/InputError.vue";
-import PrimaryBtn from "@/Components/Buttons/PrimaryBtn.vue";
+import ButtonPrimary from "@/Components/Buttons/ButtonPrimary.vue";
 
 const form = useForm({
     password: "",
@@ -43,13 +43,13 @@ const submit = () => {
                 <InputError class="mt-1" :message="form.errors.password" />
             </div>
 
-            <Button
+            <ButtonPrimary
                 type="submit"
                 :class="{ 'opacity-25': form.processing }"
                 :disabled="form.processing"
             >
                 Confirm
-            </Button>
+            </ButtonPrimary>
         </form>
     </AuthLayout>
 </template>

@@ -1,12 +1,12 @@
 <script setup>
 import {ref} from "vue";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
-import {useForm} from "@inertiajs/vue3";
+import {Head, Link, useForm} from "@inertiajs/vue3";
 
 import IconField from "primevue/iconfield";
 import InputIcon from "primevue/inputicon";
 import InputError from "@/Components/InputError.vue";
-import PrimaryBtn from "@/Components/Buttons/PrimaryBtn.vue";
+import ButtonPrimary from "@/Components/Buttons/ButtonPrimary.vue";
 
 const form = useForm({
     name: "",
@@ -93,19 +93,18 @@ const submit = () => {
                     <InputError class="mt-1" :message="form.errors.password"/>
                 </div>
 
-                <PrimaryBtn
+                <ButtonPrimary
                     block
                     type="submit"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
                     Register
-                </PrimaryBtn>
+                </ButtonPrimary>
 
-                <Link :href="route('login')">
-                    <p class="text-blue-600 hover:text-blue-900">
-                        Already registered?
-                    </p>
+                <Link :href="route('login')"
+                      class="text-primary-600 dark:text-primary-300 hover:text-primary-500 dark:hover:text-primary-400">
+                    <p>Already registered?</p>
                 </Link>
             </div>
         </form>

@@ -1,9 +1,8 @@
 <script setup>
-import { computed } from "vue";
+import {computed} from "vue";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
-import { useForm } from "@inertiajs/vue3";
-
-import PrimaryBtn from "@/Components/Buttons/PrimaryBtn.vue";
+import {Head, Link, useForm} from "@inertiajs/vue3";
+import ButtonPrimary from "@/Components/Buttons/ButtonPrimary.vue";
 
 const props = defineProps({
     status: {
@@ -24,16 +23,16 @@ const verificationLinkSent = computed(
 
 <template>
     <AuthLayout>
-        <Head title="Email Verification" />
+        <Head title="Email Verification"/>
 
-        <div class="mb-4 text-sm text-gray-600">
+        <div class="mb-4 text-sm">
             Thanks for signing up! Before getting started, could you verify your
             email address by clicking on the link we just emailed to you? If you
             didn't receive the email, we will gladly send you another.
         </div>
 
         <div
-            class="mb-4 font-medium text-sm text-green-600"
+            class="mb-4 font-medium text-sm"
             v-if="verificationLinkSent"
         >
             A new verification link has been sent to the email address you
@@ -42,14 +41,14 @@ const verificationLinkSent = computed(
 
         <form @submit.prevent="submit">
             <div class="mt-4 flex items-center justify-between">
-                <PrimaryBtn
+                <ButtonPrimary
                     block
                     type="submit"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
                     Log In
-                </PrimaryBtn>
+                </ButtonPrimary>
 
                 <Link
                     :href="route('logout')"

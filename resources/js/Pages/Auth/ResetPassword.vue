@@ -1,11 +1,11 @@
 <script setup>
 import AuthLayout from "@/Layouts/AuthLayout.vue";
-import {useForm} from "@inertiajs/vue3";
+import {Head, useForm} from "@inertiajs/vue3";
 
 import IconField from "primevue/iconfield";
 import InputIcon from "primevue/inputicon";
 import InputError from "@/Components/InputError.vue";
-import PrimaryBtn from "@/Components/Buttons/PrimaryBtn.vue";
+import ButtonPrimary from "@/Components/Buttons/ButtonPrimary.vue";
 
 const props = defineProps({
     email: {
@@ -85,14 +85,14 @@ const submit = () => {
                     <InputError class="mt-1" :message="form.errors.password"/>
                 </div>
 
-                <PrimaryBtn
+                <ButtonPrimary
                     block
                     type="submit"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
                     Reset password
-                </PrimaryBtn>
+                </ButtonPrimary>
             </div>
         </form>
     </AuthLayout>

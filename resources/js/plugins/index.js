@@ -49,6 +49,11 @@ const Noir = definePreset(Aura, {
                     background: '{surface.300}',
                     color: '{primary.600}',
                 },
+                overlay: {
+                    modal: {
+                        background: '{surface.200}',
+                    },
+                },
             },
             dark: {
                 surface: {
@@ -76,6 +81,7 @@ const Noir = definePreset(Aura, {
                 formField: {
                     background: '{surface.700}',
                     color: '{primary.300}',
+                    filledBackground: '{surface.700}',
                 },
                 overlay: {
                     modal: {
