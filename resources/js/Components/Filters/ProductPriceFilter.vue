@@ -21,7 +21,7 @@ watch(price, (price) => {
     <div>
         <p class="font-medium text-xl mb-4">{{ $t("Price")}}</p>
         <div class="space-y-6">
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-around">
                 <div class="space-x-2 flex">
                     <InputNumber
                         v-model="filterStore.price[0]"
@@ -36,14 +36,6 @@ watch(price, (price) => {
                         inputClass="w-20"
                     />
                 </div>
-            </div>
-            <div>
-                <Slider
-                    v-model="filterStore.price"
-                    :min="0"
-                    :max="5000"
-                    range
-                />
             </div>
         </div>
     </div>
