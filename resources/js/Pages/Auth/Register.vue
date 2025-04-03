@@ -1,12 +1,12 @@
 <script setup>
-import { ref } from "vue";
+import {ref} from "vue";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
-import { useForm } from "@inertiajs/vue3";
+import {Head, Link, useForm} from "@inertiajs/vue3";
 
 import IconField from "primevue/iconfield";
 import InputIcon from "primevue/inputicon";
 import InputError from "@/Components/InputError.vue";
-import PrimaryBtn from "@/Components/Buttons/PrimaryBtn.vue";
+import ButtonPrimary from "@/Components/Buttons/ButtonPrimary.vue";
 
 const form = useForm({
     name: "",
@@ -26,19 +26,14 @@ const submit = () => {
 
 <template>
     <AuthLayout>
-        <Head title="Register" />
+        <Head title="Register"/>
 
         <form @submit.prevent="submit">
             <div class="flex flex-col gap-3">
                 <div>
                     <IconField iconPosition="left">
                         <InputIcon>
-                            <Icon
-                                icon="mdi:account-outline"
-                                width="1.5rem"
-                                height="1.5rem"
-                                class="-mt-1"
-                            ></Icon>
+                            <i class="pi pi-user -mt-1"></i>
                         </InputIcon>
 
                         <InputText
@@ -49,17 +44,12 @@ const submit = () => {
                             class="pl-10 w-full"
                         />
                     </IconField>
-                    <InputError class="mt-1" :message="form.errors.name" />
+                    <InputError class="mt-1" :message="form.errors.name"/>
                 </div>
                 <div>
                     <IconField iconPosition="left">
                         <InputIcon>
-                            <Icon
-                                icon="mdi:email"
-                                width="1.5rem"
-                                height="1.5rem"
-                                class="-mt-1"
-                            ></Icon>
+                            <i class="pi pi-at -mt-1"></i>
                         </InputIcon>
 
                         <InputText
@@ -70,18 +60,13 @@ const submit = () => {
                             class="pl-10 w-full"
                         />
                     </IconField>
-                    <InputError class="mt-1" :message="form.errors.email" />
+                    <InputError class="mt-1" :message="form.errors.email"/>
                 </div>
 
                 <div>
                     <IconField iconPosition="left">
                         <InputIcon>
-                            <Icon
-                                icon="mdi:password"
-                                width="1.5rem"
-                                height="1.5rem"
-                                class="-mt-1"
-                            ></Icon>
+                            <i class="pi pi-unlock -mt-1"></i>
                         </InputIcon>
                         <InputText
                             v-model="form.password"
@@ -90,18 +75,13 @@ const submit = () => {
                             class="pl-10 w-full"
                         />
                     </IconField>
-                    <InputError class="mt-1" :message="form.errors.password" />
+                    <InputError class="mt-1" :message="form.errors.password"/>
                 </div>
 
                 <div>
                     <IconField iconPosition="left">
                         <InputIcon>
-                            <Icon
-                                icon="mdi:lock-outline"
-                                width="1.5rem"
-                                height="1.5rem"
-                                class="-mt-1"
-                            ></Icon>
+                            <i class="pi pi-unlock -mt-1"></i>
                         </InputIcon>
                         <InputText
                             v-model="form.password_confirmation"
@@ -110,22 +90,21 @@ const submit = () => {
                             class="pl-10 w-full"
                         />
                     </IconField>
-                    <InputError class="mt-1" :message="form.errors.password" />
+                    <InputError class="mt-1" :message="form.errors.password"/>
                 </div>
 
-                <PrimaryBtn
+                <ButtonPrimary
                     block
                     type="submit"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
                     Register
-                </PrimaryBtn>
+                </ButtonPrimary>
 
-                <Link :href="route('login')">
-                    <p class="text-blue-600 hover:text-blue-900">
-                        Already registered?
-                    </p>
+                <Link :href="route('login')"
+                      class="text-primary-600 dark:text-primary-300 hover:text-primary-500 dark:hover:text-primary-400">
+                    <p>Already registered?</p>
                 </Link>
             </div>
         </form>

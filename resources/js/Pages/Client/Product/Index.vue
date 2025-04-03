@@ -1,57 +1,59 @@
 <script setup>
-import { ref, computed } from "vue";
-import { router } from "@inertiajs/vue3";
+import {router, Head} from "@inertiajs/vue3";
 import ShopLayout from "@/Layouts/ShopLayout.vue";
-import PrimaryBtn from "@/Components/Buttons/PrimaryBtn.vue";
-
-import { useCartStore } from "@/Store/useCartStore";
 
 const props = defineProps(["product"]);
 
 function add(product) {
-    router.post(route('cart.add', { product: product }) )
+    router.post(route('cart.add', {product: product}))
+}
+
+function toggleWish(product) {
+    router.post(route('wish.toggle', {product: product}))
 }
 </script>
 <template>
-    <Head title="Product" />
+    <Head title="Product"/>
 
     <ShopLayout>
-        <div class="flex items-center justify-center bg-gray-100">
-            <div class="mx-auto">
-            <div class="grid grid-cols-2 gap-4 rounded-lg bg-white p-4">
-
-                <div class="relative">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="flex flex-column rounded-lg bg-surface-50 dark:bg-surface-800 p-4 space-x-4">
+                <div class="flex-1 relative">
                     <img
                         class="w-full rounded-lg object-cover object-center"
                         :src="product.image"
                         :alt="product.title"
                     >
-                        <div v-if="product.sticker" class="absolute top-2 right-2">{{product.sticker.title.toUpperCase()}}</div>
-                    </img>
+                    <div v-if="product.sticker" class="absolute top-2 right-2 text-white">
+                        {{ product.sticker.title.toUpperCase() }}
+                    </div>
                 </div>
 
                 <div class="flex flex-col">
-                    <div class="space-y-4">
-                    <p class="text-2xl font-bold ">{{ product.title }}</p>
-                    <p class=" text-xl font-semibold text-gray-800">${{ product.price }}</p>
-                    <div class="mb-2">
-                        {{ product.description }}
+                    <div class="flex-1 space-y-4">
+                        <p class="text-2xl font-bold ">{{ product.title }}</p>
+                        <p class=" text-xl font-semibold text-gray-600 dark:text-gray-100">${{ product.price }}</p>
+                        <div class="mb-2">
+                            {{ product.description }}
+                        </div>
+                    </div>
+                    <div class="space-x-4">
+                        <Button
+                            class=" w-50"
+                            @click="add(product)"
+                        >
+                            Add to cart
+                        </Button>
+                        <Button severity="secondary" v-if="$page.props.auth.user" @click.prevent="toggleWish(product)">
+                            <i v-if="product.wished" class="pi pi-heart-fill" style="color: red"></i>
+                            <i v-else class="pi pi-heart" style="color: red"></i>
+                        </Button>
                     </div>
                 </div>
-                    <PrimaryBtn
-                        class="mt-auto"
-                        @click="add(product)"
-                    >
-                        Add to cart
-                    </PrimaryBtn>
-                </div>
             </div>
-            <div class="mt-4">
-                <Chip v-for="tag in product.tags" class="mr-2">{{
-                    tag.title
-                }}</Chip>
+            <div class="mt-2">
+                <Tag severity="secondary" v-for="tag in product.tags" :value="tag.title" class="mr-2"></Tag>
             </div>
-        </div>
         </div>
     </ShopLayout>
 </template>

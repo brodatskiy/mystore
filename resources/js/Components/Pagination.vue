@@ -1,26 +1,28 @@
 <script setup>
+import {Link} from "@inertiajs/vue3";
+
 const props = defineProps({
-  links: Array,
-  meta: Object,
+    links: Array,
+    meta: Object,
 });
 </script>
 
 <template>
-  <div class="flex items-center justify-center mt-10">
+    <div class="flex items-center justify-center">
     <span v-for="(link, i) in links" :key="i">
       <Link
-        v-if="link.url"
-        :href="link.url"
-        v-html="link.label"
-        class="px-4 py-3 text-xs rounded mr-2 select-none text-center align-middle font-sans font-medium text-gray-900 transition-all"
-        :class="
+          v-if="link.url"
+          :class="
           link.active
-            ? 'bg-gray-900/20 text-black hover:bg-gray-900/30'
-            : 'bg-gray-200 text-zinc-600 hover:bg-gray-900/10'
+            ? 'bg-primary-500 text-white'
+            : 'bg-surface-300 dark:bg-surface-600 dark:text-white hover:bg-surface-400 dark:hover:bg-surface-500'
         "
-        as="button"
-        :disabled="link.active"
-      ></Link>
+          :disabled="link.active"
+          :href="link.url"
+          as="button"
+          class="px-4 py-3 cursor-pointer text-sm rounded-md mr-2 select-none text-center align-middle transition-all"
+          v-html="link.label"
+      />
     </span>
-  </div>
+    </div>
 </template>

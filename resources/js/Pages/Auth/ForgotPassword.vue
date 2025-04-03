@@ -1,12 +1,11 @@
 <script setup>
-import { ref } from "vue";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
-import { useForm } from "@inertiajs/vue3";
+import {useForm, Head} from "@inertiajs/vue3";
 
 import IconField from "primevue/iconfield";
 import InputIcon from "primevue/inputicon";
 import InputError from "@/Components/InputError.vue";
-import PrimaryBtn from "@/Components/Buttons/PrimaryBtn.vue";
+import ButtonPrimary from "@/Components/Buttons/ButtonPrimary.vue";
 
 const props = defineProps({
     status: {
@@ -25,7 +24,7 @@ const submit = () => {
 
 <template>
     <AuthLayout>
-        <Head title="Forgot Password" />
+        <Head title="Forgot Password"/>
 
         <div class="mb-4 text-body-1">
             Forgot your password? No problem. Just let us know your email
@@ -42,12 +41,7 @@ const submit = () => {
                 <div>
                     <IconField iconPosition="left">
                         <InputIcon>
-                            <Icon
-                                icon="mdi:email"
-                                width="1.5rem"
-                                height="1.5rem"
-                                class="-mt-1"
-                            ></Icon>
+                            <i class="pi pi-at -mt-1"></i>
                         </InputIcon>
 
                         <InputText
@@ -58,17 +52,16 @@ const submit = () => {
                             class="pl-10 w-full"
                         />
                     </IconField>
-                    <InputError class="mt-1" :message="form.errors.email" />
+                    <InputError class="mt-1" :message="form.errors.email"/>
                 </div>
 
-                <PrimaryBtn
-                    block
+                <ButtonPrimary
                     type="submit"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
                     Send
-                </PrimaryBtn>
+                </ButtonPrimary>
             </div>
         </form>
     </AuthLayout>

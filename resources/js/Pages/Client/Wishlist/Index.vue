@@ -1,6 +1,7 @@
 <script setup>
+import { Head } from "@inertiajs/vue3";
 import ShopLayout from "@/Layouts/ShopLayout.vue";
-import ProductCard from "@/Components/ProductCard.vue";
+import ProductCardLine from "@/Components/ProductCardLine.vue";
 
 const props = defineProps({
     wishlist: Array,
@@ -15,13 +16,13 @@ const props = defineProps({
         >
             <div class="w-full">
                 <div
-                    class="mx-auto grid max-w-6xl grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4"
+                    class="mx-auto max-w-6xl grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4"
                 >
-                    <ProductCard
+                    <ProductCardLine
                         v-for="product in props.wishlist"
                         :key="product.id"
                         :product="product"
-                    ></ProductCard>
+                    ></ProductCardLine>
                 </div>
             </div>
         </div>

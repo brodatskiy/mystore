@@ -8,8 +8,9 @@ services:
             - '${APP_PORT:-8080}:80'
         restart: always
         depends_on:
-            - app
-        container_name: my-store_nginx
+            app:
+                condition: service_started
+        container_name: nginx
 
     app:
         build:
@@ -19,11 +20,13 @@ services:
             - ./:/var/www
         ports:
             - '${VITE_PORT:-5173}:5173'
+        restart: always
         depends_on:
-            - db
+            db:
+                condition: service_healthy
         environment:
             PHP_IDE_CONFIG: "serverName=my-store"
-        container_name: my-store_app
+        container_name: app
 
     db:
         image: postgres
@@ -37,15 +40,20 @@ services:
             - POSTGRES_PASSWORD=${DB_PASSWORD}
         ports:
             - '${DB_PORT:-5432}:5432'
-        container_name: my-store_db
+        healthcheck:
+            test: [ "CMD-SHELL", "pg_isready -U ${DB_USERNAME} -d ${DB_DATABASE}" ]
+            interval: 10s
+            retries: 5
+            start_period: 30s
+            timeout: 10s
+        container_name: db
 
     redis:
         image: redis
         restart: unless-stopped
         ports:
             - "6379:6379"
-        container_name: auction_redis
-
+        container_name: redis
 
 volumes:
     db-volume:

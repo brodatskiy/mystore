@@ -1,15 +1,16 @@
 <script setup>
-import { ref } from "vue";
-import { router } from "@inertiajs/vue3";
-import { Link } from "@inertiajs/vue3";
-import SecondaryBtn from "./Buttons/SecondaryBtn.vue";
+import {ref} from "vue";
+import {router} from "@inertiajs/vue3";
+import {Link} from "@inertiajs/vue3";
+import Button from "primevue/button";
+import ButtonPrimary from "@/Components/Buttons/ButtonPrimary.vue";
 
 defineProps(["product"]);
 
 const processing = ref(false);
 
 function increase(product) {
-    router.patch(route("cart.increase", { product: product }), {
+    router.patch(route("cart.increase", {product: product}), {
         onStart: () => {
             processing.value = true;
         },
@@ -20,7 +21,7 @@ function increase(product) {
 }
 
 function decrease(product) {
-    router.patch(route("cart.decrease", { product: product }), {
+    router.patch(route("cart.decrease", {product: product}), {
         onStart: () => {
             processing.value = true;
         },
@@ -29,9 +30,8 @@ function decrease(product) {
         },
     });
 }
-
 function destroy(product) {
-    router.delete(route("cart.destroy", { product: product }), {
+    router.delete(route("cart.destroy", {product: product}), {
         onStart: () => {
             processing.value = true;
         },
@@ -42,7 +42,7 @@ function destroy(product) {
 }
 </script>
 <template>
-    <div class="mb-6 rounded-lg bg-white p-4 shadow-md flex">
+    <div class="flex mb-6 rounded-lg bg-surface-50 dark:bg-surface-600 p-4 shadow-md text-black dark:text-white">
         <Link :href="route('product.show', product)">
             <img
                 :src="product.image"
@@ -51,24 +51,21 @@ function destroy(product) {
             />
         </Link>
         <div class="flex justify-between w-full px-4">
-            <div class="flex flex-col">
+            <div class="flex flex-col space-y-2">
                 <div class="flex-1">
                     <Link :href="route('product.show', product)">
-                        <h2 class="text-lg font-bold text-gray-900">
+                        <h2 class="text-lg font-bold text-gray-900 dark:text-white">
                             {{ product.title }}
                         </h2>
                     </Link>
-                    <p class="mt-1 text-xs text-gray-700">
+                    <p class="mt-1 text-xs text-gray-700 dark:text-gray-200">
                         {{ product.description }}
                     </p>
                 </div>
-                <div class="flex space-x-2">
-                    <SecondaryBtn>
-                        <Icon icon="mdi:heart-outline" class="h-5 w-5 m-2" />
-                    </SecondaryBtn>
-                    <SecondaryBtn @click="destroy(product)">
-                        <Icon icon="mdi:trash-outline" class="h-5 w-5 m-2" />
-                    </SecondaryBtn>
+                <div class="space-x-2">
+                    <Button @click="destroy(product)" severity="danger">
+                        <i class="pi pi-trash"></i>
+                    </Button>
                 </div>
             </div>
             <div class="flex items-center space-x-3">
@@ -78,21 +75,21 @@ function destroy(product) {
                     </p>
                 </div>
                 <div class="flex">
-                    <button
-                        class="rounded-l-md bg-primary-300 hover:bg-primary-400 active:bg-primary-500 px-3 py-2"
+                    <ButtonPrimary
+                        class="rounded-l-md"
                         @click="decrease(product)"
                     >
                         -
-                    </button>
-                    <button class="hover:bg-gray-100 px-3 py-2">
+                    </ButtonPrimary>
+                    <button class="px-3 py-2">
                         {{ product.quantity }}
                     </button>
-                    <button
-                        class="rounded-r-md bg-primary-300 hover:bg-primary-400 active:bg-primary-500 px-3 py-2"
+                    <ButtonPrimary
+                        class="rounded-r-md"
                         @click="increase(product)"
                     >
                         +
-                    </button>
+                    </ButtonPrimary>
                 </div>
             </div>
         </div>

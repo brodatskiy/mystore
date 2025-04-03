@@ -1,11 +1,11 @@
 <script setup>
 import AuthLayout from "@/Layouts/AuthLayout.vue";
-import { useForm } from "@inertiajs/vue3";
+import {Head, useForm} from "@inertiajs/vue3";
 
 import IconField from "primevue/iconfield";
 import InputIcon from "primevue/inputicon";
 import InputError from "@/Components/InputError.vue";
-import PrimaryBtn from "@/Components/Buttons/PrimaryBtn.vue";
+import ButtonPrimary from "@/Components/Buttons/ButtonPrimary.vue";
 
 const props = defineProps({
     email: {
@@ -34,19 +34,14 @@ const submit = () => {
 
 <template>
     <AuthLayout>
-        <Head title="Reset Password" />
+        <Head title="Reset Password"/>
 
         <form @submit.prevent="submit">
             <div class="flex flex-col gap-3">
                 <div>
                     <IconField iconPosition="left">
                         <InputIcon>
-                            <Icon
-                                icon="mdi:email"
-                                width="1.5rem"
-                                height="1.5rem"
-                                class="-mt-1"
-                            ></Icon>
+                            <i class="pi pi-at -mt-1"></i>
                         </InputIcon>
 
                         <InputText
@@ -57,18 +52,13 @@ const submit = () => {
                             class="pl-10 w-full"
                         />
                     </IconField>
-                    <InputError class="mt-1" :message="form.errors.email" />
+                    <InputError class="mt-1" :message="form.errors.email"/>
                 </div>
 
                 <div>
                     <IconField iconPosition="left">
                         <InputIcon>
-                            <Icon
-                                icon="mdi:password"
-                                width="1.5rem"
-                                height="1.5rem"
-                                class="-mt-1"
-                            ></Icon>
+                            <i class="pi pi-unlock -mt-1"></i>
                         </InputIcon>
                         <InputText
                             v-model="form.password"
@@ -77,18 +67,13 @@ const submit = () => {
                             class="pl-10 w-full"
                         />
                     </IconField>
-                    <InputError class="mt-1" :message="form.errors.password" />
+                    <InputError class="mt-1" :message="form.errors.password"/>
                 </div>
 
                 <div>
                     <IconField iconPosition="left">
                         <InputIcon>
-                            <Icon
-                                icon="mdi:lock-outline"
-                                width="1.5rem"
-                                height="1.5rem"
-                                class="-mt-1"
-                            ></Icon>
+                            <i class="pi pi-unlock -mt-1"></i>
                         </InputIcon>
                         <InputText
                             v-model="form.password_confirmation"
@@ -97,17 +82,17 @@ const submit = () => {
                             class="pl-10 w-full"
                         />
                     </IconField>
-                    <InputError class="mt-1" :message="form.errors.password" />
+                    <InputError class="mt-1" :message="form.errors.password"/>
                 </div>
 
-                <PrimaryBtn
+                <ButtonPrimary
                     block
                     type="submit"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
                     Reset password
-                </PrimaryBtn>
+                </ButtonPrimary>
             </div>
         </form>
     </AuthLayout>

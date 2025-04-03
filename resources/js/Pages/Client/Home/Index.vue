@@ -1,7 +1,6 @@
 <script setup>
-import { ref } from "vue";
-import { Head } from '@inertiajs/vue3'
-import { usePage } from "@inertiajs/vue3";
+import {ref} from "vue";
+import {Head, usePage} from '@inertiajs/vue3'
 
 import ShopLayout from "@/Layouts/ShopLayout.vue";
 import ProductCard from "@/Components/ProductCard.vue";
@@ -12,7 +11,8 @@ import SortProducts from "@/Components/Filters/SortProducts.vue";
 
 import Drawer from 'primevue/drawer';
 
-import { useFilterStore } from "@/Store/useFilterStore";
+import {useFilterStore} from "@/Store/useFilterStore";
+import ButtonPrimary from "@/Components/Buttons/ButtonPrimary.vue";
 
 const filterStore = useFilterStore();
 
@@ -42,22 +42,18 @@ function applyFilters() {
 const filterExpand = ref(false);
 </script>
 <template>
-    <Head title="Home" />
+    <Head title="Home"/>
 
     <ShopLayout>
-        <div class="flex justify-end">
+        <div class="flex justify-center">
             <div class="flex space-x-8">
-                <button
-                    @click="filterExpand = true"
-                    class="flex items-center hover:text-primary-600"
+                <Button
+                    @click="filterExpand = !filterExpand"
+                    variant="text"
                 >
-                    <Icon
-                        icon="mdi:filter-variant"
-                        width="1.5rem"
-                        height="1.5rem"
-                    />
-                    <span>Filters</span>
-                </button>
+                    <i class="pi pi-filter"></i>
+                    <span>{{ $t("Filters") }}</span>
+                </Button>
                 <SortProducts
                     :sort="props.sort"
                     @change="applyFilters"
@@ -75,39 +71,35 @@ const filterExpand = ref(false);
                     :product="product"
                 ></ProductCard>
             </div>
-
-            <Pagination
-                v-if="products.links.next || products.links.prev"
-                :links="products.meta.links"
-                :meta="products.links"
-            ></Pagination>
+            <div class="mt-2">
+                <Pagination
+                    v-if="products.links.next || products.links.prev"
+                    :links="products.meta.links"
+                    :meta="products.links"
+                ></Pagination>
+            </div>
         </div>
 
         <div>
             <Drawer
                 v-model:visible="filterExpand"
-                header="Filters"
+                :header='$t("Filters")'
                 position="right"
-                :modal="false"
-                class="!w-[20rem]"
             >
                 <div class="space-y-8 py-4">
                     <div>
                         <ProductSearch></ProductSearch>
                     </div>
-
                     <div>
                         <ProductPriceFilter></ProductPriceFilter>
                     </div>
-
                     <div class="flex justify-center">
-                        <Button @click="applyFilters" class="w-full">
-                            Apply</Button
-                        >
+                        <ButtonPrimary @click="applyFilters" class="w-full">
+                            {{ $t("Apply") }}
+                        </ButtonPrimary>
                     </div>
                 </div>
             </Drawer>
         </div>
     </ShopLayout>
 </template>
-applyFilters

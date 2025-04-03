@@ -1,13 +1,12 @@
 <script setup>
-import { ref } from "vue";
+import {ref} from "vue";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
-import { useForm } from "@inertiajs/vue3";
-import { Head } from "@inertiajs/vue3";
+import {Head, Link, useForm} from "@inertiajs/vue3";
 
 import IconField from "primevue/iconfield";
 import InputIcon from "primevue/inputicon";
 import InputError from "@/Components/InputError.vue";
-import PrimaryBtn from "@/Components/Buttons/PrimaryBtn.vue";
+import ButtonPrimary from "@/Components/Buttons/ButtonPrimary.vue";
 
 const props = defineProps({
     canResetPassword: {
@@ -35,7 +34,7 @@ const submit = () => {
 
 <template>
     <AuthLayout>
-        <Head title="Log in" />
+        <Head title="Log in"/>
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
             {{ status }}
@@ -46,12 +45,7 @@ const submit = () => {
                 <div>
                     <IconField iconPosition="left">
                         <InputIcon>
-                            <Icon
-                                icon="mdi:email"
-                                width="1.5rem"
-                                height="1.5rem"
-                                class="-mt-1"
-                            ></Icon>
+                            <i class="pi pi-at -mt-1"></i>
                         </InputIcon>
 
                         <InputText
@@ -59,20 +53,15 @@ const submit = () => {
                             id="email"
                             type="email"
                             placeholder="Email"
-                            class="pl-10 w-full"
+                            class="w-full"
                         />
                     </IconField>
-                    <InputError class="mt-1" :message="form.errors.email" />
+                    <InputError class="mt-1" :message="form.errors.email"/>
                 </div>
                 <div>
                     <IconField iconPosition="left">
                         <InputIcon>
-                            <Icon
-                                icon="mdi:password"
-                                width="1.5rem"
-                                height="1.5rem"
-                                class="-mt-1"
-                            ></Icon>
+                            <i class="pi pi-unlock -mt-1"></i>
                         </InputIcon>
                         <InputText
                             v-model="form.password"
@@ -81,7 +70,7 @@ const submit = () => {
                             class="pl-10 w-full"
                         />
                     </IconField>
-                    <InputError class="mt-1" :message="form.errors.password" />
+                    <InputError class="mt-1" :message="form.errors.password"/>
                 </div>
                 <div class="flex items-center">
                     <Checkbox
@@ -93,16 +82,16 @@ const submit = () => {
                     <label for="remember" class="ml-2"> Remember me</label>
                 </div>
 
-                <PrimaryBtn
-                    block
-                    type="submit"
+                <ButtonPrimary
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
                     Log In
-                </PrimaryBtn>
-                <Link v-if="canResetPassword" :href="route('password.request')" class="text-blue-600 hover:text-blue-900">
-                        Forgot your password?
+                </ButtonPrimary>
+
+                <Link v-if="canResetPassword" :href="route('password.request')"
+                      class="text-primary-600 dark:text-primary-300 hover:text-primary-500 dark:hover:text-primary-400">
+                    <p>Forgot your password?</p>
                 </Link>
             </div>
         </form>

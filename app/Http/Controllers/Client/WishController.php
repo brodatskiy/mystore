@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Product\ProductCardResource;
+use App\Http\Resources\Product\ProductResource;
 use App\Http\Resources\Wish\WishResource;
 use App\Models\Product;
 use App\Models\Wish;
@@ -19,7 +20,7 @@ class WishController extends Controller
         $wishlist = $user->wishes()->get() ?? collect([]);
 
         return Inertia::render('Client/Wishlist/Index', [
-            'wishlist' => ProductCardResource::collection($wishlist),
+            'wishlist' => ProductResource::collection($wishlist),
         ]);
     }
 

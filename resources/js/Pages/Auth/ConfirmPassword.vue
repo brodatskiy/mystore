@@ -1,11 +1,11 @@
 <script setup>
 import AuthLayout from "@/Layouts/AuthLayout.vue";
-import { useForm } from "@inertiajs/vue3";
+import { useForm, Head } from "@inertiajs/vue3";
 
 import IconField from "primevue/iconfield";
 import InputIcon from "primevue/inputicon";
 import InputError from "@/Components/InputError.vue";
-import PrimaryBtn from "@/Components/Buttons/PrimaryBtn.vue";
+import ButtonPrimary from "@/Components/Buttons/ButtonPrimary.vue";
 
 const form = useForm({
     password: "",
@@ -31,12 +31,7 @@ const submit = () => {
             <div>
                 <IconField iconPosition="left">
                     <InputIcon>
-                        <Icon
-                            icon="mdi:password"
-                            width="1.5rem"
-                            height="1.5rem"
-                            class="-mt-1"
-                        ></Icon>
+                        <i class="pi pi-key -mt-1"></i>
                     </InputIcon>
                     <InputText
                         v-model="form.password"
@@ -48,14 +43,13 @@ const submit = () => {
                 <InputError class="mt-1" :message="form.errors.password" />
             </div>
 
-            <PrimaryBtn
-                block
+            <ButtonPrimary
                 type="submit"
                 :class="{ 'opacity-25': form.processing }"
                 :disabled="form.processing"
             >
                 Confirm
-            </PrimaryBtn>
+            </ButtonPrimary>
         </form>
     </AuthLayout>
 </template>

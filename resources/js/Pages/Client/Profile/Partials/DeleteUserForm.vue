@@ -1,12 +1,10 @@
 <script setup>
-import { useForm } from "@inertiajs/vue3";
-import { nextTick, ref } from "vue";
+import {useForm} from "@inertiajs/vue3";
+import {ref} from "vue";
 
-import DangerBtn from "@/Components/Buttons/DangerBtn.vue";
 import IconField from "primevue/iconfield";
 import InputIcon from "primevue/inputicon";
 import InputError from "@/Components/InputError.vue";
-import SecondaryBtn from "@/Components/Buttons/SecondaryBtn.vue";
 
 import Dialog from "primevue/dialog";
 
@@ -40,17 +38,16 @@ const closeModal = () => {
 <template>
     <section class="space-y-6">
         <header>
-            <h2 class="text-lg font-medium text-gray-900">Delete Account</h2>
+            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-300">Delete Account</h2>
 
-            <p class="mt-1 text-sm text-gray-600">
+            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
                 Once your account is deleted, all of its resources and data will
                 be permanently deleted. Before deleting your account, please
                 download any data or information that you wish to retain.
             </p>
         </header>
 
-        {{ console.log(passwordInput) }}
-        <DangerBtn @click="confirmUserDeletion">Delete Account</DangerBtn>
+        <Button severity="danger" @click="confirmUserDeletion">Delete Account</Button>
 
         <Dialog :visible="confirmingUserDeletion" modal header="Delete Profile">
             <div class="p-6">
@@ -67,12 +64,7 @@ const closeModal = () => {
                 <div class="mt-6">
                     <IconField iconPosition="left">
                         <InputIcon>
-                            <Icon
-                                icon="mdi:password"
-                                width="1.5rem"
-                                height="1.5rem"
-                                class="-mt-1"
-                            ></Icon>
+                            <i class="pi pi-unlock -mt-1"></i>
                         </InputIcon>
                         <InputText
                             v-model="form.password"
@@ -84,20 +76,21 @@ const closeModal = () => {
                             class="pl-10 w-full"
                         />
                     </IconField>
-                    <InputError class="mt-1" :message="form.errors.password" />
+                    <InputError class="mt-1" :message="form.errors.password"/>
                 </div>
 
                 <div class="mt-6 flex justify-end">
-                    <SecondaryBtn @click="closeModal"> Cancel </SecondaryBtn>
+                    <Button severity="secondary" @click="closeModal"> Cancel</Button>
 
-                    <DangerBtn
+                    <Button
+                        severity="secondary"
                         class="ml-3"
                         :class="{ 'opacity-25': form.processing }"
                         :disabled="form.processing"
                         @click="deleteUser"
                     >
                         Delete Account
-                    </DangerBtn>
+                    </Button>
                 </div>
             </div>
         </Dialog>
