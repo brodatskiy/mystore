@@ -6,6 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Screen\AsSource;
 
+/**
+ * 
+ *
+ * @property int $product_id
+ * @property int $tag_id
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductTag newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductTag newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductTag query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductTag whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductTag whereTagId($value)
+ * @mixin \Eloquent
+ */
 class ProductTag extends Model
 {
     use HasFactory;
