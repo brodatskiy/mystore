@@ -85,7 +85,6 @@ const filterExpand = ref(false);
                 v-model:visible="filterExpand"
                 :header='$t("Filters")'
                 position="right"
-                :modal="false"
             >
                 <div class="space-y-8 py-4">
                     <div>
