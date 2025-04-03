@@ -1,5 +1,5 @@
 <script setup>
-import {router, Head} from "@inertiajs/vue3";
+import {Head, router} from "@inertiajs/vue3";
 import ShopLayout from "@/Layouts/ShopLayout.vue";
 
 const props = defineProps(["product"]);
@@ -18,7 +18,7 @@ function toggleWish(product) {
     <ShopLayout>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="flex flex-column rounded-lg bg-surface-50 dark:bg-surface-800 p-4 space-x-4">
-                <div class="flex-1 relative">
+                <div class="flex-1 relative max-w-72 min-w-52">
                     <img
                         class="w-full rounded-lg object-cover object-center"
                         :src="product.image"
@@ -31,9 +31,12 @@ function toggleWish(product) {
 
                 <div class="flex flex-col">
                     <div class="flex-1 space-y-4">
-                        <p class="text-2xl font-bold ">{{ product.title }}</p>
+                        <div><p class="text-2xl font-bold ">{{ product.title }}</p></div>
+                        <div class="">
+                           <i class="pi pi-star-fill"></i> {{ product.rating }}
+                        </div>
                         <p class=" text-xl font-semibold text-gray-600 dark:text-gray-100">${{ product.price }}</p>
-                        <div class="mb-2">
+                        <div class="">
                             {{ product.description }}
                         </div>
                     </div>

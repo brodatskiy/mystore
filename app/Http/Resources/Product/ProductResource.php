@@ -26,6 +26,7 @@ class ProductResource extends JsonResource
             'wished' => $wished,
             'color' => $this->color,
             'price' => $this->price,
+            'rating' => $this->rating,
             'is_published' => $this->is_published,
             'category' => new CategoryResource($this->category),
             'sticker' => new StickerResource($this->sticker),
