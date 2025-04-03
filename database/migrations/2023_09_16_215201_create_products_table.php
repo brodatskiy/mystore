@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('preview_image');
             $table->string('color');
             $table->unsignedInteger('price');
+            $table->float('rating', precision: 1);
             $table->boolean('is_published')->default(true);
 
             $table->foreignIdFor(Category::class)

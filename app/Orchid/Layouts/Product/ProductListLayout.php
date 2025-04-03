@@ -6,16 +6,13 @@ namespace App\Orchid\Layouts\Product;
 
 use App\Models\Product;
 use Orchid\Screen\Actions\Button;
-use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
-use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Components\Cells\Boolean;
 use Orchid\Screen\Components\Cells\Currency;
 use Orchid\Screen\Components\Cells\DateTimeSplit;
+use Orchid\Screen\Components\Cells\Number;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
-use Orchid\Screen\Layouts\Card;
-use Orchid\Screen\Layouts\Persona;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 
@@ -28,26 +25,29 @@ class ProductListLayout extends Table
 
     /**
      * @return TD[]
+     * @throws \ReflectionException
      */
     public function columns(): array
     {
         return [
             TD::make('id', 'ID')
                 ->width('120')
-                ->render(fn (Product $product) =>
-                "<img src='$product->preview_image'
+                ->render(fn(Product $product) => "<img src='$product->preview_image'
                       alt='preview_image'
                       class='mw-100 d-block img-fluid rounded-1 w-100'>
-                    <span class='small text-muted mt-1 mb-0'># {$product->id}</span>")
-
+                    <span class='small text-muted mt-1 mb-0'># $product->id</span>")
                 ->sort(),
             TD::make('title')->width(120)->sort()->filter(Input::make()),
             TD::make('description')->width(200)->defaultHidden(),
             TD::make('color')
-                ->render(fn (Product $product) => "<div class='rounded' style='height:16px; width:16px; background:{$product->color}'></div>")
+                ->render(fn(Product $product) => "<div class='rounded' style='height:16px; width:16px; background:$product->color'></div>")
                 ->align(TD::ALIGN_CENTER),
             TD::make('price')
                 ->usingComponent(Currency::class, after: '₽')
+                ->align(TD::ALIGN_CENTER)
+                ->sort(),
+            TD::make('rating')
+                ->usingComponent(Number::class, decimals: 1)
                 ->align(TD::ALIGN_CENTER)
                 ->sort(),
             TD::make('tags', 'Tags')
@@ -72,7 +72,7 @@ class ProductListLayout extends Table
                 })
                 ->align(TD::ALIGN_CENTER),
 
-            TD::make('is_published', "Publised")->usingComponent(Boolean::class)
+            TD::make('is_published', "Published")->usingComponent(Boolean::class)
                 ->align(TD::ALIGN_CENTER)
                 ->sort(),
 
@@ -91,7 +91,7 @@ class ProductListLayout extends Table
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)
                 ->width('100px')
-                ->render(fn (Product $product) => Group::make([
+                ->render(fn(Product $product) => Group::make([
                     Link::make(__('View'))
                         ->icon('bs.eye')
                         ->route('platform.products.view', $product->id),

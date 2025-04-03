@@ -16,6 +16,31 @@ use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
 
 
+/**
+ * 
+ *
+ * @property int $id
+ * @property string $storage_id
+ * @property int|null $user_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CartItem> $cartItems
+ * @property-read int|null $cart_items_count
+ * @property-read \App\Models\User|null $user
+ * @method static Builder<static>|Cart defaultSort(string $column, string $direction = 'asc')
+ * @method static Builder<static>|Cart filters(?mixed $kit = null, ?\Orchid\Filters\HttpFilter $httpFilter = null)
+ * @method static Builder<static>|Cart filtersApply(iterable $filters = [])
+ * @method static Builder<static>|Cart filtersApplySelection($class)
+ * @method static Builder<static>|Cart newModelQuery()
+ * @method static Builder<static>|Cart newQuery()
+ * @method static Builder<static>|Cart query()
+ * @method static Builder<static>|Cart whereCreatedAt($value)
+ * @method static Builder<static>|Cart whereId($value)
+ * @method static Builder<static>|Cart whereStorageId($value)
+ * @method static Builder<static>|Cart whereUpdatedAt($value)
+ * @method static Builder<static>|Cart whereUserId($value)
+ * @mixin \Eloquent
+ */
 class Cart extends Model
 {
     use HasFactory;

@@ -5,19 +5,14 @@ declare(strict_types=1);
 namespace App\Orchid\Screens\Product;
 
 use App\Models\Product;
-use App\Orchid\Layouts\Product\ProductCropperLayout;
-use App\Orchid\Layouts\Product\ProductEditLayout;
-use App\Orchid\Layouts\Product\ProductViewLayout;
-use Exception;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Components\Cells\Boolean;
 use Orchid\Screen\Components\Cells\Currency;
 use Orchid\Screen\Components\Cells\DateTimeSplit;
+use Orchid\Screen\Components\Cells\Number;
 use Orchid\Screen\Screen;
 use Orchid\Screen\Sight;
 use Orchid\Support\Facades\Layout;
@@ -27,6 +22,7 @@ class ProductViewScreen extends Screen
 {
     /**
      * @var Product
+     * @noinspection PhpMissingFieldTypeInspection
      */
     public $product;
 
@@ -88,6 +84,7 @@ class ProductViewScreen extends Screen
 
     /**
      * @return \Orchid\Screen\Layout[]
+     * @throws \ReflectionException
      */
     public function layout(): iterable
     {
@@ -95,8 +92,7 @@ class ProductViewScreen extends Screen
             Layout::split([
                 Layout::legend('product', [
                     Sight::make('preview_image', 'Preview image')
-                        ->render(fn (Product $product) =>
-                        "<img src='$product->preview_image'
+                        ->render(fn(Product $product) => "<img src='$product->preview_image'
                           alt='preview_image'
                           class='mw-100 d-block img-fluid rounded-1 w-100'>")
                 ]),
@@ -106,10 +102,11 @@ class ProductViewScreen extends Screen
                     Sight::make('title'),
                     Sight::make('description'),
                     Sight::make('color')
-                        ->render(fn (Product $product) => "<div class='rounded' style='height:16px; width:16px; background:{$product->color}'></div>"),
+                        ->render(fn(Product $product) => "<div class='rounded' style='height:16px; width:16px; background:$product->color'></div>"),
                     Sight::make('price')
                         ->usingComponent(Currency::class, after: '₽'),
-
+                    Sight::make('rating')
+                        ->usingComponent(Number::class, decimals: 1),
                     Sight::make('tags')->render(
                         function (Product $product) {
                             return view('components.chip', [
@@ -125,7 +122,7 @@ class ProductViewScreen extends Screen
                     Sight::make('category_id', 'Category')->render(function (Product $product) {
                         return $product->category->title;
                     }),
-                    Sight::make('is_published', "Publised")->usingComponent(Boolean::class),
+                    Sight::make('is_published', "Published")->usingComponent(Boolean::class),
                     Sight::make('created_at', "Date of creation")->usingComponent(DateTimeSplit::class),
                     Sight::make('updated_at', "Update date")->usingComponent(DateTimeSplit::class),
                 ]),
@@ -135,29 +132,10 @@ class ProductViewScreen extends Screen
     }
 
     /**
+     * @param Product $product
      * @return RedirectResponse
      */
-    public function save(Product $product, Request $request)
-    {
-        try {
-            DB::beginTransaction();
-            $product->fill($request->collect('product')->except(['tags'])->toArray())->save();
-            $product->tags()->sync($request->input('product.tags'));
-            Toast::info(__('Product was saved.'));
-            Db::commit();
-            return redirect()->route('platform.products');
-        } catch (Exception $exeption) {
-            DB::rollBack();
-            abort(500);
-        }
-    }
-
-    /**
-     * @throws Exception
-     *
-     * @return RedirectResponse
-     */
-    public function remove(Product $product)
+    public function remove(Product $product): RedirectResponse
     {
         $product->delete();
 
