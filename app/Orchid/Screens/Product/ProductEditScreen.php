@@ -7,14 +7,12 @@ namespace App\Orchid\Screens\Product;
 use App\Models\Product;
 use App\Orchid\Layouts\Product\ProductCropperLayout;
 use App\Orchid\Layouts\Product\ProductEditLayout;
-use Exception;
+use App\Orchid\Service\ProductService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
-use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
 
@@ -22,6 +20,7 @@ class ProductEditScreen extends Screen
 {
     /**
      * @var Product
+     * @noinspection PhpMissingFieldTypeInspection
      */
     public $product;
 
@@ -96,29 +95,26 @@ class ProductEditScreen extends Screen
     }
 
     /**
+     * @param Product $product
+     * @param Request $request
+     * @param ProductService $productService
      * @return RedirectResponse
+     * @throws \Throwable
      */
-    public function save(Product $product, Request $request)
+    public function save(Product $product, Request $request, ProductService $productService): RedirectResponse
     {
-        try {
-            DB::beginTransaction();
-            $product->fill($request->collect('product')->except(['tags'])->toArray())->save();
-            $product->tags()->sync($request->input('product.tags'));
-            Toast::info(__('Product was saved.'));
-            Db::commit();
-            return redirect()->route('platform.products');
-        } catch (Exception $exeption) {
-            DB::rollBack();
-            abort(500);
-        }
+        $productService->save($product, $request);
+
+        Toast::info(__('Product was saved'));
+
+        return redirect()->route('platform.products.view', $product);
     }
 
     /**
-     * @throws Exception
-     *
+     * @param Product $product
      * @return RedirectResponse
      */
-    public function remove(Product $product)
+    public function remove(Product $product): RedirectResponse
     {
         $product->delete();
 
