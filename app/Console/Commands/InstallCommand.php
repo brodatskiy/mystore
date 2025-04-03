@@ -7,11 +7,11 @@ use Illuminate\Console\Command;
 class InstallCommand extends Command
 {
 
-    protected $signature = 'my-store:install';
+    protected $signature = 'app:install';
 
     protected $description = 'Installation';
 
-    public function handle()
+    public function handle(): int
     {
         $this->call('storage:link');
         $this->call('orchid:admin', ['name' => 'admin', 'email' => 'admin@admin.com', 'password' => 'password']);

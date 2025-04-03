@@ -8,7 +8,6 @@ use Orchid\Platform\Dashboard;
 use Orchid\Platform\ItemPermission;
 use Orchid\Platform\OrchidServiceProvider;
 use Orchid\Screen\Actions\Menu;
-use Orchid\Support\Color;
 
 class PlatformProvider extends OrchidServiceProvider
 {
@@ -34,6 +33,12 @@ class PlatformProvider extends OrchidServiceProvider
     public function menu(): array
     {
         return [
+            Menu::make(__('Store page'))
+                ->icon('bs.cart')
+                ->class('nav-link d-flex align-items-center collapsed icon-link link-info')
+                ->route('/')
+                ->permission('platform.users'),
+
             Menu::make(__('Users'))
                 ->icon('bs.people')
                 ->route('platform.users')
