@@ -54,7 +54,7 @@ const overlayMenuItems = ref([
         label: () => t('Admin panel'),
         icon: 'pi pi-objects-column',
         command: () => {
-            router.get(route('platform.index'))
+            location.href = route("platform.index")
         },
     },
     {
