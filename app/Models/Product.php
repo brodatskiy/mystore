@@ -84,7 +84,7 @@ class Product extends Model
     }
 
     //Orchid
-    protected $allowedSorts = [
+    protected array $allowedSorts = [
         'id',
         'title',
         'price',
@@ -93,7 +93,7 @@ class Product extends Model
         'created_at',
     ];
 
-    protected $allowedFilters = [
+    protected array $allowedFilters = [
         'title' => Like::class,
     ];
 }
