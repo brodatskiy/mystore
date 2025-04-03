@@ -1,6 +1,7 @@
 <script setup>
 import {Head, router} from "@inertiajs/vue3";
 import ShopLayout from "@/Layouts/ShopLayout.vue";
+import ButtonPrimary from "@/Components/Buttons/ButtonPrimary.vue";
 
 const props = defineProps(["product"]);
 
@@ -41,12 +42,12 @@ function toggleWish(product) {
                         </div>
                     </div>
                     <div class="space-x-4">
-                        <Button
+                        <ButtonPrimary
                             class=" w-50"
                             @click="add(product)"
                         >
                             Add to cart
-                        </Button>
+                        </ButtonPrimary>
                         <Button severity="secondary" v-if="$page.props.auth.user" @click.prevent="toggleWish(product)">
                             <i v-if="product.wished" class="pi pi-heart-fill" style="color: red"></i>
                             <i v-else class="pi pi-heart" style="color: red"></i>
