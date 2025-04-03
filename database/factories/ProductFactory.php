@@ -41,7 +41,7 @@ class ProductFactory extends Factory
             'category_id' => Category::all()->random()->id,
             'sticker_id' => Sticker::all()->random()->id,
             'price' => fake()->numberBetween(100, 1000),
-            'rating' => fake()->randomFloat(1,0, 10),
+            'rating' => fake()->randomFloat(1,0, 5),
             'is_published' => 1
         ];
     }
