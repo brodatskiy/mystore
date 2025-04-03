@@ -18,7 +18,7 @@ use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $title
@@ -27,6 +27,7 @@ use Spatie\Sluggable\SlugOptions;
  * @property string $preview_image
  * @property string $color
  * @property int $price
+ * @property bool $wished
  * @property float $rating
  * @property bool $is_published
  * @property int $category_id

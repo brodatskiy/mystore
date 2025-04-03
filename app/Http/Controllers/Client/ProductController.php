@@ -12,6 +12,14 @@ class ProductController extends Controller
 {
     public function show(Product $product): Response
     {
+        if (auth()->check()) {
+            $wished = (bool)$product->wishedBy()->wherePivot('user_id', auth()->user()->id)->first();
+        } else {
+            $wished = false;
+        }
+
+        $product->wished = $wished;
+
         return Inertia::render('Client/Product/Index', [
             'product' => new ProductResource($product),
         ]);

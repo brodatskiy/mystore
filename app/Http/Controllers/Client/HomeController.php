@@ -8,11 +8,15 @@ use App\Http\Requests\Product\FilterRequest;
 use App\Http\Resources\Product\ProductCardResource;
 use App\Models\Product;
 use App\Models\Tag;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Inertia\Inertia;
 
 class HomeController extends Controller
 {
-    public function __invoke(FilterRequest $request)
+    /**
+     * @throws BindingResolutionException
+     */
+    public function __invoke(FilterRequest $request): \Inertia\Response
     {
         $data = $request->validated();
 
@@ -27,6 +31,16 @@ class HomeController extends Controller
         $tags = Tag::all();
         $minPrice = Product::orderBy('price', 'ASC')->first()->price ?? 0;
         $maxPrice = Product::orderBy('price', 'DESC')->first()->price ?? 1000;
+
+        foreach ($products as $product) {
+            if (auth()->check()) {
+                $wished = (bool)$product->wishedBy()->wherePivot('user_id', auth()->user()->id)->first();
+            } else {
+                $wished = false;
+            }
+
+            $product->wished = $wished;
+        }
 
         return Inertia::render('Client/Home/Index', [
             'sort' => $request->sort ?? '',
