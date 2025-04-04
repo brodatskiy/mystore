@@ -1,18 +1,21 @@
 <script setup>
-import { ref, computed } from "vue";
+import {computed, ref} from "vue";
 
 import Select from 'primevue/select';
 
-import { useFilterStore } from "@/Store/useFilterStore";
+import {useFilterStore} from "@/Store/useFilterStore";
+import {useI18n} from "vue-i18n";
 
+const {t} = useI18n()
 const filterStore = useFilterStore();
 
 const emits = defineEmits(["change"]);
 
 const sortOptions = ref([
-    { title: "Rating", value: "rating" },
-    { title: "Price ascending", value: "price" },
-    { title: "Price descending", value: "-price" },
+    {title: computed(() => t('Popularity')), value: "popularity"},
+    {title: computed(() => t('Rating')), value: "rating"},
+    {title: computed(() => t('Price ascending')), value: "price"},
+    {title: computed(() => t('Price descending')), value: "-price"},
 ]);
 
 const sort = computed(() => {
@@ -27,7 +30,6 @@ const sort = computed(() => {
             :options="sortOptions"
             optionValue="value"
             optionLabel="title"
-            placeholder="Sort by"
             @update:modelValue="emits('change')"
         />
     </div>

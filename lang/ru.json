@@ -12,5 +12,9 @@
     "Order": "Заказать",
     "Apply": "Применить",
     "Price": "Цена",
-    "Filters": "Фильтры"
+    "Filters": "Фильтры",
+    "Popularity": "Популярные",
+    "Rating": "С высоким рейтингом",
+    "Price ascending": "Дешевле",
+    "Price descending": "Дороже"
 }

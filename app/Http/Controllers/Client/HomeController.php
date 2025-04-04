@@ -43,7 +43,7 @@ class HomeController extends Controller
         }
 
         return Inertia::render('Client/Home/Index', [
-            'sort' => $request->sort ?? '',
+            'sort' => $request->sort ?? 'popularity',
             'search' => $request->search ?? '',
             'products' => ProductCardResource::collection($products),
             'tags' => $tags,

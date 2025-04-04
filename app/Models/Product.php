@@ -132,9 +132,10 @@ class Product extends Model
                 'price' => $query->orderBy('price', 'ASC'),
                 '-price' => $query->orderBy('price', 'DESC'),
                 'rating' => $query->orderBy('rating', 'DESC'),
+                'popularity' => $query->orderBy('orders_quantity', 'DESC'),
             };
         }, function (Builder $query) {
-            $query->orderBy('price', 'ASC');
+            $query->orderBy('orders_quantity', 'DESC');
         });
     }
 

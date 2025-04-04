@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('preview_image');
             $table->string('color');
             $table->unsignedInteger('price');
+            $table->unsignedInteger('orders_quantity')->default(0);
             $table->float('rating', precision: 1)->default(0);
             $table->boolean('is_published')->default(true);
 
