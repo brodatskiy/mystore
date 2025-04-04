@@ -10,6 +10,7 @@ const filterStore = useFilterStore();
 const emits = defineEmits(["change"]);
 
 const sortOptions = ref([
+    { title: "Rating", value: "rating" },
     { title: "Price ascending", value: "price" },
     { title: "Price descending", value: "-price" },
 ]);

@@ -128,16 +128,14 @@ class Product extends Model
         $sortBy = request('sort');
 
         $query->when($sortBy, function (Builder $query, $sortBy) {
-            if ($sortBy == 'price') {
-                $query->orderBy('price', 'ASC');
-            } elseif ($sortBy == '-price') {
-                $query->orderBy('price', 'DESC');
-            }
+            match ($sortBy) {
+                'price' => $query->orderBy('price', 'ASC'),
+                '-price' => $query->orderBy('price', 'DESC'),
+                'rating' => $query->orderBy('rating', 'DESC'),
+            };
         }, function (Builder $query) {
             $query->orderBy('price', 'ASC');
-        }
-
-        );
+        });
     }
 
     //Orchid
