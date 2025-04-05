@@ -12,13 +12,8 @@ class OrderController extends Controller
     {
         $user = auth()->user();
         $orders = $user->order()->get();
-
-        foreach ($orders as $order) {
-            dd($order->products);
-        }
-
         $orders = OrderResource::collection($orders)->resolve();
-        dd($orders);
+
         return Inertia::render('Client/Order/Index', [
             'orders' => $orders,
         ]);
