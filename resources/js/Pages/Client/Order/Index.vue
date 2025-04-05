@@ -8,7 +8,7 @@ const props = defineProps({
 });
 </script>
 <template>
-    <Head title="Orders" />
+    <Head title="Orders"/>
     <ShopLayout>
         <template #header>
             {{ $t("Orders") }}

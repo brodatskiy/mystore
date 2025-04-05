@@ -14,6 +14,7 @@ class OrderController extends Controller
         $orders = $user->order()->get();
         $orders = OrderResource::collection($orders)->resolve();
 
+//dd($orders);
         return Inertia::render('Client/Order/Index', [
             'orders' => $orders,
         ]);
