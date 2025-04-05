@@ -14,7 +14,7 @@ function toggleWish(product) {
 }
 </script>
 <template>
-    <Link :href="route('product.show', product)">
+    <Link :href="route('product.show', product) ">
         <div
             class="max-w-72 min-w-52 cursor-pointer rounded-lg bg-surface-100 dark:bg-surface-800 p-2 shadow duration-150 hover:scale-105 hover:shadow-md">
             <div class="relative">
