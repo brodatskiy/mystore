@@ -111,13 +111,6 @@ class Product extends Model
         return $this->hasMany(CartItem::class);
     }
 
-    public function getSlugOptions(): SlugOptions
-    {
-        return SlugOptions::create()
-            ->generateSlugsFrom('title')
-            ->saveSlugsTo('slug');
-    }
-
     public function wishedBy(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'wish', 'product_id', 'user_id')->withTimestamps();
@@ -137,6 +130,13 @@ class Product extends Model
         }, function (Builder $query) {
             $query->orderBy('orders_quantity', 'DESC');
         });
+    }
+
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('title')
+            ->saveSlugsTo('slug');
     }
 
     //Orchid
