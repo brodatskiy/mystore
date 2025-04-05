@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -36,20 +37,15 @@ class Order extends Model
 
     protected $table = 'orders';
     protected $guarded = [];
-    protected $with  = ['products'];
+    protected $with = ['products'];
 
     public function user(): BelongsTo
     {
-        return  $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
-    public function orderItems(): HasMany
+    public function products(): BelongsToMany
     {
-        return $this->hasMany(OrderItem::class);
-    }
-
-    public function products(): HasMany
-    {
-        return $this->hasMany(Product::class);
+        return $this->belongsToMany(Product::class, 'order_items')->withPivot(['quantity', 'price']);
     }
 }
