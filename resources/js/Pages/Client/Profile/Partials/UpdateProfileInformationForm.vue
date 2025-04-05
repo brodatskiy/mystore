@@ -1,5 +1,5 @@
 <script setup>
-import {useForm, usePage} from "@inertiajs/vue3";
+import {useForm, Link, usePage} from "@inertiajs/vue3";
 
 import InputError from "@/Components/InputError.vue";
 
