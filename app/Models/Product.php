@@ -101,11 +101,6 @@ class Product extends Model
         return $this->belongsToMany(Tag::class, 'product_tag', 'product_id', 'tag_id');
     }
 
-    public function images()
-    {
-        return $this->morphMany(Image::class, 'imageable');
-    }
-
     public function cartItems(): HasMany
     {
         return $this->hasMany(CartItem::class);
