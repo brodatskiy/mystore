@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources\Order;
 
-use App\Http\Resources\Product\ProductResource;
+use App\Http\Resources\Product\ProductOrderResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -19,7 +19,7 @@ class OrderResource extends JsonResource
             "id" => $this->id,
             "total" => $this->total,
             "status" => $this->status,
-            'products' => ProductResource::collection($this->products)->resolve(),
+            'products' => ProductOrderResource::collection(($this->products))->resolve(),
         ];
     }
 }
