@@ -3,9 +3,8 @@
 namespace App\Http\Resources\Product;
 
 use App\Http\Resources\Category\CategoryResource;
-use App\Http\Resources\Tag\TagResource;
 use App\Http\Resources\Sticker\StickerResource;
-use App\Models\Product;
+use App\Http\Resources\Tag\TagResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
