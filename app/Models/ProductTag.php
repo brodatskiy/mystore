@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Orchid\Screen\AsSource;
 
 /**
- * 
+ *
  *
  * @property int $product_id
  * @property int $tag_id
@@ -20,7 +20,6 @@ use Orchid\Screen\AsSource;
  */
 class ProductTag extends Model
 {
-    use HasFactory;
     use AsSource;
 
     protected $table = 'product_tag';

@@ -3,9 +3,8 @@
 namespace App\Http\Resources\Product;
 
 use App\Http\Resources\Category\CategoryResource;
-use App\Http\Resources\Tag\TagResource;
 use App\Http\Resources\Sticker\StickerResource;
-use App\Models\Product;
+use App\Http\Resources\Tag\TagResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -22,7 +21,7 @@ class ProductResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'image' => $this->preview_image,
-            'wished' => $this->wished,
+            'wished' => $this->when($this->wishedBy()->wherePivot('user_id', auth()->user()?->id)->first(), 'true'),
             'color' => $this->color,
             'price' => $this->price,
             'rating' => $this->rating,

@@ -20,6 +20,7 @@ const props = defineProps({
           :disabled="link.active"
           :href="link.url"
           as="button"
+          preserve-scroll
           class="px-4 py-3 cursor-pointer text-sm rounded-md mr-2 select-none text-center align-middle transition-all"
           v-html="link.label"
       />

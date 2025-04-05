@@ -101,21 +101,9 @@ class Product extends Model
         return $this->belongsToMany(Tag::class, 'product_tag', 'product_id', 'tag_id');
     }
 
-    public function images()
-    {
-        return $this->morphMany(Image::class, 'imageable');
-    }
-
     public function cartItems(): HasMany
     {
         return $this->hasMany(CartItem::class);
-    }
-
-    public function getSlugOptions(): SlugOptions
-    {
-        return SlugOptions::create()
-            ->generateSlugsFrom('title')
-            ->saveSlugsTo('slug');
     }
 
     public function wishedBy(): BelongsToMany
@@ -128,16 +116,22 @@ class Product extends Model
         $sortBy = request('sort');
 
         $query->when($sortBy, function (Builder $query, $sortBy) {
-            if ($sortBy == 'price') {
-                $query->orderBy('price', 'ASC');
-            } elseif ($sortBy == '-price') {
-                $query->orderBy('price', 'DESC');
-            }
+            match ($sortBy) {
+                'price' => $query->orderBy('price', 'ASC'),
+                '-price' => $query->orderBy('price', 'DESC'),
+                'rating' => $query->orderBy('rating', 'DESC'),
+                'popularity' => $query->orderBy('orders_quantity', 'DESC'),
+            };
         }, function (Builder $query) {
-            $query->orderBy('price', 'ASC');
-        }
+            $query->orderBy('orders_quantity', 'DESC');
+        });
+    }
 
-        );
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('title')
+            ->saveSlugsTo('slug');
     }
 
     //Orchid

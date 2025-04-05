@@ -17,10 +17,20 @@ class WishController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $wishlist = $user->wishes()->get() ?? collect([]);
+        $products = $user->wishes()->get() ?? collect([]);
+
+        foreach ($products as $product) {
+            if (auth()->check()) {
+                $wished = (bool)$product->wishedBy()->wherePivot('user_id', auth()->user()->id)->first();
+            } else {
+                $wished = false;
+            }
+
+            $product->wished = $wished;
+        }
 
         return Inertia::render('Client/Wishlist/Index', [
-            'wishlist' => ProductResource::collection($wishlist),
+            'wishlist' => ProductResource::collection($products),
         ]);
     }
 

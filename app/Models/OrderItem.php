@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property int $order_id
@@ -36,6 +36,7 @@ class OrderItem extends Model
 
     protected $table = 'order_items';
     protected $guarded = [];
+    protected $with = ['product'];
 
     public function order(): BelongsTo
     {

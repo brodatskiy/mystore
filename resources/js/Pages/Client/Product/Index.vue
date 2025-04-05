@@ -33,8 +33,9 @@ function toggleWish(product) {
                 <div class="flex flex-col">
                     <div class="flex-1 space-y-4">
                         <div><p class="text-2xl font-bold ">{{ product.title }}</p></div>
-                        <div class="">
-                           <i class="pi pi-star-fill"></i> {{ product.rating }}
+                        <div class="flex align-">
+                            <i class="pi pi-star-fill mt-1"></i>
+                            <span class="ml-1"> {{ product.rating }}</span>
                         </div>
                         <p class=" text-xl font-semibold text-gray-600 dark:text-gray-100">${{ product.price }}</p>
                         <div class="">

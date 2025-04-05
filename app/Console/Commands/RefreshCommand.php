@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Storage;
 class RefreshCommand extends Command
 {
 
-    protected $signature = 'my-store:refresh';
+    protected $signature = 'app:db-refresh';
 
-    protected $description = 'Refresh';
+    protected $description = 'Refresh with seeds';
 
-    public function handle()
+    public function handle(): int
     {
         if (app()->isProduction()) {
             return self::FAILURE;

@@ -11,5 +11,9 @@
     "Order": "Order",
     "Apply": "Apply",
     "Price": "Price",
-    "Filters": "Filters"
+    "Filters": "Filters",
+    "Popularity": "Popularity",
+    "Rating": "Rating",
+    "Price ascending": "Price ascending",
+    "Price descending": "Price descending"
 }
