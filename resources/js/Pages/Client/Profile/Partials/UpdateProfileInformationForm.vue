@@ -59,14 +59,6 @@ const form = useForm({
                     <InputError :message="form.errors.email"/>
                 </div>
 
-                <!-- <div>
-                    <label for="avatar">Upload avatar</label>
-                    <FileUpload
-                        mode="basic"
-                        class="mt-1"
-                        @input="form.avatar = $event.target.files[0]"
-                    />
-                </div> -->
                 <div
                     v-if="props.mustVerifyEmail && user.email_verified_at === null"
                 >
@@ -91,7 +83,7 @@ const form = useForm({
                 </div>
 
                 <div class="flex items-center gap-4">
-                    <Button :disabled="form.processing">Save</Button>
+                    <Button type="submit" :disabled="form.processing">Save</Button>
 
                     <Transition
                         enter-from-class="opacity-0"
