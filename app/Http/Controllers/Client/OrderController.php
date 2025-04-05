@@ -12,11 +12,9 @@ class OrderController extends Controller
     {
         $user = auth()->user();
         $orders = $user->order()->get();
-        $orders = OrderResource::collection($orders)->resolve();
 
-//dd($orders);
         return Inertia::render('Client/Order/Index', [
-            'orders' => $orders,
+            'orders' => OrderResource::collection($orders),
         ]);
     }
 }
