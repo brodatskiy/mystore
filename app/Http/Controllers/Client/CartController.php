@@ -84,7 +84,7 @@ class CartController extends Controller
 
     public function destroy(Product $product): RedirectResponse
     {
-        Cart::destoyItem($product);
+        Cart::destroyItem($product);
 
         return back();
     }

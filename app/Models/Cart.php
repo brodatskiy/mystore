@@ -17,7 +17,7 @@ use Orchid\Screen\AsSource;
 
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $storage_id
@@ -43,7 +43,6 @@ use Orchid\Screen\AsSource;
  */
 class Cart extends Model
 {
-    use HasFactory;
     use AsSource, Filterable, Attachable;
 
     protected $table = 'carts';
@@ -118,7 +117,7 @@ class Cart extends Model
         return $total;
     }
 
-    public static function destoyItem(Product $product): void
+    public static function destroyItem(Product $product): void
     {
         $cartItem = self::get()->cartItems()->firstWhere('product_id', $product->id);
         $cartItem->delete();
