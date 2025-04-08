@@ -9,9 +9,9 @@ use App\Models\Order;
 use App\Models\Product;
 use Exception;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
+use Throwable;
 
 class CartController extends Controller
 {
@@ -24,6 +24,9 @@ class CartController extends Controller
         ]);
     }
 
+    /**
+     * @throws Throwable
+     */
     public function order()
     {
         if (auth()->check()) {
