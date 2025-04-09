@@ -7,6 +7,7 @@ use App\Http\Resources\CartItem\CartItemResource;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Product;
+use App\Service\CartService;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
@@ -15,12 +16,20 @@ use Throwable;
 
 class CartController extends Controller
 {
+    protected CartService $cartService;
+
+    public function __construct(CartService $cartService)
+    {
+        $this->cartService = $cartService;
+    }
+
     public function index()
     {
-        $cartItems = Cart::getItems();
+//        $this->cartService->mergeCarts();
+        $cartItems = $this->cartService->getItems();
         return Inertia::render('Client/Cart/Index', [
             'products' => CartItemResource::collection($cartItems),
-            'total' => Cart::getTotal()
+            'total' => $this->cartService->getTotal()
         ]);
     }
 
@@ -35,27 +44,27 @@ class CartController extends Controller
 
                 $order = Order::create([
                     'user_id' => auth()->id(),
-                    'total' => Cart::getTotal(),
+                    'total' => $this->cartService->getTotal(),
                     'status' => 'Unpaid'
                 ]);
 
-                $cartItems = Cart::getItems();
+                $cartItems = $this->cartService->getItems();
 
                 foreach ($cartItems as $cartItem) {
                     $order->orderItems()->create([
                         'order_id' => $order->id,
                         'product_id' => $cartItem->product_id,
                         'price' => $cartItem->price,
-                        'quantity' => $cartItem->quantity,
+                        'count' => $cartItem->count,
                     ]);
                 }
 
-                Cart::get()->delete();
-
+                $this->cartService->destroy();
                 Db::commit();
 
                 return back();
-            } catch (Exception $exeption) {
+            } catch (Exception $e) {
+                dd($e->getMessage());
                 Db::rollBack();
                 abort(500);
             }
@@ -66,28 +75,28 @@ class CartController extends Controller
 
     public function add(Product $product): RedirectResponse
     {
-        Cart::add($product);
+        $this->cartService->add($product);
 
         return back();
     }
 
     public function increase(Product $product)
     {
-        Cart::increase($product);
+        $this->cartService->increase($product);
 
         return back();
     }
 
     public function decrease(Product $product)
     {
-        Cart::decrease($product);
+        $this->cartService->decrease($product);
 
         return back();
     }
 
     public function destroy(Product $product): RedirectResponse
     {
-        Cart::destroyItem($product);
+        $this->cartService->destroyItem($product);
 
         return back();
     }

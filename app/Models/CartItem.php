@@ -2,67 +2,67 @@
 
 namespace App\Models;
 
-use Attribute;
-
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Carbon;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property int $cart_id
  * @property int $product_id
  * @property int $price
- * @property int $quantity
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Cart $cart
- * @property-read \App\Models\Product $product
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CartItem newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CartItem newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CartItem query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CartItem whereCartId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CartItem whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CartItem whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CartItem wherePrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CartItem whereProductId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CartItem whereQuantity($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CartItem whereUpdatedAt($value)
- * @mixin \Eloquent
+ * @property int $count
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Cart $cart
+ * @property-read Product $product
+ * @method static Builder<static>|CartItem newModelQuery()
+ * @method static Builder<static>|CartItem newQuery()
+ * @method static Builder<static>|CartItem query()
+ * @method static Builder<static>|CartItem whereCartId($value)
+ * @method static Builder<static>|CartItem whereCreatedAt($value)
+ * @method static Builder<static>|CartItem whereId($value)
+ * @method static Builder<static>|CartItem wherePrice($value)
+ * @method static Builder<static>|CartItem whereProductId($value)
+ * @method static Builder<static>|CartItem whereQuantity($value)
+ * @method static Builder<static>|CartItem whereUpdatedAt($value)
+ * @mixin Eloquent
  */
 class CartItem extends Model
 {
-    use HasFactory;
 
     protected $table = 'cart_items';
 
     protected $with = ['product'];
 
     protected $fillable = [
+        'id',
         'cart_id',
         'product_id',
         'price',
-        'quantity',
-        'string_option_values'
+        'count',
+        'created_at',
+        'updated_at'
     ];
 
-    public function total()
+    public function total(): string
     {
-        $total = $this->price * $this->quantity;
+        $total = $this->price * $this->count;
 
         return number_format($total, 2);
     }
 
     public function cart(): BelongsTo
     {
-        return  $this->belongsTo(Cart::class);
+        return $this->belongsTo(Cart::class);
     }
 
     public function product(): BelongsTo
     {
-        return  $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class);
     }
 }

@@ -71,7 +71,7 @@ function destroy(product) {
             <div class="flex items-center space-x-3">
                 <div class="">
                     <p class="text-center">
-                        ${{ product.price * product.quantity }}
+                        ${{ product.price * product.count }}
                     </p>
                 </div>
                 <div class="flex">
@@ -82,7 +82,7 @@ function destroy(product) {
                         -
                     </ButtonPrimary>
                     <button class="px-3 py-2">
-                        {{ product.quantity }}
+                        {{ product.count }}
                     </button>
                     <ButtonPrimary
                         class="rounded-r-md"
