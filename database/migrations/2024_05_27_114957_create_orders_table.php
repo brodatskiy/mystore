@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\OrderStatus;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -22,7 +23,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             $table->decimal('total', 8, 2);
-            $table->enum('status', ['Unpaid', 'Paid', 'Shipped', 'Completed', 'Canceled'])->default('Unpaid');
+            $table->enum('status', OrderStatus::values())->default(OrderStatus::Unpaid);
             $table->timestamps();
         });
     }

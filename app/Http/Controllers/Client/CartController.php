@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Enums\OrderStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CartItem\CartItemResource;
-use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Product;
 use App\Service\CartService;
@@ -25,7 +25,6 @@ class CartController extends Controller
 
     public function index()
     {
-//        $this->cartService->mergeCarts();
         $cartItems = $this->cartService->getItems();
         return Inertia::render('Client/Cart/Index', [
             'products' => CartItemResource::collection($cartItems),
@@ -45,7 +44,7 @@ class CartController extends Controller
                 $order = Order::create([
                     'user_id' => auth()->id(),
                     'total' => $this->cartService->getTotal(),
-                    'status' => 'Unpaid'
+                    'status' => OrderStatus::Unpaid
                 ]);
 
                 $cartItems = $this->cartService->getItems();
@@ -55,16 +54,17 @@ class CartController extends Controller
                         'order_id' => $order->id,
                         'product_id' => $cartItem->product_id,
                         'price' => $cartItem->price,
-                        'count' => $cartItem->count,
+                        'quantity' => $cartItem->count,
                     ]);
                 }
 
                 $this->cartService->destroy();
+                $order->updateStatus(OrderStatus::Paid);
+
                 Db::commit();
 
                 return back();
-            } catch (Exception $e) {
-                dd($e->getMessage());
+            } catch (Exception) {
                 Db::rollBack();
                 abort(500);
             }
