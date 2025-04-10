@@ -12,7 +12,7 @@ import en from "../../lang/en.json";
 
 // Plugins
 
-import {registerPlugins} from "@/plugins";
+import {registerPlugins} from "@/Plugins";
 
 const appName = import.meta.env.VITE_APP_NAME || "MyStore";
 
