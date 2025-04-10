@@ -45,6 +45,13 @@ class Order extends Model
     protected $guarded = [];
     protected $with = ['products'];
 
+    protected function casts(): array
+    {
+        return [
+            'status' => OrderStatus::class,
+        ];
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

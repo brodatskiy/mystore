@@ -1,11 +1,30 @@
 <script setup>
-import {Link} from "@inertiajs/vue3";
+import {Link, router} from "@inertiajs/vue3";
+import ButtonPrimary from "@/Components/Buttons/ButtonPrimary.vue";
+import {ref} from "vue";
 
 defineProps(["order"]);
+
+const processing = ref(false);
+
+function destroy(order) {
+    router.delete(route("order.destroy", {order: order}), {
+        onStart: () => {
+            processing.value = true;
+        },
+        onFinish: () => {
+            processing.value = false;
+        },
+    });
+}
+
+function pay(order) {
+    router.post(route('order.pay', {order: order}))
+}
 </script>
 <template>
-    <div class="mb-4 rounded-lg bg-surface-300 dark:bg-surface-600 p-4 shadow-md flex">
-        <div class="flex justify-between align-items-center w-full px-4">
+    <div class="mb-4 rounded-lg bg-surface-300 dark:bg-surface-600 p-4 shadow-md flex items-center">
+        <div class="flex justify-between w-3/4 px-4">
             <div class="flex">
                 <p class="font-bold">ID:</p>
                 <span class="ml-2 text-gray-600 dark:text-gray-300">
@@ -25,10 +44,15 @@ defineProps(["order"]);
                 </span>
             </div>
         </div>
+        <div  v-show="order.status === 'Unpaid'" class="flex justify-end w-1/4" >
+            <ButtonPrimary @click="pay(order)">Pay</ButtonPrimary>
+            <Button @click="destroy(order)" severity="danger" class="ml-4">Delete</Button>
+        </div>
     </div>
 
     <div class="mb-4 rounded-lg bg-surface-300 dark:bg-surface-600 p-4 shadow-md flex">
-        <Link v-for="product in order.products" :key="product.id" :href="route('product.show', product.id)" class="p-2 rounded-lg hover:bg-surface-500/20">
+        <Link v-for="product in order.products" :key="product.id" :href="route('product.show', product.id)"
+              class="p-2 rounded-lg hover:bg-surface-500/20">
             <div class="flex">
                 <p class="font-bold">ID:</p>
                 <span class="ml-2 text-gray-600 dark:text-gray-300">

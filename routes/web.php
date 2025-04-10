@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/locale', [SetLocaleController::class, 'locale'])->name('locale');
 
 //Shop
-Route::get('/',  HomeController::class)->name('/');
+Route::get('/', HomeController::class)->name('/');
 
 Route::get('/catalog', [CatalogController::class, 'index'])->name('catalog.index');
 Route::get('/catalog/navigation', [CatalogController::class, 'navigation'])->name('catalog.navigation.index');
@@ -30,10 +30,15 @@ Route::get('/sections/{section}', [SectionController::class, 'show'])->name('sec
 Route::resource('/product', ProductController::class)->only('show');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/orderlist', [OrderController::class, 'index'])->name('orderlist');
+
     Route::get('/wishlist', [WishController::class, 'index'])->name('wishlist');
     Route::post('/{product}/toggle', [WishController::class, 'toggle'])->name('wish.toggle');
 });
+Route::controller(OrderController::class)->group(function () {
+    Route::get('/orderlist', 'index')->name('orderlist');
+    Route::post('/{order}/pay', 'pay')->name('order.pay');
+    Route::delete('/{order}', 'destroy')->name('order.destroy');
+})->middleware(['auth']);
 
 //Cart
 Route::controller(CartController::class)

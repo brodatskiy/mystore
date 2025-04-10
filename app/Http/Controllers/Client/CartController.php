@@ -59,7 +59,6 @@ class CartController extends Controller
                 }
 
                 $this->cartService->destroy();
-                $order->updateStatus(OrderStatus::Paid);
 
                 Db::commit();
 
