@@ -11,6 +11,7 @@ import ApplicationLogo from "@/Components/Buttons/ApplicationLogo.vue";
 import SignUpButtonLink from "@/Components/Buttons/SignUpButtonLink.vue";
 import ButtonPrimary from "@/Components/Buttons/ButtonDD.vue";
 import ProductSearch from "@/Components/Filters/ProductSearch.vue";
+import Drawer from 'primevue/drawer';
 
 const {t} = useI18n()
 
