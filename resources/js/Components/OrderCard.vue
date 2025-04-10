@@ -1,7 +1,8 @@
 <script setup>
-import {Link, router} from "@inertiajs/vue3";
-import ButtonPrimary from "@/Components/Buttons/ButtonPrimary.vue";
 import {ref} from "vue";
+import {Link, router} from "@inertiajs/vue3";
+
+import ButtonPrimary from "@/Components/Buttons/ButtonPrimary.vue";
 
 defineProps(["order"]);
 
@@ -16,10 +17,21 @@ function destroy(order) {
             processing.value = false;
         },
     });
+
+    router.reload({only: ['order']})
 }
 
 function pay(order) {
-    router.post(route('order.pay', {order: order}))
+    router.post(route('order.pay', {order: order}), {}, {
+        onStart: () => {
+            processing.value = true;
+        },
+        onFinish: () => {
+            processing.value = false;
+        },
+    });
+
+    router.reload({only: ['order']})
 }
 </script>
 <template>
@@ -44,9 +56,17 @@ function pay(order) {
                 </span>
             </div>
         </div>
-        <div  v-show="order.status === 'Unpaid'" class="flex justify-end w-1/4" >
-            <ButtonPrimary @click="pay(order)">Pay</ButtonPrimary>
-            <Button @click="destroy(order)" severity="danger" class="ml-4">Delete</Button>
+        <div v-show="order.status === 'Unpaid'" class="flex justify-end w-1/4">
+            <ButtonPrimary
+                :class="{ 'opacity-50': processing }"
+                :disabled="processing"
+                @click="pay(order) ">Pay
+            </ButtonPrimary>
+            <Button
+                :class="{ 'opacity-50': processing }"
+                :disabled="processing"
+                @click="destroy(order)" severity="danger" class="ml-4">Delete
+            </Button>
         </div>
     </div>
 
