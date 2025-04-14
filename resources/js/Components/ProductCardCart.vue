@@ -1,7 +1,6 @@
 <script setup>
 import {ref} from "vue";
-import {router} from "@inertiajs/vue3";
-import {Link} from "@inertiajs/vue3";
+import {Link, router} from "@inertiajs/vue3";
 import Button from "primevue/button";
 import ButtonPrimary from "@/Components/Buttons/ButtonPrimary.vue";
 
@@ -10,7 +9,7 @@ defineProps(["product"]);
 const processing = ref(false);
 
 function increase(product) {
-    router.patch(route("cart.increase", {product: product}), {
+    router.patch(route("cart.increase", {product: product}), {}, {
         onStart: () => {
             processing.value = true;
         },
@@ -18,10 +17,12 @@ function increase(product) {
             processing.value = false;
         },
     });
+
+    router.reload({only: ['product']})
 }
 
 function decrease(product) {
-    router.patch(route("cart.decrease", {product: product}), {
+    router.patch(route("cart.decrease", {product: product}), {}, {
         onStart: () => {
             processing.value = true;
         },
@@ -29,7 +30,10 @@ function decrease(product) {
             processing.value = false;
         },
     });
+
+    router.reload({only: ['product']})
 }
+
 function destroy(product) {
     router.delete(route("cart.destroy", {product: product}), {
         onStart: () => {
@@ -39,6 +43,8 @@ function destroy(product) {
             processing.value = false;
         },
     });
+
+    router.reload({only: ['product']})
 }
 </script>
 <template>
@@ -63,7 +69,7 @@ function destroy(product) {
                     </p>
                 </div>
                 <div class="space-x-2">
-                    <Button @click="destroy(product)" severity="danger">
+                    <Button @click="destroy(product)" :class="{ 'opacity-50': processing }" severity="danger">
                         <i class="pi pi-trash"></i>
                     </Button>
                 </div>
@@ -77,6 +83,7 @@ function destroy(product) {
                 <div class="flex">
                     <ButtonPrimary
                         class="rounded-l-md"
+                        :class="{ 'opacity-50': processing }"
                         @click="decrease(product)"
                     >
                         -
@@ -86,6 +93,7 @@ function destroy(product) {
                     </button>
                     <ButtonPrimary
                         class="rounded-r-md"
+                        :class="{ 'opacity-50': processing }"
                         @click="increase(product)"
                     >
                         +

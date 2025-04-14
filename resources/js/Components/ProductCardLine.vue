@@ -1,13 +1,13 @@
 <script setup>
 import {ref} from "vue";
-import {router} from "@inertiajs/vue3";
-import {Link} from "@inertiajs/vue3";
+import {Link, router} from "@inertiajs/vue3";
 import Button from "primevue/button";
 import ButtonPrimary from "@/Components/Buttons/ButtonPrimary.vue";
 
 defineProps(["product"]);
 
-const processing = ref(false);
+const processingAddToWish = ref(false);
+const processingAddToCart = ref(false);
 
 function destroy(product) {
     router.delete(route("cart.destroy", {product: product}), {
@@ -20,12 +20,30 @@ function destroy(product) {
     });
 }
 
-function add(product) {
-    router.post(route('cart.add', {product: product}))
+function addToCart(product) {
+    router.post(route('cart.add', {product: product}), {}, {
+        preserveScroll: true,
+        onStart: () => {
+            processingAddToCart.value = true;
+        },
+        onFinish: () => {
+            processingAddToCart.value = false;
+        },
+    })
 }
 
 function toggleWish(product) {
-    router.post(route('wish.toggle', {product: product}))
+    router.post(route('wish.toggle', {product: product}), {}, {
+        preserveScroll: true,
+        onStart: () => {
+            processingAddToWish.value = true;
+        },
+        onFinish: () => {
+            processingAddToWish.value = false;
+        },
+    });
+
+    router.reload({only: ['product']})
 }
 </script>
 <template>
@@ -53,11 +71,13 @@ function toggleWish(product) {
             <div class="flex items-center space-x-3">
                 <ButtonPrimary
                     class="w-full"
-                    @click.prevent="add(product)"
+                    :class="{ 'opacity-50': processingAddToCart }"
+                    @click.prevent="addToCart(product)"
                 >
                     {{ $t("Add to cart") }}
                 </ButtonPrimary>
-                <Button severity="secondary" text v-if="$page.props.auth.user" @click.prevent="toggleWish(product)">
+                <Button severity="secondary" text v-if="$page.props.auth.user" @click.prevent="toggleWish(product)"
+                        :class="{ 'opacity-50': processingAddToWish }">
                     <i v-if="product.wished" class="pi pi-heart-fill" style="color: red"></i>
                     <i v-else class="pi pi-heart" style="color: red"></i>
                 </Button>
