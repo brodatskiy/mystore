@@ -4,7 +4,7 @@ import ShopLayout from "@/Layouts/ShopLayout.vue";
 import ProductCardLine from "@/Components/ProductCardLine.vue";
 
 const props = defineProps({
-    wishlist: Array,
+    wishes: Array,
 });
 </script>
 <template>
@@ -19,7 +19,7 @@ const props = defineProps({
                     class="mx-auto max-w-6xl grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4"
                 >
                     <ProductCardLine
-                        v-for="product in props.wishlist"
+                        v-for="product in props.wishes"
                         :key="product.id"
                         :product="product"
                     ></ProductCardLine>

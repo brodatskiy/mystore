@@ -21,36 +21,34 @@ Route::get('/catalog', [CatalogController::class, 'index'])->name('catalog.index
 Route::get('/catalog/navigation', [CatalogController::class, 'navigation'])->name('catalog.navigation.index');
 Route::get('/catalog/{section:slug}', [CatalogController::class, 'sectionIndex'])->name('catalog.section.index');
 Route::get('/catalog/{section:slug}/category/{category:slug}', [CatalogController::class, 'categoryIndex'])->name('catalog.section.category.index');
-
-Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
-
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::get('/sections', [SectionController::class, 'index'])->name('section.index');
 Route::get('/sections/{section}', [SectionController::class, 'show'])->name('section.show');
 
 Route::resource('/product', ProductController::class)->only('show');
 
-Route::middleware(['auth'])->group(function () {
-
-    Route::get('/wishlist', [WishController::class, 'index'])->name('wishlist');
-    Route::post('/{product}/toggle', [WishController::class, 'toggle'])->name('wish.toggle');
+//Orders
+Route::middleware([])->group(function () {
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::post('/{order}/pay', [OrderController::class, 'pay'])->name('orders.pay');
+    Route::delete('/{order}', [OrderController::class, 'destroy'])->name('orders.destroy');
 });
-Route::controller(OrderController::class)->group(function () {
-    Route::get('/orderlist', 'index')->name('orderlist');
-    Route::post('/{order}/pay', 'pay')->name('order.pay');
-    Route::delete('/{order}', 'destroy')->name('order.destroy');
-})->middleware(['auth']);
+
+//Wishes
+Route::middleware(['auth'])->group(function () {
+    Route::get('/wishes', [WishController::class, 'index'])->name('wishes.index');
+    Route::post('/wishes/{product}/toggle', [WishController::class, 'toggle'])->name('wishes.toggle');
+});
 
 //Cart
-Route::controller(CartController::class)
-    ->prefix('cart')
-    ->group(function () {
-        Route::get('/', 'index')->name('cart.index');
-        Route::post('/order', 'order')->name('cart.order');
-        Route::post('/{product}/add', 'add')->name('cart.add');
-        Route::patch('/{product}/increase', 'increase')->name('cart.increase');
-        Route::patch('/{product}/decrease', 'decrease')->name('cart.decrease');
-        Route::delete('/{product}', 'destroy')->name('cart.destroy');
-    });
+Route::middleware(['auth'])->group(function () {
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/order', [CartController::class, 'order'])->name('cart.order');
+    Route::post('/cart/{product}/add', [CartController::class, 'add'])->name('cart.add');
+    Route::patch('/cart/{product}/increase', [CartController::class, 'increase'])->name('cart.increase');
+    Route::patch('/cart/{product}/decrease', [CartController::class, 'decrease'])->name('cart.decrease');
+    Route::delete('/cart/{product}', [CartController::class, 'destroy'])->name('cart.destroy');
+});
 
 //Profile
 Route::middleware(['auth'])->group(function () {

@@ -3,21 +3,25 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Product\ProductCardResource;
 use App\Http\Resources\Product\ProductResource;
-use App\Http\Resources\Wish\WishResource;
 use App\Models\Product;
-use App\Models\Wish;
+use App\Service\CartService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class WishController extends Controller
 {
+    protected CartService $cartService;
+
+    public function __construct(CartService $cartService)
+    {
+        $this->cartService = $cartService;
+    }
+
     public function index()
     {
         $user = auth()->user();
-        $products = $user->wishes()->get() ?? collect([]);
+        $products = $user->wishes()->get() ?? collect();
 
         foreach ($products as $product) {
             if (auth()->check()) {
@@ -29,14 +33,13 @@ class WishController extends Controller
             $product->wished = $wished;
         }
 
-        return Inertia::render('Client/Wishlist/Index', [
-            'wishlist' => ProductResource::collection($products),
+        return Inertia::render('Client/Wishes/Index', [
+            'wishes' => ProductResource::collection($products),
         ]);
     }
 
     public function toggle(Product $product): RedirectResponse
     {
-
         $user = auth()->user();
         $user->wishes()->toggle([$product->id]);
 

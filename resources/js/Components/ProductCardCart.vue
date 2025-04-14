@@ -69,7 +69,8 @@ function destroy(product) {
                     </p>
                 </div>
                 <div class="space-x-2">
-                    <Button @click="destroy(product)" :class="{ 'opacity-50': processing }" severity="danger">
+                    <Button @click="destroy(product)" :class="{ 'opacity-50': processing }" :disabled="processing"
+                            severity="danger">
                         <i class="pi pi-trash"></i>
                     </Button>
                 </div>
@@ -84,6 +85,7 @@ function destroy(product) {
                     <ButtonPrimary
                         class="rounded-l-md"
                         :class="{ 'opacity-50': processing }"
+                        :disabled="processing"
                         @click="decrease(product)"
                     >
                         -
@@ -94,6 +96,7 @@ function destroy(product) {
                     <ButtonPrimary
                         class="rounded-r-md"
                         :class="{ 'opacity-50': processing }"
+                        :disabled="processing"
                         @click="increase(product)"
                     >
                         +

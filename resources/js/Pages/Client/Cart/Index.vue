@@ -1,24 +1,31 @@
 <script setup>
 import ShopLayout from "@/Layouts/ShopLayout.vue";
 import CartProductCard from "@/Components/ProductCardCart.vue";
-import { useCartStore } from "@/Store/useCartStore";
-import { router, Head } from "@inertiajs/vue3";
+import {Head, router} from "@inertiajs/vue3";
 import ButtonPrimary from "@/Components/Buttons/ButtonPrimary.vue";
-
-const cartStore = useCartStore();
+import {ref} from "vue";
 
 const props = defineProps({
     products: Object,
     total: Number,
 });
 
-// cartStore.products = props.products;
+const processing = ref(false);
+
 function order() {
-    router.post(route("cart.order"));
+    router.post(route("cart.order"), {}, {
+        preserveScroll: true,
+        onStart: () => {
+            processing.value = true;
+        },
+        onFinish: () => {
+            processing.value = false;
+        },
+    });
 }
 </script>
 <template>
-    <Head title="Cart" />
+    <Head title="Cart"/>
     <ShopLayout>
         <template #header>
             {{ $t("Cart") }}
@@ -44,8 +51,11 @@ function order() {
                         <p class="ml-1 text-lg font-bold">${{ props.total }}</p>
                     </div>
                 </div>
+
                 <ButtonPrimary
                     class="mt-6 w-full"
+                    :class="{ 'opacity-50': processing  }"
+                    :disabled="!!(props.products.length < 1 || processing)"
                     @click="order()"
                 >
                     {{ $t("Order") }}

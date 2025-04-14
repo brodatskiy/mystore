@@ -49,6 +49,10 @@ class CartController extends Controller
 
                 $cartItems = $this->cartService->getItems();
 
+                if ($cartItems->count() === 0) {
+                    throw new Exception('empty cart');
+                }
+
                 foreach ($cartItems as $cartItem) {
                     $order->orderItems()->create([
                         'order_id' => $order->id,
@@ -62,8 +66,8 @@ class CartController extends Controller
 
                 Db::commit();
 
-                return back();
-            } catch (Exception) {
+                return redirect()->route('orders.index');
+            } catch (Exception $exception) {
                 Db::rollBack();
                 abort(500);
             }

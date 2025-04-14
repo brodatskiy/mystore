@@ -45,7 +45,7 @@ const overlayMenuItems = ref([
         label: () => t('Orders'),
         icon: 'pi pi-shopping-bag',
         command: () => {
-            router.visit(route('orderlist'))
+            router.visit(route('orders.index'))
         },
     },
     {
@@ -121,7 +121,7 @@ onMounted(() => {
                         <ButtonLink :href="route('cart.index')">
                             <i class="pi pi-shopping-cart" style="font-size: 1.25rem"></i>
                         </ButtonLink>
-                        <ButtonLink :href="route('wishlist')">
+                        <ButtonLink :href="route('wishes.index')">
                             <i class="pi pi-heart" style="font-size: 1.25rem"></i>
                         </ButtonLink>
                     </div>
