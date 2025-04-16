@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.3.2",
+        "codex-team/hawk.laravel": "^0.0.1",
         "guzzlehttp/guzzle": "^7.2",
         "inertiajs/inertia-laravel": "2.0.1",
         "laravel/framework": "^11.44",
@@ -18,7 +19,6 @@
         "orchid/crud": "^4.2",
         "orchid/platform": "^14.22",
         "pusher/pusher-php-server": "^7.2",
-        "sentry/sentry-laravel": "^4.2",
         "spatie/laravel-sluggable": "^3.6",
         "tightenco/ziggy": "^2.0"
     },

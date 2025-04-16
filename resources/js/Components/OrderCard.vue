@@ -9,7 +9,8 @@ defineProps(["order"]);
 const processing = ref(false);
 
 function destroy(order) {
-    router.delete(route("order.destroy", {order: order}), {
+    router.delete(route("orders.destroy", {order: order}), {
+        preserveScroll: true,
         onStart: () => {
             processing.value = true;
         },
@@ -22,7 +23,8 @@ function destroy(order) {
 }
 
 function pay(order) {
-    router.post(route('order.pay', {order: order}), {}, {
+    router.post(route('orders.pay', {order: order}), {}, {
+        preserveScroll: true,
         onStart: () => {
             processing.value = true;
         },

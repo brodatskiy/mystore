@@ -17,7 +17,7 @@ use Orchid\Platform\Models\User as Authenticatable;
 use Orchid\Screen\AsSource;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name
@@ -83,29 +83,51 @@ class User extends Authenticatable
 {
     use AsSource, Chartable, Filterable, HasFactory, Notifiable, UserAccess;
 
+    /**
+     * @var string
+     */
     protected $table = 'users';
+
+    /**
+     * @var bool
+     */
     protected $guarded = false;
 
+    /**
+     * @return HasMany
+     */
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class, 'user_id');
     }
 
+    /**
+     * @return HasOne
+     */
     public function cart(): HasOne
     {
         return $this->hasOne(Product::class);
     }
 
+    /**
+     * @return HasMany
+     */
     public function order(): HasMany
     {
         return $this->hasMany(Order::class);
     }
 
+    /**
+     * @return BelongsToMany
+     */
     public function wishes(): BelongsToMany
     {
         return $this->belongsToMany(Product::class, 'wish', 'user_id', 'product_id')->withTimestamps();
     }
 
+    /**
+     * @var string[]
+     */
     protected $hidden = [
         'password',
         'remember_token',
@@ -114,19 +136,28 @@ class User extends Authenticatable
         'email_verified_at'
     ];
 
+    /**
+     * @var string[]
+     */
     protected $casts = [
-        'permissions'          => 'array',
-        'email_verified_at'    => 'datetime',
+        'permissions' => 'array',
+        'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * @var string[]
+     */
     protected $allowedFilters = [
-        'id'         => Where::class,
-        'name'       => Like::class,
-        'email'      => Like::class,
+        'id' => Where::class,
+        'name' => Like::class,
+        'email' => Like::class,
         'updated_at' => WhereDateStartEnd::class,
         'created_at' => WhereDateStartEnd::class,
     ];
 
+    /**
+     * @var string[]
+     */
     protected $allowedSorts = [
         'id',
         'name',
