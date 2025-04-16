@@ -9,7 +9,6 @@
     "license": "MIT",
     "require": {
         "php": "^8.3.2",
-        "codex-team/hawk.laravel": "^0.0.1",
         "guzzlehttp/guzzle": "^7.2",
         "inertiajs/inertia-laravel": "2.0.1",
         "laravel/framework": "^11.44",

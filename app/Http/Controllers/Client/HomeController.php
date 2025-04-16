@@ -10,13 +10,14 @@ use App\Models\Product;
 use App\Models\Tag;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class HomeController extends Controller
 {
     /**
      * @throws BindingResolutionException
      */
-    public function __invoke(FilterRequest $request): \Inertia\Response
+    public function __invoke(FilterRequest $request): Response
     {
         $data = $request->validated();
 

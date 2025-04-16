@@ -2,9 +2,7 @@
 
 namespace App\Providers;
 
-use App\Http\Kernel;
 use Carbon\CarbonInterval;
-use Illuminate\Database\Connection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -30,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
         Model::shouldBeStrict(!app()->isProduction());
 
         if (app()->isProduction()) {
-            DB::listen(function ($query) {
+            DB::listen(function (QueryExecuted $query) {
                 if ($query->time > 100) {
                     logger()
                         ->channel('telegram')
@@ -38,10 +36,10 @@ class AppServiceProvider extends ServiceProvider
                 }
             });
 
-            app(Kernel::class)->whenRequestLifecycleIsLongerThan(
-                CarbonInterval::seconds(4),
-                function () {
-                    logger()->channel('telegram')->debug('whenRequestLifecycleIsLongerThan:' . request()->url());
+            DB::whenQueryingForLongerThan(
+                CarbonInterval::seconds(5),
+                function (QueryExecuted $query) {
+                    logger()->channel('telegram')->debug('whenRequestLifecycleIsLongerThan:' . $query->sql, $query->bindings);
                 }
             );
         }
