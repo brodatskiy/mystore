@@ -18,6 +18,7 @@
         "orchid/crud": "^4.2",
         "orchid/platform": "^14.22",
         "pusher/pusher-php-server": "^7.2",
+        "sentry/sentry-laravel": "^4.13",
         "spatie/laravel-sluggable": "^3.6",
         "tightenco/ziggy": "^2.0"
     },
