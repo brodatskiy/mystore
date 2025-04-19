@@ -28,7 +28,7 @@ Route::get('/sections/{section}', [SectionController::class, 'show'])->name('sec
 Route::resource('/product', ProductController::class)->only('show');
 
 //Orders
-Route::middleware([])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::post('/{order}/pay', [OrderController::class, 'pay'])->name('orders.pay');
     Route::delete('/{order}', [OrderController::class, 'destroy'])->name('orders.destroy');
@@ -41,9 +41,9 @@ Route::middleware(['auth'])->group(function () {
 });
 
 //Cart
-Route::middleware(['auth'])->group(function () {
+Route::middleware([])->group(function () {
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-    Route::post('/cart/order', [CartController::class, 'order'])->name('cart.order');
+    Route::post('/cart/order', [CartController::class, 'order'])->name('cart.order')->middleware('auth');
     Route::post('/cart/{product}/add', [CartController::class, 'add'])->name('cart.add');
     Route::patch('/cart/{product}/increase', [CartController::class, 'increase'])->name('cart.increase');
     Route::patch('/cart/{product}/decrease', [CartController::class, 'decrease'])->name('cart.decrease');
