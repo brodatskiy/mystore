@@ -15,7 +15,7 @@ class OrderController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $orders = $user->order()->orderByDesc('updated_at')->get();
+        $orders = $user->orders()->orderByDesc('updated_at')->get();
 
         return Inertia::render('Client/Order/Index', [
             'orders' => OrderResource::collection($orders),
