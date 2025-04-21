@@ -24,13 +24,13 @@ class FilterRequest extends FormRequest
     {
         return [
             'search' => 'string',
-            'price' => 'array',
-            'category_id' => 'integer|exists:categories,id',
-            'tags' => 'array',
+            'minPrice' => 'integer',
+            'maxPrice' => 'integer',
+            'sort' => 'string',
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [];
     }

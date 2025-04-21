@@ -23,7 +23,8 @@ const props = defineProps({
     categories: Array,
     tags: Array,
     search: String,
-    price: Object,
+    minPrice: Number,
+    maxPrice: Number,
     sort: String,
 });
 
@@ -31,7 +32,8 @@ filterStore.setStore(props);
 
 const filters = ref({
     search: filterStore.search,
-    price: filterStore.price,
+    minPrice: filterStore.minPrice,
+    maxPrice:  filterStore.maxPrice,
     sort: filterStore.sort,
 });
 

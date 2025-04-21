@@ -24,6 +24,7 @@ function addToCart(product) {
 function toggleWish(product) {
     router.post(route('wishes.toggle', {product: product}), {}, {
         preserveScroll: true,
+        async: true,
         onStart: () => {
             processingAddToWish.value = true;
         },
@@ -31,8 +32,6 @@ function toggleWish(product) {
             processingAddToWish.value = false;
         },
     });
-
-    router.reload({only: ['product']})
 }
 </script>
 <template>

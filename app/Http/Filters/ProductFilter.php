@@ -9,15 +9,15 @@ use Illuminate\Database\Eloquent\Builder;
 class ProductFilter extends AbstractFilter
 {
     public const string SEARCH = 'search';
-    public const string CATEGORY_ID = 'category_id';
-    public const string PRICE = 'price';
+    public const string MIN_PRICE = 'minPrice';
+    public const string MAX_PRICE = 'maxPrice';
 
     protected function getCallbacks(): array
     {
         return [
             self::SEARCH => [$this, 'search'],
-            self::CATEGORY_ID => [$this, 'categoryId'],
-            self::PRICE => [$this, 'price'],
+            self::MIN_PRICE => [$this, 'minPrice'],
+            self::MAX_PRICE => [$this, 'maxPrice'],
         ];
     }
 
@@ -26,19 +26,13 @@ class ProductFilter extends AbstractFilter
         $builder->where('products.' . 'title', 'like', "%{$value}%");
     }
 
-    public function categoryId(Builder $builder, $value): void
+    public function minPrice(Builder $builder, $value): void
     {
-
-        $builder->where('category_id', $value);
+        $builder->where('price', '>', $value);
     }
 
-    public function price(Builder $builder, $value): void
+    public function maxPrice(Builder $builder, $value): void
     {
-        $builder->whereBetween('price', [$value[0], $value[1]]);
-    }
-
-    public function tags(Builder $builder, $value)
-    {
-        //
+        $builder->where('price', '<', $value);
     }
 }

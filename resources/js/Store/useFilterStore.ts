@@ -1,19 +1,21 @@
-import { defineStore } from "pinia";
-import { ref, computed } from "vue";
-import { router } from "@inertiajs/vue3";
+import {defineStore} from "pinia";
+import {computed, ref} from "vue";
+import {router} from "@inertiajs/vue3";
 import pickBy from "lodash/pickBy";
 
 export const useFilterStore = defineStore("Filter", () => {
-    const price = ref([]);
+    const minPrice = ref();
+    const maxPrice = ref();
     const sort = ref();
     const search = ref();
 
     const filters = computed(() => {
-        return { price: price.value, sort: sort.value, search: search.value };
+        return {minPrice: minPrice.value, maxPrice: maxPrice.value, sort: sort.value, search: search.value};
     });
 
     function setStore(props) {
-        price.value = props.price;
+        minPrice.value = props.minPrice;
+        maxPrice.value = props.maxPrice;
         sort.value = props.sort;
         search.value = props.search;
     }
@@ -25,5 +27,8 @@ export const useFilterStore = defineStore("Filter", () => {
         });
     }
 
-    return { sort, price, search, filters, applyFilters, setStore };
+    return {
+        sort, minPrice,
+        maxPrice, search, filters, applyFilters, setStore
+    };
 });

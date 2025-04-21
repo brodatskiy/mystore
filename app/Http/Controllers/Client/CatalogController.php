@@ -6,14 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Filters\ProductFilter;
 use App\Http\Requests\Product\FilterRequest;
 use App\Http\Resources\Product\ProductCardResource;
-use App\Http\Resources\Section\SectionResource;
 use App\Http\Resources\Section\SectionWithCategoriesResource;
-use App\Http\Resources\Section\SectionWithParentCategoriesResource;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Section;
 use App\Models\Tag;
-use Illuminate\Http\Client\Request;
 use Inertia\Inertia;
 
 class CatalogController extends Controller
@@ -21,7 +18,6 @@ class CatalogController extends Controller
     public function index(FilterRequest $request)
     {
         $data = $request->validated();
-
         $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($data)]);
 
         $products = Product::query()
@@ -39,7 +35,8 @@ class CatalogController extends Controller
             'search' => $request->search ?? '',
             'products' => ProductCardResource::collection($products),
             'tags' => $tags,
-            'price' => $request->price ?? [$minPrice, $maxPrice],
+            'minPrice' => $request->minPrice ? (int)$request->minPrice : $minPrice,
+            'maxPrice' => $request->maxPrice ? (int)$request->maxPrice : $maxPrice,
         ]);
     }
 
@@ -66,7 +63,8 @@ class CatalogController extends Controller
             'search' => $request->search ?? '',
             'products' => ProductCardResource::collection($products),
             'tags' => $tags,
-            'price' => $request->price ?? [$minPrice, $maxPrice],
+            'minPrice' => $request->minPrice ?? $minPrice,
+            'maxPrice' => $request->maxPrice ?? $maxPrice,
         ]);
     }
 
@@ -91,7 +89,8 @@ class CatalogController extends Controller
             'search' => $request->search ?? '',
             'products' => ProductCardResource::collection($products),
             'tags' => $tags,
-            'price' => $request->price ?? [$minPrice, $maxPrice],
+            'minPrice' => $request->minPrice ?? $minPrice,
+            'maxPrice' => $request->maxPrice ?? $maxPrice,
         ]);
     }
 
