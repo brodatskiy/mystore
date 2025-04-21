@@ -38,12 +38,6 @@ class ProductEditLayout extends Rows
                 ->title('Description')
                 ->placeholder('Description'),
 
-            Input::make('product.color')
-                ->required()
-                ->type('color')
-                ->title('Color')
-                ->horizontal(),
-
             Input::make('product.price')
                 ->required()
                 ->type('number')

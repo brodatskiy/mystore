@@ -39,9 +39,6 @@ class ProductListLayout extends Table
                 ->sort(),
             TD::make('title')->width(120)->sort()->filter(Input::make()),
             TD::make('description')->width(200)->defaultHidden(),
-            TD::make('color')
-                ->render(fn(Product $product) => "<div class='rounded' style='height:16px; width:16px; background:$product->color'></div>")
-                ->align(TD::ALIGN_CENTER),
             TD::make('price')
                 ->usingComponent(Currency::class, after: '₽')
                 ->align(TD::ALIGN_CENTER)
