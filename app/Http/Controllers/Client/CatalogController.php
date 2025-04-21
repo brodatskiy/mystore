@@ -34,8 +34,8 @@ class CatalogController extends Controller
         $minPrice = Product::orderBy('price', 'ASC')->first()->price ?? 0;
         $maxPrice = Product::orderBy('price', 'DESC')->first()->price ?? 1000;
 
-        return Inertia::render('Client/Home/Index', [
-            'sort' => $request->sort ?? '',
+        return Inertia::render('Client/Catalog/Index', [
+            'sort' => $request->sort ?? 'popularity',
             'search' => $request->search ?? '',
             'products' => ProductCardResource::collection($products),
             'tags' => $tags,
@@ -57,7 +57,6 @@ class CatalogController extends Controller
             ->paginate(8)
             ->withQueryString();
 
-        // $colors = Color::all();
         $tags = Tag::all();
         $minPrice = Product::orderBy('price', 'ASC')->first()->price;
         $maxPrice = Product::orderBy('price', 'DESC')->first()->price;
@@ -83,7 +82,6 @@ class CatalogController extends Controller
             ->paginate(8)
             ->withQueryString();
 
-        // $colors = Color::all();
         $tags = Tag::all();
         $minPrice = Product::orderBy('price', 'ASC')->first()->price;
         $maxPrice = Product::orderBy('price', 'DESC')->first()->price;

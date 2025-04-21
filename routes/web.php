@@ -3,7 +3,6 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\CatalogController;
-use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\OrderController;
 use App\Http\Controllers\Client\ProductController;
 use App\Http\Controllers\Client\ProfileController;
@@ -15,8 +14,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/locale', [SetLocaleController::class, 'locale'])->name('locale');
 
 //Shop
-Route::get('/', HomeController::class)->name('/');
-
+Route::get('/', [CatalogController::class, 'index'])->name('/');
 Route::get('/catalog', [CatalogController::class, 'index'])->name('catalog.index');
 Route::get('/catalog/navigation', [CatalogController::class, 'navigation'])->name('catalog.navigation.index');
 Route::get('/catalog/{section:slug}', [CatalogController::class, 'sectionIndex'])->name('catalog.section.index');
