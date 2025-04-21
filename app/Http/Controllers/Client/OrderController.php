@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Enums\OrderStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Order\OrderResource;
+use App\Http\Resources\Product\ProductOrderResource;
 use App\Models\Order;
 use Exception;
 use Illuminate\Http\RedirectResponse;
@@ -19,6 +20,13 @@ class OrderController extends Controller
 
         return Inertia::render('Client/Order/Index', [
             'orders' => OrderResource::collection($orders),
+        ]);
+    }
+
+    public function show(Order $order)
+    {
+        return Inertia::render('Client/Order/Show', [
+            'order' => OrderResource::make($order),
         ]);
     }
 
