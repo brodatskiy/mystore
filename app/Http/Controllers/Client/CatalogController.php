@@ -97,7 +97,6 @@ class CatalogController extends Controller
     public function navigation()
     {
         $section = Section::with('categories')->get();
-        $section->load('categories');
 
         return SectionWithCategoriesResource::collection($section);
     }
