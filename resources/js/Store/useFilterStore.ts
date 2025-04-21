@@ -20,8 +20,8 @@ export const useFilterStore = defineStore("Filter", () => {
 
     function applyFilters(currentLocation) {
         router.get(currentLocation, pickBy(filters.value), {
-            preserveState: true,
-            replace: true,
+            preserveScroll: true,
+            async: true,
         });
     }
 
