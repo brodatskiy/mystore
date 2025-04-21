@@ -2,15 +2,37 @@
 import {Head, router} from "@inertiajs/vue3";
 import ShopLayout from "@/Layouts/ShopLayout.vue";
 import ButtonPrimary from "@/Components/Buttons/ButtonPrimary.vue";
+import {ref} from "vue";
 
 const props = defineProps(["product"]);
 
-function add(product) {
-    router.post(route('cart.add', {product: product}))
+const processingAddToWish = ref(false);
+const processingAddToCart = ref(false);
+
+function addToCart(product) {
+    router.post(route('cart.add', {product: product}), {}, {
+        preserveScroll: true,
+        async: true,
+        onStart: () => {
+            processingAddToCart.value = true;
+        },
+        onFinish: () => {
+            processingAddToCart.value = false;
+        },
+    })
 }
 
 function toggleWish(product) {
-    router.post(route('wishes.toggle', {product: product}))
+    router.post(route('wishes.toggle', {product: product}), {}, {
+        preserveScroll: true,
+        async: true,
+        onStart: () => {
+            processingAddToWish.value = true;
+        },
+        onFinish: () => {
+            processingAddToWish.value = false;
+        },
+    });
 }
 </script>
 <template>
@@ -42,14 +64,17 @@ function toggleWish(product) {
                             {{ product.description }}
                         </div>
                     </div>
-                    <div class="space-x-4">
+                    <div class="flex space-x-4">
                         <ButtonPrimary
-                            class=" w-50"
-                            @click="add(product)"
+                            class="w-full"
+                            :class="{ 'opacity-50 ': processingAddToCart } "
+                            @click.prevent="addToCart(product)"
                         >
-                            Add to cart
+                            {{ $t("Add to cart") }}
                         </ButtonPrimary>
-                        <Button severity="secondary" v-if="$page.props.auth.user" @click.prevent="toggleWish(product)">
+                        <Button severity="secondary" text v-if="$page.props.auth.user"
+                                @click.prevent="toggleWish(product)"
+                                :class="{ 'opacity-50': processingAddToWish }">
                             <i v-if="product.wished" class="pi pi-heart-fill" style="color: red"></i>
                             <i v-else class="pi pi-heart" style="color: red"></i>
                         </Button>

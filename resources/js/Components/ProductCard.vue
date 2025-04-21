@@ -11,6 +11,7 @@ const processingAddToCart = ref(false);
 function addToCart(product) {
     router.post(route('cart.add', {product: product}), {}, {
         preserveScroll: true,
+        async: true,
         onStart: () => {
             processingAddToCart.value = true;
         },
