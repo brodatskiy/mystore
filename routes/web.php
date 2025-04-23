@@ -6,7 +6,6 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SectionController;
 use App\Http\Controllers\SetLocaleController;
 use App\Http\Controllers\WishController;
 use Illuminate\Support\Facades\Route;
@@ -20,8 +19,6 @@ Route::get('/catalog/navigation', [CatalogController::class, 'navigation'])->nam
 Route::get('/catalog/{section:slug}', [CatalogController::class, 'sectionIndex'])->name('catalog.section.index');
 Route::get('/catalog/{section:slug}/category/{category:slug}', [CatalogController::class, 'categoryIndex'])->name('catalog.section.category.index');
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
-Route::get('/sections', [SectionController::class, 'index'])->name('section.index');
-Route::get('/sections/{section}', [SectionController::class, 'show'])->name('section.show');
 
 Route::resource('/product', ProductController::class)->only('show');
 
