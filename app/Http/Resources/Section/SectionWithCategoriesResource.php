@@ -25,7 +25,7 @@ class SectionWithCategoriesResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'slug' => $this->slug,
-            'categories' => CategoryWithChildrenResource::collection($this->parentCategories()),
+            'parentCategories' => CategoryWithChildrenResource::collection($this->categories->load('children')),
         ];
     }
 }
