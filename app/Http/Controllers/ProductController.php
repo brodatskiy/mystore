@@ -11,7 +11,7 @@ class ProductController extends Controller
 {
     public function show(Product $product): Response
     {
-        return Inertia::render('Client/Product/Index', [
+        return Inertia::render('Product/Index', [
             'product' => new ProductResource($product),
         ]);
     }

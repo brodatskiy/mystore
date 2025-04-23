@@ -16,14 +16,14 @@ class OrderController extends Controller
         $user = auth()->user();
         $orders = $user->orders()->orderByDesc('updated_at')->get();
 
-        return Inertia::render('Client/Order/Index', [
+        return Inertia::render('Order/Index', [
             'orders' => OrderResource::collection($orders),
         ]);
     }
 
     public function show(Order $order)
     {
-        return Inertia::render('Client/Order/Show', [
+        return Inertia::render('Order/Show', [
             'order' => OrderResource::make($order),
         ]);
     }

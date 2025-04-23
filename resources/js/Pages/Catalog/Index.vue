@@ -11,7 +11,7 @@ import SortProducts from "@/Components/Filters/SortProducts.vue";
 
 import Drawer from 'primevue/drawer';
 
-import {useFilterStore} from "@/Store/useFilterStore";
+import {useFilterStore} from "@/Store/useFilterStore.js";
 import ButtonPrimary from "@/Components/Buttons/ButtonPrimary.vue";
 
 const filterStore = useFilterStore();

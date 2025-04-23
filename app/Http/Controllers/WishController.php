@@ -32,7 +32,7 @@ class WishController extends Controller
             $product->wished = $wished;
         }
 
-        return Inertia::render('Client/Wishes/Index', [
+        return Inertia::render('Wishes/Index', [
             'wishes' => ProductResource::collection($products),
         ]);
     }

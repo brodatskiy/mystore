@@ -29,7 +29,7 @@ class CatalogController extends Controller
         $minPrice = Product::orderBy('price', 'ASC')->first()->price ?? 0;
         $maxPrice = Product::orderBy('price', 'DESC')->first()->price ?? 1000;
 
-        return Inertia::render('Client/Catalog/Index', [
+        return Inertia::render('Catalog/Index', [
             'sort' => $request->sort ?? 'popularity',
             'search' => $request->search ?? '',
             'products' => ProductCardResource::collection($products),
@@ -57,7 +57,7 @@ class CatalogController extends Controller
         $minPrice = Product::orderBy('price', 'ASC')->first()->price;
         $maxPrice = Product::orderBy('price', 'DESC')->first()->price;
 
-        return Inertia::render('Client/Catalog/Index', [
+        return Inertia::render('Catalog/Index', [
             'sort' => $request->sort ?? '',
             'search' => $request->search ?? '',
             'products' => ProductCardResource::collection($products),
@@ -83,7 +83,7 @@ class CatalogController extends Controller
         $minPrice = Product::orderBy('price', 'ASC')->first()->price;
         $maxPrice = Product::orderBy('price', 'DESC')->first()->price;
 
-        return Inertia::render('Client/Catalog/Index', [
+        return Inertia::render('Catalog/Index', [
             'sort' => $request->sort ?? '',
             'search' => $request->search ?? '',
             'products' => ProductCardResource::collection($products),

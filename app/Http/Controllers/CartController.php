@@ -25,7 +25,7 @@ class CartController extends Controller
     public function index()
     {
         $cartItems = $this->cartService->getItems();
-        return Inertia::render('Client/Cart/Index', [
+        return Inertia::render('Cart/Index', [
             'products' => CartItemResource::collection($cartItems),
             'total' => $this->cartService->getTotal()
         ]);
