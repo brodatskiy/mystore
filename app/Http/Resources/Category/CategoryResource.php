@@ -5,6 +5,11 @@ namespace App\Http\Resources\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property mixed $id
+ * @property mixed $title
+ * @property mixed $slug
+ */
 class CategoryResource extends JsonResource
 {
     /**
@@ -17,8 +22,6 @@ class CategoryResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'section_id' => $this->section_id,
-            'parent_id' => $this->parent_id,
             'slug' => $this->slug,
         ];
     }

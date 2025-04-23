@@ -6,6 +6,12 @@ use App\Http\Resources\Category\CategoryWithChildrenResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property mixed $id
+ * @property mixed $title
+ * @property mixed $slug
+ * @method parentCategories()
+ */
 class SectionWithCategoriesResource extends JsonResource
 {
     /**
@@ -19,7 +25,7 @@ class SectionWithCategoriesResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'slug' => $this->slug,
-            'parentCategories' => CategoryWithChildrenResource::collection($this->categories->load('children')),
+            'categories' => CategoryWithChildrenResource::collection($this->parentCategories()),
         ];
     }
 }

@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Section\SectionResource;
-use App\Http\Resources\Section\SectionWithParentCategoriesResource;
 use App\Models\Section;
 use Illuminate\Http\Request;
 

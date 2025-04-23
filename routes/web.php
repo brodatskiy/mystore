@@ -1,14 +1,14 @@
 <?php
 
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\Client\CartController;
-use App\Http\Controllers\Client\CatalogController;
-use App\Http\Controllers\Client\OrderController;
-use App\Http\Controllers\Client\ProductController;
-use App\Http\Controllers\Client\ProfileController;
-use App\Http\Controllers\Client\WishController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\SetLocaleController;
+use App\Http\Controllers\WishController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/locale', [SetLocaleController::class, 'locale'])->name('locale');

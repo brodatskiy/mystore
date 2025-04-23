@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Client;
+namespace App\Http\Controllers;
 
 use App\Enums\OrderStatus;
-use App\Http\Controllers\Controller;
 use App\Http\Resources\CartItem\CartItemResource;
 use App\Models\Order;
 use App\Models\Product;
