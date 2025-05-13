@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\OrderStatus;
 use App\Http\Resources\CartItem\CartItemResource;
 use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
 use App\Service\CartService;
 use Exception;
@@ -36,6 +37,8 @@ class CartController extends Controller
      */
     public function order()
     {
+
+
         if (auth()->check()) {
             try {
                 DB::beginTransaction();
@@ -61,13 +64,28 @@ class CartController extends Controller
                     ]);
                 }
 
+
+                $orderItems = $order->orderItems()->get();
+
+                /** @var OrderItem $orderItem */
+                foreach ($orderItems as $orderItem) {
+                    $product = $orderItem->product;
+
+                    if ($product->count < $orderItem->quantity) {
+                        throw new Exception('Out of stock');
+                    }
+
+                    $product->count -= $orderItem->quantity;
+                    $product->save();
+                }
+
                 $this->cartService->destroy();
 
                 Db::commit();
-
                 return redirect()->route('orders.index');
             } catch (Exception $exception) {
                 Db::rollBack();
+                dd($exception->getMessage());
                 abort(500);
             }
         } else {
