@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 
 
 class CartService
@@ -48,7 +49,7 @@ class CartService
         }
     }
 
-    public function getItems(): array|\Illuminate\Database\Eloquent\Collection
+    public function getItems(): array|Collection
     {
         return $this->getCart()->cartItems()->orderBy('id')->get() ?? [];
     }
