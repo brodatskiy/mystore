@@ -25,8 +25,8 @@ use Spatie\Sluggable\SlugOptions;
  * @property string $slug
  * @property string $description
  * @property string $preview_image
- * @property string $color
  * @property int $price
+ * @property int $count
  * @property bool $wished
  * @property float $rating
  * @property bool $is_published
