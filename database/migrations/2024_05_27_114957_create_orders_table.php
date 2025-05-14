@@ -25,6 +25,8 @@ return new class extends Migration
             $table->decimal('total', 8, 2);
             $table->enum('status', OrderStatus::values())->default(OrderStatus::Unpaid);
             $table->timestamps();
+
+            $table->softDeletes();
         });
     }
 
