@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Enums\OrderStatus;
 use App\Http\Resources\Order\OrderResource;
-use App\Jobs\TestJob;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Exception;
@@ -15,7 +14,6 @@ class OrderController extends Controller
 {
     public function index()
     {
-        TestJob::dispatch();
         $user = auth()->user();
         $orders = $user->orders()->orderByDesc('updated_at')->get();
 
