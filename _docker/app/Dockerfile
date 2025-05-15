@@ -2,15 +2,26 @@ FROM php:8.4-fpm
 
 WORKDIR /var/www
 
+# Timezone
+ENV TZ=Europe/Moscow
+RUN apt-get update && apt-get install -yy tzdata
+RUN cp /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# Add crontab file in the cron directory
+COPY /_docker/app/cron/crontab.txt /etc/cron.d/crontab
+
 # Установка docker-php-extension-installer
 ADD --chmod=0755 https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
-# Install "curl", "libpq-dev", "libjpeg-dev",
-#         "libpng-dev", "libfreetype6-dev", "libssl-dev", "libmcrypt-dev",
+# Install "nano", "procps", "cron", "curl", "libpq-dev", "libjpeg-dev",
+# "libpng-dev", "libfreetype6-dev", "libssl-dev", "libmcrypt-dev",
 RUN set -eux; \
     apt-get update; \
     apt-get upgrade -y; \
     apt-get install -y --no-install-recommends \
+            nano \
+            procps \
+            cron \
             curl \
             libpq-dev \
             libz-dev \
@@ -36,20 +47,23 @@ RUN set -eux; \
             --with-xpm \
             --with-freetype; \
     docker-php-ext-install gd; \
-    php -r 'var_dump(gd_info());' \
-
-
-RUN set -eux; \
+    install-php-extensions redis; \
     install-php-extensions @composer; \
-    IPE_DONT_ENABLE=1 install-php-extensions xdebug; \
-    install-php-extensions redis
+    install-php-extensions xdebug; \
+    php -r 'var_dump(gd_info());'
 
-# Добавление кастомных .ini файлов
+# Give execution rights on the cron job
+RUN chmod 0644 /etc/cron.d/crontab
+
+# Добавление кастомных .ini файлов для php
 COPY /_docker/app/conf.d /usr/local/etc/php/conf.d/
 
 # Install nodejs
 RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - \
   && apt-get install -y nodejs
+
+# Настройка php-fpm
+COPY /_docker/app/php-fpm.d/www.conf /usr/local/etc/php-fpm.d
 
 # Очистка мусора
 RUN apt-get clean \
