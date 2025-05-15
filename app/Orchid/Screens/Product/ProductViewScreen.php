@@ -101,8 +101,6 @@ class ProductViewScreen extends Screen
                     Sight::make('id'),
                     Sight::make('title'),
                     Sight::make('description'),
-                    Sight::make('color')
-                        ->render(fn(Product $product) => "<div class='rounded' style='height:16px; width:16px; background:$product->color'></div>"),
                     Sight::make('price')
                         ->usingComponent(Currency::class, after: '₽'),
                     Sight::make('rating')
