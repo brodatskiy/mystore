@@ -85,7 +85,6 @@ class CartController extends Controller
                 return redirect()->route('orders.index');
             } catch (Exception $exception) {
                 Db::rollBack();
-                dd($exception->getMessage());
                 abort(500);
             }
         } else {
