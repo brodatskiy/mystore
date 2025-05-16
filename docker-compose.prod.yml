@@ -9,7 +9,7 @@ services:
     restart: always
     depends_on:
       - app
-    container_name: my-store_nginx
+    container_name: MyStore_nginx
 
   app:
     image: ${APP_IMAGE}
@@ -21,7 +21,7 @@ services:
       - '${VITE_PORT:-5173}:5173'
     depends_on:
       - db
-    container_name: my-store_app
+    container_name: MyStore_app
 
   db:
     image: postgres:16.3-alpine3.20
@@ -34,9 +34,9 @@ services:
       - POSTGRES_PASSWORD=$${DB_PASSWORD}
     ports:
       - '${DB_PORT:-5432}:5432'
-    container_name: my-store_db
+    container_name: MyStore_db
 
 volumes:
   db-volume:
     driver: local
-    name: "my-store-pgsql"
+    name: "MyStore-pgsql"

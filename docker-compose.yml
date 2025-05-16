@@ -25,7 +25,7 @@ services:
             db:
                 condition: service_healthy
         environment:
-            PHP_IDE_CONFIG: "serverName=my-store"
+            PHP_IDE_CONFIG: "serverName=MyStore"
             XDEBUG_CONFIG: "idekey=PHPSTORM"
         container_name: app
 
