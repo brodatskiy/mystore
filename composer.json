@@ -21,7 +21,8 @@
         "pusher/pusher-php-server": "^7.2",
         "sentry/sentry-laravel": "^4.13",
         "spatie/laravel-sluggable": "^3.6",
-        "tightenco/ziggy": "^2.0"
+        "tightenco/ziggy": "^2.0",
+        "vladimir-yuldashev/laravel-queue-rabbitmq": "^14.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.10",

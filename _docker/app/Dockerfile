@@ -7,9 +7,6 @@ ENV TZ=Europe/Moscow
 RUN apt-get update && apt-get install -yy tzdata
 RUN cp /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-# Add crontab file in the cron directory
-COPY /_docker/app/cron/crontab.txt /etc/cron.d/crontab
-
 # Установка docker-php-extension-installer
 ADD --chmod=0755 https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
@@ -22,6 +19,7 @@ RUN set -eux; \
             nano \
             procps \
             cron \
+            supervisor \
             curl \
             libpq-dev \
             libz-dev \
@@ -52,15 +50,26 @@ RUN set -eux; \
     install-php-extensions xdebug; \
     php -r 'var_dump(gd_info());'
 
-# Give execution rights on the cron job
-RUN chmod 0644 /etc/cron.d/crontab
-
-# Добавление кастомных .ini файлов для php
-COPY /_docker/app/conf.d /usr/local/etc/php/conf.d/
-
 # Install nodejs
 RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - \
   && apt-get install -y nodejs
+
+# Add crontab file in the cron directory
+COPY /_docker/app/cron/crontab.txt /etc/cron.d/crontab
+
+# Give execution rights on the cron job
+RUN chmod 0744 /etc/cron.d/crontab
+
+# Apply cron job
+RUN crontab /etc/cron.d/crontab
+
+# Добавление кофиг файла supervisod
+COPY /_docker/app/supervisor/supervisord.conf /etc/supervisor/supervisord.conf
+# Добавление кофиг файлой воркеров
+COPY /_docker/app/supervisor/conf.d /etc/supervisor/conf.d
+
+# Добавление кастомных .ini файлов для php
+COPY /_docker/app/conf.d /usr/local/etc/php/conf.d/
 
 # Настройка php-fpm
 COPY /_docker/app/php-fpm.d/www.conf /usr/local/etc/php-fpm.d
