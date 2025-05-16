@@ -26,6 +26,7 @@ services:
                 condition: service_healthy
         environment:
             PHP_IDE_CONFIG: "serverName=my-store"
+            XDEBUG_CONFIG: "idekey=PHPSTORM"
         container_name: app
 
     db:
@@ -54,21 +55,6 @@ services:
         ports:
             - "6379:6379"
         container_name: redis
-
-    mailpit:
-        image: axllent/mailpit
-        container_name: mailpit
-        restart: unless-stopped
-        volumes:
-            - ./data:/data
-        ports:
-            - "8025:8025"
-            - "1025:1025"
-        environment:
-            MP_MAX_MESSAGES: 5000
-            MP_DATABASE: /data/mailpit.db
-            MP_SMTP_AUTH_ACCEPT_ANY: 1
-            MP_SMTP_AUTH_ALLOW_INSECURE: 1
 
 volumes:
     db-volume:
