@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Profile\UpdateRequest;
+use Exception;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -35,6 +36,9 @@ class ProfileController extends Controller
         return back()->with('message', __('You have updated your profile.'));
     }
 
+    /**
+     * @throws Exception
+     */
     public function destroy(Request $request): RedirectResponse
     {
         $request->validate([

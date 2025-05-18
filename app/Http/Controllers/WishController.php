@@ -8,6 +8,9 @@ use App\Service\CartService;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 
+/**
+ *
+ */
 class WishController extends Controller
 {
     protected CartService $cartService;
@@ -22,6 +25,7 @@ class WishController extends Controller
         $user = auth()->user();
         $products = $user->wishes()->get() ?? collect();
 
+        /** @var Product $product */
         foreach ($products as $product) {
             if (auth()->check()) {
                 $wished = (bool)$product->wishedBy()->wherePivot('user_id', auth()->user()->id)->first();
@@ -37,6 +41,10 @@ class WishController extends Controller
         ]);
     }
 
+    /**
+     * @param Product $product
+     * @return RedirectResponse
+     */
     public function toggle(Product $product): RedirectResponse
     {
         $user = auth()->user();
