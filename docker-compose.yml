@@ -2,7 +2,7 @@ services:
     nginx:
         image: nginx:stable
         volumes:
-            - ./_docker/nginx/conf.d:/etc/nginx/conf.d
+            - ./.docker/nginx/conf.d:/etc/nginx/conf.d
             - ./:/var/www
         ports:
             - '${APP_PORT:-8080}:80'
