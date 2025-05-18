@@ -1,9 +1,11 @@
 <script setup>
 import ShopLayout from "@/Layouts/ShopLayout.vue";
 import CartProductCard from "@/Components/ProductCardCart.vue";
-import {Head, router} from "@inertiajs/vue3";
+import {Head, router, usePage} from "@inertiajs/vue3";
 import ButtonPrimary from "@/Components/Buttons/ButtonPrimary.vue";
 import {ref} from "vue";
+import {useI18n} from "vue-i18n";
+const {t} = useI18n()
 
 const props = defineProps({
     products: Object,
@@ -13,6 +15,10 @@ const props = defineProps({
 const processing = ref(false);
 
 function order() {
+    if (props.products.length < 1){
+        usePage().props.flash.message = t("Your cart is empty");
+        return;
+    }
     router.post(route("cart.order"), {}, {
         preserveScroll: true,
         onStart: () => {
@@ -46,7 +52,7 @@ function order() {
                 class="h-full rounded-lg bg-surface-50 dark:bg-surface-600 p-6 shadow-md md:mt-0 md:w-1/3"
             >
                 <div class="flex justify-between">
-                    <p class="text-lg font-bold">Total</p>
+                    <p class="text-lg font-bold">{{ $t("Total") }}</p>
                     <div class="">
                         <p class="ml-1 text-lg font-bold">${{ props.total }}</p>
                     </div>
@@ -55,7 +61,7 @@ function order() {
                 <ButtonPrimary
                     class="mt-6 w-full"
                     :class="{ 'opacity-50': processing  }"
-                    :disabled="!!(props.products.length < 1 || processing)"
+                    :disabled="!!(processing)"
                     @click="order()"
                 >
                     {{ $t("Order") }}

@@ -12,9 +12,11 @@
     "Order": "Order",
     "Apply": "Apply",
     "Price": "Price",
+    "Total": "Total",
     "Filters": "Filters",
     "Popularity": "Popularity",
     "Rating": "Rating",
     "Price ascending": "Price ascending",
-    "Price descending": "Price descending"
+    "Price descending": "Price descending",
+    "Your cart is empty": "Your cart is empty"
 }

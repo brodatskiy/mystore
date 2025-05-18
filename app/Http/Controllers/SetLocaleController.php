@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Session;
 
 class SetLocaleController extends Controller
 {
-    public function locale(Request $request)
+    public function change(Request $request)
     {
         Session::put('locale', $request->get('locale'));
         App::setLocale($request->get('locale'));

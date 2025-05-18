@@ -3,6 +3,7 @@ import {ref} from "vue";
 import {useI18n} from "vue-i18n";
 
 import ButtonDD from "@/Components/Buttons/ButtonDD.vue";
+import {router} from "@inertiajs/vue3";
 
 const {locale} = useI18n({useScope: "global"});
 const menu = ref(null);
@@ -26,14 +27,15 @@ function toggleMenu(event) {
     menu.value.toggle(event);
 }
 
-const setLocale = async (lang) => {
-    await axios
-        .post(route("locale"), {locale: lang})
-        .then((locale.value = lang))
-        .catch((error) => {
-            console.log(error);
-        });
-};
+function setLocale (lang) {
+    router.post(route('changeLocale'), {locale: lang}, {
+        preserveScroll: true,
+        async: true,
+        onSuccess: () => {
+            locale.value = lang
+        }
+    })
+}
 </script>
 
 <template>

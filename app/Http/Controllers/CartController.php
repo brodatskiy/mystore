@@ -37,9 +37,6 @@ class CartController extends Controller
      */
     public function order()
     {
-
-
-        if (auth()->check()) {
             try {
                 DB::beginTransaction();
 
@@ -85,11 +82,8 @@ class CartController extends Controller
                 return redirect()->route('orders.index');
             } catch (Exception $exception) {
                 Db::rollBack();
-                abort(500);
+                return back()->with('message', __('Your cart is empty'));
             }
-        } else {
-            return back();
-        }
     }
 
     public function add(Product $product): RedirectResponse

@@ -13,9 +13,11 @@
     "Order": "Заказать",
     "Apply": "Применить",
     "Price": "Цена",
+    "Total": "Сумма",
     "Filters": "Фильтры",
     "Popularity": "Популярные",
     "Rating": "С высоким рейтингом",
     "Price ascending": "Дешевле",
-    "Price descending": "Дороже"
+    "Price descending": "Дороже",
+    "Your cart is empty": "Ваша корзина пуста"
 }

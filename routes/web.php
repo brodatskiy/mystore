@@ -10,7 +10,7 @@ use App\Http\Controllers\SetLocaleController;
 use App\Http\Controllers\WishController;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/locale', [SetLocaleController::class, 'locale'])->name('locale');
+Route::post('/locale', [SetLocaleController::class, 'change'])->name('changeLocale');
 
 //Shop
 Route::get('/', [CatalogController::class, 'index'])->name('/');

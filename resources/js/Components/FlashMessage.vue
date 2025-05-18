@@ -12,7 +12,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <Message class="fixed">{{ flashMessage }}</Message>
+    <Message severity="contrast" class="fixed">{{ flashMessage }}</Message>
 </template>
 
 <style></style>
