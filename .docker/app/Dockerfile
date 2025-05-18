@@ -55,7 +55,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - \
   && apt-get install -y nodejs
 
 # Add crontab file in the cron directory
-COPY /_docker/app/cron/crontab.txt /etc/cron.d/crontab
+COPY /.docker/app/cron/crontab.txt /etc/cron.d/crontab
 
 # Give execution rights on the cron job
 RUN chmod 0744 /etc/cron.d/crontab
@@ -64,15 +64,15 @@ RUN chmod 0744 /etc/cron.d/crontab
 RUN crontab /etc/cron.d/crontab
 
 # Добавление кофиг файла supervisod
-COPY /_docker/app/supervisor/supervisord.conf /etc/supervisor/supervisord.conf
+COPY /.docker/app/supervisor/supervisord.conf /etc/supervisor/supervisord.conf
 # Добавление кофиг файлой воркеров
-COPY /_docker/app/supervisor/conf.d /etc/supervisor/conf.d
+COPY /.docker/app/supervisor/conf.d /etc/supervisor/conf.d
 
 # Добавление кастомных .ini файлов для php
-COPY /_docker/app/conf.d /usr/local/etc/php/conf.d/
+COPY /.docker/app/conf.d /usr/local/etc/php/conf.d/
 
 # Настройка php-fpm
-COPY /_docker/app/php-fpm.d/www.conf /usr/local/etc/php-fpm.d
+COPY /.docker/app/php-fpm.d/www.conf /usr/local/etc/php-fpm.d
 
 # Очистка мусора
 RUN apt-get clean \
