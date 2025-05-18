@@ -66,7 +66,6 @@ class Category extends Model
 
     protected $table = 'categories';
     protected $guarded = false;
-    protected $with = ['section', 'parent'];
 
     public function products(): HasMany
     {

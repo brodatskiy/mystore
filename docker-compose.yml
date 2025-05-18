@@ -59,4 +59,4 @@ services:
 volumes:
     db-volume:
         driver: local
-        name: "my-store-pgsql"
+        name: "MyStore-pgsql"

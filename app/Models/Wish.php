@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property int $user_id
@@ -26,10 +27,8 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Wish whereUserId($value)
  * @mixin \Eloquent
  */
-class Wish extends Pivot
+class Wish extends Model
 {
-    use HasFactory;
-
     protected $table = 'wish';
     protected $guarded = [];
 
