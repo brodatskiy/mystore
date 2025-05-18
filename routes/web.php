@@ -14,8 +14,8 @@ Route::post('/locale', [SetLocaleController::class, 'change'])->name('changeLoca
 
 //Shop
 Route::get('/', [CatalogController::class, 'index'])->name('/');
-Route::get('/catalog', [CatalogController::class, 'index'])->name('catalog.index');
 Route::get('/catalog/navigation', [CatalogController::class, 'navigation'])->name('catalog.navigation.index');
+Route::get('/catalog', [CatalogController::class, 'index'])->name('catalog.index');
 Route::get('/catalog/{section:slug}', [CatalogController::class, 'sectionIndex'])->name('catalog.section.index');
 Route::get('/catalog/{section:slug}/category/{category:slug}', [CatalogController::class, 'categoryIndex'])->name('catalog.section.category.index');
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
