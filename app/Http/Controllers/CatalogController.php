@@ -2,32 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Filters\ProductFilter;
 use App\Http\Requests\Product\FilterRequest;
 use App\Http\Resources\Product\ProductCardResource;
 use App\Http\Resources\Section\SectionWithCategoriesResource;
 use App\Models\Category;
-use App\Models\Product;
 use App\Models\Section;
-use App\Models\Tag;
+use App\Service\CatalogService;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Inertia\Inertia;
 
 class CatalogController extends Controller
 {
+    private CatalogService $catalogService;
+
+    public function __construct(CatalogService $catalogService)
+    {
+
+        $this->catalogService = $catalogService;
+    }
+
+    /**
+     * @throws BindingResolutionException
+     */
     public function index(FilterRequest $request)
     {
         $data = $request->validated();
-        $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($data)]);
-
-        $products = Product::query()
-            ->filter($filter)
-            ->sorted()
-            ->paginate(8)
-            ->withQueryString();
-
-        $tags = Tag::all();
-        $minPrice = Product::orderBy('price', 'ASC')->first()->price ?? 0;
-        $maxPrice = Product::orderBy('price', 'DESC')->first()->price ?? 1000;
+        [$products, $tags, $minPrice, $maxPrice] = $this->catalogService->getCatalog($data);
 
         return Inertia::render('Catalog/Index', [
             'sort' => $request->sort ?? 'popularity',
@@ -39,23 +39,13 @@ class CatalogController extends Controller
         ]);
     }
 
+    /**
+     * @throws BindingResolutionException
+     */
     public function sectionIndex(FilterRequest $request, Section $section)
     {
         $data = $request->validated();
-
-        $products = $section->products();
-
-        $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($data)]);
-
-        $products = $products
-            ->filter($filter)
-            ->sorted()
-            ->paginate(8)
-            ->withQueryString();
-
-        $tags = Tag::all();
-        $minPrice = Product::orderBy('price', 'ASC')->first()->price;
-        $maxPrice = Product::orderBy('price', 'DESC')->first()->price;
+        [$products, $tags, $minPrice, $maxPrice] = $this->catalogService->getCatalog($data, $section);
 
         return Inertia::render('Catalog/Index', [
             'sort' => $request->sort ?? '',
@@ -67,21 +57,13 @@ class CatalogController extends Controller
         ]);
     }
 
+    /**
+     * @throws BindingResolutionException
+     */
     public function categoryIndex(FilterRequest $request, Section $section, Category $category)
     {
         $data = $request->validated();
-
-        $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($data)]);
-
-        $products = $category->products()
-            ->filter($filter)
-            ->sorted()
-            ->paginate(8)
-            ->withQueryString();
-
-        $tags = Tag::all();
-        $minPrice = Product::orderBy('price', 'ASC')->first()->price;
-        $maxPrice = Product::orderBy('price', 'DESC')->first()->price;
+        [$products, $tags, $minPrice, $maxPrice] = $this->catalogService->getCatalog($data, $section, $category);
 
         return Inertia::render('Catalog/Index', [
             'sort' => $request->sort ?? '',
