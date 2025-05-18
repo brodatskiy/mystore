@@ -1,5 +1,5 @@
 <script setup>
-import {ref, onMounted} from "vue";
+import {ref} from "vue";
 import {router} from '@inertiajs/vue3';
 import {useI18n} from 'vue-i18n'
 
@@ -26,6 +26,13 @@ function getNavigation() {
     axios.get(`/catalog/navigation`).then((res) => {
         navigation.value = res.data;
     });
+}
+
+function navigationExpander() {
+    if (navigation.value.length === 0){
+        getNavigation();
+    }
+    navigationExpand.value = true;
 }
 
 function CategoriesExpander(section) {
@@ -81,9 +88,6 @@ function isDarkMode() {
     return document.documentElement.classList.contains('dark');
 }
 
-onMounted(() => {
-    getNavigation();
-});
 </script>
 <template>
     <div class="min-h-screen">
@@ -93,7 +97,7 @@ onMounted(() => {
                 <div class="flex space-x-4">
                     <div class="flex">
                         <ButtonPrimary
-                            @click="navigationExpand = !navigationExpand"
+                            @click="navigationExpander()"
                             variant="text"
                         >
                             <i class="pi pi-bars" style="font-size: 1.25rem"></i>
@@ -181,7 +185,6 @@ onMounted(() => {
             position="left"
             :modal="false"
             :showCloseIcon="false"
-            @mouseleave="navigationExpand = true"
             :pt="{
                 content: {class: 'p-0!'},
             }"

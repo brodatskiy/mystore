@@ -26,9 +26,10 @@ class CartController extends Controller
     public function index()
     {
         $cartItems = $this->cartService->getItems();
+        $total = $cartItems->sum(fn ($item) => $item->price);
         return Inertia::render('Cart/Index', [
             'products' => CartItemResource::collection($cartItems),
-            'total' => $this->cartService->getTotal()
+            'total' => $total
         ]);
     }
 

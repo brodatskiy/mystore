@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
 use App\Models\Section;
 use Illuminate\Database\Seeder;
 
@@ -15,6 +14,16 @@ class SectionSeeder extends Seeder
      */
     public function run()
     {
-       Section::factory(3)->hasCategories(7)->create();
+        Section::factory()->hasCategories(7)->create(['title' => function () {
+            return 'Clothing';
+        }]);
+        Section::factory()->hasCategories(7)->create(['title' => function () {
+            return 'Shoe';
+        }]);
+
+        Section::factory()->hasCategories(7)->create(['title' => function () {
+            return 'Accessories';
+        }]);
+
     }
 }

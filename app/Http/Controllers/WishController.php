@@ -25,17 +25,6 @@ class WishController extends Controller
         $user = auth()->user();
         $products = $user->wishes()->get() ?? collect();
 
-        /** @var Product $product */
-        foreach ($products as $product) {
-            if (auth()->check()) {
-                $wished = (bool)$product->wishedBy()->wherePivot('user_id', auth()->user()->id)->first();
-            } else {
-                $wished = false;
-            }
-
-            $product->wished = $wished;
-        }
-
         return Inertia::render('Wishes/Index', [
             'wishes' => ProductResource::collection($products),
         ]);
