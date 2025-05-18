@@ -20,6 +20,8 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property-read Cart $cart
  * @property-read Product $product
+ * @method increment($column, $amount = 1, array $extra = [])
+ * @method decrement($column, $amount = 1, array $extra = [])
  * @method static Builder<static>|CartItem newModelQuery()
  * @method static Builder<static>|CartItem newQuery()
  * @method static Builder<static>|CartItem query()
