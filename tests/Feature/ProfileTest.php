@@ -14,8 +14,7 @@ class ProfileTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this
-            ->actingAs($user)
+        $response = $this->actingAs($user)
             ->get('/profile');
 
         $response->assertOk();
@@ -32,8 +31,7 @@ class ProfileTest extends TestCase
                 'email' => 'test@example.com',
             ]);
 
-        $response
-            ->assertSessionHasNoErrors();
+        $response->assertSessionHasNoErrors();
 
         $user->refresh();
 
@@ -52,8 +50,7 @@ class ProfileTest extends TestCase
                 'email' => $user->email,
             ]);
 
-        $response
-            ->assertSessionHasNoErrors();
+        $response->assertSessionHasNoErrors();
 
         $this->assertNotNull($user->refresh()->email_verified_at);
     }
@@ -62,14 +59,12 @@ class ProfileTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this
-            ->actingAs($user)
+        $response = $this->actingAs($user)
             ->delete('/profile', [
                 'password' => 'password',
             ]);
 
-        $response
-            ->assertSessionHasNoErrors()
+        $response->assertSessionHasNoErrors()
             ->assertRedirect('/');
 
         $this->assertGuest();
@@ -87,8 +82,7 @@ class ProfileTest extends TestCase
                 'password' => 'wrong-password',
             ]);
 
-        $response
-            ->assertSessionHasErrors('password')
+        $response->assertSessionHasErrors('password')
             ->assertRedirect('/profile');
 
         $this->assertNotNull($user->fresh());
