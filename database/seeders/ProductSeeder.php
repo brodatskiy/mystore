@@ -17,7 +17,7 @@ class ProductSeeder extends Seeder
     {
         $tags = Tag::all();
         $products = Product::factory()
-            ->count(100)
+            ->count(15)
             ->create();
 
         $products->each(function ($product) use ($tags){
