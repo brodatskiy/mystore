@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Section;
 use App\Models\Tag;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Support\Facades\Cache;
 
 class CatalogService
 {
@@ -30,11 +31,17 @@ class CatalogService
             ->filter($filter)
             ->sorted()
             ->paginate(8)
-            ->withQueryString();
+            ->withQueryString();;
 
-        $tags = Tag::all();
-        $minPrice = Product::orderBy('price', 'ASC')->first()->price;
-        $maxPrice = Product::orderBy('price', 'DESC')->first()->price;
+        $tags = Cache::flexible('tags', [600, 1200], function () {
+            return Tag::all();
+        });
+        $minPrice = Cache::flexible('minPrice', [600, 1200], function () {
+            return Product::orderBy('price', 'ASC')->first()->price;
+        });
+        $maxPrice = Cache::flexible('maxPrice', [600, 1200], function () {
+            return Product::orderBy('price', 'DESC')->first()->price;
+        });
 
         return [$products, $tags, $minPrice, $maxPrice];
     }

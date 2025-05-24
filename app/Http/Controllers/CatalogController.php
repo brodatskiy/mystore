@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Section;
 use App\Service\CatalogService;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
 
 class CatalogController extends Controller
@@ -77,8 +78,10 @@ class CatalogController extends Controller
 
     public function navigation()
     {
-        $section = Section::with('categories')->get();
+        return Cache::flexible('navigation', [600, 1200], function () {
+            $section = Section::with('categories')->get();
 
-        return SectionWithCategoriesResource::collection($section);
+            return SectionWithCategoriesResource::collection($section);
+        });
     }
 }
