@@ -102,6 +102,8 @@ class ProductViewScreen extends Screen
                     Sight::make('description'),
                     Sight::make('price')
                         ->usingComponent(Currency::class, after: '₽'),
+                    Sight::make('count')
+                        ->usingComponent(Number::class),
                     Sight::make('rating')
                         ->usingComponent(Number::class, decimals: 1),
                     Sight::make('tags')->render(

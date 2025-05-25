@@ -41,6 +41,10 @@ class ProductListLayout extends Table
                 ->usingComponent(Currency::class, after: '₽')
                 ->align(TD::ALIGN_CENTER)
                 ->sort(),
+            TD::make('count')
+                ->usingComponent(Number::class)
+                ->align(TD::ALIGN_CENTER)
+                ->sort(),
             TD::make('rating')
                 ->usingComponent(Number::class, decimals: 1)
                 ->align(TD::ALIGN_CENTER)

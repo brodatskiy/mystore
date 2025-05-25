@@ -44,6 +44,13 @@ class ProductEditLayout extends Rows
                 ->title(__('Price'))
                 ->placeholder(__('Price')),
 
+            Input::make('product.count')
+                ->value(1)
+                ->required()
+                ->type('number')
+                ->title(__('Count'))
+                ->placeholder(__('Count')),
+
             Select::make('product.tags.')
                 ->required()
                 ->fromModel(Tag::class, 'title')
