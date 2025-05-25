@@ -21,7 +21,7 @@ class ProductCardResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'image' => $this->preview_image,
+            'image' => $this->previewImage()->first()->getRelativeUrlAttribute(),
             'wished' => $this->when($this->wishedBy()->wherePivot('user_id', auth()->user()?->id)->first(), 'true'),
             'price' => $this->price,
             'sticker' => new StickerResource($this->sticker),

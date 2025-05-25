@@ -20,7 +20,7 @@ class ProductResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'image' => $this->preview_image,
+            'image' => $this->previewImage()->first()->getRelativeUrlAttribute(),
             'wished' => $this->when($this->wishedBy()->wherePivot('user_id', auth()->user()?->id)->first(), 'true'),
             'price' => $this->price,
             'rating' => $this->rating,
