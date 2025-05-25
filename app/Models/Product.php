@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Orchid\Attachment\Attachable;
+use Orchid\Attachment\Models\Attachment;
 use Orchid\Filters\Filterable;
 use Orchid\Filters\Types\Like;
 use Orchid\Screen\AsSource;
@@ -38,7 +39,6 @@ use Spatie\Sluggable\SlugOptions;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CartItem> $cartItems
  * @property-read int|null $cart_items_count
  * @property-read \App\Models\Category $category
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Image> $images
  * @property-read int|null $images_count
  * @property-read \App\Models\Sticker|null $sticker
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Tag> $tags
@@ -132,6 +132,12 @@ class Product extends Model
         return SlugOptions::create()
             ->generateSlugsFrom('title')
             ->saveSlugsTo('slug');
+    }
+
+    public function previewImage()
+    {
+        return $this->hasOne(Attachment::class, 'id', 'preview_image')
+            ->withDefault();
     }
 
     //Orchid

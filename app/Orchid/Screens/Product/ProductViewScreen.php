@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Orchid\Screens\Product;
 
 use App\Models\Product;
+use App\Orchid\Components\ImagePreview;
+use App\Orchid\Service\ProductService;
 use Illuminate\Http\RedirectResponse;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
@@ -91,10 +93,7 @@ class ProductViewScreen extends Screen
         return [
             Layout::split([
                 Layout::legend('product', [
-                    Sight::make('preview_image', 'Preview image')
-                        ->render(fn(Product $product) => "<img src='$product->preview_image'
-                          alt='preview_image'
-                          class='mw-100 d-block img-fluid rounded-1 w-100'>")
+                    Sight::make('preview_image', 'Preview image')->component(ImagePreview::class),
                 ]),
 
                 Layout::legend('product', [
@@ -131,11 +130,13 @@ class ProductViewScreen extends Screen
 
     /**
      * @param Product $product
+     * @param ProductService $productService
      * @return RedirectResponse
+     * @throws \Throwable
      */
-    public function remove(Product $product): RedirectResponse
+    public function remove(Product $product, ProductService $productService): RedirectResponse
     {
-        $product->delete();
+        $productService->delete($product);
 
         Toast::info(__('Product was removed'));
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Orchid\Layouts\Product;
 
 use App\Models\Product;
+use App\Orchid\Components\ImagePreview;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Components\Cells\Boolean;
@@ -32,10 +33,7 @@ class ProductListLayout extends Table
         return [
             TD::make('id', 'ID')
                 ->width('120')
-                ->render(fn(Product $product) => "<img src='$product->preview_image'
-                      alt='preview_image'
-                      class='mw-100 d-block img-fluid rounded-1 w-100'>
-                    <span class='small text-muted mt-1 mb-0'># $product->id</span>")
+                ->component(ImagePreview::class)
                 ->sort(),
             TD::make('title')->width(120)->sort()->filter(Input::make()),
             TD::make('description')->width(200)->defaultHidden(),

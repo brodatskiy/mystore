@@ -6,6 +6,7 @@ namespace App\Orchid\Screens\Product;
 
 use App\Models\Product;
 use App\Orchid\Layouts\Product\ProductListLayout;
+use App\Orchid\Service\ProductService;
 use Illuminate\Http\Request;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Link;
@@ -75,9 +76,12 @@ class ProductListScreen extends Screen
         ];
     }
 
-    public function remove(Request $request): void
+    /**
+     * @throws \Throwable
+     */
+    public function remove(Request $request, ProductService $productService): void
     {
-        Product::findOrFail($request->get('id'))->delete();
+        $productService->delete(Product::findOrFail($request->get('id')));
 
         Toast::info(__('Product was removed'));
     }

@@ -101,7 +101,7 @@ class ProductEditScreen extends Screen
      * @return RedirectResponse
      * @throws \Throwable
      */
-    public function save(Product $product, Request $request, ProductService $productService): RedirectResponse
+    public function save( Request $request, Product $product, ProductService $productService): RedirectResponse
     {
         $productService->save($product, $request);
 
@@ -112,11 +112,13 @@ class ProductEditScreen extends Screen
 
     /**
      * @param Product $product
+     * @param ProductService $productService
      * @return RedirectResponse
+     * @throws \Throwable
      */
-    public function remove(Product $product): RedirectResponse
+    public function remove(Product $product, ProductService $productService): RedirectResponse
     {
-        $product->delete();
+        $productService->delete($product);
 
         Toast::info(__('Product was removed'));
 
