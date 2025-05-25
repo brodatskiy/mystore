@@ -83,7 +83,7 @@ class CartController extends Controller
                 return redirect()->route('orders.index');
             } catch (Exception $exception) {
                 Db::rollBack();
-                return back()->with('message', __('Your cart is empty'));
+                return back()->with('message', __($exception->getMessage()));
             }
     }
 
