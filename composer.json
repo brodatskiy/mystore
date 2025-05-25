@@ -16,6 +16,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/telescope": "^5.0",
         "laravel/tinker": "^2.8",
+        "league/flysystem-aws-s3-v3": "^3.0",
         "orchid/crud": "^4.2",
         "orchid/platform": "^14.22",
         "pusher/pusher-php-server": "^7.2",
