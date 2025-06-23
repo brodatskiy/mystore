@@ -10,7 +10,7 @@ services:
         depends_on:
             app:
                 condition: service_started
-        container_name: nginx
+        container_name: mystore_nginx
 
     app:
         build:
@@ -27,7 +27,7 @@ services:
         environment:
             PHP_IDE_CONFIG: "serverName=MyStore"
             XDEBUG_CONFIG: "idekey=PHPSTORM"
-        container_name: app
+        container_name: mystore_app
 
     db:
         image: postgres
@@ -47,16 +47,16 @@ services:
             retries: 5
             start_period: 30s
             timeout: 10s
-        container_name: db
+        container_name: mystore_db
 
     redis:
         image: redis
         restart: unless-stopped
         ports:
             - "6379:6379"
-        container_name: redis
+        container_name: mystore_redis
 
 volumes:
     db-volume:
         driver: local
-        name: "MyStore-pgsql"
+        name: "mystore_pgsql"

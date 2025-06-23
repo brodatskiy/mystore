@@ -4,12 +4,12 @@ on:
   push:
     branches: ['production']
   pull_request:
-      branches: ['production']
+    branches: ['production']
 
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  CONTAINER_PREFIX: my-store
+  CONTAINER_PREFIX: mystore
 
 jobs:
   build:

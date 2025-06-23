@@ -1,15 +1,15 @@
 services:
   nginx:
-    image: nginx:1.27.0-alpine-slim
+    image: nginx:stable
     volumes:
-      - ./_docker/nginx/conf.d:/etc/nginx/conf.d
+      - ./.docker/nginx/conf.d:/etc/nginx/conf.d
       - ./:/var/www
     ports:
       - '${APP_PORT:-80}:80'
     restart: always
     depends_on:
       - app
-    container_name: MyStore_nginx
+    container_name: mystore_nginx
 
   app:
     image: ${APP_IMAGE}
@@ -21,10 +21,10 @@ services:
       - '${VITE_PORT:-5173}:5173'
     depends_on:
       - db
-    container_name: MyStore_app
+    container_name: mystore_app
 
   db:
-    image: postgres:16.3-alpine3.20
+    image: postgres
     restart: always
     volumes:
       - db-volume:/var/lib/postgresql/data
@@ -34,9 +34,9 @@ services:
       - POSTGRES_PASSWORD=$${DB_PASSWORD}
     ports:
       - '${DB_PORT:-5432}:5432'
-    container_name: MyStore_db
+    container_name: mystore_db
 
 volumes:
   db-volume:
     driver: local
-    name: "MyStore-pgsql"
+    name: "mystore_pgsql"
