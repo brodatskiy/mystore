@@ -47,6 +47,7 @@ RUN set -eux; \
     install-php-extensions redis; \
     install-php-extensions @composer; \
     install-php-extensions xdebug; \
+    install-php-extensions sockets; \
     php -r 'var_dump(gd_info());'
 
 # Добавление кастомных .ini файлов для php
@@ -64,7 +65,7 @@ COPY /.docker/app/conf.d /usr/local/etc/php/conf.d/
 #COPY package.json   /var/www/package.json
 #COPY webpack.mix.js /var/www/webpack.mix.js
 
-COPY . ./var/www
+COPY composer.*  ./
 
 # Install nodejs
 RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - \
@@ -73,7 +74,6 @@ RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - \
 RUN composer install \
       --no-interaction \
       --no-plugins \
-      --no-suggest \
       --no-scripts \
       --no-autoloader \
       --prefer-dist
