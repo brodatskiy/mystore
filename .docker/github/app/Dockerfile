@@ -66,16 +66,9 @@ COPY webpack.mix.js /var/www/webpack.mix.js
 
 COPY composer.*  ./
 
-# Install composer
-ENV COMPOSER_ALLOW_SUPERUSER=1
-RUN curl -sS https://getcomposer.org/installer | php -- \
-    --filename=composer \
-    --install-dir=/usr/local/bin
-# alias
-RUN echo "alias a='artisan'" >> /root/.bashrc
-
-RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
-RUN apt-get install -y nodejs
+# Install nodejs
+RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - \
+  && apt-get install -y nodejs
 
 RUN composer install \
       --no-interaction \
