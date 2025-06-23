@@ -70,7 +70,7 @@ COPY composer.*  ./
 
 # Install nodejs
 RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - \
-  && apt-get install -y nodejs \
+  && apt-get install -y nodejs
 
 RUN set -eux; \
     composer install \
@@ -78,15 +78,15 @@ RUN set -eux; \
       --no-plugins \
       --no-scripts \
       --no-autoloader \
-      --prefer-dist;
+      --prefer-dist
 
 RUN set -eux; \
     composer dump-autoload --no-scripts --optimize; \
-    chown -R root:www-data /var/www;
+    chown -R root:www-data /var/www
 
 RUN set -eux; \
     chmod -R 755 /var/www; \
     chmod -R 775 /var/www/storage; \
-    chmod -R 775 /var/www/bootstrap/cache;
+    chmod -R 775 /var/www/bootstrap/cache
 
 WORKDIR /var/www
