@@ -1,5 +1,7 @@
 FROM php:8.4-fpm
 
+WORKDIR /var/www
+
 # Timezone
 ENV TZ=Europe/Moscow
 RUN apt-get update && apt-get install -yy tzdata
@@ -49,6 +51,10 @@ RUN set -eux; \
     install-php-extensions sockets; \
     php -r 'var_dump(gd_info());'
 
+# Install nodejs
+RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - \
+  && apt-get install -y nodejs
+
 # Добавление кастомных .ini файлов для php
 COPY /.docker/app/conf.d /usr/local/etc/php/conf.d/
 
@@ -63,11 +69,9 @@ COPY /.docker/app/conf.d /usr/local/etc/php/conf.d/
 #COPY artisan        /var/www/artisan
 #COPY package.json   /var/www/package.json
 
-COPY composer.*  ./
+#COPY composer.*  ./var/www
 
-# Install nodejs
-RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - \
-  && apt-get install -y nodejs
+COPY . .
 
 RUN set -eux; \
     composer install \
@@ -80,7 +84,6 @@ RUN set -eux; \
 RUN set -eux; \
     composer dump-autoload --no-scripts --optimize
 
-COPY . ./var/www
 
 RUN set -eux; \
     chmod -R 755 /var/www; \
@@ -89,4 +92,4 @@ RUN set -eux; \
 RUN set -eux; \
     chmod -R 775 /var/www/bootstrap/cache
 
-WORKDIR /var/www
+
