@@ -82,7 +82,7 @@ RUN set -eux; \
 RUN set -eux; \
     composer dump-autoload --no-scripts --optimize; \
     chown -R root:www-data /var/www; \
-    chmod 755 -R /var/www; \
+    chmod -R 755 /var/www; \
     chmod -R 775 /var/www/storage; \
     chmod -R 775 /var/www/bootstrap/cache;
 
