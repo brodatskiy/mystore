@@ -49,6 +49,8 @@ RUN set -eux; \
     install-php-extensions xdebug; \
     php -r 'var_dump(gd_info());'
 
+# Добавление кастомных .ini файлов для php
+COPY /.docker/app/conf.d /usr/local/etc/php/conf.d/
 
 COPY app            /var/www/app
 COPY bootstrap      /var/www/bootstrap
