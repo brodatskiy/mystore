@@ -48,6 +48,7 @@ RUN set -eux; \
     install-php-extensions redis; \
     install-php-extensions @composer; \
     install-php-extensions xdebug; \
+    install-php-extensions sockets; \
     php -r 'var_dump(gd_info());'
 
 # Install nodejs
