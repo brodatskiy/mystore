@@ -29,7 +29,7 @@ COPY artisan        /var/www/artisan
 COPY package.json   /var/www/package.json
 COPY vite.config.js /var/www/vite.config.js
 
-COPY composer.*  ./
+COPY composer.*  ./var/www
 
 #COPY . .
 
@@ -46,15 +46,13 @@ RUN echo "alias a='artisan'" >> /root/.bashrc
 RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - \
   && apt-get install -y nodejs
 
-#RUN composer install \
-#      --no-interaction \
-#      --no-plugins \
-#      --no-suggest \
-#      --no-scripts \
-#      --no-autoloader \
-#      --prefer-dist
-
-RUN composer install --no-interaction
+RUN composer install \
+      --no-interaction \
+      --no-plugins \
+      --no-suggest \
+      --no-scripts \
+      --no-autoloader \
+      --prefer-dist
 
 
 RUN composer dump-autoload  --no-scripts --optimize && \
