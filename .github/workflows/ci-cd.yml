@@ -89,7 +89,7 @@ jobs:
       - name: Copy .env
         run: cp .env.production .env
 
-      - name: Docker compose up
+      - name: Docker compose up2
         run: docker compose -f docker-compose.prod.yml up -d
 
       - run: echo ${{ vars.CONTAINER_PREFIX }}
