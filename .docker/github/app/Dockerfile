@@ -63,8 +63,6 @@ COPY /.docker/app/conf.d /usr/local/etc/php/conf.d/
 #COPY artisan        /var/www/artisan
 #COPY package.json   /var/www/package.json
 
-COPY . ./var/www
-
 COPY composer.*  ./
 
 # Install nodejs
@@ -80,8 +78,9 @@ RUN set -eux; \
       --prefer-dist
 
 RUN set -eux; \
-    composer dump-autoload --no-scripts --optimize; \
-    chown -R root:www-data /var/www
+    composer dump-autoload --no-scripts --optimize
+
+COPY . ./var/www
 
 RUN set -eux; \
     chmod -R 755 /var/www; \
