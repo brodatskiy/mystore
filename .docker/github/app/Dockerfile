@@ -63,9 +63,10 @@ COPY /.docker/app/conf.d /usr/local/etc/php/conf.d/
 #COPY storage        /var/www/storage
 #COPY artisan        /var/www/artisan
 #COPY package.json   /var/www/package.json
-#COPY webpack.mix.js /var/www/webpack.mix.js
 
-COPY composer.*  ./
+COPY . ./var/www
+
+#COPY composer.*  ./
 
 # Install nodejs
 RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - \
@@ -81,7 +82,9 @@ RUN set -eux; \
 
 RUN set -eux; \
     composer dump-autoload --no-scripts --optimize; \
-    chown -R root:www-data /var/www; \
+    chown -R root:www-data /var/www;
+
+RUN set -eux; \
     chmod -R 755 /var/www; \
     chmod -R 775 /var/www/storage; \
     chmod -R 775 /var/www/bootstrap/cache;
