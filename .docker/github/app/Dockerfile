@@ -17,21 +17,21 @@ RUN apt-get update \
     && docker-php-ext-install pgsql \
     && docker-php-ext-install pdo_pgsql
 
-#COPY app            /var/www/app
-#COPY bootstrap      /var/www/bootstrap
-#COPY config         /var/www/config
-#COPY database       /var/www/database
-#COPY public         /var/www/public
-#COPY resources      /var/www/resources
-#COPY routes         /var/www/routes
-#COPY storage        /var/www/storage
-#COPY artisan        /var/www/artisan
-#COPY package.json   /var/www/package.json
-#COPY vite.config.js /var/www/vite.config.js
-#
-#COPY composer.*  ./
+COPY app            /var/www/app
+COPY bootstrap      /var/www/bootstrap
+COPY config         /var/www/config
+COPY database       /var/www/database
+COPY public         /var/www/public
+COPY resources      /var/www/resources
+COPY routes         /var/www/routes
+COPY storage        /var/www/storage
+COPY artisan        /var/www/artisan
+COPY package.json   /var/www/package.json
+COPY vite.config.js /var/www/vite.config.js
 
-COPY . .
+COPY composer.*  ./
+
+#COPY . .
 
 # Install composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
