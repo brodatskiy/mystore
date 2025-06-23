@@ -16,7 +16,7 @@ RUN apt-get update \
     && docker-php-ext-install pdo_pgsql
 
 
-COPY ./_docker/app/php.ini /usr/local/etc/php/conf.d/php.ini
+COPY ./.docker/app/php.ini /usr/local/etc/php/conf.d/php.ini
 
 COPY app            /var/www/app
 COPY bootstrap      /var/www/bootstrap
