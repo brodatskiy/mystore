@@ -78,11 +78,10 @@ RUN composer install \
       --no-autoloader \
       --prefer-dist
 
-
-RUN composer dump-autoload  --no-scripts --optimize && \
-    chown -R root:www-data /var/www && \
-    chmod 755 -R /var/www && \
-    chmod -R 775 /var/www/storage && \
+RUN composer dump-autoload --no-scripts --optimize; \
+    chown -R root:www-data /var/www; \
+    chmod 755 -R /var/www; \
+    chmod -R 775 /var/www/storage; \
     chmod -R 775 /var/www/bootstrap/cache
 
 WORKDIR /var/www
