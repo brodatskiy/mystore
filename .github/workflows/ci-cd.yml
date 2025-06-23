@@ -92,6 +92,8 @@ jobs:
       - name: Docker compose up
         run: docker compose -f docker-compose.prod.yml up -d
 
+      - run: echo ${{ vars.CONTAINER_PREFIX }}
+
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app composer install
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app npm install
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app npm run build
