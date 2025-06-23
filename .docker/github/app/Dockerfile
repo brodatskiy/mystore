@@ -1,5 +1,4 @@
 FROM php:8.4-fpm
-WORKDIR /var/www
 
 # Timezone
 ENV TZ=Europe/Moscow
@@ -64,9 +63,9 @@ COPY /.docker/app/conf.d /usr/local/etc/php/conf.d/
 #COPY artisan        /var/www/artisan
 #COPY package.json   /var/www/package.json
 
-COPY . .
+COPY . ./var/www
 
-COPY composer.*  ./
+#COPY composer.*  ./
 
 # Install nodejs
 RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - \
