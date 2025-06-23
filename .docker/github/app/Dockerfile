@@ -37,7 +37,6 @@ RUN set -eux; \
 RUN set -eux; \
     docker-php-ext-install pgsql; \
     docker-php-ext-install pdo_pgsql; \
-    # Install the PHP gd library
     docker-php-ext-configure gd \
             --prefix=/usr \
             --with-jpeg \
@@ -58,19 +57,6 @@ RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - \
 # Добавление кастомных .ini файлов для php
 COPY /.docker/app/conf.d /usr/local/etc/php/conf.d/
 
-#COPY app            /var/www/app
-#COPY bootstrap      /var/www/bootstrap
-#COPY config         /var/www/config
-#COPY database       /var/www/database
-#COPY public         /var/www/public
-#COPY resources      /var/www/resources
-#COPY routes         /var/www/routes
-#COPY storage        /var/www/storage
-#COPY artisan        /var/www/artisan
-#COPY package.json   /var/www/package.json
-
-#COPY composer.*  ./var/www
-
 COPY . .
 
 RUN set -eux; \
@@ -81,15 +67,8 @@ RUN set -eux; \
       --no-autoloader \
       --prefer-dist
 
-RUN set -eux; \
-    composer dump-autoload --no-scripts --optimize
-
-
-RUN set -eux; \
-    chmod -R 755 /var/www; \
-    chmod -R 775 /var/www/storage
-
-RUN set -eux; \
+RUN composer dump-autoload  --no-scripts --optimize && \
+    chown -R root:www-data /var/www && \
+    chmod -R 755 /var/www && \
+    chmod -R 775 /var/www/storage && \
     chmod -R 775 /var/www/bootstrap/cache
-
-

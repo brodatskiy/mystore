@@ -37,7 +37,6 @@ RUN set -eux; \
 RUN set -eux; \
     docker-php-ext-install pgsql; \
     docker-php-ext-install pdo_pgsql; \
-    # Install the PHP gd library
     docker-php-ext-configure gd \
             --prefix=/usr \
             --with-jpeg \
