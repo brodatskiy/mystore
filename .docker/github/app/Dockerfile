@@ -86,7 +86,9 @@ RUN set -eux; \
 
 RUN set -eux; \
     chmod -R 755 /var/www; \
-    chmod -R 775 /var/www/storage; \
+    chmod -R 775 /var/www/storage
+
+RUN set -eux; \
     chmod -R 775 /var/www/bootstrap/cache
 
 WORKDIR /var/www
