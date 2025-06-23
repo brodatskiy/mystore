@@ -52,19 +52,19 @@ RUN set -eux; \
 # Добавление кастомных .ini файлов для php
 COPY /.docker/app/conf.d /usr/local/etc/php/conf.d/
 
-COPY app            /var/www/app
-COPY bootstrap      /var/www/bootstrap
-COPY config         /var/www/config
-COPY database       /var/www/database
-COPY public         /var/www/public
-COPY resources      /var/www/resources
-COPY routes         /var/www/routes
-COPY storage        /var/www/storage
-COPY artisan        /var/www/artisan
-COPY package.json   /var/www/package.json
-COPY webpack.mix.js /var/www/webpack.mix.js
+#COPY app            /var/www/app
+#COPY bootstrap      /var/www/bootstrap
+#COPY config         /var/www/config
+#COPY database       /var/www/database
+#COPY public         /var/www/public
+#COPY resources      /var/www/resources
+#COPY routes         /var/www/routes
+#COPY storage        /var/www/storage
+#COPY artisan        /var/www/artisan
+#COPY package.json   /var/www/package.json
+#COPY webpack.mix.js /var/www/webpack.mix.js
 
-COPY composer.*  ./
+COPY . ./var/www
 
 # Install nodejs
 RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - \
