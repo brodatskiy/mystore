@@ -46,13 +46,15 @@ RUN echo "alias a='artisan'" >> /root/.bashrc
 RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - \
   && apt-get install -y nodejs
 
-RUN composer install \
-      --no-interaction \
-      --no-plugins \
-      --no-suggest \
-      --no-scripts \
-      --no-autoloader \
-      --prefer-dist
+#RUN composer install \
+#      --no-interaction \
+#      --no-plugins \
+#      --no-suggest \
+#      --no-scripts \
+#      --no-autoloader \
+#      --prefer-dist
+
+RUN composer -v
 
 
 RUN composer dump-autoload  --no-scripts --optimize && \
