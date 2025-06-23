@@ -54,7 +54,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - \
 #      --no-autoloader \
 #      --prefer-dist
 
-RUN composer -v
+RUN composer install --no-interaction
 
 
 RUN composer dump-autoload  --no-scripts --optimize && \
