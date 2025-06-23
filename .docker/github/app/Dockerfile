@@ -64,7 +64,7 @@ COPY /.docker/app/conf.d /usr/local/etc/php/conf.d/
 #COPY artisan        /var/www/artisan
 #COPY package.json   /var/www/package.json
 
-COPY . ./var/www
+COPY . .
 
 COPY composer.*  ./
 
