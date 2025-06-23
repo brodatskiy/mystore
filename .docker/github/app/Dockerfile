@@ -1,4 +1,6 @@
-FROM php:8.3-fpm-bullseye
+FROM php:8.4-fpm
+
+WORKDIR /var/www
 
 RUN apt-get update \
     && apt-get install -y \
@@ -15,22 +17,21 @@ RUN apt-get update \
     && docker-php-ext-install pgsql \
     && docker-php-ext-install pdo_pgsql
 
+#COPY app            /var/www/app
+#COPY bootstrap      /var/www/bootstrap
+#COPY config         /var/www/config
+#COPY database       /var/www/database
+#COPY public         /var/www/public
+#COPY resources      /var/www/resources
+#COPY routes         /var/www/routes
+#COPY storage        /var/www/storage
+#COPY artisan        /var/www/artisan
+#COPY package.json   /var/www/package.json
+#COPY vite.config.js /var/www/vite.config.js
+#
+#COPY composer.*  ./
 
-COPY ./.docker/app/php.ini /usr/local/etc/php/conf.d/php.ini
-
-COPY app            /var/www/app
-COPY bootstrap      /var/www/bootstrap
-COPY config         /var/www/config
-COPY database       /var/www/database
-COPY public         /var/www/public
-COPY resources      /var/www/resources
-COPY routes         /var/www/routes
-COPY storage        /var/www/storage
-COPY artisan        /var/www/artisan
-COPY package.json   /var/www/package.json
-COPY vite.config.js /var/www/vite.config.js
-
-COPY composer.*  ./
+COPY . .
 
 # Install composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
@@ -63,4 +64,3 @@ RUN composer dump-autoload  --no-scripts --optimize && \
 RUN apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-WORKDIR /var/www
