@@ -65,6 +65,7 @@ RUN crontab /etc/cron.d/crontab
 
 # Добавление кофиг файла supervisod
 COPY /.docker/app/supervisor/supervisord.conf /etc/supervisor/supervisord.conf
+
 # Добавление кофиг файлой воркеров
 COPY /.docker/app/supervisor/conf.d /etc/supervisor/conf.d
 
