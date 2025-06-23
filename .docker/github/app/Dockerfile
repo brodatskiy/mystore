@@ -65,7 +65,7 @@ COPY /.docker/app/conf.d /usr/local/etc/php/conf.d/
 
 COPY . ./var/www
 
-#COPY composer.*  ./
+COPY composer.*  ./
 
 # Install nodejs
 RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - \
