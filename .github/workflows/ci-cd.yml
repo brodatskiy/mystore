@@ -13,7 +13,7 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     outputs:
       APP_IMAGE: ${{ steps.setImageName.outputs.APP_IMAGE }}
     permissions:
@@ -56,7 +56,8 @@ jobs:
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
 
-      - id: setImageName
+      - name: Create output var
+        id: setImageName
         run: echo "APP_IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.push.outputs.digest }}" >> "$GITHUB_OUTPUT"
 
   deploy:
