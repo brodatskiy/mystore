@@ -98,7 +98,7 @@ jobs:
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app npm run build
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan migrate --force
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan key:generate
-      - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan my-store:install
+      - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan mystore:install
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app chmod -R 777 ./storage
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app chmod -R 775 ./bootstrap/cache
       - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app cron
