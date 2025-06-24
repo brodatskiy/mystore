@@ -7,7 +7,7 @@ use Illuminate\Console\Command;
 class InstallCommand extends Command
 {
 
-    protected $signature = 'app:install';
+    protected $signature = 'mystore:install';
 
     protected $description = 'Installation';
 
