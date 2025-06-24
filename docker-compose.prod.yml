@@ -36,6 +36,13 @@ services:
       - '${DB_PORT:-5432}:5432'
     container_name: mystore_db
 
+  redis:
+    image: redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    container_name: mystore_redis
+
 volumes:
   db-volume:
     driver: local
