@@ -88,12 +88,12 @@ jobs:
       - name: Copy .env
         run: cp .env.production .env
 
-      - name: Docker compose up2
+      - name: Docker compose up
         run: docker compose -f docker-compose.prod.yml up -d
 
-      - run: docker exec app composer install
-      - run: docker exec app npm install
-      - run: docker exec app npm run build
+#      - run: docker exec app composer install
+#      - run: docker exec app npm install
+#      - run: docker exec app npm run build
       - run: docker exec app php artisan migrate --force
       - run: docker exec app php artisan key:generate
       - run: docker exec app php artisan mystore:install

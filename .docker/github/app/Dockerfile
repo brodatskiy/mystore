@@ -50,7 +50,7 @@ RUN set -eux; \
     install-php-extensions sockets; \
     php -r 'var_dump(gd_info());'
 
-# Install nodejs
+# Установка nodejs
 RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - \
   && apt-get install -y nodejs
 
@@ -59,13 +59,16 @@ COPY /.docker/app/conf.d /usr/local/etc/php/conf.d/
 
 COPY . .
 
-RUN set -eux; \
-    composer install \
+RUN composer install \
       --no-interaction \
       --no-plugins \
       --no-scripts \
       --no-autoloader \
       --prefer-dist
+
+RUN npm install; \
+    npm run build; \
+    rm -fr node_modules
 
 RUN composer dump-autoload  --no-scripts --optimize && \
     chown -R root:www-data /var/www && \
