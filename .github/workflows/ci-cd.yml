@@ -91,18 +91,14 @@ jobs:
       - name: Docker compose up2
         run: docker compose -f docker-compose.prod.yml up -d
 
-      - run: echo ${{ vars.CONTAINER_PREFIX }}
-
-      - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app composer install
-      - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app npm install
-      - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app npm run build
-      - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan migrate --force
-      - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan key:generate
-      - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan mystore:install
-      - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app chmod -R 777 ./storage
-      - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app chmod -R 775 ./bootstrap/cache
-      - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app cron
-      - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app supervisord
-      - run: docker exec ${{ vars.CONTAINER_PREFIX }}_app php artisan optimize
-
-
+      - run: docker exec app composer install
+      - run: docker exec app npm install
+      - run: docker exec app npm run build
+      - run: docker exec app php artisan migrate --force
+      - run: docker exec app php artisan key:generate
+      - run: docker exec app php artisan mystore:install
+      - run: docker exec app chmod -R 777 ./storage
+      - run: docker exec app chmod -R 775 ./bootstrap/cache
+      - run: docker exec app cron
+      - run: docker exec app supervisord
+      - run: docker exec app php artisan optimize

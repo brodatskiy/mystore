@@ -9,7 +9,7 @@ services:
     restart: always
     depends_on:
       - app
-    container_name: mystore_nginx
+    container_name: nginx
 
   app:
     image: ${APP_IMAGE}
@@ -21,7 +21,7 @@ services:
       - '${VITE_PORT:-5173}:5173'
     depends_on:
       - db
-    container_name: mystore_app
+    container_name: app
 
   db:
     image: postgres
@@ -34,14 +34,14 @@ services:
       - POSTGRES_PASSWORD=$${DB_PASSWORD}
     ports:
       - '${DB_PORT:-5432}:5432'
-    container_name: mystore_db
+    container_name: db
 
   redis:
     image: redis
     restart: unless-stopped
     ports:
       - "6379:6379"
-    container_name: mystore_redis
+    container_name: redis
 
 volumes:
   db-volume:
