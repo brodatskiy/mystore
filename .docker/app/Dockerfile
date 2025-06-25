@@ -50,24 +50,19 @@ RUN set -eux; \
     install-php-extensions sockets; \
     php -r 'var_dump(gd_info());'
 
-# Install nodejs
+# Установка nodejs
 RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - \
   && apt-get install -y nodejs
 
-# Add crontab file in the cron directory
+# Копирование таблиц крон
 COPY /.docker/app/cron/crontab.txt /etc/cron.d/crontab
 
-# Give execution rights on the cron job
-RUN chmod 0744 /etc/cron.d/crontab
+# Выдача прав крону
+RUN chmod 0744 /etc/cron.d/crontab; \
+    crontab /etc/cron.d/crontab
 
-# Apply cron job
-RUN crontab /etc/cron.d/crontab
-
-# Добавление кофиг файла supervisod
-COPY /.docker/app/supervisor/supervisord.conf /etc/supervisor/supervisord.conf
-
-# Добавление кофиг файлой воркеров
-COPY /.docker/app/supervisor/conf.d /etc/supervisor/conf.d
+# Добавление кофиг файлов supervisod
+COPY /.docker/app/supervisor /etc/supervisor
 
 # Добавление кастомных .ini файлов для php
 COPY /.docker/app/conf.d /usr/local/etc/php/conf.d/
