@@ -94,7 +94,7 @@ jobs:
 #      - run: docker exec app npm run build
       - run: docker exec app php artisan migrate --force
       - run: docker exec app php artisan key:generate
-      - run: docker exec app php artisan mystore:install
+      - run: docker exec app php artisan app:install
       - run: docker exec app chmod -R 777 ./storage
       - run: docker exec app chmod -R 775 ./bootstrap/cache
       - run: docker exec app cron

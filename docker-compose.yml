@@ -21,12 +21,12 @@ services:
         ports:
             - '${VITE_PORT:-5173}:5173'
         restart: always
+        environment:
+            PHP_IDE_CONFIG: "serverName=mystore"
+            XDEBUG_CONFIG: "idekey=PHPSTORM"
         depends_on:
             db:
                 condition: service_healthy
-        environment:
-            PHP_IDE_CONFIG: "serverName=MyStore"
-            XDEBUG_CONFIG: "idekey=PHPSTORM"
         container_name: app
 
     db:
@@ -59,4 +59,4 @@ services:
 volumes:
     db-volume:
         driver: local
-        name: "mystore_pgsql"
+        name: "db_volume"
