@@ -74,16 +74,16 @@ jobs:
           clean: 'false'
 
       - name: Stop all containers
-        run: docker stop $(docker ps -a -q)
+        run: docker stop $(docker ps -a -q) -a -f
 
       - name: Remove all the containers
-        run: docker container prune
+        run: docker container prune -a -f
 
       - name: Remove unused images.
-        run: docker image prune
+        run: docker image prune -a -f
 
       - name: Remove remove anonymous local volumes.
-        run:  docker volume prune
+        run:  docker volume prune -a -f
 
       - name: Copy .env
         run: cp .env.production .env
