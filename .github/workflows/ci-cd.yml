@@ -74,22 +74,22 @@ jobs:
           clean: 'false'
 
       - name: Stop all containers
-        run: docker stop $(docker ps -a -q) -a -f
+        run: docker stop $(docker ps -a -q)
 
-      - name: Remove all the containers
-        run: docker container prune -a -f
+      - name: Remove unused containers.
+        run: docker rm $(docker ps --filter status=exited -q)
 
       - name: Remove unused images.
         run: docker image prune -a -f
 
       - name: Remove remove anonymous local volumes.
-        run:  docker volume prune -a -f
+        run:  docker volume prune -f
 
       - name: Copy .env
         run: cp .env.production .env
 
       - name: Docker compose up
-        run: docker compose -f docker-compose.prod.yml up -d --rm
+        run: docker compose -f docker-compose.prod.yml up -d
 
       - run: docker exec app composer install
       - run: docker exec app npm install
