@@ -74,7 +74,7 @@ jobs:
           clean: 'false'
 
       - name: Stop all containers
-        run: docker stop $(docker ps -a -q) && true
+        run: docker stop $(docker ps -a -q) || true
 
       - name: Remove unused containers.
         run: docker rm $(docker ps --filter status=exited -q)
