@@ -74,7 +74,7 @@ jobs:
           clean: 'false'
 
       - name: Stop all containers
-        run: docker stop $(docker ps -a -q) && true
+        run: docker stop $(docker ps -a -q)
 
       - name: Remove all the containers
         run: docker container prune
