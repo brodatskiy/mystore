@@ -77,13 +77,13 @@ jobs:
         run: docker stop $(docker ps -a -q) || true
 
       - name: Remove unused containers.
-        run: docker rm $(docker ps --filter status=exited -q)
+        run: docker rm $(docker ps --filter status=exited -q) || true
 
       - name: Remove unused images.
-        run: docker image prune -a -f
+        run: docker image prune -a -f || true
 
       - name: Remove remove anonymous local volumes.
-        run:  docker volume prune -f
+        run:  docker volume prune -f || true
 
       - name: Copy .env
         run: cp .env.production .env
