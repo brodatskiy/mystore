@@ -42,12 +42,12 @@ function toggleWish(product) {
                 <div v-if="!product.image" class="w-full h-72 bg-gray-300 rounded"></div>
                 <img v-else class="w-full h-72 rounded-lg object-cover object-center" :src="product.image"
                      :alt="product.title">
-                <p v-if="product.sticker" class="absolute top-2 right-2">
+                <p v-if="product.sticker" class="absolute top-2 right-2 text-white">
                     {{ product.sticker.title.toUpperCase() }}
                 </p>
             </div>
             <div class="flex items-center justify-between py-2">
-                <p class=" text-l font-semibold text-surface-800 dark:text-surface-200">${{ product.price }}</p>
+                <p class=" text-l font-semibold text-surface-800 dark:text-surface-200">{{ product.price }}₽</p>
                 <Button severity="secondary" text v-if="$page.props.auth.user" @click.prevent="toggleWish(product)"
                         :class="{ 'opacity-50': processingAddToWish }">
                     <i v-if="product.wished" class="pi pi-heart-fill" style="color: red"></i>
