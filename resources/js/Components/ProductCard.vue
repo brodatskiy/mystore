@@ -3,7 +3,7 @@ import {Link, router} from "@inertiajs/vue3";
 import ButtonPrimary from "@/Components/Buttons/ButtonPrimary.vue";
 import {ref} from "vue";
 
-defineProps(["product"]);
+const props = defineProps(["product"]);
 
 const processingAddToWish = ref(false);
 const processingAddToCart = ref(false);
@@ -33,6 +33,8 @@ function toggleWish(product) {
         },
     });
 }
+
+console.log(props);
 </script>
 <template>
     <Link :href="route('product.show', product) ">
