@@ -91,6 +91,9 @@ jobs:
       - name: Docker compose up
         run: docker compose -f docker-compose.prod.yml up -d
 
+      - name: test
+        run: echo ${{vars.S3_SECRET_ACCESS_KEY}}
+
       - run: docker exec app composer install
       - run: docker exec app npm install
       - run: docker exec app npm run build
