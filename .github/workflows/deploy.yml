@@ -28,15 +28,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: test
-        run: echo ${{vars.APP_NAME}}
-
-      - name: test2
-        run: echo ${{env.DB_PASSWORD}}
-
-      - name: test2
-        run: throw
-
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
