@@ -23,6 +23,7 @@ jobs:
     environment: production
     env:
       S3_SECRET_ACCESS_KEY: ${{vars.S3_SECRET_ACCESS_KEY}}
+      DB_PASSWORD: ${{vars.DB_PASSWORD}}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -31,7 +32,7 @@ jobs:
         run: echo ${{vars.APP_NAME}}
 
       - name: test2
-        run: echo ${{env.S3_SECRET_ACCESS_KEY}}
+        run: echo ${{env.DB_PASSWORD}}
 
       - name: test2
         run: throw
