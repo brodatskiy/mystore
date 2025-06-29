@@ -24,6 +24,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: test
+        run: ${{vars}}
+
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
@@ -67,6 +70,7 @@ jobs:
     env:
       APP_IMAGE: ${{needs.build.outputs.APP_IMAGE}}
       DB_PASSWORD: ${{vars.DB_PASSWORD}}
+      S3_SECRET_ACCESS_KEY: ${{vars.S3_SECRET_ACCESS_KEY}}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -90,9 +94,6 @@ jobs:
 
       - name: Docker compose up
         run: docker compose -f docker-compose.prod.yml up -d
-
-      - name: test
-        run: echo ${{vars.S3_SECRET_ACCESS_KEY}}
 
       - run: docker exec app composer install
       - run: docker exec app npm install
