@@ -104,5 +104,5 @@ jobs:
       - run: docker exec app chmod -R 777 ./storage
       - run: docker exec app chmod -R 775 ./bootstrap/cache
       - run: docker exec app cron
-      - run: docker exec app supervisord
+      - run: docker exec app supervisord || true
       - run: docker exec app php artisan optimize
