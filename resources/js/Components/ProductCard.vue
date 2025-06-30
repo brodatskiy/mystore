@@ -44,7 +44,7 @@ console.log(props);
                 <div v-if="!product.image" class="w-full h-72 bg-gray-300 rounded"></div>
                 <img v-else class="w-full h-72 rounded-lg object-cover object-center" :src="product.image"
                      :alt="product.title">
-                <p v-if="product.sticker" class="absolute top-2 right-2 text-white">
+                <p v-if="product.sticker" class="absolute top-2 right-2 text-black">
                     {{ product.sticker.title.toUpperCase() }}
                 </p>
             </div>
