@@ -33,7 +33,7 @@ class ProductService
     {
         try {
             DB::beginTransaction();
-            Storage::disk('public')->delete($product->previewImage()->first()->physicalPath());
+            $product->previewImage->delete();
             $product->delete();
             Db::commit();
         } catch (Exception $exception) {
