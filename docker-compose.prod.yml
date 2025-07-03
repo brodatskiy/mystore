@@ -32,7 +32,7 @@ services:
         image: postgres
         restart: always
         volumes:
-            - db-volume:/var/lib/postgresql/data
+            - db-pgsql:/var/lib/postgresql/data
         environment:
             - POSTGRES_DB=${DB_DATABASE}
             - POSTGRES_USER=${DB_USERNAME}
@@ -55,6 +55,6 @@ services:
         container_name: redis
 
 volumes:
-    db-volume:
+    db-pgsql:
         driver: local
-        name: "db_volume"
+        name: "db_pgsql"
