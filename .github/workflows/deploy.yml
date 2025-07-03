@@ -72,6 +72,12 @@ jobs:
       APP_IMAGE: ${{needs.build.outputs.APP_IMAGE}}
       DB_PASSWORD: ${{vars.DB_PASSWORD}}
     steps:
+      - name: test
+        run: echo ${{ secrets.DB_PASSWORD }}
+
+      - name: test2
+        run: echo ${{ vars.DB_PASSWORD}}
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
