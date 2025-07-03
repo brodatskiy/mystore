@@ -6,70 +6,11 @@ on:
   pull_request:
     branches: ['production']
 
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
-
 jobs:
-#  build:
-#    runs-on: ubuntu-22.04
-#    outputs:
-#      APP_IMAGE: ${{ steps.setImageName.outputs.APP_IMAGE }}
-#    permissions:
-#      id-token: write
-#      packages: write
-#      contents: read
-#      attestations: write
-#    environment: production
-#    env:
-#      S3_SECRET_ACCESS_KEY: ${{vars.S3_SECRET_ACCESS_KEY}}
-#      DB_PASSWORD: ${{vars.DB_PASSWORD}}
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v4
-#
-#      - name: Login to GitHub Container Registry
-#        uses: docker/login-action@v3
-#        with:
-#          registry: ${{ env.REGISTRY }}
-#          username: ${{ github.actor }}
-#          password: ${{ secrets.GITHUB_TOKEN }}
-#
-#      - name: Docker meta
-#        id: meta
-#        uses: docker/metadata-action@v5
-#        with:
-#          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-#
-#      - name: Build and push
-#        id: push
-#        uses: docker/build-push-action@v5
-#        with:
-#          context: .
-#          file: ./.docker/github/app/Dockerfile
-#          push: ${{ github.event_name != 'pull_request' }}
-#          tags: ${{ steps.meta.outputs.tags }}
-#          labels: ${{ steps.meta.outputs.labels }}
-#
-#      - name: Generate artifact attestation
-#        id: artifact
-#        uses: actions/attest-build-provenance@v1
-#        with:
-#          subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}
-#          subject-digest: ${{ steps.push.outputs.digest }}
-#          push-to-registry: true
-#
-#      - name: Create output var
-#        id: setImageName
-#        run: echo "APP_IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.push.outputs.digest }}" >> "$GITHUB_OUTPUT"
-
   deploy:
-#    needs: [build]
     runs-on: self-hosted
     permissions: write-all
     environment: production
-    env:
-      APP_IMAGE: ${{needs.build.outputs.APP_IMAGE}}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -80,11 +21,6 @@ jobs:
         uses: easyware-io/export-to-env@v1
         with:
           vars: ${{ toJSON(vars) }}
-
-      - name: test
-        run: echo $S3_ACCESS_KEY_ID
-
-      - run: pwtadmkaw
 
       - name: Stop all containers
         run: docker stop $(docker ps -a -q) || true
