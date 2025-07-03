@@ -83,7 +83,7 @@ jobs:
           secrets: ${{ toJSON(vars) }}
 
       - name: test
-        run: echo ${{S3_ACCESS_KEY_ID}}
+        run: echo ${{vars.S3_ACCESS_KEY_ID}}
 
       - run: pwtadmkaw
 
