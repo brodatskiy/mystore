@@ -41,6 +41,12 @@ services:
             - '${DB_PORT:-5432}:5432'
         container_name: db
 
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+            - 8080:8080
+
     redis:
         image: redis
         restart: unless-stopped
