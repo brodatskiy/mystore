@@ -19,7 +19,7 @@ services:
         volumes:
             - ./:/var/www
         environment:
-            - DB_PASSWORD=$${DB_PASSWORD}
+            - DB_PASSWORD=${DB_PASSWORD}
             - PHP_IDE_CONFIG="serverName=mystore"
             - XDEBUG_CONFIG="idekey=PHPSTORM"
         ports:
