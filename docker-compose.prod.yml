@@ -19,6 +19,19 @@ services:
         volumes:
             - ./:/var/www
         environment:
+            APP_KEY: ${APP_KEY}
+            APP_NAME: ${APP_NAME}
+            APP_ENV: ${APP_ENV}
+            APP_URL: ${APP_URL}
+            DB_CONNECTION: ${DB_CONNECTION}
+            DB_HOST: ${DB_HOST}
+            DB_PORT: ${DB_PORT}
+            DB_DATABASE: ${DB_DATABASE}
+            DB_USERNAME: ${DB_USERNAME}
+            DB_PASSWORD: ${DB_PASSWORD}
+            APP_DEBUG: ${APP_DEBUG}
+            AWS_ACCESS_KEY_ID: ${S3_ACCESS_KEY_ID}
+            AWS_SECRET_ACCESS_KEY: ${S3_SECRET_ACCESS_KEY}
             PHP_IDE_CONFIG: "serverName=mystore"
             XDEBUG_CONFIG: "idekey=PHPSTORM"
         ports:
