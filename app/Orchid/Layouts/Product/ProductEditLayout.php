@@ -44,15 +44,24 @@ class ProductEditLayout extends Rows
                 ->title(__('Price'))
                 ->placeholder(__('Price')),
 
+            Input::make('product.rating')
+                ->value(5)
+                ->required()
+                ->mask([
+                    'mask' => '9.9',
+                    'numericInput' => true
+                ])
+                ->title(__('Rating'))
+                ->placeholder(__('Rating')),
+
             Input::make('product.count')
-                ->value(1)
+                ->value(100)
                 ->required()
                 ->type('number')
                 ->title(__('Count'))
                 ->placeholder(__('Count')),
 
             Select::make('product.tags.')
-                ->required()
                 ->fromModel(Tag::class, 'title')
                 ->multiple()
                 ->title(__('Tag')),
