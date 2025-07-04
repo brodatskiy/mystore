@@ -18,6 +18,9 @@ class ProductService
         try {
             DB::beginTransaction();
             $product->fill($request->collect('product')->except(['tags'])->toArray())->save();
+            $product->attachments()->syncWithoutDetaching(
+                $request->input('product.preview_image', [])
+            );
             $product->tags()->sync($request->input('product.tags'));
             Db::commit();
         } catch (Exception $exception) {
