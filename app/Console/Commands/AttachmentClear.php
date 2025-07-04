@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Collection;
 use Orchid\Attachment\Models\Attachment;
 
 class AttachmentClear extends Command
@@ -22,14 +23,17 @@ class AttachmentClear extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(): int
     {
+        /**
+         * @var $unrelatedAttachments Collection
+         */
         $unrelatedAttachments = Attachment::doesntHave('relationships')
             ->where('created_at', '<', now()->subMinutes(3))
             ->get();
 
         $unrelatedAttachments->each->delete();
 
-        return Command::SUCCESS;
+        return self::SUCCESS;
     }
 }
