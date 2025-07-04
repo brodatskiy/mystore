@@ -31,6 +31,7 @@ class ProductEditScreen extends Screen
      */
     public function query(Product $product): iterable
     {
+        $product->load('attachments');
 
         return [
             'product' => $product,
