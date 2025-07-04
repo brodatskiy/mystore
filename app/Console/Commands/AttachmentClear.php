@@ -29,7 +29,7 @@ class AttachmentClear extends Command
          * @var $unrelatedAttachments Collection
          */
         $unrelatedAttachments = Attachment::doesntHave('relationships')
-            ->where('created_at', '<', now()->subMinutes(3))
+            ->whereDate('created_at', '<', now()->subDays(1))
             ->get();
 
         $unrelatedAttachments->each->delete();
