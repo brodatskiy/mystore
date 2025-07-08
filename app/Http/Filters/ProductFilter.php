@@ -28,11 +28,11 @@ class ProductFilter extends AbstractFilter
 
     public function minPrice(Builder $builder, $value): void
     {
-        $builder->where('price', '>', $value);
+        $builder->where('price', '>=', $value);
     }
 
     public function maxPrice(Builder $builder, $value): void
     {
-        $builder->where('price', '<', $value);
+        $builder->where('price', '<=', $value);
     }
 }
