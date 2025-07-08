@@ -41,7 +41,7 @@ jobs:
         run: docker compose -f docker-compose.prod.yml up -d
 
       - run: docker exec app composer install --no-dev
-      - run: docker exec app npm install --omit=dev
+      - run: docker exec app npm install
       - run: docker exec app npm run build
       - run: docker exec app php artisan migrate --force
       - run: docker exec app php artisan key:generate
