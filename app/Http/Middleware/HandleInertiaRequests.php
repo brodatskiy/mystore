@@ -48,7 +48,7 @@ class HandleInertiaRequests extends Middleware
             ],
             'misc' => fn () => [
                 'cartItemsCount'=> app(CartService::class)->count(),
-                'wishesCount'=> $request->user()->wishes()->count(),
+//                'wishesCount'=> $request->user()->wishes()->count(),
             ],
             'locale' => fn () => app()->getLocale()
         ];
