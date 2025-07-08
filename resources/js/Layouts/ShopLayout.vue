@@ -12,6 +12,7 @@ import SignUpButtonLink from "@/Components/Buttons/SignUpButtonLink.vue";
 import ButtonPrimary from "@/Components/Buttons/ButtonDD.vue";
 import ProductSearch from "@/Components/Filters/ProductSearch.vue";
 import Drawer from 'primevue/drawer';
+import OverlayBadge from 'primevue/overlaybadge';
 
 const {t} = useI18n()
 
@@ -29,7 +30,7 @@ function getNavigation() {
 }
 
 function navigationExpander() {
-    if (navigation.value.length === 0){
+    if (navigation.value.length === 0) {
         getNavigation();
     }
     navigationExpand.value = true;
@@ -123,7 +124,9 @@ function isDarkMode() {
                             <i v-else class="pi pi-sun" style="font-size: 1.25rem"></i>
                         </ButtonPrimary>
                         <ButtonLink :href="route('cart.index')">
-                            <i class="pi pi-shopping-cart" style="font-size: 1.25rem"></i>
+                            <OverlayBadge :value="$page.props.misc.cartItemsCount" size="small" >
+                                <i class="pi pi-shopping-cart" style="font-size: 1.25rem"></i>
+                            </OverlayBadge>
                         </ButtonLink>
                         <ButtonLink :href="route('wishes.index')">
                             <i class="pi pi-heart" style="font-size: 1.25rem"></i>
