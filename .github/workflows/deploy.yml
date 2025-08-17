@@ -35,7 +35,7 @@ jobs:
         run:  docker volume prune -f || true
 
       - name: Copy .env
-        run: cp .env.production .env
+        run: cp .env.example .env
 
       - name: Docker compose up
         run: docker compose -f docker-compose.prod.yml up -d
