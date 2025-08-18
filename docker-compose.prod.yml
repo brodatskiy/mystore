@@ -19,7 +19,6 @@ services:
         volumes:
             - ./:/var/www
         environment:
-            APP_KEY: ${APP_KEY}
             APP_NAME: ${APP_NAME}
             APP_ENV: ${APP_ENV}
             APP_DEBUG: ${APP_DEBUG}
