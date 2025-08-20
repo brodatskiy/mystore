@@ -2,7 +2,7 @@ name: ci-cd
 
 on:
   push:
-    branches: ['production']
+    branches: ['main']
 
 jobs:
   deploy:
