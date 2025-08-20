@@ -19,9 +19,9 @@ services:
         volumes:
             - ./:/var/www
         environment:
+            APP_KEY: ${APP_KEY}
             APP_NAME: ${APP_NAME}
             APP_ENV: ${APP_ENV}
-            APP_DEBUG: ${APP_DEBUG}
             APP_URL: ${APP_URL}
 
             DB_CONNECTION: ${DB_CONNECTION}
@@ -84,6 +84,7 @@ services:
             - "6379:6379"
         environment:
             REDIS_PASSWORD: ${REDIS_PASSWORD}
+        command: redis-server --requirepass ${REDIS_PASSWORD}
         container_name: redis
 
 volumes:
