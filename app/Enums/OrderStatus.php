@@ -16,9 +16,9 @@ enum OrderStatus: string
     {
         $transitions = [
             OrderStatus::Unpaid->value => [
-                OrderStatus::Paid
-            ], OrderStatus::Paid->value => [
+                OrderStatus::Paid,
                 OrderStatus::Cancelled,
+            ], OrderStatus::Paid->value => [
                 OrderStatus::Shipped,
             ], OrderStatus::Shipped->value => [
                 OrderStatus::Delivered,

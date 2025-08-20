@@ -1,0 +1,52 @@
+name: ci-cd
+
+on:
+  push:
+    branches: ['production']
+  pull_request:
+    branches: ['production']
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    permissions: write-all
+    environment: production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          clean: 'false'
+
+      - name: Export secrets and vars to local env
+        uses: easyware-io/export-to-env@v1
+        with:
+          vars: ${{ toJSON(vars) }}
+
+      - name: Stop all containers
+        run: docker stop $(docker ps -a -q) || true
+
+      - name: Remove unused containers.
+        run: docker rm $(docker ps --filter status=exited -q) || true
+
+      - name: Remove unused images.
+        run: docker image prune -a -f || true
+
+      - name: Remove remove anonymous local volumes.
+        run:  docker volume prune -f || true
+
+      - name: Copy .env
+        run: cp .env.example .env
+
+      - name: Docker compose up
+        run: docker compose -f docker-compose.prod.yml up -d
+
+      - run: docker exec app composer install --no-dev
+      - run: docker exec app npm install
+      - run: docker exec app npm run build
+      - run: docker exec app php artisan migrate --force
+      - run: docker exec app php artisan key:generate
+      - run: docker exec app php artisan app:install
+      - run: docker exec app chmod -R 777 ./storage
+      - run: docker exec app chmod -R 775 ./bootstrap/cache
+      - run: docker exec app supervisord || true
+      - run: docker exec app php artisan optimize

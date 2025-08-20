@@ -53,6 +53,11 @@ class OrderController extends Controller
     {
         $order->updateStatus(OrderStatus::Paid);
 
+        $order->orderItems->each(function (OrderItem $orderItem) {
+            $orderItem->product->orders_quantity += $orderItem->quantity;
+            $orderItem->product->save();
+        });
+
         return back();
     }
 }

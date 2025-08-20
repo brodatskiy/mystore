@@ -61,6 +61,12 @@ class CartService
         });
     }
 
+    public function count(){
+        return $this->getItems()->sum(function ($item) {
+            return $item->count;
+        });
+    }
+
     public function destroy(): void
     {
         $this->getCart()?->delete();

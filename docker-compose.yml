@@ -21,12 +21,12 @@ services:
         ports:
             - '${VITE_PORT:-5173}:5173'
         restart: always
+        environment:
+            PHP_IDE_CONFIG: "serverName=mystore"
+            XDEBUG_CONFIG: "idekey=PHPSTORM"
         depends_on:
             db:
                 condition: service_healthy
-        environment:
-            PHP_IDE_CONFIG: "serverName=MyStore"
-            XDEBUG_CONFIG: "idekey=PHPSTORM"
         container_name: app
 
     db:
@@ -34,7 +34,7 @@ services:
         restart: always
         shm_size: 128mb
         volumes:
-            - db-volume:/var/lib/postgresql/data
+            - db-pgsql:/var/lib/postgresql/data
         environment:
             - POSTGRES_DB=${DB_DATABASE}
             - POSTGRES_USER=${DB_USERNAME}
@@ -57,6 +57,6 @@ services:
         container_name: redis
 
 volumes:
-    db-volume:
+    db-pgsql:
         driver: local
-        name: "MyStore-pgsql"
+        name: "db_pgsql"

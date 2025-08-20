@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Enums\OrderStatus;
 use App\Models\Order;
+use Exception;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Date;
@@ -23,6 +24,7 @@ class DeleteUnpaidOrders implements ShouldQueue
 
     /**
      * Execute the job.
+     * @throws Exception
      */
     public function handle(): void
     {
@@ -30,7 +32,7 @@ class DeleteUnpaidOrders implements ShouldQueue
 
         foreach ($orders as $order) {
             if ($order->updated_at->diffInMinutes(Date::now()) > self::ALIVE_TIME_OF_UNPAID_ORDER) {
-                $order->delete();
+                $order->updateStatus(OrderStatus::Cancelled);
             }
         }
     }

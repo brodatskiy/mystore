@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Service\CartService;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
@@ -34,6 +35,7 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'auth' => [
                 'user' => $request->user(),
+
             ],
             'ziggy' => fn () => [
                 ...(new Ziggy())->toArray(),
@@ -43,6 +45,10 @@ class HandleInertiaRequests extends Middleware
                 'message' => $request->session()->get('message'),
                 'success' => $request->session()->get('success'),
                 'error' => $request->session()->get('error'),
+            ],
+            'misc' => fn () => [
+                'cartItemsCount'=> app(CartService::class)->count(),
+//                'wishesCount'=> $request->user()->wishes()->count(),
             ],
             'locale' => fn () => app()->getLocale()
         ];

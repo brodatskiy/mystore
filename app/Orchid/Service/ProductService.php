@@ -18,6 +18,9 @@ class ProductService
         try {
             DB::beginTransaction();
             $product->fill($request->collect('product')->except(['tags'])->toArray())->save();
+            $product->attachments()->syncWithoutDetaching(
+                $request->input('product.preview_image', [])
+            );
             $product->tags()->sync($request->input('product.tags'));
             Db::commit();
         } catch (Exception $exception) {
@@ -33,7 +36,7 @@ class ProductService
     {
         try {
             DB::beginTransaction();
-            Storage::disk('public')->delete($product->previewImage()->first()->physicalPath());
+            $product->previewImage->delete();
             $product->delete();
             Db::commit();
         } catch (Exception $exception) {

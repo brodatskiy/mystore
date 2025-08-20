@@ -31,6 +31,7 @@ class ProductEditScreen extends Screen
      */
     public function query(Product $product): iterable
     {
+        $product->load('attachments');
 
         return [
             'product' => $product,
@@ -68,7 +69,6 @@ class ProductEditScreen extends Screen
     public function commandBar(): iterable
     {
         return [
-
             Button::make(__('Remove'))
                 ->icon('bs.trash3')
                 ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted.'))

@@ -1,11 +1,8 @@
 <?php
 
+use App\Console\Commands\AttachmentClear;
 use App\Jobs\DeleteUnpaidOrders;
-use Illuminate\Foundation\Inspiring;
-use Illuminate\Support\Facades\Artisan;
 
 Schedule::job(new DeleteUnpaidOrders())->everyMinute();
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote');
+Schedule::command(AttachmentClear::class)->daily();
