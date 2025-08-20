@@ -41,6 +41,7 @@ jobs:
       - run: docker exec app composer install --no-dev
       - run: docker exec app npm install
       - run: docker exec app npm run build
+      - run: docker exec app php artisan config:clear
       - run: docker exec app php artisan migrate --force
       - run: docker exec app php artisan key:generate
       - run: docker exec app php artisan app:install
